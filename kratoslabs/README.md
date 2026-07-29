@@ -50,7 +50,6 @@ src/
 ```
 
 Convenzioni, design token e regole di factorizzazione: vedi `CLAUDE.md`.
-Sequenza di sviluppo storica: vedi `PROMPTS.md`.
 
 ## Cosa è implementato
 
