@@ -18,8 +18,16 @@ export const MOCK_PRODUCTS: Product[] = [
     compareAtPriceCents: 4990,
     images: [
       {
-        url: "/images/placeholder-product.svg",
+        url: "/images/products/tub.svg",
         alt: "Barattolo ISO Zero Whey Isolate su fondo antracite",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di ISO Zero",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2601-A",
       },
     ],
     specs: {
@@ -50,8 +58,16 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 1990,
     images: [
       {
-        url: "/images/placeholder-product.svg",
+        url: "/images/products/jar.svg",
         alt: "Confezione di creatina monoidrato micronizzata",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione della creatina",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2558-C",
       },
     ],
     specs: {
@@ -82,8 +98,16 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 3290,
     images: [
       {
-        url: "/images/placeholder-product.svg",
-        alt: "Barattolo Ignition pre-workout",
+        url: "/images/products/shaker.svg",
+        alt: "Barattolo Ignition pre-workout con shaker",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di Ignition",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2604-B",
       },
     ],
     specs: {
@@ -114,8 +138,12 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 2490,
     images: [
       {
-        url: "/images/placeholder-product.svg",
+        url: "/images/products/sachets.svg",
         alt: "Bustine Hydrate elettroliti",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di Hydrate",
       },
     ],
     specs: {
@@ -140,8 +168,16 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 2790,
     images: [
       {
-        url: "/images/placeholder-product.svg",
-        alt: "Flacone di omega-3 in capsule",
+        url: "/images/products/softgels.svg",
+        alt: "Flacone di omega-3 in capsule softgel",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di Omega-3",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2571-A",
       },
     ],
     specs: {
@@ -175,7 +211,7 @@ export const MOCK_ORDERS: Order[] = [
         slug: "iso-zero-whey-isolate",
         title: "ISO Zero — Whey Isolate",
         brand: "KratosLabs",
-        imageUrl: "/images/placeholder-product.svg",
+        imageUrl: "/images/products/tub.svg",
         unitPriceCents: 4490,
         quantity: 1,
       },
@@ -184,7 +220,7 @@ export const MOCK_ORDERS: Order[] = [
         slug: "creatina-monoidrato-micronizzata",
         title: "Creatina Monoidrato Micronizzata",
         brand: "KratosLabs",
-        imageUrl: "/images/placeholder-product.svg",
+        imageUrl: "/images/products/jar.svg",
         unitPriceCents: 1990,
         quantity: 1,
       },
@@ -203,7 +239,7 @@ export const MOCK_ORDERS: Order[] = [
         slug: "ignition-pre-workout",
         title: "Ignition — Pre-workout",
         brand: "KratosLabs",
-        imageUrl: "/images/placeholder-product.svg",
+        imageUrl: "/images/products/shaker.svg",
         unitPriceCents: 3290,
         quantity: 1,
       },

@@ -1,3 +1,8 @@
+import { Topbar } from "@/components/layout/Topbar";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { CartDrawer } from "@/components/cart/CartDrawer";
+
 export default function ShopLayout({
   children,
 }: {
@@ -5,9 +10,11 @@ export default function ShopLayout({
 }) {
   return (
     <div className="flex min-h-dvh flex-col">
-      {/* Topbar, Header e MegaMenu arrivano al task 3. */}
+      <Topbar />
+      <Header />
       <main className="flex-1">{children}</main>
-      {/* Footer arriva al task 3. */}
+      <Footer />
+      <CartDrawer />
     </div>
   );
 }
