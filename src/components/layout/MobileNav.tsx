@@ -14,9 +14,10 @@ import { Button } from "@/components/ui/button";
 import { SearchForm } from "@/components/layout/SearchBar";
 import { CurrencyToggle } from "@/components/layout/CurrencyToggle";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
-import { CATEGORIES, NAV_LINKS } from "@/lib/constants";
+import { NAV_LINKS } from "@/lib/constants";
+import type { Category } from "@/types";
 
-export function MobileNav() {
+export function MobileNav({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
@@ -40,7 +41,7 @@ export function MobileNav() {
             <p className="pb-1 text-xs font-medium uppercase tracking-wide text-muted">
               Categorie
             </p>
-            {CATEGORIES.map((c) => (
+            {categories.map((c) => (
               <Link
                 key={c.slug}
                 href={`/products?category=${c.slug}`}
