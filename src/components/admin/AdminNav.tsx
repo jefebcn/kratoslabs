@@ -6,7 +6,9 @@ import {
   ClipboardList,
   LayoutDashboard,
   Package,
+  Settings,
   Tags,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { ADMIN_NAV } from "@/lib/constants";
@@ -17,6 +19,8 @@ const ICONS: Record<string, LucideIcon> = {
   "/admin/products": Package,
   "/admin/categories": Tags,
   "/admin/orders": ClipboardList,
+  "/admin/users": Users,
+  "/admin/settings": Settings,
 };
 
 export function AdminNav({ onNavigate }: { onNavigate?: () => void }) {

@@ -14,6 +14,13 @@ import { createOrder, type CheckoutResult } from "@/features/checkout";
 import { useCart } from "@/features/cart";
 import { PAYMENT_METHODS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import type { BankConfig } from "@/lib/payments/bank";
+import type { CryptoAsset } from "@/lib/payments/crypto";
+
+export interface CheckoutPayment {
+  bank: BankConfig;
+  assets: CryptoAsset[];
+}
 
 function Field({
   label,
@@ -45,7 +52,7 @@ function Field({
   );
 }
 
-export function CheckoutForm() {
+export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
   const [state, action, pending] = useActionState<CheckoutResult | null, FormData>(
     createOrder,
     null,
@@ -73,6 +80,7 @@ export function CheckoutForm() {
           reference={state.reference}
           totalCents={orderTotalCents ?? undefined}
           emailSent={state.emailSent}
+          assets={payment.assets}
         />
       );
     }
@@ -82,6 +90,7 @@ export function CheckoutForm() {
           reference={state.reference}
           totalCents={orderTotalCents ?? undefined}
           emailSent={state.emailSent}
+          bank={payment.bank}
         />
       );
     }
