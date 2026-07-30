@@ -19,13 +19,15 @@ export function Reveal({
 
   if (reduce) return <div className={className}>{children}</div>;
 
+  // Anima all'ingresso in viewport, ma NON resta mai invisibile: se l'osservatore
+  // non scatta (es. screenshot "pagina intera"), l'animate lo porta comunque a
+  // opacità piena. `once` evita ripetizioni.
   return (
     <motion.div
       className={className}
       initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1], delay }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </motion.div>
