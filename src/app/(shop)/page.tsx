@@ -18,7 +18,7 @@ const SLIDES: HeroSlide[] = [
     title: "Dosaggi dichiarati, verificati",
     subtitle: HERO.subtitle,
     cta: { label: "Esplora il catalogo", href: "/products" },
-    image: "/images/logo.png",
+    image: "/images/products/tub.svg",
   },
   {
     eyebrow: "Community",
