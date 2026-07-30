@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bitcoin, Send } from "lucide-react";
+import { Bitcoin, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
@@ -115,18 +115,29 @@ export default async function HomePage() {
       {/* Feedback verificati */}
       <ReviewsSection />
 
-      {/* Dalla community */}
+      {/* Galleria Touchdown: barra rossa + foto clienti + CTA rossa */}
       <section className="border-t border-border bg-surface">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-          <SectionHeading
-            eyebrow="Dalla community"
-            title="Ordini arrivati"
-            description="Foto reali inviate dai clienti. Consegna tracciata, imballo curato."
-          />
-          <Reveal className="mt-8">
+        <div className="bg-accent">
+          <p className="mx-auto max-w-7xl px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.2em] text-white sm:px-6">
+            Galleria Touchdown
+          </p>
+        </div>
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+          <Reveal>
             <CommunityGallery />
           </Reveal>
         </div>
+        <Link
+          href={SITE.telegramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block bg-accent transition-colors hover:bg-accent/90"
+        >
+          <span className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-3.5 text-center font-display text-sm font-bold uppercase tracking-[0.15em] text-white sm:px-6">
+            <Mail className="size-4" aria-hidden />
+            Invia il tuo touchdown qui
+          </span>
+        </Link>
       </section>
 
       {/* Community / Telegram: CTA secondaria, verso il fondo */}

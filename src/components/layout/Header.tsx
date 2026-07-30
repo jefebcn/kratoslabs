@@ -6,7 +6,7 @@ import type { Category } from "@/types";
 
 export function Header({ categories }: { categories: Category[] }) {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
+    <header className="sticky top-0 z-30 border-b border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80 lg:static">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 sm:py-4">
         {/* Sinistra: hamburger (mobile) + ricerca (desktop) */}
         <div className="flex flex-1 items-center gap-2">
