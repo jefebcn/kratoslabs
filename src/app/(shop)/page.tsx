@@ -51,11 +51,11 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
+      {/* We accept: banda subito sotto l'header, sopra il carosello */}
+      <PaymentsBand />
+
       {/* Carosello promozionale */}
       <HeroCarousel slides={SLIDES} />
-
-      {/* We accept */}
-      <PaymentsBand />
 
       {/* Community / Telegram */}
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
