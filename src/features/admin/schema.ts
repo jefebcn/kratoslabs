@@ -1,14 +1,5 @@
 import { z } from "zod";
 
-const CATEGORY_VALUES = [
-  "proteine",
-  "creatina",
-  "pre-workout",
-  "elettroliti",
-  "omega-3",
-  "vitamine",
-] as const;
-
 /**
  * Schema del form prodotto dell'admin. Include i campi tecnici richiesti dal
  * dominio integratori: dosaggio dichiarato, porzioni, principio attivo, brand.
@@ -17,7 +8,8 @@ export const productFormSchema = z.object({
   title: z.string().min(2, "Minimo 2 caratteri"),
   brand: z.string().min(1, "Campo obbligatorio"),
   slug: z.string().min(1, "Campo obbligatorio"),
-  category: z.enum(CATEGORY_VALUES),
+  // Slug categoria libero: permette anche categorie create dall'admin.
+  category: z.string().min(1, "Categoria obbligatoria"),
   shortDescription: z.string().min(1, "Campo obbligatorio").max(160),
   description: z.string().min(1, "Campo obbligatorio"),
   priceCents: z.coerce.number().int().positive("Prezzo non valido"),

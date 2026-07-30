@@ -2,10 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import { ProductForm } from "@/components/admin/ProductForm";
+import { listCategories } from "@/features/categories";
 
 export const metadata: Metadata = { title: "Nuovo prodotto" };
 
-export default function NewProductPage() {
+export default async function NewProductPage() {
+  const categories = await listCategories();
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -20,7 +22,7 @@ export default function NewProductPage() {
           Nuovo prodotto
         </h1>
       </div>
-      <ProductForm />
+      <ProductForm categories={categories} />
     </div>
   );
 }

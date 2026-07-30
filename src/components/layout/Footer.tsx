@@ -3,8 +3,8 @@ import { Instagram, Send } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { Icon } from "@/components/ui/icon";
+import { listCategories } from "@/features/categories";
 import {
-  CATEGORIES,
   LEGAL_LINKS,
   NAV_LINKS,
   PAYMENT_METHODS,
@@ -39,7 +39,8 @@ function Column({
   );
 }
 
-export function Footer() {
+export async function Footer() {
+  const categories = await listCategories();
   return (
     <footer className="mt-16 border-t border-border bg-surface">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -71,7 +72,7 @@ export function Footer() {
 
           <Column
             title="Catalogo"
-            links={CATEGORIES.map((c) => ({
+            links={categories.map((c) => ({
               href: `/products?category=${c.slug}`,
               label: c.name,
             }))}

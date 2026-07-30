@@ -6,6 +6,7 @@ import {
   ClipboardList,
   LayoutDashboard,
   Package,
+  Tags,
   type LucideIcon,
 } from "lucide-react";
 import { ADMIN_NAV } from "@/lib/constants";
@@ -14,6 +15,7 @@ import { cn } from "@/lib/utils";
 const ICONS: Record<string, LucideIcon> = {
   "/admin": LayoutDashboard,
   "/admin/products": Package,
+  "/admin/categories": Tags,
   "/admin/orders": ClipboardList,
 };
 

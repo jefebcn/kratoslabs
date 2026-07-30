@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import { ProductForm } from "@/components/admin/ProductForm";
 import { findProductById } from "@/features/products";
+import { listCategories } from "@/features/categories";
 
 export async function generateMetadata({
   params,
@@ -23,6 +24,7 @@ export default async function EditProductPage({
   const { id } = await params;
   const product = await findProductById(id);
   if (!product) notFound();
+  const categories = await listCategories();
 
   return (
     <div className="flex flex-col gap-6">
@@ -39,7 +41,7 @@ export default async function EditProductPage({
         </h1>
         <p className="num text-sm text-muted">Modifica prodotto · {product.slug}</p>
       </div>
-      <ProductForm product={product} />
+      <ProductForm product={product} categories={categories} />
     </div>
   );
 }
