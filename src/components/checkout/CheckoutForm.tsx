@@ -12,6 +12,7 @@ import { CryptoPayment } from "@/components/checkout/CryptoPayment";
 import { BankTransfer } from "@/components/checkout/BankTransfer";
 import { createOrder, type CheckoutResult } from "@/features/checkout";
 import { useCart } from "@/features/cart";
+import { priceLine } from "@/features/products/pricing";
 import { PAYMENT_METHODS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import type { BankConfig } from "@/lib/payments/bank";
@@ -61,17 +62,21 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
   const clear = useCart((s) => s.clear);
   const empty = lines.length === 0;
 
+  // Totale netto (sconti quantità inclusi): stesso valore mostrato nel riepilogo.
+  const netTotalCents = lines.reduce(
+    (sum, l) => sum + priceLine(l.unitPriceCents, l.quantity).netCents,
+    0,
+  );
+
   // Congela il totale al momento della conferma, prima di svuotare il carrello.
   const [orderTotalCents, setOrderTotalCents] = useState<number | null>(null);
 
   useEffect(() => {
     if (state?.ok && orderTotalCents === null) {
-      setOrderTotalCents(
-        lines.reduce((sum, l) => sum + l.unitPriceCents * l.quantity, 0),
-      );
+      setOrderTotalCents(netTotalCents);
       clear();
     }
-  }, [state?.ok, orderTotalCents, lines, clear]);
+  }, [state?.ok, orderTotalCents, netTotalCents, clear]);
 
   if (state?.ok && state.reference) {
     if (state.paymentMethod === "crypto") {
@@ -119,6 +124,24 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
 
   return (
     <form action={action} className="flex flex-col gap-6">
+      {/* Snapshot del carrello inviato al server per persistere l'ordine. */}
+      <input
+        type="hidden"
+        name="lines"
+        value={JSON.stringify(
+          lines.map((l) => ({
+            productId: l.productId,
+            slug: l.slug,
+            title: l.title,
+            brand: l.brand,
+            imageUrl: l.imageUrl,
+            unitPriceCents: l.unitPriceCents,
+            quantity: l.quantity,
+          })),
+        )}
+      />
+      <input type="hidden" name="totalCents" value={netTotalCents} />
+
       {state?.message && (
         <div className="rounded-base border border-danger/50 px-4 py-3 text-sm text-danger">
           {state.message}

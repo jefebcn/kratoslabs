@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { orderStatusSchema, productFormSchema } from "./schema";
+import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { MOCK_PRODUCTS } from "@/lib/mock-data";
 
@@ -142,19 +142,4 @@ export async function importCatalog(_formData: FormData): Promise<void> {
   }));
   await admin.from("products").upsert(rows, { onConflict: "slug" });
   refreshSite();
-}
-
-/** Aggiornamento stato ordine + tracking. Collegato nella fase ordini. */
-export async function updateOrderStatus(
-  _prev: ActionResult | null,
-  formData: FormData,
-): Promise<ActionResult> {
-  const parsed = orderStatusSchema.safeParse(Object.fromEntries(formData));
-  if (!parsed.success) {
-    return { ok: false, message: "Dati ordine non validi." };
-  }
-  return {
-    ok: true,
-    message: `Ordine ${parsed.data.orderId} aggiornato a "${parsed.data.status}".`,
-  };
 }

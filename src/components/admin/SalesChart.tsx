@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { SALES_SERIES } from "@/lib/constants";
+import type { SalesPoint } from "@/types";
 
 const W = 640;
 const H = 240;
@@ -10,9 +11,23 @@ function shortEuro(cents: number) {
   return `€${Math.round(cents / 100000)}k`;
 }
 
-export function SalesChart() {
-  const data = SALES_SERIES;
-  const max = Math.max(...data.map((d) => d.revenueCents));
+export function SalesChart({ data = SALES_SERIES }: { data?: SalesPoint[] }) {
+  const max = Math.max(1, ...data.map((d) => d.revenueCents));
+  const hasData = data.some((d) => d.revenueCents > 0);
+
+  if (!hasData) {
+    return (
+      <Card className="p-5">
+        <div>
+          <p className="text-sm font-medium">Ricavi mensili</p>
+          <p className="text-xs text-muted">Ultimi 6 mesi</p>
+        </div>
+        <div className="mt-4 grid h-40 place-items-center rounded-base border border-dashed border-border text-sm text-muted">
+          Nessun ricavo registrato: i dati compaiono con i primi ordini pagati.
+        </div>
+      </Card>
+    );
+  }
   const innerW = W - PAD.l - PAD.r;
   const innerH = H - PAD.t - PAD.b;
   const barW = (innerW - GAP * (data.length - 1)) / data.length;
