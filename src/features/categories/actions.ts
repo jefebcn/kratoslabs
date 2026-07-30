@@ -54,14 +54,28 @@ export async function saveCategory(
 }
 
 /** Rinomina una categoria esistente (nome + descrizione). */
-export async function renameCategory(formData: FormData): Promise<void> {
-  const slug = String(formData.get("slug") || "");
+export async function renameCategory(
+  _prev: CategoryResult | null,
+  formData: FormData,
+): Promise<CategoryResult> {
+  const slug = String(formData.get("slug") || "").trim();
   const name = String(formData.get("name") || "").trim();
-  const description = String(formData.get("description") || "");
+  const description = String(formData.get("description") || "").trim();
+
+  if (!slug) return { ok: false, message: "Categoria non valida." };
+  if (!name) return { ok: false, message: "Il nome non può essere vuoto." };
+
   const admin = createAdminClient();
-  if (!admin || !slug || !name) return;
-  await admin.from("categories").update({ name, description }).eq("slug", slug);
+  if (!admin) return { ok: false, message: NO_ADMIN };
+
+  const { error } = await admin
+    .from("categories")
+    .update({ name, description })
+    .eq("slug", slug);
+  if (error) return { ok: false, message: `Errore DB: ${error.message}` };
+
   refresh();
+  return { ok: true, message: "Salvato." };
 }
 
 /** Attiva/disattiva una categoria (nasconde dal sito senza eliminarla). */
