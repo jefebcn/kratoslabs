@@ -33,7 +33,7 @@ export function CategoryNav({ categories }: { categories: Category[] }) {
 
   return (
     <nav
-      className="hidden border-b border-[#23262c] bg-[#15181d] lg:block"
+      className="hidden border-b border-[#23262c] bg-[#15181d] lg:sticky lg:top-0 lg:z-40 lg:block"
       aria-label="Categorie"
     >
       <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 sm:px-6">

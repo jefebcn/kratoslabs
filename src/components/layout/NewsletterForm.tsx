@@ -32,9 +32,7 @@ export function NewsletterForm() {
         aria-label="Email per la newsletter"
         className="sm:max-w-xs"
       />
-      <Button type="submit" variant="outline">
-        Iscriviti
-      </Button>
+      <Button type="submit">Iscriviti</Button>
     </form>
   );
 }
