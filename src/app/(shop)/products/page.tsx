@@ -50,7 +50,7 @@ export default async function ProductsPage({
   const { category, q } = await searchParams;
   const activeCategory = isCategory(category) ? category : undefined;
 
-  const base = q ? searchProducts(q) : listProducts();
+  const base = q ? await searchProducts(q) : await listProducts();
   const products = activeCategory
     ? base.filter((p) => p.category === activeCategory)
     : base;

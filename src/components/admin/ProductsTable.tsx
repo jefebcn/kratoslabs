@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Pencil } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { CATEGORIES } from "@/lib/constants";
 import { formatPrice } from "@/lib/utils";
+import { deleteProduct } from "@/features/admin";
 import type { Product } from "@/types";
 
 function categoryName(slug: string) {
@@ -58,14 +59,27 @@ export function ProductsTable({ products }: { products: Product[] }) {
                   <span className="text-danger">0</span>
                 )}
               </td>
-              <td className="px-4 py-3 text-right">
-                <Link
-                  href={`/admin/products/${p.id}`}
-                  className="inline-flex items-center gap-1 text-accent hover:underline"
-                >
-                  <Pencil className="size-3.5" aria-hidden />
-                  Modifica
-                </Link>
+              <td className="px-4 py-3">
+                <div className="flex items-center justify-end gap-3">
+                  <Link
+                    href={`/admin/products/${p.id}`}
+                    className="inline-flex items-center gap-1 text-accent hover:underline"
+                  >
+                    <Pencil className="size-3.5" aria-hidden />
+                    Modifica
+                  </Link>
+                  <form action={deleteProduct}>
+                    <input type="hidden" name="id" value={p.id} />
+                    <button
+                      type="submit"
+                      className="inline-flex items-center gap-1 text-muted transition-colors hover:text-danger"
+                      aria-label={`Elimina ${p.title}`}
+                    >
+                      <Trash2 className="size-3.5" aria-hidden />
+                      Elimina
+                    </button>
+                  </form>
+                </div>
               </td>
             </tr>
           ))}

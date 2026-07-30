@@ -1,14 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Plus } from "lucide-react";
+import { Plus, DownloadCloud } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductsTable } from "@/components/admin/ProductsTable";
 import { listProducts } from "@/features/products";
+import { importCatalog } from "@/features/admin";
+import { hasServiceRole } from "@/lib/supabase/admin";
 
 export const metadata: Metadata = { title: "Prodotti" };
 
-export default function AdminProductsPage() {
-  const products = listProducts();
+export default async function AdminProductsPage() {
+  const products = await listProducts();
 
   return (
     <div className="flex flex-col gap-6">
@@ -19,13 +21,28 @@ export default function AdminProductsPage() {
             {products.length} prodotti a catalogo
           </p>
         </div>
-        <Button asChild>
-          <Link href="/admin/products/new">
-            <Plus className="size-4" aria-hidden />
-            Nuovo prodotto
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <form action={importCatalog}>
+            <Button type="submit" variant="outline">
+              <DownloadCloud className="size-4" aria-hidden />
+              Importa catalogo iniziale
+            </Button>
+          </form>
+          <Button asChild>
+            <Link href="/admin/products/new">
+              <Plus className="size-4" aria-hidden />
+              Nuovo prodotto
+            </Link>
+          </Button>
+        </div>
       </div>
+
+      {!hasServiceRole && (
+        <p className="rounded-base border border-danger/40 bg-accent-soft px-4 py-3 text-sm text-danger">
+          Salvataggio non attivo: aggiungi <code>SUPABASE_SERVICE_ROLE_KEY</code>{" "}
+          nelle Environment Variables di Vercel e ridistribuisci.
+        </p>
+      )}
 
       <ProductsTable products={products} />
     </div>

@@ -8,6 +8,7 @@ export {
   listProducts,
   listFeaturedProducts,
   findProduct,
+  findProductById,
   listByCategory,
   searchProducts,
 } from "./queries";

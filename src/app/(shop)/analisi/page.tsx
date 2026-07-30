@@ -28,8 +28,8 @@ const STEPS = [
   },
 ];
 
-export default function AnalisiPage() {
-  const batches = listProducts()
+export default async function AnalisiPage() {
+  const batches = (await listProducts())
     .filter((p) => p.labReport)
     .map((p) => ({ product: p.title, report: p.labReport! }));
 

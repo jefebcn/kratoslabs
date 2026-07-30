@@ -3,4 +3,10 @@ export {
   orderStatusSchema,
   type ProductFormValues,
 } from "./schema";
-export { saveProduct, updateOrderStatus, type ActionResult } from "./actions";
+export {
+  saveProduct,
+  deleteProduct,
+  importCatalog,
+  updateOrderStatus,
+  type ActionResult,
+} from "./actions";
