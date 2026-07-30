@@ -12,11 +12,11 @@
 <rect width="1200" height="800" fill="url(#g)"/>
 <rect width="1200" height="800" fill="url(#grid)"/>
 <g stroke="#23262C" fill="none" opacity="0.8">
-<circle cx="820" cy="260" r="7" fill="#C9A227" stroke="none" opacity="0.9"/>
-<circle cx="960" cy="200" r="5" fill="#C9A227" stroke="none" opacity="0.7"/>
-<circle cx="900" cy="360" r="5" fill="#C9A227" stroke="none" opacity="0.7"/>
+<circle cx="820" cy="260" r="7" fill="#DC2626" stroke="none" opacity="0.9"/>
+<circle cx="960" cy="200" r="5" fill="#DC2626" stroke="none" opacity="0.7"/>
+<circle cx="900" cy="360" r="5" fill="#DC2626" stroke="none" opacity="0.7"/>
 <circle cx="720" cy="360" r="5" fill="#8A9099" stroke="none" opacity="0.5"/>
-<path d="M720 360L820 260L960 200M820 260L900 360" stroke="#C9A227" opacity="0.35"/>
+<path d="M720 360L820 260L960 200M820 260L900 360" stroke="#DC2626" opacity="0.35"/>
 </g>
 <g stroke="#15171C">
 <path d="M0 620h1200M0 700h1200"/>

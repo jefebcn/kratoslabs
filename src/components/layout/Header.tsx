@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/layout/Logo";
 import { MegaMenu } from "@/components/layout/MegaMenu";
 import { SearchBar } from "@/components/layout/SearchBar";
@@ -39,6 +41,17 @@ export function Header() {
             <CurrencyToggle />
             <LanguageToggle />
           </div>
+          <Link
+            href="/login"
+            aria-label="Accedi"
+            title="Accedi"
+            className="inline-flex size-10 items-center justify-center rounded-base text-text transition-colors hover:bg-surface-2"
+          >
+            <User className="size-5" aria-hidden />
+          </Link>
+          <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex">
+            <Link href="/register">Registrati</Link>
+          </Button>
           <CartButton />
         </div>
       </div>

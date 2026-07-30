@@ -205,7 +205,7 @@ export function ProductForm({ product }: { product?: Product }) {
           type="checkbox"
           name="featured"
           defaultChecked={product?.featured}
-          className="size-4 rounded-[3px] border-border bg-surface [accent-color:#c9a227]"
+          className="size-4 rounded-[3px] border-border bg-surface [accent-color:#dc2626]"
         />
         Metti in evidenza in homepage
       </label>

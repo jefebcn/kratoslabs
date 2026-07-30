@@ -61,7 +61,7 @@ export function SalesChart() {
                 width={barW}
                 height={h}
                 rx="2"
-                fill="#C9A227"
+                fill="#DC2626"
                 opacity={isLast ? 1 : 0.5}
               />
               <text
