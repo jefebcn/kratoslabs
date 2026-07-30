@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { MOCK_PRODUCTS } from "@/lib/mock-data";
+import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
 
 export interface ActionResult {
   ok: boolean;
@@ -121,26 +121,56 @@ export async function deleteProduct(formData: FormData): Promise<void> {
   refreshSite();
 }
 
-/** Importa il catalogo iniziale (i prodotti di esempio) nel DB. Idempotente. */
-export async function importCatalog(_formData: FormData): Promise<void> {
+/**
+ * Importa il catalogo Deus Medical (categorie + prodotti) nel DB. Idempotente:
+ * aggiorna nome/prezzi/costo dei prodotti già presenti senza crearne di doppi.
+ * Non tocca le immagini eventualmente già caricate.
+ */
+export async function importCatalog(
+  _prev: ActionResult | null,
+  _formData: FormData,
+): Promise<ActionResult> {
   const admin = createAdminClient();
-  if (!admin) return;
-  const rows = MOCK_PRODUCTS.map((p) => ({
+  if (!admin) return { ok: false, message: NO_ADMIN };
+
+  // 1) Categorie.
+  const catRows = DEUS_CATEGORIES.map((c) => ({
+    slug: c.slug,
+    name: c.name,
+    description: c.description,
+    position: c.position,
+    active: true,
+  }));
+  const { error: catErr } = await admin
+    .from("categories")
+    .upsert(catRows, { onConflict: "slug" });
+  if (catErr)
+    return { ok: false, message: `Errore categorie: ${catErr.message}` };
+
+  // 2) Prodotti. Non sovrascrive le immagini esistenti.
+  const rows = DEUS_PRODUCTS.map((p) => ({
     slug: p.slug,
-    brand: p.brand,
+    brand: "Deus Medical",
     title: p.title,
     short_description: p.shortDescription,
     description: p.description,
     category: p.category,
     price_cents: p.priceCents,
-    compare_at_price_cents: p.compareAtPriceCents ?? null,
-    images: p.images,
+    cost_cents: p.costCents,
     specs: p.specs,
-    lab_report: p.labReport ?? null,
     stock: p.stock,
-    featured: p.featured,
-    active: true,
+    active: p.active,
+    updated_at: new Date().toISOString(),
   }));
-  await admin.from("products").upsert(rows, { onConflict: "slug" });
+  const { error: prodErr } = await admin
+    .from("products")
+    .upsert(rows, { onConflict: "slug" });
+  if (prodErr)
+    return { ok: false, message: `Errore prodotti: ${prodErr.message}` };
+
   refreshSite();
+  return {
+    ok: true,
+    message: `Catalogo importato: ${catRows.length} categorie e ${rows.length} prodotti.`,
+  };
 }

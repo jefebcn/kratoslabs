@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Bitcoin, Send } from "lucide-react";
+import { Bitcoin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
@@ -62,23 +62,7 @@ export default async function HomePage() {
       {/* Prodotti subito sotto il carosello: tutti i prodotti + bestseller */}
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14">
         <Reveal>
-          <div className="flex items-end justify-between gap-4">
-            <SectionHeading
-              eyebrow="Catalogo"
-              title="I nostri prodotti"
-              description="Tutti i prodotti e i bestseller. Prezzo per grammo di attivo su ogni card."
-            />
-            <Link
-              href="/products"
-              className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent hover:underline sm:inline-flex"
-            >
-              Tutto il catalogo
-              <ArrowRight className="size-4" aria-hidden />
-            </Link>
-          </div>
-          <div className="mt-8">
-            <ProductTabs all={all} bestseller={bestseller} />
-          </div>
+          <ProductTabs all={all} bestseller={bestseller} />
         </Reveal>
       </section>
 
