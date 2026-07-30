@@ -1,10 +1,8 @@
-export type CategorySlug =
-  | "proteine"
-  | "creatina"
-  | "pre-workout"
-  | "elettroliti"
-  | "omega-3"
-  | "vitamine";
+/**
+ * Slug di categoria. Le categorie sono gestibili dall'admin e vivono nel
+ * database, quindi lo slug è una stringa libera (non più un'unione fissa).
+ */
+export type CategorySlug = string;
 
 export interface Category {
   slug: CategorySlug;
@@ -24,6 +22,8 @@ export interface ProductSpecs {
   activePerServingG: number;
   /** Nome del principio attivo dichiarato in etichetta. */
   activeName: string;
+  /** Confezione/formato (es. "10 fiale / 1 mL"). Opzionale. */
+  packaging?: string;
 }
 
 export interface LabReport {
@@ -42,9 +42,11 @@ export interface Product {
   shortDescription: string;
   description: string;
   category: CategorySlug;
-  /** Prezzo in centesimi di euro. Mai float sui soldi. */
+  /** Prezzo di vendita in centesimi di euro. Mai float sui soldi. */
   priceCents: number;
   compareAtPriceCents?: number;
+  /** Prezzo di acquisto (costo) in centesimi. Per il calcolo dei profitti. */
+  costCents?: number;
   images: { url: string; alt: string }[];
   specs: ProductSpecs;
   labReport?: LabReport;

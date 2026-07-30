@@ -19,12 +19,13 @@ function rowToProduct(r: Record<string, unknown>): Product {
     title: (r.title as string) || "",
     shortDescription: (r.short_description as string) || "",
     description: (r.description as string) || "",
-    category: (r.category as CategorySlug) ?? "proteine",
+    category: (r.category as CategorySlug) ?? "",
     priceCents: Number(r.price_cents ?? 0),
     compareAtPriceCents:
       r.compare_at_price_cents != null
         ? Number(r.compare_at_price_cents)
         : undefined,
+    costCents: Number(r.cost_cents ?? 0),
     images: Array.isArray(r.images)
       ? (r.images as { url: string; alt: string }[])
       : [],

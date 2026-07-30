@@ -151,7 +151,7 @@ export function ProductForm({
         <h3 className="mb-4 text-sm font-medium">Prezzo</h3>
         <div className="grid gap-5 sm:grid-cols-2">
           <Field
-            label="Prezzo (centesimi)"
+            label="Prezzo di vendita (centesimi)"
             hint="es. 4490 = € 44,90"
             error={err("priceCents")}
           >
@@ -161,6 +161,18 @@ export function ProductForm({
               min={0}
               defaultValue={product?.priceCents}
               required
+            />
+          </Field>
+          <Field
+            label="Prezzo di acquisto (centesimi)"
+            hint="costo che paghi tu — serve per il profitto"
+            error={err("costCents")}
+          >
+            <Input
+              name="costCents"
+              type="number"
+              min={0}
+              defaultValue={product?.costCents}
             />
           </Field>
           <Field
@@ -181,8 +193,8 @@ export function ProductForm({
       <section>
         <h3 className="text-sm font-medium">Dati tecnici</h3>
         <p className="mb-4 mt-1 text-xs text-muted">
-          Dosaggio dichiarato e porzioni: alimentano il prezzo per grammo di
-          attivo mostrato in vetrina.
+          Opzionali. Per gli integratori alimentano il prezzo per grammo di
+          attivo; per gli altri prodotti puoi lasciarli vuoti.
         </p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <Field
@@ -190,7 +202,7 @@ export function ProductForm({
             error={err("activeName")}
             className="lg:col-span-2"
           >
-            <Input name="activeName" defaultValue={s?.activeName} required />
+            <Input name="activeName" defaultValue={s?.activeName} />
           </Field>
           <Field label="Attivo/porzione (g)" error={err("activePerServingG")}>
             <Input
@@ -199,7 +211,6 @@ export function ProductForm({
               step="0.1"
               min={0}
               defaultValue={s?.activePerServingG}
-              required
             />
           </Field>
           <Field label="Porzione (g)" error={err("servingSizeG")}>
@@ -209,7 +220,6 @@ export function ProductForm({
               step="0.1"
               min={0}
               defaultValue={s?.servingSizeG}
-              required
             />
           </Field>
           <Field
@@ -221,7 +231,6 @@ export function ProductForm({
               type="number"
               min={0}
               defaultValue={s?.servingsPerContainer}
-              required
             />
           </Field>
           <Field label="Peso netto (g)" error={err("netWeightG")}>
@@ -231,7 +240,6 @@ export function ProductForm({
               step="0.1"
               min={0}
               defaultValue={s?.netWeightG}
-              required
             />
           </Field>
         </div>

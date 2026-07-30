@@ -31,34 +31,44 @@ export const ANNOUNCEMENTS = [
 
 export const CATEGORIES: Category[] = [
   {
-    slug: "proteine",
-    name: "Proteine",
-    description: "Isolati e concentrati, profilo aminoacidico dichiarato.",
+    slug: "iniettabili",
+    name: "Iniettabili",
+    description: "Soluzioni sterili in fiale per uso intramuscolare.",
   },
   {
-    slug: "creatina",
-    name: "Creatina",
-    description: "Monoidrato micronizzato, purezza certificata.",
+    slug: "orali",
+    name: "Orali",
+    description: "Compresse in blister per uso orale.",
   },
   {
-    slug: "pre-workout",
-    name: "Pre-workout",
-    description: "Formule a dosaggio pieno, senza proprietary blend.",
+    slug: "post-cycle",
+    name: "Post Cycle (PCT)",
+    description: "SERM, inibitori dell'aromatasi e supporto ormonale.",
   },
   {
-    slug: "elettroliti",
-    name: "Elettroliti",
-    description: "Sodio, potassio e magnesio in rapporti misurati.",
+    slug: "brucia-grassi",
+    name: "Brucia grassi",
+    description: "Termogenici, ormoni tiroidei e agonisti GLP-1.",
   },
   {
-    slug: "omega-3",
-    name: "Omega-3",
-    description: "EPA e DHA quantificati, test su metalli pesanti.",
+    slug: "sex-support",
+    name: "Sex Support",
+    description: "Supporto per la funzione sessuale.",
   },
   {
-    slug: "vitamine",
-    name: "Vitamine",
-    description: "Micronutrienti in forme biodisponibili.",
+    slug: "hgh-peptidi",
+    name: "HGH & Peptidi",
+    description: "Ormone della crescita e peptidi.",
+  },
+  {
+    slug: "sarms",
+    name: "SARMs",
+    description: "Modulatori selettivi del recettore degli androgeni.",
+  },
+  {
+    slug: "salute",
+    name: "Salute",
+    description: "Supporto cardiovascolare, colesterolo e accessori.",
   },
 ];
 
