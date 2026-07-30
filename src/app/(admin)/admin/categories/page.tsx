@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { CategoryManager } from "@/components/admin/CategoryManager";
-import { createAdminClient, hasServiceRole } from "@/lib/supabase/admin";
+import {
+  createAdminClient,
+  hasServiceRole,
+  serviceKeyWarning,
+} from "@/lib/supabase/admin";
 import { CATEGORIES } from "@/lib/constants";
 
 export const metadata: Metadata = { title: "Categorie" };
@@ -49,6 +53,12 @@ export default async function AdminCategoriesPage() {
         <p className="rounded-base border border-danger/40 bg-accent-soft px-4 py-3 text-sm text-danger">
           Gestione non attiva: aggiungi <code>SUPABASE_SERVICE_ROLE_KEY</code> su
           Vercel e ridistribuisci.
+        </p>
+      )}
+
+      {hasServiceRole && serviceKeyWarning && (
+        <p className="rounded-base border border-danger/40 bg-accent-soft px-4 py-3 text-sm text-danger">
+          {serviceKeyWarning}
         </p>
       )}
 
