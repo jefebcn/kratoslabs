@@ -26,6 +26,17 @@
      animazione in uscita. Transizioni pure non basterebbero. */
   --animate-fade-in: kl-fade-in 200ms ease;
   --animate-fade-out: kl-fade-out 180ms ease;
+  --animate-marquee: kl-marquee 26s linear infinite;
+}
+
+@keyframes kl-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Il track contiene due copie identiche: -50% = una copia intera. */
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes kl-fade-in {
