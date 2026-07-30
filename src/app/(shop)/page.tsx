@@ -14,11 +14,18 @@ import { CATEGORIES, HERO, SITE, TRUST_BADGES } from "@/lib/constants";
 
 const SLIDES: HeroSlide[] = [
   {
+    eyebrow: "Kratos Labs",
+    title: "Kratos Athletes",
+    subtitle: "",
+    cta: { label: "Esplora il catalogo", href: "/products" },
+    banner: "/images/carousel-hero.jpg",
+  },
+  {
     eyebrow: HERO.eyebrow,
     title: "Dosaggi dichiarati, verificati",
     subtitle: HERO.subtitle,
     cta: { label: "Esplora il catalogo", href: "/products" },
-    image: "/images/logo.png",
+    image: "/images/products/tub.svg",
   },
   {
     eyebrow: "Community",

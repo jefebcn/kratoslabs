@@ -3,7 +3,13 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /** Logo/wordmark ufficiale Kratos Labs (immagine orizzontale). */
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  imgClassName,
+}: {
+  className?: string;
+  imgClassName?: string;
+}) {
   return (
     <Link
       href="/"
@@ -16,7 +22,7 @@ export function Logo({ className }: { className?: string }) {
         width={3592}
         height={1152}
         priority
-        className="h-9 w-auto sm:h-10"
+        className={cn("h-9 w-auto sm:h-10", imgClassName)}
       />
     </Link>
   );
