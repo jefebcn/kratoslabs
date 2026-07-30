@@ -227,6 +227,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
 export const ADMIN_NAV: NavLink[] = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/products", label: "Prodotti" },
+  { href: "/admin/categories", label: "Categorie" },
   { href: "/admin/orders", label: "Ordini" },
 ];
 

@@ -39,7 +39,13 @@ function Field({
   );
 }
 
-export function ProductForm({ product }: { product?: Product }) {
+export function ProductForm({
+  product,
+  categories = CATEGORIES,
+}: {
+  product?: Product;
+  categories?: { slug: string; name: string }[];
+}) {
   const [state, action, pending] = useActionState<ActionResult | null, FormData>(
     saveProduct,
     null,
@@ -73,8 +79,11 @@ export function ProductForm({ product }: { product?: Product }) {
           <Input name="slug" defaultValue={product?.slug} required />
         </Field>
         <Field label="Categoria" error={err("category")}>
-          <Select name="category" defaultValue={product?.category ?? "proteine"}>
-            {CATEGORIES.map((c) => (
+          <Select
+            name="category"
+            defaultValue={product?.category ?? categories[0]?.slug ?? "proteine"}
+          >
+            {categories.map((c) => (
               <option key={c.slug} value={c.slug}>
                 {c.name}
               </option>

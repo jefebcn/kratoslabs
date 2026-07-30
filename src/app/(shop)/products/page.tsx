@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { listProducts, searchProducts } from "@/features/products";
-import { CATEGORIES } from "@/lib/constants";
+import { listCategories } from "@/features/categories";
 import { cn } from "@/lib/utils";
 import type { CategorySlug } from "@/types";
 
@@ -11,12 +11,6 @@ export const metadata: Metadata = {
   title: "Catalogo",
   description: "Tutti gli integratori KratosLabs, analizzati lotto per lotto.",
 };
-
-const SLUGS = CATEGORIES.map((c) => c.slug);
-
-function isCategory(value?: string): value is CategorySlug {
-  return !!value && SLUGS.includes(value as CategorySlug);
-}
 
 function FilterPill({
   href,
@@ -48,7 +42,12 @@ export default async function ProductsPage({
   searchParams: Promise<{ category?: string; q?: string }>;
 }) {
   const { category, q } = await searchParams;
-  const activeCategory = isCategory(category) ? category : undefined;
+  const categories = await listCategories();
+  const slugs = categories.map((c) => c.slug);
+  const activeCategory =
+    category && slugs.includes(category as CategorySlug)
+      ? (category as CategorySlug)
+      : undefined;
 
   const base = q ? await searchProducts(q) : await listProducts();
   const products = activeCategory
@@ -56,7 +55,7 @@ export default async function ProductsPage({
     : base;
 
   const activeName = activeCategory
-    ? CATEGORIES.find((c) => c.slug === activeCategory)?.name
+    ? categories.find((c) => c.slug === activeCategory)?.name
     : undefined;
 
   const title = activeName ?? (q ? `Risultati per “${q}”` : "Tutti i prodotti");
@@ -75,7 +74,7 @@ export default async function ProductsPage({
         <FilterPill href="/products" active={!activeCategory && !q}>
           Tutti
         </FilterPill>
-        {CATEGORIES.map((c) => (
+        {categories.map((c) => (
           <FilterPill
             key={c.slug}
             href={`/products?category=${c.slug}`}

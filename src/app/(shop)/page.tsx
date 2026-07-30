@@ -10,7 +10,8 @@ import { ProductTabs } from "@/components/product/ProductTabs";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
 import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts, listProducts } from "@/features/products";
-import { CATEGORIES, HERO, SITE, TRUST_BADGES } from "@/lib/constants";
+import { HERO, SITE, TRUST_BADGES } from "@/lib/constants";
+import { listCategories } from "@/features/categories";
 
 const SLIDES: HeroSlide[] = [
   {
@@ -48,6 +49,7 @@ const SLIDES: HeroSlide[] = [
 export default async function HomePage() {
   const bestseller = await listFeaturedProducts();
   const all = await listProducts();
+  const categories = await listCategories();
 
   return (
     <div className="flex flex-col">
@@ -102,7 +104,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
           <SectionHeading eyebrow="Categorie" title="Scegli per obiettivo" />
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {CATEGORIES.map((c) => (
+            {categories.map((c) => (
               <Link
                 key={c.slug}
                 href={`/products?category=${c.slug}`}

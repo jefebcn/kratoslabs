@@ -18,7 +18,7 @@ import { RatingOverview } from "@/components/reviews/RatingOverview";
 import { Stars } from "@/components/reviews/Stars";
 import { findProduct, listByCategory, listProducts } from "@/features/products";
 import { ratingSummary, reviewsForProduct } from "@/features/reviews";
-import { CATEGORIES } from "@/lib/constants";
+import { listCategories } from "@/features/categories";
 
 export async function generateStaticParams() {
   return (await listProducts()).map((p) => ({ slug: p.slug }));
@@ -47,7 +47,8 @@ export default async function ProductDetailPage({
   const product = await findProduct(slug);
   if (!product) notFound();
 
-  const category = CATEGORIES.find((c) => c.slug === product.category);
+  const categories = await listCategories();
+  const category = categories.find((c) => c.slug === product.category);
   const related = (await listByCategory(product.category)).filter(
     (p) => p.id !== product.id,
   );
