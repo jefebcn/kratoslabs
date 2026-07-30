@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -24,9 +18,8 @@ import { cn } from "@/lib/utils";
 // da Server a Client Component.
 const ICONS: Record<string, LucideIcon> = { Star, FlaskConical };
 
-// useLayoutEffect lato client, useEffect lato server (evita il warning SSR).
-const useIsoLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+// Altezza FISSA e uguale per ogni slide: niente salti di layout quando ruota.
+const SLIDE_H = "h-[230px] sm:h-[330px] lg:h-[440px]";
 
 export interface HeroSlide {
   eyebrow: string;
@@ -45,29 +38,6 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const n = slides.length;
   const go = useCallback((i: number) => setIndex(((i % n) + n) % n), [n]);
 
-  // Altezza del carosello = altezza della slide attiva, così una slide bassa
-  // (banner) non eredita lo spazio vuoto di una slide alta (testo).
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [trackHeight, setTrackHeight] = useState<number | undefined>(undefined);
-
-  useIsoLayoutEffect(() => {
-    const el = slideRefs.current[index];
-    if (!el) return;
-    const measure = () => setTrackHeight(el.offsetHeight);
-    measure();
-
-    let ro: ResizeObserver | undefined;
-    if (typeof ResizeObserver !== "undefined") {
-      ro = new ResizeObserver(measure);
-      ro.observe(el);
-    }
-    window.addEventListener("resize", measure);
-    return () => {
-      ro?.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, [index]);
-
   useEffect(() => {
     if (reduce || n <= 1) return;
     const t = setInterval(() => setIndex((p) => (p + 1) % n), 6000);
@@ -80,102 +50,81 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       aria-roledescription="carousel"
       aria-label="Promozioni in evidenza"
     >
-      <div
-        className="overflow-hidden transition-[height] duration-500 ease-out-expo"
-        style={{ height: trackHeight }}
-      >
+      <div className="overflow-hidden">
         <div
-          className="flex items-start transition-transform duration-500 ease-out-expo"
+          className="flex transition-transform duration-500 ease-out-expo"
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {slides.map((s, i) => {
             const Icon = s.icon ? ICONS[s.icon] : undefined;
 
-            if (s.banner) {
-              return (
-                <div
-                  key={s.title}
-                  ref={(el) => {
-                    slideRefs.current[i] = el;
-                  }}
-                  className="w-full shrink-0"
-                  aria-hidden={i !== index}
-                >
-                  {/* Banner contenuto nella larghezza del sito: rapporto nativo
-                      (niente stretch), niente full-bleed che coprirebbe tutto. */}
-                  <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
-                    <Link
-                      href={s.cta.href}
-                      aria-label={s.title}
-                      className="relative block aspect-[1000/356] w-full overflow-hidden rounded-base border border-border bg-surface-2"
-                    >
-                      <Image
-                        src={s.banner}
-                        alt={s.title}
-                        fill
-                        sizes="(max-width: 1280px) 100vw, 1280px"
-                        className="object-cover"
-                        priority={i === 0}
-                      />
-                    </Link>
-                  </div>
-                </div>
-              );
-            }
-
             return (
               <div
                 key={s.title}
-                ref={(el) => {
-                  slideRefs.current[i] = el;
-                }}
-                className="w-full shrink-0"
+                className={cn("relative w-full shrink-0", SLIDE_H)}
                 aria-hidden={i !== index}
               >
-                <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:py-20">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-                      {s.eyebrow}
-                    </p>
-                    <h2 className="font-display mt-3 text-balance text-4xl font-bold uppercase leading-[1.03] sm:text-5xl">
-                      {s.title}
-                    </h2>
-                    <p className="mt-4 max-w-xl text-pretty text-muted">
-                      {s.subtitle}
-                    </p>
-                    <div className="mt-6">
-                      <Button asChild size="lg">
-                        <Link href={s.cta.href}>
-                          {s.cta.label}
-                          <ChevronRight className="size-4" aria-hidden />
-                        </Link>
-                      </Button>
+                {s.banner ? (
+                  <Link
+                    href={s.cta.href}
+                    aria-label={s.title}
+                    className="relative block size-full bg-surface-2"
+                  >
+                    <Image
+                      src={s.banner}
+                      alt={s.title}
+                      fill
+                      sizes="100vw"
+                      className="object-cover object-left sm:object-center"
+                      priority={i === 0}
+                    />
+                  </Link>
+                ) : (
+                  <div className="mx-auto flex h-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid lg:grid-cols-2">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-xs">
+                        {s.eyebrow}
+                      </p>
+                      <h2 className="font-display mt-2 text-balance text-2xl font-bold uppercase leading-[1.05] sm:mt-3 sm:text-4xl lg:text-5xl">
+                        {s.title}
+                      </h2>
+                      <p className="mt-2 line-clamp-2 max-w-xl text-pretty text-sm text-muted sm:mt-4 sm:text-base lg:line-clamp-3">
+                        {s.subtitle}
+                      </p>
+                      <div className="mt-4 sm:mt-6">
+                        <Button asChild size="lg">
+                          <Link href={s.cta.href}>
+                            {s.cta.label}
+                            <ChevronRight className="size-4" aria-hidden />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="relative hidden aspect-[4/3] h-full max-h-[340px] items-center justify-center overflow-hidden rounded-base border border-border bg-white lg:flex">
+                      {s.image ? (
+                        <Image
+                          src={s.image}
+                          alt=""
+                          fill
+                          sizes="45vw"
+                          className="object-contain p-6"
+                          priority={i === 0}
+                        />
+                      ) : (
+                        Icon && (
+                          <div className="grid size-full place-items-center bg-accent-soft">
+                            <Icon
+                              className="size-24 text-accent"
+                              strokeWidth={1.2}
+                              aria-hidden
+                            />
+                          </div>
+                        )
+                      )}
                     </div>
                   </div>
-
-                  <div className="relative mx-auto flex aspect-[4/3] w-full max-w-md items-center justify-center overflow-hidden rounded-base border border-border bg-white">
-                    {s.image ? (
-                      <Image
-                        src={s.image}
-                        alt=""
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 45vw"
-                        className="object-contain p-6"
-                        priority={i === 0}
-                      />
-                    ) : (
-                      Icon && (
-                        <div className="grid size-full place-items-center bg-accent-soft">
-                          <Icon
-                            className="size-24 text-accent"
-                            strokeWidth={1.2}
-                            aria-hidden
-                          />
-                        </div>
-                      )
-                    )}
-                  </div>
-                </div>
+                )}
               </div>
             );
           })}
