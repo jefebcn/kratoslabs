@@ -49,6 +49,32 @@ export async function saveProduct(
       .eq("slug", d.slug)
       .maybeSingle();
 
+    // Carica le immagini nuove su Storage e appendile a quelle esistenti.
+    let images: { url: string; alt: string }[] = Array.isArray(existing?.images)
+      ? (existing.images as { url: string; alt: string }[])
+      : [];
+    const files = formData
+      .getAll("imageFiles")
+      .filter((f): f is File => f instanceof File && f.size > 0);
+    for (const file of files) {
+      const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
+      const path = `${d.slug}/${Date.now()}-${Math.round(
+        Math.random() * 1e6,
+      )}-${safe}`;
+      const { error: upErr } = await admin.storage
+        .from("product-images")
+        .upload(path, file, {
+          contentType: file.type || "image/jpeg",
+          upsert: false,
+        });
+      if (!upErr) {
+        const { data: pub } = admin.storage
+          .from("product-images")
+          .getPublicUrl(path);
+        images = [...images, { url: pub.publicUrl, alt: d.title }];
+      }
+    }
+
     const row = {
       slug: d.slug,
       brand: d.brand,
@@ -67,7 +93,7 @@ export async function saveProduct(
         activePerServingG: d.activePerServingG,
         activeName: d.activeName,
       },
-      images: existing?.images ?? [],
+      images,
       lab_report: existing?.lab_report ?? null,
       active: true,
       updated_at: new Date().toISOString(),
