@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Bitcoin, Clock, Send } from "lucide-react";
+import { Bitcoin, Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyRow } from "@/components/checkout/CopyRow";
 import { formatPrice } from "@/lib/utils";
-import { SITE } from "@/lib/constants";
 import {
   CRYPTO_ASSETS,
   isCryptoConfigured,
@@ -15,9 +14,11 @@ import {
 export function CryptoPayment({
   reference,
   totalCents,
+  emailSent,
 }: {
   reference: string;
   totalCents?: number;
+  emailSent?: boolean;
 }) {
   return (
     <div className="rounded-base border border-accent/30 bg-surface p-6 sm:p-8">
@@ -59,9 +60,7 @@ export function CryptoPayment({
         <>
           <p className="mt-6 text-sm text-muted">
             Invia l&apos;equivalente dell&apos;importo a uno degli indirizzi qui
-            sotto, indicando il riferimento. L&apos;ordine passa a{" "}
-            <span className="text-text">pagato</span> appena riceviamo la
-            conferma sulla blockchain.
+            sotto, indicando il riferimento come nota.
           </p>
 
           <div className="mt-4 flex flex-col gap-4">
@@ -96,24 +95,31 @@ export function CryptoPayment({
           <p className="mt-5 rounded-base border border-border bg-surface-2 px-3 py-2 text-xs text-muted">
             Invia l&apos;importo <span className="text-text">esatto</span> e usa
             il riferimento <span className="num text-text">{reference}</span>{" "}
-            come causale/nota. Reti diverse da quelle indicate = fondi persi.
+            come nota. Reti diverse da quelle indicate = fondi persi.
           </p>
         </>
       ) : (
         <div className="mt-6 rounded-base border border-border bg-surface-2 p-4 text-sm text-muted">
-          Il pagamento in criptovaluta è in fase di attivazione. Per completare
-          l&apos;ordine <span className="num text-text">{reference}</span>,
-          contattaci sul canale e ti inviamo l&apos;indirizzo di pagamento.
+          Il pagamento in criptovaluta è in fase di attivazione. Ti
+          contatteremo via email con l&apos;indirizzo per completare
+          l&apos;ordine <span className="num text-text">{reference}</span>.
         </div>
       )}
 
-      <div className="mt-6 flex flex-wrap gap-3">
-        <Button asChild>
-          <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">
-            <Send className="size-4" aria-hidden />
-            Conferma su Telegram
-          </a>
-        </Button>
+      {/* Flusso ordine: pre-conferma email -> verifica -> conferma */}
+      <div className="mt-6 flex items-start gap-2.5 rounded-base border border-border p-3 text-sm text-muted">
+        <Mail className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+        <p>
+          {emailSent
+            ? "Ti abbiamo inviato un'email di pre-conferma. "
+            : null}
+          L&apos;ordine viene <span className="text-text">confermato</span> dopo
+          che verifichiamo la ricezione del pagamento: riceverai una seconda
+          email con la conferma.
+        </p>
+      </div>
+
+      <div className="mt-6">
         <Button asChild variant="outline">
           <Link href="/products">Continua lo shopping</Link>
         </Button>

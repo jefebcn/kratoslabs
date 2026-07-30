@@ -72,6 +72,7 @@ export function CheckoutForm() {
         <CryptoPayment
           reference={state.reference}
           totalCents={orderTotalCents ?? undefined}
+          emailSent={state.emailSent}
         />
       );
     }
@@ -80,6 +81,7 @@ export function CheckoutForm() {
         <BankTransfer
           reference={state.reference}
           totalCents={orderTotalCents ?? undefined}
+          emailSent={state.emailSent}
         />
       );
     }
@@ -88,11 +90,14 @@ export function CheckoutForm() {
         <div className="mx-auto grid size-12 place-items-center rounded-full border border-emerald-500/40 text-emerald-600">
           <Check className="size-6" aria-hidden />
         </div>
-        <h2 className="mt-4 text-lg font-semibold">Ordine confermato</h2>
+        <h2 className="mt-4 text-lg font-semibold">Ordine ricevuto</h2>
         <p className="mt-1 text-sm text-muted">
           Riferimento{" "}
-          <span className="num text-text">{state.reference}</span>. Ti abbiamo
-          inviato una email di conferma.
+          <span className="num text-text">{state.reference}</span>.
+          {state.emailSent
+            ? " Ti abbiamo inviato un'email di pre-conferma."
+            : ""}{" "}
+          L&apos;ordine è confermato dopo la verifica del pagamento.
         </p>
         <Button asChild className="mt-6" variant="outline">
           <Link href="/products">Continua lo shopping</Link>
