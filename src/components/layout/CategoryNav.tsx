@@ -13,7 +13,7 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
-import { CATEGORIES } from "@/lib/constants";
+import type { Category } from "@/types";
 
 const CAT_ICON: Record<string, LucideIcon> = {
   proteine: Beef,
@@ -30,28 +30,28 @@ interface NavItem {
   icon: LucideIcon;
 }
 
-const ITEMS: NavItem[] = [
-  { href: "/", label: "Home", icon: Home },
-  ...CATEGORIES.map((c) => ({
-    href: `/products?category=${c.slug}`,
-    label: c.name,
-    icon: CAT_ICON[c.slug] ?? Pill,
-  })),
-  { href: "/products", label: "Tutti i prodotti", icon: LayoutGrid },
-  { href: "/guide", label: "Guide", icon: BookOpen },
-  { href: "/analisi", label: "Analisi", icon: ScrollText },
-  { href: "/recensioni", label: "Recensioni", icon: Star },
-];
-
 /** Barra categorie desktop (nascosta su mobile: lì c'è il drawer). */
-export function CategoryNav() {
+export function CategoryNav({ categories }: { categories: Category[] }) {
+  const items: NavItem[] = [
+    { href: "/", label: "Home", icon: Home },
+    ...categories.map((c) => ({
+      href: `/products?category=${c.slug}`,
+      label: c.name,
+      icon: CAT_ICON[c.slug] ?? Pill,
+    })),
+    { href: "/products", label: "Tutti i prodotti", icon: LayoutGrid },
+    { href: "/guide", label: "Guide", icon: BookOpen },
+    { href: "/analisi", label: "Analisi", icon: ScrollText },
+    { href: "/recensioni", label: "Recensioni", icon: Star },
+  ];
+
   return (
     <nav
       className="hidden border-b border-[#23262c] bg-[#15181d] lg:block"
       aria-label="Categorie"
     >
       <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 sm:px-6">
-        {ITEMS.map((item) => {
+        {items.map((item) => {
           const Icon = item.icon;
           return (
             <Link
