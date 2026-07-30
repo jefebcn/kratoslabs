@@ -1,18 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { Bitcoin, Clock, Send } from "lucide-react";
+import { Landmark, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyRow } from "@/components/checkout/CopyRow";
 import { formatPrice } from "@/lib/utils";
 import { SITE } from "@/lib/constants";
-import {
-  CRYPTO_ASSETS,
-  isCryptoConfigured,
-  bitcoinUri,
-} from "@/lib/payments/crypto";
+import { BANK, isBankConfigured, formatIban } from "@/lib/payments/bank";
 
-export function CryptoPayment({
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-xs uppercase tracking-wide text-muted">{label}</p>
+      <div className="mt-1">
+        <CopyRow value={value} />
+      </div>
+    </div>
+  );
+}
+
+export function BankTransfer({
   reference,
   totalCents,
 }: {
@@ -23,11 +30,11 @@ export function CryptoPayment({
     <div className="rounded-base border border-accent/30 bg-surface p-6 sm:p-8">
       <div className="flex items-center gap-3">
         <span className="grid size-11 place-items-center rounded-full border border-accent/30 text-accent">
-          <Bitcoin className="size-6" aria-hidden />
+          <Landmark className="size-6" aria-hidden />
         </span>
         <div>
           <h2 className="font-display text-lg font-semibold uppercase tracking-tight">
-            Paga in criptovaluta
+            Paga con bonifico
           </h2>
           <p className="inline-flex items-center gap-1.5 text-xs text-muted">
             <Clock className="size-3.5" aria-hidden />
@@ -39,14 +46,14 @@ export function CryptoPayment({
       <dl className="mt-6 grid gap-3 rounded-base border border-border bg-surface-2 p-4 text-sm sm:grid-cols-2">
         <div>
           <dt className="text-xs uppercase tracking-wide text-muted">
-            Riferimento ordine
+            Causale (obbligatoria)
           </dt>
           <dd className="num mt-0.5 font-semibold">{reference}</dd>
         </div>
         {typeof totalCents === "number" && (
           <div className="sm:text-right">
             <dt className="text-xs uppercase tracking-wide text-muted">
-              Totale da pagare
+              Importo del bonifico
             </dt>
             <dd className="num mt-0.5 font-semibold">
               {formatPrice(totalCents)}
@@ -55,55 +62,33 @@ export function CryptoPayment({
         )}
       </dl>
 
-      {isCryptoConfigured ? (
+      {isBankConfigured ? (
         <>
           <p className="mt-6 text-sm text-muted">
-            Invia l&apos;equivalente dell&apos;importo a uno degli indirizzi qui
-            sotto, indicando il riferimento. L&apos;ordine passa a{" "}
-            <span className="text-text">pagato</span> appena riceviamo la
-            conferma sulla blockchain.
+            Esegui il bonifico con i dati qui sotto, indicando{" "}
+            <span className="text-text">obbligatoriamente</span> la causale.
+            L&apos;ordine passa a <span className="text-text">pagato</span> alla
+            ricezione del bonifico (1–3 giorni lavorativi).
           </p>
 
-          <div className="mt-4 flex flex-col gap-4">
-            {CRYPTO_ASSETS.map((a) => (
-              <div key={a.symbol}>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold">
-                    {a.label}{" "}
-                    <span className="text-muted">({a.symbol})</span>
-                  </p>
-                  {a.network && (
-                    <span className="rounded-base border border-border px-1.5 py-0.5 text-[11px] text-muted">
-                      Rete: {a.network}
-                    </span>
-                  )}
-                </div>
-                <div className="mt-1.5">
-                  <CopyRow value={a.address} />
-                </div>
-                {a.symbol === "BTC" && (
-                  <a
-                    href={bitcoinUri(a.address, `Kratos Labs ${reference}`)}
-                    className="mt-1.5 inline-block text-xs font-medium text-accent hover:underline"
-                  >
-                    Apri nel wallet →
-                  </a>
-                )}
-              </div>
-            ))}
+          <div className="mt-4 flex flex-col gap-3">
+            <Row label="Intestatario" value={BANK.holder} />
+            <Row label="IBAN" value={formatIban(BANK.iban)} />
+            {BANK.bic && <Row label="BIC / SWIFT" value={BANK.bic} />}
+            {BANK.bank && <Row label="Banca" value={BANK.bank} />}
+            <Row label="Causale" value={reference} />
           </div>
 
           <p className="mt-5 rounded-base border border-border bg-surface-2 px-3 py-2 text-xs text-muted">
-            Invia l&apos;importo <span className="text-text">esatto</span> e usa
-            il riferimento <span className="num text-text">{reference}</span>{" "}
-            come causale/nota. Reti diverse da quelle indicate = fondi persi.
+            Senza la causale <span className="num text-text">{reference}</span>{" "}
+            non riusciamo ad abbinare il pagamento all&apos;ordine.
           </p>
         </>
       ) : (
         <div className="mt-6 rounded-base border border-border bg-surface-2 p-4 text-sm text-muted">
-          Il pagamento in criptovaluta è in fase di attivazione. Per completare
+          Il pagamento con bonifico è in fase di attivazione. Per completare
           l&apos;ordine <span className="num text-text">{reference}</span>,
-          contattaci sul canale e ti inviamo l&apos;indirizzo di pagamento.
+          contattaci e ti inviamo le coordinate bancarie.
         </div>
       )}
 

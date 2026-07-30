@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Icon } from "@/components/ui/icon";
 import { CryptoPayment } from "@/components/checkout/CryptoPayment";
+import { BankTransfer } from "@/components/checkout/BankTransfer";
 import { createOrder, type CheckoutResult } from "@/features/checkout";
 import { useCart } from "@/features/cart";
 import { PAYMENT_METHODS } from "@/lib/constants";
@@ -69,6 +70,14 @@ export function CheckoutForm() {
     if (state.paymentMethod === "crypto") {
       return (
         <CryptoPayment
+          reference={state.reference}
+          totalCents={orderTotalCents ?? undefined}
+        />
+      );
+    }
+    if (state.paymentMethod === "bank") {
+      return (
+        <BankTransfer
           reference={state.reference}
           totalCents={orderTotalCents ?? undefined}
         />
