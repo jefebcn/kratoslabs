@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 
 /** Form di ricerca riutilizzabile: header desktop e drawer mobile. */
 export function SearchForm({
@@ -24,20 +23,27 @@ export function SearchForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} role="search" className="relative w-full">
-      <Search
-        className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted"
-        aria-hidden
-      />
-      <Input
+    <form
+      onSubmit={handleSubmit}
+      role="search"
+      className="flex h-10 w-full items-center overflow-hidden rounded-full border border-border bg-surface focus-within:border-accent"
+    >
+      <input
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus}
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Cerca proteine, creatina…"
+        placeholder="Ricerca…"
         aria-label="Cerca prodotti"
-        className="pl-9"
+        className="h-full min-w-0 flex-1 bg-transparent px-4 text-sm text-text outline-none placeholder:text-muted"
       />
+      <button
+        type="submit"
+        aria-label="Cerca"
+        className="grid h-full w-11 shrink-0 place-items-center border-l border-border text-muted transition-colors hover:text-accent"
+      >
+        <Search className="size-4" aria-hidden />
+      </button>
     </form>
   );
 }
