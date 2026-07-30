@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/server";
 import { isSupabaseConfigured, isAdminUser } from "@/lib/supabase/config";
 import { signOut } from "@/features/auth/actions";
 
@@ -16,11 +16,7 @@ export const metadata: Metadata = {
 export default async function AccountPage() {
   if (!isSupabaseConfigured) redirect("/login");
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const user = await getCurrentUser();
   if (!user) redirect("/login?next=/account");
 
   const name = (user.user_metadata?.full_name as string | undefined) ?? null;

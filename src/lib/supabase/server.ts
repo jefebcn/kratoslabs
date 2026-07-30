@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./config";
+import type { User } from "@supabase/supabase-js";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, isSupabaseConfigured } from "./config";
 
 /** Client Supabase per Server Component, Route Handler e Server Action. */
 export async function createClient() {
@@ -23,4 +24,18 @@ export async function createClient() {
       },
     },
   });
+}
+
+/** Utente corrente o null. Non lancia mai: qualsiasi errore = nessun utente. */
+export async function getCurrentUser(): Promise<User | null> {
+  if (!isSupabaseConfigured) return null;
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user ?? null;
+  } catch {
+    return null;
+  }
 }

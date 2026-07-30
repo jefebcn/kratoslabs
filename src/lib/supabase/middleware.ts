@@ -14,9 +14,20 @@ import {
  * Se Supabase non è configurato, lascia passare tutto (utile in locale).
  */
 export async function updateSession(request: NextRequest) {
-  let response = NextResponse.next({ request });
+  if (!isSupabaseConfigured) return NextResponse.next({ request });
 
-  if (!isSupabaseConfigured) return response;
+  try {
+    return await runSession(request);
+  } catch {
+    // Un errore di auth (rete, chiavi errate, runtime) non deve mai far cadere
+    // l'intero sito: si prosegue senza sessione. /admin resta protetto anche
+    // dal controllo lato server nel layout.
+    return NextResponse.next({ request });
+  }
+}
+
+async function runSession(request: NextRequest) {
+  let response = NextResponse.next({ request });
 
   const supabase = createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
