@@ -1,22 +1,42 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bitcoin, Check, Send } from "lucide-react";
+import { ArrowRight, Bitcoin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { Icon } from "@/components/ui/icon";
+import { HeroCarousel, type HeroSlide } from "@/components/home/HeroCarousel";
 import { PaymentsBand } from "@/components/layout/PaymentsBand";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
 import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts, listProducts } from "@/features/products";
-import {
-  ANNOUNCEMENTS,
-  CATEGORIES,
-  HERO,
-  SITE,
-  TRUST_BADGES,
-} from "@/lib/constants";
+import { CATEGORIES, HERO, SITE, TRUST_BADGES } from "@/lib/constants";
+
+const SLIDES: HeroSlide[] = [
+  {
+    eyebrow: HERO.eyebrow,
+    title: "Dosaggi dichiarati, verificati",
+    subtitle: HERO.subtitle,
+    cta: { label: "Esplora il catalogo", href: "/products" },
+    image: "/images/logo.png",
+  },
+  {
+    eyebrow: "Community",
+    title: "Le tue recensioni contano",
+    subtitle:
+      "Condividi la tua esperienza dopo l'acquisto: aiuti la community a scegliere meglio, e ricevi un vantaggio riservato.",
+    cta: { label: "Scrivi una recensione", href: "/recensioni" },
+    icon: "Star",
+  },
+  {
+    eyebrow: "Quality control",
+    title: "Ogni lotto, analizzato",
+    subtitle:
+      "Un laboratorio indipendente verifica contenuto e contaminanti. Referto pubblico con il numero di lotto verificabile.",
+    cta: { label: "Come testiamo", href: "/analisi" },
+    icon: "FlaskConical",
+  },
+];
 
 export default function HomePage() {
   const bestseller = listFeaturedProducts();
@@ -24,61 +44,8 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero */}
-      <section className="border-b border-border">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:py-24">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-              {HERO.eyebrow}
-            </p>
-            <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-              {HERO.title}
-            </h1>
-            <p className="mt-5 max-w-xl text-pretty text-muted">
-              {HERO.subtitle}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <Link href={HERO.primaryCta.href}>
-                  {HERO.primaryCta.label}
-                  <ArrowRight className="size-4" aria-hidden />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href={HERO.secondaryCta.href}>
-                  {HERO.secondaryCta.label}
-                </Link>
-              </Button>
-            </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-              {ANNOUNCEMENTS.map((a) => (
-                <li
-                  key={a}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted"
-                >
-                  <Check className="size-4 text-accent" aria-hidden />
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-base border border-border bg-surface lg:mx-0 lg:max-w-none">
-            <Image
-              src="/images/logo.png"
-              alt="Kratos Labs: beuta da laboratorio fusa con il volto di Kratos e la striscia rossa"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
-            <div className="absolute bottom-4 left-4 rounded-base border border-border bg-bg/80 px-3 py-2 text-xs backdrop-blur">
-              <p className="num font-medium text-accent">Lotto KL-2601-A</p>
-              <p className="text-muted">Analizzato · contenuto proteico 100,4%</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Carosello promozionale */}
+      <HeroCarousel slides={SLIDES} />
 
       {/* We accept */}
       <PaymentsBand />
@@ -169,32 +136,6 @@ export default function HomePage() {
                 </p>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Le tue recensioni contano */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
-        <div className="grid items-center gap-6 overflow-hidden rounded-base border border-border bg-accent-soft p-8 md:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              Recensioni
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-              Le tue recensioni contano
-            </h2>
-            <p className="mt-2 text-muted">
-              Condividi la tua esperienza dopo l&apos;acquisto: aiuti la
-              community a scegliere meglio.
-            </p>
-          </div>
-          <div className="flex md:justify-end">
-            <Button asChild size="lg">
-              <Link href="/recensioni">
-                Scrivi una recensione
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-            </Button>
           </div>
         </div>
       </section>
