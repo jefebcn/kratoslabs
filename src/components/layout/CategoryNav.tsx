@@ -1,28 +1,14 @@
 import Link from "next/link";
 import {
-  Beef,
   BookOpen,
-  Droplets,
-  Fish,
-  FlaskConical,
   Home,
   LayoutGrid,
-  Pill,
   ScrollText,
   Star,
-  Zap,
   type LucideIcon,
 } from "lucide-react";
 import type { Category } from "@/types";
-
-const CAT_ICON: Record<string, LucideIcon> = {
-  proteine: Beef,
-  creatina: FlaskConical,
-  "pre-workout": Zap,
-  elettroliti: Droplets,
-  "omega-3": Fish,
-  vitamine: Pill,
-};
+import { categoryIcon } from "@/lib/category-icons";
 
 interface NavItem {
   href: string;
@@ -37,7 +23,7 @@ export function CategoryNav({ categories }: { categories: Category[] }) {
     ...categories.map((c) => ({
       href: `/products?category=${c.slug}`,
       label: c.name,
-      icon: CAT_ICON[c.slug] ?? Pill,
+      icon: categoryIcon(c.slug),
     })),
     { href: "/products", label: "Tutti i prodotti", icon: LayoutGrid },
     { href: "/guide", label: "Guide", icon: BookOpen },

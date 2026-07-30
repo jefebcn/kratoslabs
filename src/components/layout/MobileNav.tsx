@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import {
+  BookOpen,
+  Menu,
+  ScrollText,
+  Star,
+  type LucideIcon,
+} from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -16,6 +22,14 @@ import { CurrencyToggle } from "@/components/layout/CurrencyToggle";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { NAV_LINKS } from "@/lib/constants";
 import type { Category } from "@/types";
+import { categoryIcon } from "@/lib/category-icons";
+
+/** Icona per le pagine informative del menu, mappata per href. */
+const PAGE_ICON: Record<string, LucideIcon> = {
+  "/guide": BookOpen,
+  "/recensioni": Star,
+  "/analisi": ScrollText,
+};
 
 export function MobileNav({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false);
@@ -41,32 +55,42 @@ export function MobileNav({ categories }: { categories: Category[] }) {
             <p className="pb-1 text-xs font-medium uppercase tracking-wide text-muted">
               Categorie
             </p>
-            {categories.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/products?category=${c.slug}`}
-                onClick={close}
-                className="py-2 text-sm transition-colors hover:text-accent"
-              >
-                {c.name}
-              </Link>
-            ))}
+            {categories.map((c) => {
+              const Icon = categoryIcon(c.slug);
+              return (
+                <Link
+                  key={c.slug}
+                  href={`/products?category=${c.slug}`}
+                  onClick={close}
+                  className="flex items-center gap-3 py-2 text-sm transition-colors hover:text-accent"
+                >
+                  <Icon className="size-4 shrink-0 text-muted" aria-hidden />
+                  {c.name}
+                </Link>
+              );
+            })}
           </nav>
 
           <nav
             className="flex flex-col border-t border-border pt-4"
             aria-label="Pagine"
           >
-            {NAV_LINKS.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={close}
-                className="py-2 text-sm transition-colors hover:text-accent"
-              >
-                {l.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((l) => {
+              const Icon = PAGE_ICON[l.href];
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={close}
+                  className="flex items-center gap-3 py-2 text-sm transition-colors hover:text-accent"
+                >
+                  {Icon && (
+                    <Icon className="size-4 shrink-0 text-muted" aria-hidden />
+                  )}
+                  {l.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex flex-col gap-2 border-t border-border pt-4">
