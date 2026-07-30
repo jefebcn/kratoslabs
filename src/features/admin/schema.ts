@@ -25,15 +25,3 @@ export const productFormSchema = z.object({
 });
 
 export type ProductFormValues = z.infer<typeof productFormSchema>;
-
-export const orderStatusSchema = z.object({
-  orderId: z.string().min(1),
-  status: z.enum([
-    "pending",
-    "processing",
-    "shipped",
-    "delivered",
-    "cancelled",
-  ]),
-  trackingId: z.string().optional(),
-});

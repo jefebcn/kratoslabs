@@ -25,10 +25,12 @@ export function StatCard({ metric }: { metric: DashboardMetric }) {
       </p>
       <p className="num mt-2 text-2xl font-semibold">{metric.value}</p>
       <div className="mt-2 flex items-center gap-1.5 text-xs">
-        <span className={cn("num inline-flex items-center gap-0.5", tone)}>
-          <Arrow className="size-3.5" aria-hidden />
-          {Math.abs(metric.deltaPct)}%
-        </span>
+        {metric.deltaPct !== 0 && (
+          <span className={cn("num inline-flex items-center gap-0.5", tone)}>
+            <Arrow className="size-3.5" aria-hidden />
+            {Math.abs(metric.deltaPct)}%
+          </span>
+        )}
         <span className="text-muted">{metric.hint}</span>
       </div>
     </Card>
