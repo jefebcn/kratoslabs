@@ -8,6 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import {
+  TurnstileWidget,
+  turnstileEnabled,
+} from "@/components/auth/TurnstileWidget";
 
 function Field({
   label,
@@ -43,6 +47,10 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [checkEmail, setCheckEmail] = useState(false);
+  // Token captcha (solo registrazione, se Turnstile è configurato).
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  // Cambia per forzare un nuovo challenge dopo un errore (token monouso).
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -82,12 +90,19 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
       return;
     }
 
-    // Registrazione
+    // Registrazione — richiede il captcha se Turnstile è attivo.
+    if (turnstileEnabled && !captchaToken) {
+      setLoading(false);
+      setError("Completa la verifica anti-bot qui sotto.");
+      return;
+    }
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: name },
+        captchaToken: captchaToken ?? undefined,
         emailRedirectTo:
           typeof window !== "undefined"
             ? `${window.location.origin}/login`
@@ -98,6 +113,9 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
 
     if (error) {
       setError(error.message);
+      // Rigenera il captcha: il token appena usato non è più valido.
+      setCaptchaToken(null);
+      setCaptchaKey((k) => k + 1);
       return;
     }
 
@@ -147,6 +165,10 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
         type="password"
         autoComplete={isLogin ? "current-password" : "new-password"}
       />
+
+      {!isLogin && (
+        <TurnstileWidget key={captchaKey} onToken={setCaptchaToken} />
+      )}
 
       {error && (
         <p className="rounded-base border border-danger/30 bg-accent-soft px-3 py-2 text-sm text-danger">
