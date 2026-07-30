@@ -47,7 +47,7 @@ const SLIDES: HeroSlide[] = [
 
 export default function HomePage() {
   const bestseller = listFeaturedProducts();
-  const novita = [...listProducts()].reverse().slice(0, 4);
+  const all = listProducts();
 
   return (
     <div className="flex flex-col">
@@ -57,7 +57,30 @@ export default function HomePage() {
       {/* Carosello promozionale */}
       <HeroCarousel slides={SLIDES} />
 
-      {/* Trust badges */}
+      {/* Prodotti subito sotto il carosello: tutti i prodotti + bestseller */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14">
+        <Reveal>
+          <div className="flex items-end justify-between gap-4">
+            <SectionHeading
+              eyebrow="Catalogo"
+              title="I nostri prodotti"
+              description="Tutti i prodotti e i bestseller. Prezzo per grammo di attivo su ogni card."
+            />
+            <Link
+              href="/products"
+              className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent hover:underline sm:inline-flex"
+            >
+              Tutto il catalogo
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </div>
+          <div className="mt-8">
+            <ProductTabs all={all} bestseller={bestseller} />
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Trust badges: perché sceglierci */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
           {TRUST_BADGES.map((b) => (
@@ -72,29 +95,6 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Prodotti: Novità / Bestseller */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
-        <Reveal>
-          <div className="flex items-end justify-between gap-4">
-            <SectionHeading
-              eyebrow="Catalogo"
-              title="Novità e bestseller"
-              description="Selezionati per rapporto qualità-dose. Prezzo per grammo di attivo su ogni card."
-            />
-            <Link
-              href="/products"
-              className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent hover:underline sm:inline-flex"
-            >
-              Tutto il catalogo
-              <ArrowRight className="size-4" aria-hidden />
-            </Link>
-          </div>
-          <div className="mt-8">
-            <ProductTabs novita={novita} bestseller={bestseller} />
-          </div>
-        </Reveal>
       </section>
 
       {/* Categorie */}

@@ -68,14 +68,25 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                   <Link
                     href={s.cta.href}
                     aria-label={s.title}
-                    className="relative block size-full bg-surface-2"
+                    className="relative block size-full overflow-hidden bg-surface-2"
                   >
+                    {/* Sfondo sfocato che riempie la cornice: niente barre vuote. */}
+                    <Image
+                      src={s.banner}
+                      alt=""
+                      fill
+                      sizes="100vw"
+                      aria-hidden
+                      className="scale-110 object-cover opacity-70 blur-2xl"
+                      priority={i === 0}
+                    />
+                    {/* Immagine INTERA, mai tagliata. */}
                     <Image
                       src={s.banner}
                       alt={s.title}
                       fill
                       sizes="100vw"
-                      className="object-cover object-left sm:object-center"
+                      className="object-contain"
                       priority={i === 0}
                     />
                   </Link>
