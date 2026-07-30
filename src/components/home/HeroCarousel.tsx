@@ -25,6 +25,8 @@ export interface HeroSlide {
   cta: { label: string; href: string };
   image?: string;
   icon?: string;
+  /** Immagine a tutta larghezza: sostituisce il layout testo+box. */
+  banner?: string;
 }
 
 export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
@@ -51,6 +53,32 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       >
         {slides.map((s, i) => {
           const Icon = s.icon ? ICONS[s.icon] : undefined;
+
+          if (s.banner) {
+            return (
+              <div
+                key={s.title}
+                className="w-full shrink-0"
+                aria-hidden={i !== index}
+              >
+                <Link
+                  href={s.cta.href}
+                  aria-label={s.title}
+                  className="relative block min-h-[220px] w-full sm:min-h-[340px] lg:min-h-[440px]"
+                >
+                  <Image
+                    src={s.banner}
+                    alt={s.title}
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
+                    priority={i === 0}
+                  />
+                </Link>
+              </div>
+            );
+          }
+
           return (
             <div key={s.title} className="w-full shrink-0" aria-hidden={i !== index}>
               <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:py-20">
