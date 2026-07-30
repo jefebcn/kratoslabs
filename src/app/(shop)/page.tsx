@@ -85,9 +85,9 @@ export default function HomePage() {
 
       {/* Community / Telegram */}
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-        <div className="grid items-center gap-6 rounded-base border border-border bg-linear-to-br from-[#3a1618] to-surface p-8 md:grid-cols-2">
+        <div className="grid items-center gap-6 rounded-base border border-border bg-accent-soft p-8 md:grid-cols-2">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent">
+            <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-white px-2.5 py-1 text-xs font-medium text-accent">
               <Bitcoin className="size-3.5" aria-hidden />
               Accettiamo Bitcoin e criptovalute
             </div>
@@ -175,7 +175,7 @@ export default function HomePage() {
 
       {/* Le tue recensioni contano */}
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
-        <div className="grid items-center gap-6 overflow-hidden rounded-base border border-border bg-linear-to-br from-[#3a1618] to-bg p-8 md:grid-cols-2">
+        <div className="grid items-center gap-6 overflow-hidden rounded-base border border-border bg-accent-soft p-8 md:grid-cols-2">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Recensioni

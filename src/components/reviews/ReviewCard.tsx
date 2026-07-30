@@ -18,7 +18,7 @@ export function ReviewCard({
         <div className="flex items-center justify-between gap-2">
           <Stars rating={review.rating} />
           {review.verifiedPurchase && (
-            <span className="inline-flex items-center gap-1 text-xs text-emerald-400">
+            <span className="inline-flex items-center gap-1 text-xs text-emerald-600">
               <BadgeCheck className="size-3.5" aria-hidden />
               Acquisto verificato
             </span>

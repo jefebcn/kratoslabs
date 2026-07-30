@@ -8,7 +8,7 @@ const variants: Record<BadgeVariant, string> = {
   accent: "border-accent/30 bg-accent-soft text-accent",
   outline: "border-border bg-transparent text-muted",
   danger: "border-danger/40 bg-transparent text-danger",
-  success: "border-emerald-500/40 bg-transparent text-emerald-400",
+  success: "border-emerald-500/40 bg-transparent text-emerald-600",
 };
 
 export interface BadgeProps extends React.ComponentProps<"span"> {

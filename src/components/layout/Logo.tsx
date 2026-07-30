@@ -9,7 +9,7 @@ export function Logo({ className }: { className?: string }) {
       aria-label="Kratos Labs, home"
       className={cn("inline-flex items-center gap-2", className)}
     >
-      <span className="grid size-8 shrink-0 place-items-center rounded-[4px] border border-border bg-surface">
+      <span className="grid size-8 shrink-0 place-items-center rounded-[4px] border border-[#15181d] bg-[#15181d]">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
           <path
             d="M9 3.5h6M10.2 3.7v5.3L5.9 17.4a1.7 1.7 0 0 0 1.5 2.6h9.2a1.7 1.7 0 0 0 1.5-2.6L13.8 9V3.7"

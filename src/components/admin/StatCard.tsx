@@ -6,7 +6,7 @@ import type { DashboardMetric } from "@/types";
 export function StatCard({ metric }: { metric: DashboardMetric }) {
   const tone =
     metric.trend === "up"
-      ? "text-emerald-400"
+      ? "text-emerald-600"
       : metric.trend === "down"
         ? "text-danger"
         : "text-muted";
