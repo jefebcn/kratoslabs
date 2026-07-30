@@ -45,9 +45,9 @@ const SLIDES: HeroSlide[] = [
   },
 ];
 
-export default function HomePage() {
-  const bestseller = listFeaturedProducts();
-  const all = listProducts();
+export default async function HomePage() {
+  const bestseller = await listFeaturedProducts();
+  const all = await listProducts();
 
   return (
     <div className="flex flex-col">

@@ -20,8 +20,8 @@ import { findProduct, listByCategory, listProducts } from "@/features/products";
 import { ratingSummary, reviewsForProduct } from "@/features/reviews";
 import { CATEGORIES } from "@/lib/constants";
 
-export function generateStaticParams() {
-  return listProducts().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await listProducts()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -30,7 +30,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = findProduct(slug);
+  const product = await findProduct(slug);
   if (!product) return { title: "Prodotto non trovato" };
   return {
     title: product.title,
@@ -44,11 +44,11 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = findProduct(slug);
+  const product = await findProduct(slug);
   if (!product) notFound();
 
   const category = CATEGORIES.find((c) => c.slug === product.category);
-  const related = listByCategory(product.category).filter(
+  const related = (await listByCategory(product.category)).filter(
     (p) => p.id !== product.id,
   );
   const reviews = reviewsForProduct(slug);

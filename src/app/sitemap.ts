@@ -4,7 +4,7 @@ import { CATEGORIES } from "@/lib/constants";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/products",
@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const productRoutes = listProducts().map((p) => ({
+  const productRoutes = (await listProducts()).map((p) => ({
     url: `${BASE}/products/${p.slug}`,
     changeFrequency: "weekly" as const,
     priority: 0.8,

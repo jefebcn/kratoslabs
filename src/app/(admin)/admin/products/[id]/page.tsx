@@ -3,11 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import { ProductForm } from "@/components/admin/ProductForm";
-import { MOCK_PRODUCTS } from "@/lib/mock-data";
-
-export function generateStaticParams() {
-  return MOCK_PRODUCTS.map((p) => ({ id: p.id }));
-}
+import { findProductById } from "@/features/products";
 
 export async function generateMetadata({
   params,
@@ -15,7 +11,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const product = MOCK_PRODUCTS.find((p) => p.id === id);
+  const product = await findProductById(id);
   return { title: product ? `Modifica · ${product.title}` : "Prodotto" };
 }
 
@@ -25,7 +21,7 @@ export default async function EditProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const product = MOCK_PRODUCTS.find((p) => p.id === id);
+  const product = await findProductById(id);
   if (!product) notFound();
 
   return (
@@ -41,7 +37,7 @@ export default async function EditProductPage({
         <h1 className="mt-2 text-xl font-semibold tracking-tight">
           {product.title}
         </h1>
-        <p className="num text-sm text-muted">Modifica prodotto · {product.id}</p>
+        <p className="num text-sm text-muted">Modifica prodotto · {product.slug}</p>
       </div>
       <ProductForm product={product} />
     </div>
