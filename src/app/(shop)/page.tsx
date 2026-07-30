@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { Icon } from "@/components/ui/icon";
-import { ProductGrid } from "@/components/product/ProductGrid";
+import { PaymentsBand } from "@/components/layout/PaymentsBand";
+import { ProductTabs } from "@/components/product/ProductTabs";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
 import { ReviewsSection } from "@/components/reviews/ReviewsSection";
-import { listFeaturedProducts } from "@/features/products";
+import { listFeaturedProducts, listProducts } from "@/features/products";
 import {
   ANNOUNCEMENTS,
   CATEGORIES,
@@ -18,13 +19,14 @@ import {
 } from "@/lib/constants";
 
 export default function HomePage() {
-  const featured = listFeaturedProducts();
+  const bestseller = listFeaturedProducts();
+  const novita = [...listProducts()].reverse().slice(0, 4);
 
   return (
     <div className="flex flex-col">
       {/* Hero */}
       <section className="border-b border-border">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:py-24">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
               {HERO.eyebrow}
@@ -78,9 +80,39 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* We accept */}
+      <PaymentsBand />
+
+      {/* Community / Telegram */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
+        <div className="grid items-center gap-6 rounded-base border border-border bg-linear-to-br from-[#3a1618] to-surface p-8 md:grid-cols-2">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent">
+              <Bitcoin className="size-3.5" aria-hidden />
+              Accettiamo Bitcoin e criptovalute
+            </div>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              Unisciti al canale Kratos Labs
+            </h2>
+            <p className="mt-2 text-muted">
+              Nuovi lotti, referti di laboratorio in anteprima e offerte
+              riservate. Nessuno spam, solo aggiornamenti che contano.
+            </p>
+          </div>
+          <div className="flex md:justify-end">
+            <Button asChild size="lg">
+              <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">
+                <Send className="size-4" aria-hidden />
+                Vai al canale Telegram
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Trust badges */}
-      <section className="border-b border-border bg-surface">
-        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
           {TRUST_BADGES.map((b) => (
             <div key={b.title} className="flex gap-3">
               <span className="grid size-10 shrink-0 place-items-center rounded-base border border-border text-accent">
@@ -95,13 +127,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured products */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
+      {/* Prodotti: Novità / Bestseller */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
         <Reveal>
           <div className="flex items-end justify-between gap-4">
             <SectionHeading
-              eyebrow="Bestseller"
-              title="I più richiesti"
+              eyebrow="Catalogo"
+              title="Novità e bestseller"
               description="Selezionati per rapporto qualità-dose. Prezzo per grammo di attivo su ogni card."
             />
             <Link
@@ -113,17 +145,14 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="mt-8">
-            <ProductGrid products={featured} />
+            <ProductTabs novita={novita} bestseller={bestseller} />
           </div>
         </Reveal>
       </section>
 
-      {/* Feedback verificati */}
-      <ReviewsSection />
-
       {/* Categorie */}
       <section className="border-y border-border bg-surface">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
           <SectionHeading eyebrow="Categorie" title="Scegli per obiettivo" />
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {CATEGORIES.map((c) => (
@@ -144,36 +173,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Community band */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
-        <div className="grid items-center gap-6 rounded-base border border-border bg-surface p-8 md:grid-cols-2">
+      {/* Le tue recensioni contano */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        <div className="grid items-center gap-6 overflow-hidden rounded-base border border-border bg-linear-to-br from-[#3a1618] to-bg p-8 md:grid-cols-2">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent">
-              <Bitcoin className="size-3.5" aria-hidden />
-              Accettiamo Bitcoin e criptovalute
-            </div>
-            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
-              Unisciti al canale KratosLabs
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              Recensioni
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+              Le tue recensioni contano
             </h2>
             <p className="mt-2 text-muted">
-              Nuovi lotti, referti di laboratorio in anteprima e offerte
-              riservate. Nessuno spam, solo aggiornamenti che contano.
+              Condividi la tua esperienza dopo l&apos;acquisto: aiuti la
+              community a scegliere meglio.
             </p>
           </div>
           <div className="flex md:justify-end">
-            <Button asChild size="lg" variant="outline">
-              <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">
-                <Send className="size-4" aria-hidden />
-                Vai al canale Telegram
-              </a>
+            <Button asChild size="lg">
+              <Link href="/recensioni">
+                Scrivi una recensione
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Touchdown / community gallery */}
+      {/* Feedback verificati */}
+      <ReviewsSection />
+
+      {/* Dalla community */}
       <section className="border-t border-border bg-surface">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
           <SectionHeading
             eyebrow="Dalla community"
             title="Ordini arrivati"
