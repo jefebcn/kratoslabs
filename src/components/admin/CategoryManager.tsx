@@ -20,6 +20,53 @@ interface Row {
   active: boolean;
 }
 
+/** Riga di rinomina con feedback di salvataggio dedicato. */
+function RenameRow({ category }: { category: Row }) {
+  const [state, action, pending] = useActionState<
+    CategoryResult | null,
+    FormData
+  >(renameCategory, null);
+
+  return (
+    <form
+      action={action}
+      className="flex flex-wrap items-center gap-2"
+    >
+      <input type="hidden" name="slug" value={category.slug} />
+      <Input
+        name="name"
+        defaultValue={category.name}
+        className="h-9 w-full sm:w-40"
+      />
+      <Input
+        name="description"
+        defaultValue={category.description}
+        className="h-9 w-full sm:w-56"
+        placeholder="Descrizione"
+      />
+      <button
+        type="submit"
+        disabled={pending}
+        className="inline-flex items-center gap-1 rounded-base border border-border px-2 py-1.5 text-xs font-medium transition-colors hover:text-accent disabled:opacity-50"
+      >
+        <Check className="size-3.5" aria-hidden />
+        {pending ? "Salvo…" : "Salva"}
+      </button>
+      <span className="text-xs text-muted">/{category.slug}</span>
+      {state?.message && (
+        <span
+          className={cn(
+            "w-full text-xs sm:w-auto",
+            state.ok ? "text-emerald-600" : "text-danger",
+          )}
+        >
+          {state.message}
+        </span>
+      )}
+    </form>
+  );
+}
+
 export function CategoryManager({ categories }: { categories: Row[] }) {
   const [state, addAction, pending] = useActionState<
     CategoryResult | null,
@@ -69,31 +116,7 @@ export function CategoryManager({ categories }: { categories: Row[] }) {
             {categories.map((c) => (
               <tr key={c.slug} className="border-b border-border last:border-0">
                 <td className="px-4 py-3">
-                  <form
-                    action={renameCategory}
-                    className="flex flex-wrap items-center gap-2"
-                  >
-                    <input type="hidden" name="slug" value={c.slug} />
-                    <Input
-                      name="name"
-                      defaultValue={c.name}
-                      className="h-9 w-40"
-                    />
-                    <Input
-                      name="description"
-                      defaultValue={c.description}
-                      className="h-9 w-56"
-                      placeholder="Descrizione"
-                    />
-                    <button
-                      type="submit"
-                      className="inline-flex items-center gap-1 rounded-base border border-border px-2 py-1.5 text-xs font-medium transition-colors hover:text-accent"
-                    >
-                      <Check className="size-3.5" aria-hidden />
-                      Salva
-                    </button>
-                    <span className="text-xs text-muted">/{c.slug}</span>
-                  </form>
+                  <RenameRow category={c} />
                 </td>
                 <td className="px-4 py-3">
                   <span
