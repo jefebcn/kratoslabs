@@ -154,6 +154,17 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
   { id: "crypto", label: "Bitcoin", icon: "Bitcoin" },
 ];
 
+/** Metodi realmente accettati al checkout: mostrati nella banda che ruota. */
+export const ACCEPTED_PAYMENTS = [
+  { name: "Bitcoin", subtitle: "BTC — privato e veloce", icon: "Bitcoin" },
+  { name: "USDT", subtitle: "TRC-20 — stablecoin", icon: "CircleDollarSign" },
+  {
+    name: "Bonifico bancario",
+    subtitle: "SEPA — conferma in 24–48h",
+    icon: "Landmark",
+  },
+] as const;
+
 /**
  * "Dalla community": foto reali inviate dai clienti. Prova sociale onesta,
  * non pacchi anonimi. In produzione arrivano moderate da un CMS.
