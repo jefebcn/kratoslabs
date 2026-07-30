@@ -58,7 +58,13 @@ export function MobileNav({ categories }: { categories: Category[] }) {
       >
         <Menu className="size-5" aria-hidden />
       </SheetTrigger>
-      <SheetContent side="left" aria-describedby={undefined}>
+      <SheetContent
+        side="left"
+        aria-describedby={undefined}
+        // Non spostare il focus sul campo di ricerca all'apertura: su mobile
+        // farebbe comparire la tastiera senza che l'utente l'abbia richiesto.
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
