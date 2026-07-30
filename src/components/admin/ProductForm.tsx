@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useActionState } from "react";
 import { Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -108,6 +109,33 @@ export function ProductForm({ product }: { product?: Product }) {
         >
           <Textarea name="description" defaultValue={product?.description} required />
         </Field>
+      </section>
+
+      <section>
+        <h3 className="mb-1 text-sm font-medium">Immagini</h3>
+        <p className="mb-4 text-xs text-muted">
+          Carica una o più immagini (JPG/PNG/WebP). Le nuove si aggiungono a
+          quelle esistenti.
+        </p>
+        {product?.images?.length ? (
+          <div className="mb-4 flex flex-wrap gap-2">
+            {product.images.map((img, i) => (
+              <div
+                key={i}
+                className="relative size-16 shrink-0 overflow-hidden rounded-base border border-border bg-surface-2"
+              >
+                <Image
+                  src={img.url}
+                  alt={img.alt ?? ""}
+                  fill
+                  sizes="64px"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
+        <Input type="file" name="imageFiles" multiple accept="image/*" />
       </section>
 
       <section>
