@@ -1,10 +1,10 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Plus, DownloadCloud } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductsTable } from "@/components/admin/ProductsTable";
+import { ImportCatalogButton } from "@/components/admin/ImportCatalogButton";
 import { listProducts } from "@/features/products";
-import { importCatalog } from "@/features/admin";
 import { hasServiceRole } from "@/lib/supabase/admin";
 
 export const metadata: Metadata = { title: "Prodotti" };
@@ -22,12 +22,7 @@ export default async function AdminProductsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <form action={importCatalog}>
-            <Button type="submit" variant="outline">
-              <DownloadCloud className="size-4" aria-hidden />
-              Importa catalogo iniziale
-            </Button>
-          </form>
+          <ImportCatalogButton />
           <Button asChild>
             <Link href="/admin/products/new">
               <Plus className="size-4" aria-hidden />
