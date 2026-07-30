@@ -1,19 +1,24 @@
 "use server";
 
 import { checkoutSchema } from "./schema";
+import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
+import { orderPreConfirmationEmail } from "@/lib/email/templates";
 
 export interface CheckoutResult {
   ok: boolean;
   reference?: string;
   paymentMethod?: string;
+  /** true se l'email di pre-conferma è stata effettivamente inviata. */
+  emailSent?: boolean;
   errors?: Record<string, string[] | undefined>;
   message?: string;
 }
 
 /**
- * Server Action di esempio. Valida i dati e simula la creazione dell'ordine.
- * Da collegare a DB e provider di pagamento negli step successivi; la firma
- * (FormData -> risultato serializzabile) resta questa.
+ * Server Action del checkout. Valida i dati, crea il riferimento e invia la
+ * pre-conferma via email (se Resend è configurato). La persistenza su Supabase
+ * (service role) e la conferma finale dopo verifica pagamento sono lo step
+ * successivo; la firma (FormData -> risultato serializzabile) resta stabile.
  */
 export async function createOrder(
   _prev: CheckoutResult | null,
@@ -29,8 +34,22 @@ export async function createOrder(
     };
   }
 
-  // TODO: persistere l'ordine su Supabase (service role) una volta configurato.
-  // La firma resta stabile; il client mostra le istruzioni di pagamento.
   const reference = `KL-${Date.now().toString().slice(-6)}`;
-  return { ok: true, reference, paymentMethod: parsed.data.paymentMethod };
+
+  // Pre-conferma via email (no-op se Resend non è configurato).
+  let emailSent = false;
+  if (isEmailConfigured) {
+    const { subject, html } = orderPreConfirmationEmail({
+      reference,
+      paymentMethod: parsed.data.paymentMethod,
+    });
+    emailSent = await sendEmail({ to: parsed.data.email, subject, html });
+  }
+
+  return {
+    ok: true,
+    reference,
+    paymentMethod: parsed.data.paymentMethod,
+    emailSent,
+  };
 }

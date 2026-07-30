@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Landmark, Clock, Send } from "lucide-react";
+import { Landmark, Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyRow } from "@/components/checkout/CopyRow";
 import { formatPrice } from "@/lib/utils";
-import { SITE } from "@/lib/constants";
 import { BANK, isBankConfigured, formatIban } from "@/lib/payments/bank";
 
 function Row({ label, value }: { label: string; value: string }) {
@@ -22,9 +21,11 @@ function Row({ label, value }: { label: string; value: string }) {
 export function BankTransfer({
   reference,
   totalCents,
+  emailSent,
 }: {
   reference: string;
   totalCents?: number;
+  emailSent?: boolean;
 }) {
   return (
     <div className="rounded-base border border-accent/30 bg-surface p-6 sm:p-8">
@@ -67,8 +68,6 @@ export function BankTransfer({
           <p className="mt-6 text-sm text-muted">
             Esegui il bonifico con i dati qui sotto, indicando{" "}
             <span className="text-text">obbligatoriamente</span> la causale.
-            L&apos;ordine passa a <span className="text-text">pagato</span> alla
-            ricezione del bonifico (1–3 giorni lavorativi).
           </p>
 
           <div className="mt-4 flex flex-col gap-3">
@@ -86,19 +85,26 @@ export function BankTransfer({
         </>
       ) : (
         <div className="mt-6 rounded-base border border-border bg-surface-2 p-4 text-sm text-muted">
-          Il pagamento con bonifico è in fase di attivazione. Per completare
-          l&apos;ordine <span className="num text-text">{reference}</span>,
-          contattaci e ti inviamo le coordinate bancarie.
+          Il pagamento con bonifico è in fase di attivazione. Ti contatteremo
+          via email con le coordinate per completare l&apos;ordine{" "}
+          <span className="num text-text">{reference}</span>.
         </div>
       )}
 
-      <div className="mt-6 flex flex-wrap gap-3">
-        <Button asChild>
-          <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">
-            <Send className="size-4" aria-hidden />
-            Conferma su Telegram
-          </a>
-        </Button>
+      {/* Flusso ordine: pre-conferma email -> ricezione bonifico -> conferma */}
+      <div className="mt-6 flex items-start gap-2.5 rounded-base border border-border p-3 text-sm text-muted">
+        <Mail className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+        <p>
+          {emailSent
+            ? "Ti abbiamo inviato un'email di pre-conferma. "
+            : null}
+          Con bonifico la conferma dell&apos;ordine arriva{" "}
+          <span className="text-text">entro 24–48 ore</span> dalla ricezione del
+          pagamento: riceverai una seconda email con la conferma.
+        </p>
+      </div>
+
+      <div className="mt-6">
         <Button asChild variant="outline">
           <Link href="/products">Continua lo shopping</Link>
         </Button>
