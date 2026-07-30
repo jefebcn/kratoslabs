@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Confezione neutra KratosLabs">
+<rect width="400" height="400" fill="#14161A"/>
+<rect x="0.5" y="0.5" width="399" height="399" fill="none" stroke="#23262C"/>
+
+<path d="M140 160l60-26 60 26-60 26z" fill="#1B1E24" stroke="#23262C"/>
+<path d="M140 160v70l60 26v-70z" fill="#0B0C0E" stroke="#23262C"/>
+<path d="M260 160v70l-60 26v-70z" fill="#1B1E24" stroke="#23262C"/>
+<path d="M200 186v70" stroke="#23262C"/>
+<path d="M170 210h20" stroke="#C9A227" stroke-width="1.5"/>
+<text x="200" y="305" fill="#8A9099" font-family="monospace" font-size="11" text-anchor="middle" letter-spacing="2">SUPPLEMENT</text>
+<text x="200" y="327" fill="#23262C" font-family="monospace" font-size="9" text-anchor="middle" letter-spacing="3">KRATOSLABS</text>
+
+</svg>

@@ -1,4 +1,4 @@
-import type { Order, Product } from "@/types";
+import type { Order, Product, Review } from "@/types";
 
 /**
  * Dati di sviluppo. Sostituire con query al DB allo step 5,
@@ -18,8 +18,16 @@ export const MOCK_PRODUCTS: Product[] = [
     compareAtPriceCents: 4990,
     images: [
       {
-        url: "/images/placeholder-product.svg",
+        url: "/images/products/tub.svg",
         alt: "Barattolo ISO Zero Whey Isolate su fondo antracite",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di ISO Zero",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2601-A",
       },
     ],
     specs: {
@@ -50,8 +58,16 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 1990,
     images: [
       {
-        url: "/images/placeholder-product.svg",
+        url: "/images/products/jar.svg",
         alt: "Confezione di creatina monoidrato micronizzata",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione della creatina",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2558-C",
       },
     ],
     specs: {
@@ -82,8 +98,16 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 3290,
     images: [
       {
-        url: "/images/placeholder-product.svg",
-        alt: "Barattolo Ignition pre-workout",
+        url: "/images/products/shaker.svg",
+        alt: "Barattolo Ignition pre-workout con shaker",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di Ignition",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2604-B",
       },
     ],
     specs: {
@@ -114,8 +138,12 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 2490,
     images: [
       {
-        url: "/images/placeholder-product.svg",
+        url: "/images/products/sachets.svg",
         alt: "Bustine Hydrate elettroliti",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di Hydrate",
       },
     ],
     specs: {
@@ -140,8 +168,16 @@ export const MOCK_PRODUCTS: Product[] = [
     priceCents: 2790,
     images: [
       {
-        url: "/images/placeholder-product.svg",
-        alt: "Flacone di omega-3 in capsule",
+        url: "/images/products/softgels.svg",
+        alt: "Flacone di omega-3 in capsule softgel",
+      },
+      {
+        url: "/images/products/box.svg",
+        alt: "Confezione neutra di spedizione di Omega-3",
+      },
+      {
+        url: "/images/coa.svg",
+        alt: "Referto di analisi del lotto KL-2571-A",
       },
     ],
     specs: {
@@ -175,7 +211,7 @@ export const MOCK_ORDERS: Order[] = [
         slug: "iso-zero-whey-isolate",
         title: "ISO Zero — Whey Isolate",
         brand: "KratosLabs",
-        imageUrl: "/images/placeholder-product.svg",
+        imageUrl: "/images/products/tub.svg",
         unitPriceCents: 4490,
         quantity: 1,
       },
@@ -184,7 +220,7 @@ export const MOCK_ORDERS: Order[] = [
         slug: "creatina-monoidrato-micronizzata",
         title: "Creatina Monoidrato Micronizzata",
         brand: "KratosLabs",
-        imageUrl: "/images/placeholder-product.svg",
+        imageUrl: "/images/products/jar.svg",
         unitPriceCents: 1990,
         quantity: 1,
       },
@@ -203,7 +239,7 @@ export const MOCK_ORDERS: Order[] = [
         slug: "ignition-pre-workout",
         title: "Ignition — Pre-workout",
         brand: "KratosLabs",
-        imageUrl: "/images/placeholder-product.svg",
+        imageUrl: "/images/products/shaker.svg",
         unitPriceCents: 3290,
         quantity: 1,
       },
@@ -223,4 +259,124 @@ export function getProductsByCategory(category: string) {
 
 export function getFeaturedProducts() {
   return MOCK_PRODUCTS.filter((p) => p.featured);
+}
+
+/**
+ * Recensioni dei clienti. Ognuna è legata a un prodotto reale del catalogo e
+ * marcata come acquisto verificato. In produzione arrivano dal DB / da un
+ * provider di recensioni, mantenendo la forma di `Review`.
+ */
+export const MOCK_REVIEWS: Review[] = [
+  {
+    id: "r_001",
+    author: "Marco R.",
+    location: "Milano",
+    rating: 5,
+    title: "Dosaggi reali, referto che combacia",
+    body: "Ho confrontato l'etichetta con il referto del lotto: 27 g di proteine per porzione veri. Sapore neutro, si scioglie senza grumi. È il motivo per cui sono passato a KratosLabs.",
+    productSlug: "iso-zero-whey-isolate",
+    productTitle: "ISO Zero — Whey Isolate",
+    date: "2026-07-22",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_002",
+    author: "Sara T.",
+    location: "Torino",
+    rating: 5,
+    title: "Creatina essenziale e pulita",
+    body: "Nessun additivo, purezza dichiarata e certificata. 5 g esatti per misurino. Ordine arrivato in un giorno, imballo neutro come richiesto.",
+    productSlug: "creatina-monoidrato-micronizzata",
+    productTitle: "Creatina Monoidrato Micronizzata",
+    date: "2026-07-20",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_003",
+    author: "Luca B.",
+    location: "Bologna",
+    rating: 4,
+    title: "Formula onesta, a etichetta aperta",
+    body: "Finalmente un pre-workout senza proprietary blend: sai esattamente cosa prendi. Dosaggi pieni. Tolgo mezza stella solo perché vorrei più gusti disponibili.",
+    productSlug: "ignition-pre-workout",
+    productTitle: "Ignition — Pre-workout",
+    date: "2026-07-18",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_004",
+    author: "Giulia M.",
+    location: "Roma",
+    rating: 5,
+    title: "Trasparenza totale sugli omega-3",
+    body: "Test su mercurio, PCB e diossine pubblicati per il lotto. Forma trigliceride, nessun retrogusto. Ho comprato dopo aver letto il referto ed è tutto vero.",
+    productSlug: "omega-3-triglyceride",
+    productTitle: "Omega-3 forma trigliceride",
+    date: "2026-07-15",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_005",
+    author: "Davide P.",
+    location: "Napoli",
+    rating: 5,
+    title: "Spedizione rapida e tracciata",
+    body: "Ordinato di sera, consegnato dopo un giorno e mezzo con tracking sempre aggiornato. La creatina è micronizzata davvero, si scioglie in acqua senza residui.",
+    productSlug: "creatina-monoidrato-micronizzata",
+    productTitle: "Creatina Monoidrato Micronizzata",
+    date: "2026-07-12",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_006",
+    author: "Elena V.",
+    location: "Firenze",
+    rating: 5,
+    title: "Il migliore isolato che abbia provato",
+    body: "Digeribilità ottima, pochissimo lattosio come dichiarato. Il rapporto prezzo/grammo di proteine è migliore di marchi più blasonati. Riordino sicuro.",
+    productSlug: "iso-zero-whey-isolate",
+    productTitle: "ISO Zero — Whey Isolate",
+    date: "2026-07-09",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_007",
+    author: "Francesco L.",
+    location: "Bari",
+    rating: 4,
+    title: "Elettroliti utili d'estate",
+    body: "1000 mg di sodio per bustina, zero zuccheri: perfetti per le uscite lunghe in bici col caldo. Gusto leggero. Avrei gradito una confezione più grande.",
+    productSlug: "hydrate-elettroliti",
+    productTitle: "Hydrate — Elettroliti",
+    date: "2026-07-05",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_008",
+    author: "Chiara N.",
+    location: "Verona",
+    rating: 5,
+    title: "Pre-workout che sento davvero",
+    body: "Citrullina e beta-alanina a dosaggio pieno, la differenza sull'allenamento si sente. Niente crash dopo. La caffeina è quella dichiarata, non esagerata.",
+    productSlug: "ignition-pre-workout",
+    productTitle: "Ignition — Pre-workout",
+    date: "2026-06-30",
+    verifiedPurchase: true,
+  },
+  {
+    id: "r_009",
+    author: "Andrea S.",
+    location: "Genova",
+    rating: 5,
+    title: "Acquisto affidabile, referti pubblici",
+    body: "Quello che cercavo: poter verificare ogni lotto. Omega-3 in forma trigliceride, capsule non troppo grandi. Servizio clienti gentile via email.",
+    productSlug: "omega-3-triglyceride",
+    productTitle: "Omega-3 forma trigliceride",
+    date: "2026-06-24",
+    verifiedPurchase: true,
+  },
+];
+
+export function getReviewsByProduct(slug: string) {
+  return MOCK_REVIEWS.filter((r) => r.productSlug === slug);
 }

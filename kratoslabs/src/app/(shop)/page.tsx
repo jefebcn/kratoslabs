@@ -1,53 +1,189 @@
-import { getFeaturedProducts } from "@/lib/mock-data";
-import { formatPrice, formatPricePerActiveGram } from "@/lib/utils";
-import { SITE } from "@/lib/constants";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Bitcoin, Check, Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { Reveal } from "@/components/ui/reveal";
+import { Icon } from "@/components/ui/icon";
+import { ProductGrid } from "@/components/product/ProductGrid";
+import { CommunityGallery } from "@/components/product/CommunityGallery";
+import { ReviewsSection } from "@/components/reviews/ReviewsSection";
+import { listFeaturedProducts } from "@/features/products";
+import {
+  ANNOUNCEMENTS,
+  CATEGORIES,
+  HERO,
+  SITE,
+  TRUST_BADGES,
+} from "@/lib/constants";
 
-/**
- * Pagina di verifica del build. Serve a provare che token, tipi, utils e dati
- * mock funzionino insieme. Viene sostituita dalla home vera al task 6.
- */
 export default function HomePage() {
-  const products = getFeaturedProducts();
+  const featured = listFeaturedProducts();
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
-      <p className="text-xs uppercase tracking-[0.2em] text-muted">
-        Fondazione attiva
-      </p>
-      <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-        {SITE.name}
-      </h1>
-      <p className="mt-2 max-w-prose text-muted">{SITE.tagline}</p>
+    <div className="flex flex-col">
+      {/* Hero */}
+      <section className="border-b border-border">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
+              {HERO.eyebrow}
+            </p>
+            <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
+              {HERO.title}
+            </h1>
+            <p className="mt-5 max-w-xl text-pretty text-muted">
+              {HERO.subtitle}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <Link href={HERO.primaryCta.href}>
+                  {HERO.primaryCta.label}
+                  <ArrowRight className="size-4" aria-hidden />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href={HERO.secondaryCta.href}>
+                  {HERO.secondaryCta.label}
+                </Link>
+              </Button>
+            </div>
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+              {ANNOUNCEMENTS.map((a) => (
+                <li
+                  key={a}
+                  className="inline-flex items-center gap-1.5 text-sm text-muted"
+                >
+                  <Check className="size-4 text-accent" aria-hidden />
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      <ul className="mt-12 divide-y divide-border border-y border-border">
-        {products.map((product) => {
-          const perGram = formatPricePerActiveGram(
-            product.priceCents,
-            product.specs.activePerServingG,
-            product.specs.servingsPerContainer,
-          );
+          <div className="relative aspect-[4/3] overflow-hidden rounded-base border border-border bg-surface">
+            <Image
+              src="/images/hero.svg"
+              alt="Laboratorio di controllo qualità KratosLabs"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div className="absolute bottom-4 left-4 rounded-base border border-border bg-bg/80 px-3 py-2 text-xs backdrop-blur">
+              <p className="num font-medium text-accent">Lotto KL-2601-A</p>
+              <p className="text-muted">Analizzato · contenuto proteico 100,4%</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          return (
-            <li
-              key={product.id}
-              className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4"
+      {/* Trust badges */}
+      <section className="border-b border-border bg-surface">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+          {TRUST_BADGES.map((b) => (
+            <div key={b.title} className="flex gap-3">
+              <span className="grid size-10 shrink-0 place-items-center rounded-base border border-border text-accent">
+                <Icon name={b.icon} className="size-5" />
+              </span>
+              <div>
+                <p className="text-sm font-medium">{b.title}</p>
+                <p className="mt-1 text-sm text-muted">{b.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured products */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
+        <Reveal>
+          <div className="flex items-end justify-between gap-4">
+            <SectionHeading
+              eyebrow="Bestseller"
+              title="I più richiesti"
+              description="Selezionati per rapporto qualità-dose. Prezzo per grammo di attivo su ogni card."
+            />
+            <Link
+              href="/products"
+              className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent hover:underline sm:inline-flex"
             >
-              <div className="min-w-0">
-                <p className="truncate font-medium">{product.title}</p>
-                <p className="truncate text-sm text-muted">
-                  {product.shortDescription}
+              Tutto il catalogo
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </div>
+          <div className="mt-8">
+            <ProductGrid products={featured} />
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Feedback verificati */}
+      <ReviewsSection />
+
+      {/* Categorie */}
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <SectionHeading eyebrow="Categorie" title="Scegli per obiettivo" />
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {CATEGORIES.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/products?category=${c.slug}`}
+                className="group rounded-base border border-border bg-bg p-4 transition-colors hover:border-accent/50"
+              >
+                <p className="text-sm font-medium transition-colors group-hover:text-accent">
+                  {c.name}
                 </p>
-              </div>
-              <div className="text-right">
-                <p className="num font-medium text-accent">
-                  {formatPrice(product.priceCents)}
+                <p className="mt-1 line-clamp-2 text-xs text-muted">
+                  {c.description}
                 </p>
-                {perGram && <p className="num text-sm text-muted">{perGram}</p>}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Community band */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
+        <div className="grid items-center gap-6 rounded-base border border-border bg-surface p-8 md:grid-cols-2">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent">
+              <Bitcoin className="size-3.5" aria-hidden />
+              Accettiamo Bitcoin e criptovalute
+            </div>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              Unisciti al canale KratosLabs
+            </h2>
+            <p className="mt-2 text-muted">
+              Nuovi lotti, referti di laboratorio in anteprima e offerte
+              riservate. Nessuno spam, solo aggiornamenti che contano.
+            </p>
+          </div>
+          <div className="flex md:justify-end">
+            <Button asChild size="lg" variant="outline">
+              <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">
+                <Send className="size-4" aria-hidden />
+                Vai al canale Telegram
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Touchdown / community gallery */}
+      <section className="border-t border-border bg-surface">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <SectionHeading
+            eyebrow="Dalla community"
+            title="Ordini arrivati"
+            description="Foto reali inviate dai clienti. Consegna tracciata, imballo curato."
+          />
+          <Reveal className="mt-8">
+            <CommunityGallery />
+          </Reveal>
+        </div>
+      </section>
     </div>
   );
 }
