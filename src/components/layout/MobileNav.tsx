@@ -4,9 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   BookOpen,
+  Info,
+  Mail,
   Menu,
   ScrollText,
   Star,
+  Store,
   type LucideIcon,
 } from "lucide-react";
 import {
@@ -29,7 +32,19 @@ const PAGE_ICON: Record<string, LucideIcon> = {
   "/guide": BookOpen,
   "/recensioni": Star,
   "/analisi": ScrollText,
+  "/chi-siamo": Info,
+  "/contatto": Mail,
+  "/all-ingrosso": Store,
 };
+
+/** Pagine nel drawer: risorse + voci informative (queste su mobile stanno
+ *  solo qui, per non affollare la barra utility in alto). */
+const PAGES: { href: string; label: string }[] = [
+  ...NAV_LINKS,
+  { href: "/chi-siamo", label: "Chi siamo" },
+  { href: "/contatto", label: "Contatto" },
+  { href: "/all-ingrosso", label: "All'ingrosso" },
+];
 
 export function MobileNav({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false);
@@ -75,7 +90,7 @@ export function MobileNav({ categories }: { categories: Category[] }) {
             className="flex flex-col border-t border-border pt-4"
             aria-label="Pagine"
           >
-            {NAV_LINKS.map((l) => {
+            {PAGES.map((l) => {
               const Icon = PAGE_ICON[l.href];
               return (
                 <Link
