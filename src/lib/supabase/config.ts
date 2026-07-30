@@ -4,10 +4,24 @@ import type { User } from "@supabase/supabase-js";
  * Configurazione Supabase letta dalle variabili d'ambiente.
  * NEXT_PUBLIC_* sono disponibili sia lato server sia lato client.
  */
-export const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").trim();
-export const SUPABASE_ANON_KEY = (
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
-).trim();
+
+/** Ripulisce i valori d'ambiente incollati con errori comuni. */
+function clean(raw: string | undefined): string {
+  return (raw ?? "").trim().replace(/^["']|["']$/g, "").trim();
+}
+
+/** Normalizza l'URL Supabase: aggiunge https:// se lo schema manca. */
+function normalizeUrl(raw: string | undefined): string {
+  const v = clean(raw);
+  if (!v) return "";
+  if (/^https?:\/\//i.test(v)) return v;
+  // Nessuno schema ma sembra un host (es. xxxx.supabase.co): assume https.
+  if (/^[a-z0-9.-]+\.[a-z]{2,}(:\d+)?(\/.*)?$/i.test(v)) return `https://${v}`;
+  return v;
+}
+
+export const SUPABASE_URL = normalizeUrl(process.env.NEXT_PUBLIC_SUPABASE_URL);
+export const SUPABASE_ANON_KEY = clean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
 /** L'URL è valido solo se è un http(s) ben formato: evita che un valore
  *  malformato faccia lanciare createServerClient (500 su tutto il sito). */
