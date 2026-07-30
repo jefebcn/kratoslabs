@@ -34,7 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
           <p className="text-xs uppercase tracking-wide text-muted">
             {product.brand}
           </p>
-          <h3 className="mt-1 font-medium leading-tight">
+          <h3 className="font-display mt-1 font-semibold uppercase leading-tight tracking-tight">
             <Link href={href} className="hover:text-accent">
               {product.title}
             </Link>

@@ -53,7 +53,7 @@ export default function AnalisiPage() {
         ))}
       </div>
 
-      <h2 className="mt-12 text-lg font-semibold tracking-tight">
+      <h2 className="mt-12 text-lg font-semibold uppercase tracking-tight">
         Referti recenti
       </h2>
       <div className="mt-4 overflow-x-auto rounded-base border border-border">

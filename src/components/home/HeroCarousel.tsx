@@ -61,20 +61,24 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                 className="w-full shrink-0"
                 aria-hidden={i !== index}
               >
-                <Link
-                  href={s.cta.href}
-                  aria-label={s.title}
-                  className="relative block min-h-[220px] w-full sm:min-h-[340px] lg:min-h-[440px]"
-                >
-                  <Image
-                    src={s.banner}
-                    alt={s.title}
-                    fill
-                    sizes="100vw"
-                    className="object-cover"
-                    priority={i === 0}
-                  />
-                </Link>
+                {/* Banner contenuto nella larghezza del sito: rapporto nativo
+                    (niente stretch), niente full-bleed che coprirebbe tutto. */}
+                <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
+                  <Link
+                    href={s.cta.href}
+                    aria-label={s.title}
+                    className="relative block aspect-[1000/356] w-full overflow-hidden rounded-base border border-border bg-surface-2"
+                  >
+                    <Image
+                      src={s.banner}
+                      alt={s.title}
+                      fill
+                      sizes="(max-width: 1280px) 100vw, 1280px"
+                      className="object-cover"
+                      priority={i === 0}
+                    />
+                  </Link>
+                </div>
               </div>
             );
           }

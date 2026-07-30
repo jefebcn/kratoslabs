@@ -38,7 +38,9 @@ export function OrderSummary() {
               />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">{l.title}</p>
+              <p className="font-display truncate text-sm font-semibold uppercase tracking-tight">
+                {l.title}
+              </p>
               <p className="num text-xs text-muted">× {l.quantity}</p>
             </div>
             <Money

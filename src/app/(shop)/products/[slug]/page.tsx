@@ -90,7 +90,7 @@ export default async function ProductDetailPage({
             <p className="text-xs uppercase tracking-wide text-muted">
               {product.brand}
             </p>
-            <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
+            <h1 className="mt-1 text-2xl font-semibold uppercase tracking-tight sm:text-3xl">
               {product.title}
             </h1>
             <p className="mt-3 text-pretty text-muted">
@@ -137,7 +137,7 @@ export default async function ProductDetailPage({
 
       <section id="recensioni" className="mt-16 scroll-mt-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 className="text-lg font-semibold tracking-tight">Recensioni</h2>
+          <h2 className="text-lg font-semibold uppercase tracking-tight">Recensioni</h2>
           {rating.count > 0 && (
             <RatingOverview average={rating.average} count={rating.count} />
           )}
@@ -158,7 +158,7 @@ export default async function ProductDetailPage({
 
       {related.length > 0 && (
         <section className="mt-16">
-          <h2 className="text-lg font-semibold tracking-tight">
+          <h2 className="text-lg font-semibold uppercase tracking-tight">
             Nella stessa categoria
           </h2>
           <div className="mt-6">
