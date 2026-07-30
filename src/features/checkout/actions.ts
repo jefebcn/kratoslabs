@@ -5,6 +5,7 @@ import { checkoutSchema } from "./schema";
 export interface CheckoutResult {
   ok: boolean;
   reference?: string;
+  paymentMethod?: string;
   errors?: Record<string, string[] | undefined>;
   message?: string;
 }
@@ -28,7 +29,8 @@ export async function createOrder(
     };
   }
 
-  // TODO: persistere l'ordine e avviare il pagamento reale.
+  // TODO: persistere l'ordine su Supabase (service role) una volta configurato.
+  // La firma resta stabile; il client mostra le istruzioni di pagamento.
   const reference = `KL-${Date.now().toString().slice(-6)}`;
-  return { ok: true, reference };
+  return { ok: true, reference, paymentMethod: parsed.data.paymentMethod };
 }
