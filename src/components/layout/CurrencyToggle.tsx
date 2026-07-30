@@ -23,9 +23,9 @@ export function CurrencyToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label="Cambia valuta"
-        className="inline-flex h-9 items-center rounded-base px-2 text-sm text-muted transition-colors hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="inline-flex h-9 items-center rounded-base px-2 text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <span className="num font-medium text-text">{current}</span>
+        <span className="num font-medium text-white">{current}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Valuta</DropdownMenuLabel>

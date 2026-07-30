@@ -23,9 +23,9 @@ export function Topbar() {
   const Icon = ICONS[index] ?? FlaskConical;
 
   return (
-    <div className="border-b border-border bg-surface">
-      <div className="mx-auto flex h-9 max-w-7xl items-center justify-center gap-3 px-4 text-xs text-muted sm:gap-4">
-        <Meander units={3} className="hidden text-accent/60 sm:block" />
+    <div className="bg-black">
+      <div className="mx-auto flex h-9 max-w-7xl items-center justify-center gap-3 px-4 text-xs text-white/70 sm:gap-4">
+        <Meander units={3} className="hidden text-accent sm:block" />
         <span
           key={index}
           className="animate-fade-in inline-flex min-w-0 items-center gap-1.5 truncate font-medium"
@@ -33,7 +33,7 @@ export function Topbar() {
           <Icon className="size-3.5 shrink-0 text-accent" aria-hidden />
           <span className="truncate">{ANNOUNCEMENTS[index]}</span>
         </span>
-        <Meander units={3} className="hidden text-accent/60 sm:block" />
+        <Meander units={3} className="hidden text-accent sm:block" />
       </div>
     </div>
   );
