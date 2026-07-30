@@ -1,13 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Anteprima del referto di laboratorio">
-<rect width="400" height="400" fill="#14161A"/>
-<rect x="0.5" y="0.5" width="399" height="399" fill="none" stroke="#23262C"/>
+<rect width="400" height="400" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="399" height="399" fill="none" stroke="#D3D8DF"/>
 
-<rect x="120" y="70" width="160" height="220" rx="4" fill="#0B0C0E" stroke="#23262C"/>
-<path d="M140 100h120M140 118h120M140 136h80" stroke="#23262C"/>
-<rect x="140" y="160" width="120" height="70" fill="none" stroke="#23262C"/>
+<rect x="120" y="70" width="160" height="220" rx="4" fill="#FFFFFF" stroke="#C2C8D0"/>
+<path d="M140 100h120M140 118h120M140 136h80" stroke="#D3D8DF"/>
+<rect x="140" y="160" width="120" height="70" fill="none" stroke="#D3D8DF"/>
 <path d="M150 200l16 14 24 -34 20 26 18 -14" fill="none" stroke="#DC2626" stroke-width="1.5"/>
 <circle cx="235" cy="255" r="16" fill="none" stroke="#DC2626" stroke-width="1.5"/>
 <path d="M228 255l5 5 9 -11" stroke="#DC2626" stroke-width="1.5" fill="none"/>
-<text x="200" y="315" fill="#8A9099" font-family="monospace" font-size="11" text-anchor="middle" letter-spacing="2">CERTIFICATE OF ANALYSIS</text>
-
+<text x="200" y="315" fill="#6B7280" font-family="monospace" font-size="11" text-anchor="middle" letter-spacing="2">CERTIFICATE OF ANALYSIS</text>
 </svg>

@@ -53,7 +53,7 @@ export function ProductForm({ product }: { product?: Product }) {
           className={cn(
             "rounded-base border px-4 py-3 text-sm",
             state.ok
-              ? "border-emerald-500/40 text-emerald-400"
+              ? "border-emerald-500/40 text-emerald-600"
               : "border-danger/50 text-danger",
           )}
         >

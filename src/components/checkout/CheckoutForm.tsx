@@ -58,7 +58,7 @@ export function CheckoutForm() {
   if (state?.ok) {
     return (
       <div className="rounded-base border border-emerald-500/40 bg-surface p-8 text-center">
-        <div className="mx-auto grid size-12 place-items-center rounded-full border border-emerald-500/40 text-emerald-400">
+        <div className="mx-auto grid size-12 place-items-center rounded-full border border-emerald-500/40 text-emerald-600">
           <Check className="size-6" aria-hidden />
         </div>
         <h2 className="mt-4 text-lg font-semibold">Ordine confermato</h2>

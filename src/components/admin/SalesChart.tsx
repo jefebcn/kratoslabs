@@ -42,7 +42,7 @@ export function SalesChart() {
               x2={W - PAD.r}
               y1={y}
               y2={y}
-              stroke="#23262C"
+              stroke="#E2E5EA"
               strokeWidth="1"
             />
           );
@@ -68,7 +68,7 @@ export function SalesChart() {
                 x={x + barW / 2}
                 y={H - 12}
                 textAnchor="middle"
-                fill="#8A9099"
+                fill="#6B7280"
                 fontSize="11"
                 fontFamily="monospace"
               >

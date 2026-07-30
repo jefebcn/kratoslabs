@@ -233,12 +233,12 @@ export const ORDER_STATUS_META: OrderStatusMeta[] = [
   {
     status: "shipped",
     label: "Spedito",
-    tone: "border-sky-500/40 text-sky-400",
+    tone: "border-sky-500/40 text-sky-600",
   },
   {
     status: "delivered",
     label: "Consegnato",
-    tone: "border-emerald-500/40 text-emerald-400",
+    tone: "border-emerald-500/40 text-emerald-600",
   },
   {
     status: "cancelled",

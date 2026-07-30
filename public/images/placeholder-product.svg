@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Immagine prodotto non disponibile">
-  <rect width="400" height="400" fill="#14161A"/>
-  <rect x="0.5" y="0.5" width="399" height="399" fill="none" stroke="#23262C"/>
-  <path d="M150 250h100M200 150v100" stroke="#23262C" stroke-width="1"/>
-  <circle cx="200" cy="200" r="48" fill="none" stroke="#DC2626" stroke-width="1"/>
-  <text x="200" y="330" fill="#8A9099" font-family="monospace" font-size="12" text-anchor="middle">KRATOSLABS</text>
+<rect width="400" height="400" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="399" height="399" fill="none" stroke="#D3D8DF"/>
+
+<path d="M150 250h100M200 150v100" stroke="#D3D8DF" stroke-width="1"/>
+<circle cx="200" cy="200" r="48" fill="none" stroke="#DC2626" stroke-width="1"/>
+<text x="200" y="330" fill="#6B7280" font-family="monospace" font-size="12" text-anchor="middle">KRATOSLABS</text>
 </svg>
