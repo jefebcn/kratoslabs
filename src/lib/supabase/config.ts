@@ -4,11 +4,25 @@ import type { User } from "@supabase/supabase-js";
  * Configurazione Supabase letta dalle variabili d'ambiente.
  * NEXT_PUBLIC_* sono disponibili sia lato server sia lato client.
  */
-export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+export const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").trim();
+export const SUPABASE_ANON_KEY = (
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
+).trim();
 
-/** true solo se entrambe le chiavi sono presenti: evita crash quando manca l'env. */
-export const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
+/** L'URL è valido solo se è un http(s) ben formato: evita che un valore
+ *  malformato faccia lanciare createServerClient (500 su tutto il sito). */
+function isValidHttpUrl(value: string): boolean {
+  try {
+    const u = new URL(value);
+    return u.protocol === "https:" || u.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+/** true solo se URL valido e chiave presenti: altrimenti si va in pass-through. */
+export const isSupabaseConfigured =
+  isValidHttpUrl(SUPABASE_URL) && SUPABASE_ANON_KEY.length > 0;
 
 /**
  * Un utente è admin se:

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { AdminSidebar } from "@/components/layout/AdminSidebar";
 import { AdminTopbar } from "@/components/layout/AdminTopbar";
-import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/server";
 import { isSupabaseConfigured, isAdminUser } from "@/lib/supabase/config";
 
 export default async function AdminLayout({
@@ -11,10 +11,7 @@ export default async function AdminLayout({
 }) {
   // Difesa lato server (oltre al middleware): solo admin autenticati.
   if (isSupabaseConfigured) {
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const user = await getCurrentUser();
     if (!user) redirect("/login?next=/admin");
     if (!isAdminUser(user)) redirect("/");
   }
