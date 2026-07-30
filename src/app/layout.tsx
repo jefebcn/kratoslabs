@@ -1,6 +1,20 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-oswald",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -29,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="it">
+    <html lang="it" className={`${inter.variable} ${oswald.variable}`}>
       <body className="min-h-dvh antialiased">{children}</body>
     </html>
   );
