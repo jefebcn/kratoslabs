@@ -5,8 +5,8 @@
 <rect x="150" y="120" width="100" height="150" rx="8" fill="#1B1E24" stroke="#23262C"/>
 <rect x="158" y="102" width="84" height="26" rx="6" fill="#0B0C0E" stroke="#23262C"/>
 <rect x="150" y="175" width="100" height="46" fill="#0B0C0E" opacity="0.6"/>
-<circle cx="200" cy="198" r="20" fill="none" stroke="#C9A227" stroke-width="1.5"/>
-<path d="M200 184v28M186 198h28" stroke="#C9A227" stroke-width="1"/>
+<circle cx="200" cy="198" r="20" fill="none" stroke="#DC2626" stroke-width="1.5"/>
+<path d="M200 184v28M186 198h28" stroke="#DC2626" stroke-width="1"/>
 <text x="200" y="300" fill="#8A9099" font-family="monospace" font-size="11" text-anchor="middle" letter-spacing="2">WHEY ISOLATE</text>
 <text x="200" y="322" fill="#23262C" font-family="monospace" font-size="9" text-anchor="middle" letter-spacing="3">KRATOSLABS</text>
 

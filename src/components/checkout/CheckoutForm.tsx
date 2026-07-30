@@ -149,7 +149,7 @@ export function CheckoutForm() {
                 name="paymentMethod"
                 value={m.id}
                 defaultChecked={i === 0}
-                className="[accent-color:#c9a227]"
+                className="[accent-color:#dc2626]"
               />
               <Icon name={m.icon} className="size-4" />
               {m.label}

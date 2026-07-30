@@ -10,6 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { SearchForm } from "@/components/layout/SearchBar";
 import { CurrencyToggle } from "@/components/layout/CurrencyToggle";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
@@ -66,6 +67,15 @@ export function MobileNav() {
               </Link>
             ))}
           </nav>
+
+          <div className="flex flex-col gap-2 border-t border-border pt-4">
+            <Button asChild onClick={close}>
+              <Link href="/login">Accedi</Link>
+            </Button>
+            <Button asChild variant="outline" onClick={close}>
+              <Link href="/register">Registrati</Link>
+            </Button>
+          </div>
         </div>
 
         <div className="mt-auto flex items-center gap-2 border-t border-border p-5">

@@ -7,8 +7,8 @@
   --color-border: #23262c;
   --color-text: #f2f3f5;
   --color-muted: #8a9099;
-  --color-accent: #c9a227;
-  --color-accent-soft: #3a3117;
+  --color-accent: #dc2626;
+  --color-accent-soft: #2e1315;
   --color-danger: #b91c1c;
 
   --radius-base: 4px;
@@ -144,7 +144,7 @@
 
   ::selection {
     background-color: var(--color-accent);
-    color: var(--color-bg);
+    color: #ffffff;
   }
 
   /* Scrollbar discreta, coerente col fondo scuro. */

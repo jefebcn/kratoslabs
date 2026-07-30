@@ -71,8 +71,11 @@ Token in `src/app/globals.css`, usa solo quelli:
 | `--border` | `#23262C` | hairline, divisori |
 | `--text` | `#F2F3F5` | testo primario |
 | `--muted` | `#8A9099` | label, meta, unità |
-| `--accent` | `#C9A227` | ottone: CTA, prezzi, focus |
+| `--accent` | `#DC2626` | rosso Kratos: CTA, prezzi, focus, stati attivi |
 | `--danger` | `#B91C1C` | errori, elimina, stock esaurito |
+
+Brand: rosso (`--accent`) + bianco (`--text`) su base scura, ispirati al
+personaggio (striscia rossa, pelle chiara). Testo su `--accent` sempre bianco.
 
 Tipografia: display e numeri in un grotesque a larghezza fissa per le cifre
 (`font-variant-numeric: tabular-nums` su ogni prezzo e dato tecnico), body in

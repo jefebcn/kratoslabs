@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Logo } from "@/components/layout/Logo";
 
 export default function AuthLayout({
   children,
@@ -9,9 +9,20 @@ export default function AuthLayout({
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
-        <div className="flex justify-center">
-          <Logo />
-        </div>
+        <Link
+          href="/"
+          aria-label="Kratos Labs, home"
+          className="mx-auto block w-fit"
+        >
+          <Image
+            src="/images/logo.png"
+            alt="Kratos Labs"
+            width={144}
+            height={136}
+            priority
+            className="rounded-base border border-border"
+          />
+        </Link>
         <div className="mt-8 rounded-base border border-border bg-surface p-6">
           {children}
         </div>

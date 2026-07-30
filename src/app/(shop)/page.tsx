@@ -61,13 +61,13 @@ export default function HomePage() {
             </ul>
           </div>
 
-          <div className="relative aspect-[4/3] overflow-hidden rounded-base border border-border bg-surface">
+          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-base border border-border bg-surface lg:mx-0 lg:max-w-none">
             <Image
-              src="/images/hero.svg"
-              alt="Laboratorio di controllo qualità KratosLabs"
+              src="/images/logo.png"
+              alt="Kratos Labs: beuta da laboratorio fusa con il volto di Kratos e la striscia rossa"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"
             />
             <div className="absolute bottom-4 left-4 rounded-base border border-border bg-bg/80 px-3 py-2 text-xs backdrop-blur">

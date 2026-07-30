@@ -16,7 +16,7 @@ const base =
   "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-base font-medium transition-colors duration-150 ease-out-expo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-accent text-bg hover:bg-accent/90",
+  primary: "bg-accent text-white hover:bg-accent/90",
   outline:
     "border border-border bg-transparent text-text hover:border-accent hover:text-accent",
   ghost: "bg-transparent text-text hover:bg-surface-2",
