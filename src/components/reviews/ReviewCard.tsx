@@ -24,7 +24,9 @@ export function ReviewCard({
             </span>
           )}
         </div>
-        <p className="mt-2 text-sm font-medium">{review.title}</p>
+        <p className="font-display mt-2 text-base font-semibold uppercase tracking-tight">
+          {review.title}
+        </p>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col">
         <p className="text-sm text-muted">{review.body}</p>
@@ -37,7 +39,7 @@ export function ReviewCard({
         {showProduct && (
           <Link
             href={`/products/${review.productSlug}`}
-            className="mt-2 w-fit text-xs text-accent hover:underline"
+            className="font-display mt-2 w-fit text-xs font-semibold uppercase tracking-wide text-accent hover:underline"
           >
             {review.productTitle}
           </Link>

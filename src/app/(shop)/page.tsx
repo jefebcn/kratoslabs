@@ -65,7 +65,7 @@ export default function HomePage() {
               <Bitcoin className="size-3.5" aria-hidden />
               Accettiamo Bitcoin e criptovalute
             </div>
-            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+            <h2 className="mt-4 text-2xl font-semibold uppercase tracking-tight">
               Unisciti al canale Kratos Labs
             </h2>
             <p className="mt-2 text-muted">
@@ -135,7 +135,7 @@ export default function HomePage() {
                 href={`/products?category=${c.slug}`}
                 className="group rounded-base border border-border bg-bg p-4 transition-colors hover:border-accent/50"
               >
-                <p className="text-sm font-medium transition-colors group-hover:text-accent">
+                <p className="font-display text-sm font-semibold uppercase tracking-tight transition-colors group-hover:text-accent">
                   {c.name}
                 </p>
                 <p className="mt-1 line-clamp-2 text-xs text-muted">
