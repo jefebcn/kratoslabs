@@ -83,12 +83,10 @@ export default async function HomePage() {
 
       {/* Sezioni per categoria: barra rossa + prodotti + "vedi tutti" */}
       {categorySections.map(({ category, products }) => (
-        <section
-          key={category.slug}
-          className="border-t border-border bg-surface"
-        >
-          <div className="bg-accent">
-            <p className="mx-auto max-w-7xl px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.2em] text-white sm:px-6">
+        <section key={category.slug} className="bg-surface">
+          <div className="mx-auto max-w-7xl px-4 pt-10 sm:px-6">
+            {/* Barra rossa larga quanto la griglia prodotti sotto. */}
+            <p className="bg-accent px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.2em] text-white">
               {category.name}
             </p>
           </div>
