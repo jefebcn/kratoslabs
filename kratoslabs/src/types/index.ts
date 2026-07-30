@@ -172,3 +172,24 @@ export interface OrderStatusMeta {
   /** Classi Tailwind per il badge di stato. */
   tone: string;
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Recensioni dei clienti                                                    */
+/* -------------------------------------------------------------------------- */
+
+export interface Review {
+  id: string;
+  author: string;
+  location: string;
+  /** Voto da 1 a 5. */
+  rating: number;
+  title: string;
+  body: string;
+  /** Prodotto acquistato, per collegare la recensione al PDP. */
+  productSlug: string;
+  productTitle: string;
+  /** ISO date. */
+  date: string;
+  /** True se la recensione arriva da un ordine reale sul sito. */
+  verifiedPurchase: boolean;
+}

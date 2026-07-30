@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Icon } from "@/components/ui/icon";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
+import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts } from "@/features/products";
 import {
   ANNOUNCEMENTS,
@@ -116,6 +117,9 @@ export default function HomePage() {
           </div>
         </Reveal>
       </section>
+
+      {/* Feedback verificati */}
+      <ReviewsSection />
 
       {/* Categorie */}
       <section className="border-y border-border bg-surface">

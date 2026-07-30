@@ -13,7 +13,11 @@ import { SpecsTable } from "@/components/product/SpecsTable";
 import { LabReportCard } from "@/components/product/LabReportCard";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
 import { ProductGrid } from "@/components/product/ProductGrid";
+import { ReviewCard } from "@/components/reviews/ReviewCard";
+import { RatingOverview } from "@/components/reviews/RatingOverview";
+import { Stars } from "@/components/reviews/Stars";
 import { findProduct, listByCategory, listProducts } from "@/features/products";
+import { ratingSummary, reviewsForProduct } from "@/features/reviews";
 import { CATEGORIES } from "@/lib/constants";
 
 export function generateStaticParams() {
@@ -47,6 +51,8 @@ export default async function ProductDetailPage({
   const related = listByCategory(product.category).filter(
     (p) => p.id !== product.id,
   );
+  const reviews = reviewsForProduct(slug);
+  const rating = ratingSummary(reviews);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -90,6 +96,18 @@ export default async function ProductDetailPage({
             <p className="mt-3 text-pretty text-muted">
               {product.shortDescription}
             </p>
+            {rating.count > 0 && (
+              <a
+                href="#recensioni"
+                className="mt-3 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-text"
+              >
+                <Stars rating={Math.round(rating.average)} />
+                <span className="num">
+                  {rating.average.toFixed(1).replace(".", ",")} ·{" "}
+                  {rating.count} recensioni
+                </span>
+              </a>
+            )}
           </div>
 
           <ProductPurchasePanel product={product} />
@@ -116,6 +134,27 @@ export default async function ProductDetailPage({
           </TabsContent>
         </Tabs>
       </div>
+
+      <section id="recensioni" className="mt-16 scroll-mt-24">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 className="text-lg font-semibold tracking-tight">Recensioni</h2>
+          {rating.count > 0 && (
+            <RatingOverview average={rating.average} count={rating.count} />
+          )}
+        </div>
+        {reviews.length > 0 ? (
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {reviews.map((review) => (
+              <ReviewCard key={review.id} review={review} showProduct={false} />
+            ))}
+          </div>
+        ) : (
+          <p className="mt-4 text-sm text-muted">
+            Questo prodotto non ha ancora recensioni. Sarai tra i primi a
+            lasciarne una dopo l&apos;acquisto.
+          </p>
+        )}
+      </section>
 
       {related.length > 0 && (
         <section className="mt-16">
