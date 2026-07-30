@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Bitcoin, Mail, Send } from "lucide-react";
+import { ArrowRight, Bitcoin, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { Icon } from "@/components/ui/icon";
 import { HeroCarousel, type HeroSlide } from "@/components/home/HeroCarousel";
 import { PaymentsBand } from "@/components/layout/PaymentsBand";
 import { ProductTabs } from "@/components/product/ProductTabs";
+import { ProductGrid } from "@/components/product/ProductGrid";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
 import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts, listProducts } from "@/features/products";
@@ -56,6 +56,15 @@ export default async function HomePage() {
   const bestseller = await listFeaturedProducts();
   const all = await listProducts();
   const categories = await listCategories();
+  // "Nuovi prodotti": i più recenti (già ordinati per data desc).
+  const newest = all.slice(0, 10);
+  // Sezioni per categoria: prime 5 di ogni categoria con prodotti.
+  const categorySections = categories
+    .map((c) => ({
+      category: c,
+      products: all.filter((p) => p.category === c.slug).slice(0, 5),
+    }))
+    .filter((s) => s.products.length > 0);
 
   return (
     <div className="flex flex-col">
@@ -65,12 +74,38 @@ export default async function HomePage() {
       {/* Carosello promozionale */}
       <HeroCarousel slides={SLIDES} />
 
-      {/* Prodotti subito sotto il carosello: tutti i prodotti + bestseller */}
+      {/* Prodotti subito sotto il carosello: nuovi prodotti + bestseller */}
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14">
         <Reveal>
-          <ProductTabs all={all} bestseller={bestseller} />
+          <ProductTabs all={newest} bestseller={bestseller} />
         </Reveal>
       </section>
+
+      {/* Sezioni per categoria: barra rossa + prodotti + "vedi tutti" */}
+      {categorySections.map(({ category, products }) => (
+        <section
+          key={category.slug}
+          className="border-t border-border bg-surface"
+        >
+          <div className="bg-accent">
+            <p className="mx-auto max-w-7xl px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.2em] text-white sm:px-6">
+              {category.name}
+            </p>
+          </div>
+          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+            <ProductGrid products={products} />
+            <div className="mt-6 text-center">
+              <Link
+                href={`/products?category=${category.slug}`}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-accent transition-colors hover:underline"
+              >
+                Vedi tutti — {category.name}
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </div>
+          </div>
+        </section>
+      ))}
 
       {/* Trust badges: perché sceglierci */}
       <section className="border-y border-border bg-surface">
@@ -86,29 +121,6 @@ export default async function HomePage() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Categorie */}
-      <section className="border-y border-border bg-surface">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-          <SectionHeading eyebrow="Categorie" title="Scegli per obiettivo" />
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {categories.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/products?category=${c.slug}`}
-                className="group rounded-base border border-border bg-bg p-4 transition-colors hover:border-accent/50"
-              >
-                <p className="font-display text-sm font-semibold uppercase tracking-tight transition-colors group-hover:text-accent">
-                  {c.name}
-                </p>
-                <p className="mt-1 line-clamp-2 text-xs text-muted">
-                  {c.description}
-                </p>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
