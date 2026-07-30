@@ -57,33 +57,6 @@ export default function HomePage() {
       {/* Carosello promozionale */}
       <HeroCarousel slides={SLIDES} />
 
-      {/* Community / Telegram */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-        <div className="grid items-center gap-6 rounded-base border border-border bg-accent-soft p-8 md:grid-cols-2">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-white px-2.5 py-1 text-xs font-medium text-accent">
-              <Bitcoin className="size-3.5" aria-hidden />
-              Accettiamo Bitcoin e criptovalute
-            </div>
-            <h2 className="mt-4 text-2xl font-semibold uppercase tracking-tight">
-              Unisciti al canale Kratos Labs
-            </h2>
-            <p className="mt-2 text-muted">
-              Nuovi lotti, referti di laboratorio in anteprima e offerte
-              riservate. Nessuno spam, solo aggiornamenti che contano.
-            </p>
-          </div>
-          <div className="flex md:justify-end">
-            <Button asChild size="lg">
-              <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">
-                <Send className="size-4" aria-hidden />
-                Vai al canale Telegram
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Trust badges */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
@@ -161,6 +134,39 @@ export default function HomePage() {
           <Reveal className="mt-8">
             <CommunityGallery />
           </Reveal>
+        </div>
+      </section>
+
+      {/* Community / Telegram: CTA secondaria, verso il fondo */}
+      <section className="border-t border-border bg-surface">
+        <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
+          <div className="grid items-center gap-6 rounded-base border border-border bg-accent-soft p-8 md:grid-cols-2">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-white px-2.5 py-1 text-xs font-medium text-accent">
+                <Bitcoin className="size-3.5" aria-hidden />
+                Accettiamo Bitcoin e criptovalute
+              </div>
+              <h2 className="mt-4 text-2xl font-semibold uppercase tracking-tight">
+                Unisciti al canale Kratos Labs
+              </h2>
+              <p className="mt-2 text-muted">
+                Nuovi lotti, referti di laboratorio in anteprima e offerte
+                riservate. Nessuno spam, solo aggiornamenti che contano.
+              </p>
+            </div>
+            <div className="flex md:justify-end">
+              <Button asChild size="lg">
+                <a
+                  href={SITE.telegramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Send className="size-4" aria-hidden />
+                  Vai al canale Telegram
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
