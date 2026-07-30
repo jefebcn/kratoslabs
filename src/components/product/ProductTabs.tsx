@@ -24,7 +24,7 @@ export function ProductTabs({
     <Tabs defaultValue="all">
       <TabsList className="grid w-full grid-cols-2 gap-2 border-0">
         <TabsTrigger value="all" className={triggerClass}>
-          Tutti i prodotti
+          Nuovi prodotti
         </TabsTrigger>
         <TabsTrigger value="bestseller" className={triggerClass}>
           Bestseller
