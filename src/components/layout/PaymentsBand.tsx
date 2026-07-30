@@ -43,7 +43,7 @@ export function PaymentsBand() {
   const loop = [...ACCEPTED_PAYMENTS, ...ACCEPTED_PAYMENTS];
 
   return (
-    <section className="border-y border-black/10 bg-[#15181d] text-white">
+    <section className="mt-1.5 border-y border-black/10 bg-[#15181d] text-white lg:mt-2">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:gap-4 sm:px-6">
         <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
           Accettiamo

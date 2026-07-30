@@ -47,7 +47,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [checkEmail, setCheckEmail] = useState(false);
-  // Token captcha (solo registrazione, se Turnstile è configurato).
+  // Token captcha (login e registrazione, se Turnstile è configurato).
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   // Cambia per forzare un nuovo challenge dopo un errore (token monouso).
   const [captchaKey, setCaptchaKey] = useState(0);
@@ -71,10 +71,19 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     setLoading(true);
     const supabase = createClient();
 
+    // Il captcha (se attivo su Supabase) è richiesto sia al login sia alla
+    // registrazione: senza token l'endpoint auth rifiuta la richiesta.
+    if (turnstileEnabled && !captchaToken) {
+      setLoading(false);
+      setError("Completa la verifica anti-bot qui sotto.");
+      return;
+    }
+
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
+        options: { captchaToken: captchaToken ?? undefined },
       });
       setLoading(false);
       if (error) {
@@ -83,17 +92,13 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
             ? "Email o password non corretti."
             : error.message,
         );
+        // Rigenera il captcha: il token appena usato non è più valido.
+        setCaptchaToken(null);
+        setCaptchaKey((k) => k + 1);
         return;
       }
       router.push(next);
       router.refresh();
-      return;
-    }
-
-    // Registrazione — richiede il captcha se Turnstile è attivo.
-    if (turnstileEnabled && !captchaToken) {
-      setLoading(false);
-      setError("Completa la verifica anti-bot qui sotto.");
       return;
     }
 
@@ -166,9 +171,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
         autoComplete={isLogin ? "current-password" : "new-password"}
       />
 
-      {!isLogin && (
-        <TurnstileWidget key={captchaKey} onToken={setCaptchaToken} />
-      )}
+      <TurnstileWidget key={captchaKey} onToken={setCaptchaToken} />
 
       {error && (
         <p className="rounded-base border border-danger/30 bg-accent-soft px-3 py-2 text-sm text-danger">
