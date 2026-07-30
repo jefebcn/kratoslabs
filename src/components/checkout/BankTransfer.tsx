@@ -5,7 +5,11 @@ import { Landmark, Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyRow } from "@/components/checkout/CopyRow";
 import { formatPrice } from "@/lib/utils";
-import { BANK, isBankConfigured, formatIban } from "@/lib/payments/bank";
+import {
+  formatIban,
+  isBankComplete,
+  type BankConfig,
+} from "@/lib/payments/bank";
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
@@ -22,10 +26,12 @@ export function BankTransfer({
   reference,
   totalCents,
   emailSent,
+  bank,
 }: {
   reference: string;
   totalCents?: number;
   emailSent?: boolean;
+  bank: BankConfig;
 }) {
   return (
     <div className="rounded-base border border-accent/30 bg-surface p-6 sm:p-8">
@@ -63,7 +69,7 @@ export function BankTransfer({
         )}
       </dl>
 
-      {isBankConfigured ? (
+      {isBankComplete(bank) ? (
         <>
           <p className="mt-6 text-sm text-muted">
             Esegui il bonifico con i dati qui sotto, indicando{" "}
@@ -71,10 +77,10 @@ export function BankTransfer({
           </p>
 
           <div className="mt-4 flex flex-col gap-3">
-            <Row label="Intestatario" value={BANK.holder} />
-            <Row label="IBAN" value={formatIban(BANK.iban)} />
-            {BANK.bic && <Row label="BIC / SWIFT" value={BANK.bic} />}
-            {BANK.bank && <Row label="Banca" value={BANK.bank} />}
+            <Row label="Intestatario" value={bank.holder} />
+            <Row label="IBAN" value={formatIban(bank.iban)} />
+            {bank.bic && <Row label="BIC / SWIFT" value={bank.bic} />}
+            {bank.bank && <Row label="Banca" value={bank.bank} />}
             <Row label="Causale" value={reference} />
           </div>
 

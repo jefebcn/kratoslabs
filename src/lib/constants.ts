@@ -229,6 +229,8 @@ export const ADMIN_NAV: NavLink[] = [
   { href: "/admin/products", label: "Prodotti" },
   { href: "/admin/categories", label: "Categorie" },
   { href: "/admin/orders", label: "Ordini" },
+  { href: "/admin/users", label: "Utenti" },
+  { href: "/admin/settings", label: "Impostazioni" },
 ];
 
 export const ORDER_STATUS_META: OrderStatusMeta[] = [

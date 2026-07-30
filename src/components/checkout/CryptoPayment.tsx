@@ -5,21 +5,20 @@ import { Bitcoin, Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyRow } from "@/components/checkout/CopyRow";
 import { formatPrice } from "@/lib/utils";
-import {
-  CRYPTO_ASSETS,
-  isCryptoConfigured,
-  bitcoinUri,
-} from "@/lib/payments/crypto";
+import { bitcoinUri, type CryptoAsset } from "@/lib/payments/crypto";
 
 export function CryptoPayment({
   reference,
   totalCents,
   emailSent,
+  assets,
 }: {
   reference: string;
   totalCents?: number;
   emailSent?: boolean;
+  assets: CryptoAsset[];
 }) {
+  const isCryptoConfigured = assets.length > 0;
   return (
     <div className="rounded-base border border-accent/30 bg-surface p-6 sm:p-8">
       <div className="flex items-center gap-3">
@@ -64,7 +63,7 @@ export function CryptoPayment({
           </p>
 
           <div className="mt-4 flex flex-col gap-4">
-            {CRYPTO_ASSETS.map((a) => (
+            {assets.map((a) => (
               <div key={a.symbol}>
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold">

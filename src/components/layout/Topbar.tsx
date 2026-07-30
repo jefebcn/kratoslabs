@@ -9,10 +9,15 @@ import { Meander } from "@/components/ui/Meander";
 const ICONS: LucideIcon[] = [FlaskConical, Truck, RotateCcw];
 
 /** Barra annunci che ruota su una sola riga (niente wrap su mobile). */
-export function Topbar() {
+export function Topbar({
+  announcements = [...ANNOUNCEMENTS],
+}: {
+  announcements?: string[];
+}) {
+  const messages = announcements.length ? announcements : [...ANNOUNCEMENTS];
   const [index, setIndex] = useState(0);
   const reduce = useReducedMotion();
-  const n = ANNOUNCEMENTS.length;
+  const n = messages.length;
 
   useEffect(() => {
     if (reduce || n <= 1) return;
@@ -31,7 +36,7 @@ export function Topbar() {
           className="animate-fade-in inline-flex min-w-0 items-center gap-1.5 truncate font-medium"
         >
           <Icon className="size-3.5 shrink-0 text-accent" aria-hidden />
-          <span className="truncate">{ANNOUNCEMENTS[index]}</span>
+          <span className="truncate">{messages[index % n]}</span>
         </span>
         <Meander units={3} className="hidden text-accent sm:block" />
       </div>
