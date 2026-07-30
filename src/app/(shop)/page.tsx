@@ -15,6 +15,20 @@ import { listCategories } from "@/features/categories";
 
 const SLIDES: HeroSlide[] = [
   {
+    eyebrow: "Community",
+    title: "Unisciti alla community Telegram",
+    subtitle: "",
+    cta: { label: "Unisciti", href: SITE.telegramUrl },
+    banner: "/images/banner-telegram.png",
+  },
+  {
+    eyebrow: "Community",
+    title: "La tua recensione conta",
+    subtitle: "",
+    cta: { label: "Scrivi una recensione", href: "/recensioni" },
+    banner: "/images/banner-recensioni.png",
+  },
+  {
     eyebrow: "Kratos Labs",
     title: "Kratos Athletes",
     subtitle: "",
@@ -27,14 +41,6 @@ const SLIDES: HeroSlide[] = [
     subtitle: HERO.subtitle,
     cta: { label: "Esplora il catalogo", href: "/products" },
     image: "/images/products/tub.svg",
-  },
-  {
-    eyebrow: "Community",
-    title: "Le tue recensioni contano",
-    subtitle:
-      "Condividi la tua esperienza dopo l'acquisto: aiuti la community a scegliere meglio, e ricevi un vantaggio riservato.",
-    cta: { label: "Scrivi una recensione", href: "/recensioni" },
-    icon: "Star",
   },
   {
     eyebrow: "Quality control",

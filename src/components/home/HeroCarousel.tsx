@@ -57,6 +57,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         >
           {slides.map((s, i) => {
             const Icon = s.icon ? ICONS[s.icon] : undefined;
+            const external = /^https?:\/\//.test(s.cta.href);
 
             return (
               <div
@@ -68,6 +69,8 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                   <Link
                     href={s.cta.href}
                     aria-label={s.title}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
                     className="relative block size-full overflow-hidden bg-surface-2"
                   >
                     {/* Sfondo sfocato che riempie la cornice: niente barre vuote. */}
