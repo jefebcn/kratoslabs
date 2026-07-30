@@ -1,10 +1,12 @@
 import {
-  Beef,
-  Droplets,
-  Fish,
+  Activity,
+  Flame,
   FlaskConical,
+  Heart,
   Pill,
-  Zap,
+  RefreshCw,
+  Star,
+  Syringe,
   type LucideIcon,
 } from "lucide-react";
 
@@ -14,12 +16,14 @@ import {
  * coerenti. Gli slug non presenti ricadono su un'icona generica.
  */
 export const CATEGORY_ICON: Record<string, LucideIcon> = {
-  proteine: Beef,
-  creatina: FlaskConical,
-  "pre-workout": Zap,
-  elettroliti: Droplets,
-  "omega-3": Fish,
-  vitamine: Pill,
+  iniettabili: Syringe,
+  orali: Pill,
+  "post-cycle": RefreshCw,
+  "brucia-grassi": Flame,
+  "sex-support": Heart,
+  "hgh-peptidi": FlaskConical,
+  sarms: Star,
+  salute: Activity,
 };
 
 /** Icona di una categoria dato lo slug (fallback: Pill). */

@@ -14,20 +14,34 @@ export function SpecsTable({ specs }: { specs: ProductSpecs }) {
 
   return (
     <dl>
-      <Row label="Peso netto" value={`${specs.netWeightG} g`} />
-      <Row label="Porzione" value={`${specs.servingSizeG} g`} />
-      <Row
-        label="Porzioni per confezione"
-        value={`${specs.servingsPerContainer}`}
-      />
-      <Row
-        label={`${specs.activeName} per porzione`}
-        value={`${specs.activePerServingG} g`}
-      />
-      <Row
-        label={`${specs.activeName} totali`}
-        value={`${Number(totalActive.toFixed(1))} g`}
-      />
+      {specs.activeName && (
+        <Row label="Principio attivo" value={specs.activeName} />
+      )}
+      {specs.packaging && <Row label="Confezione" value={specs.packaging} />}
+      {specs.netWeightG > 0 && (
+        <Row label="Peso netto" value={`${specs.netWeightG} g`} />
+      )}
+      {specs.servingSizeG > 0 && (
+        <Row label="Porzione" value={`${specs.servingSizeG} g`} />
+      )}
+      {specs.servingsPerContainer > 0 && (
+        <Row
+          label="Porzioni per confezione"
+          value={`${specs.servingsPerContainer}`}
+        />
+      )}
+      {specs.activePerServingG > 0 && (
+        <Row
+          label={`${specs.activeName} per porzione`}
+          value={`${specs.activePerServingG} g`}
+        />
+      )}
+      {totalActive > 0 && (
+        <Row
+          label={`${specs.activeName} totali`}
+          value={`${Number(totalActive.toFixed(1))} g`}
+        />
+      )}
     </dl>
   );
 }

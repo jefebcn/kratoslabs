@@ -18,7 +18,9 @@ export function ProductsTable({ products }: { products: Product[] }) {
           <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted">
             <th className="px-4 py-3 font-medium">Prodotto</th>
             <th className="px-4 py-3 font-medium">Categoria</th>
-            <th className="px-4 py-3 text-right font-medium">Prezzo</th>
+            <th className="px-4 py-3 text-right font-medium">Vendita</th>
+            <th className="px-4 py-3 text-right font-medium">Acquisto</th>
+            <th className="px-4 py-3 text-right font-medium">Profitto</th>
             <th className="px-4 py-3 text-right font-medium">Stock</th>
             <th className="px-4 py-3 text-right font-medium">Azioni</th>
           </tr>
@@ -51,6 +53,29 @@ export function ProductsTable({ products }: { products: Product[] }) {
               </td>
               <td className="num px-4 py-3 text-right">
                 {formatPrice(p.priceCents)}
+              </td>
+              <td className="num px-4 py-3 text-right text-muted">
+                {p.costCents ? formatPrice(p.costCents) : "—"}
+              </td>
+              <td className="num px-4 py-3 text-right">
+                {p.costCents ? (
+                  (() => {
+                    const profit = p.priceCents - p.costCents;
+                    const margin = p.priceCents
+                      ? Math.round((profit / p.priceCents) * 100)
+                      : 0;
+                    return (
+                      <span className={profit >= 0 ? "text-emerald-600" : "text-danger"}>
+                        {formatPrice(profit)}
+                        <span className="ml-1 text-xs text-muted">
+                          ({margin}%)
+                        </span>
+                      </span>
+                    );
+                  })()
+                ) : (
+                  "—"
+                )}
               </td>
               <td className="num px-4 py-3 text-right">
                 {p.stock > 0 ? (
