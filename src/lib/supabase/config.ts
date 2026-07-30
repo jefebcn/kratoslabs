@@ -20,8 +20,23 @@ function normalizeUrl(raw: string | undefined): string {
   return v;
 }
 
-export const SUPABASE_URL = normalizeUrl(process.env.NEXT_PUBLIC_SUPABASE_URL);
-export const SUPABASE_ANON_KEY = clean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+// Valori PUBBLICI del progetto (la publishable key è pensata da Supabase per
+// stare nel browser ed è protetta dalle policy RLS). Le env su Vercel hanno la
+// precedenza e permettono la rotazione; questi default garantiscono che l'auth
+// funzioni anche se il nome della variabile su Vercel non combacia.
+const FALLBACK_URL = "https://dpjrvwhpbmrwhodlzfei.supabase.co";
+const FALLBACK_PUBLISHABLE = "sb_publishable_3YMIxj7IlIn8nmwcoeS31Q_kQvr2QSb";
+
+export const SUPABASE_URL = normalizeUrl(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || FALLBACK_URL,
+);
+
+// Supporta sia la nuova publishable key (sb_publishable_…) sia la vecchia anon.
+export const SUPABASE_ANON_KEY = clean(
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    FALLBACK_PUBLISHABLE,
+);
 
 /** L'URL è valido solo se è un http(s) ben formato: evita che un valore
  *  malformato faccia lanciare createServerClient (500 su tutto il sito). */

@@ -25,10 +25,10 @@ export function LanguageToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label="Cambia lingua"
-        className="inline-flex h-9 items-center gap-1.5 rounded-base px-2 text-sm text-muted transition-colors hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="inline-flex h-9 items-center gap-1.5 rounded-base px-2 text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
         <Globe className="size-4" aria-hidden />
-        <span className="font-medium text-text">{short}</span>
+        <span className="font-medium text-white">{short}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Lingua</DropdownMenuLabel>

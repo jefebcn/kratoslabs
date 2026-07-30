@@ -48,17 +48,17 @@ export function AccountMenu() {
       <div className="flex items-center gap-2">
         <Link
           href="/account"
-          className="inline-flex max-w-[10rem] items-center gap-1.5 py-2 pr-2 text-xs font-semibold uppercase tracking-wide text-text transition-colors hover:text-accent"
+          className="inline-flex max-w-[10rem] items-center gap-1.5 py-2 pr-2 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:text-accent"
           title={email}
         >
           <UserIcon className="size-3.5 text-accent" aria-hidden />
           <span className="truncate">{email}</span>
         </Link>
-        <span className="text-border">|</span>
+        <span className="text-white/25">|</span>
         <button
           type="button"
           onClick={handleLogout}
-          className="inline-flex items-center gap-1.5 py-2 pl-2 text-xs font-semibold uppercase tracking-wide text-text transition-colors hover:text-accent"
+          className="inline-flex items-center gap-1.5 py-2 pl-2 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:text-accent"
         >
           <LogOut className="size-3.5 text-accent" aria-hidden />
           Esci
@@ -71,7 +71,7 @@ export function AccountMenu() {
     <div className="flex items-center">
       <Link
         href="/login"
-        className="inline-flex items-center gap-1.5 py-2 pr-3 text-xs font-semibold uppercase tracking-wide text-text transition-colors hover:text-accent"
+        className="inline-flex items-center gap-1.5 py-2 pr-3 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:text-accent"
       >
         <LogIn className="size-3.5 text-accent" aria-hidden />
         Accedi
@@ -79,7 +79,7 @@ export function AccountMenu() {
       <span className="text-border">|</span>
       <Link
         href="/register"
-        className="inline-flex items-center gap-1.5 py-2 pl-3 text-xs font-semibold uppercase tracking-wide text-text transition-colors hover:text-accent"
+        className="inline-flex items-center gap-1.5 py-2 pl-3 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:text-accent"
       >
         <UserPlus className="size-3.5 text-accent" aria-hidden />
         Registrati
