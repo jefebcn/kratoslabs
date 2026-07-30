@@ -17,10 +17,10 @@ export default function AuthLayout({
           <Image
             src="/images/logo.png"
             alt="Kratos Labs"
-            width={144}
-            height={136}
+            width={3592}
+            height={1152}
             priority
-            className="rounded-base border border-border"
+            className="h-14 w-auto"
           />
         </Link>
         <div className="mt-8 rounded-base border border-border bg-surface p-6">
