@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Meander } from "@/components/ui/Meander";
 
 export function SectionHeading({
   eyebrow,
@@ -28,6 +29,11 @@ export function SectionHeading({
       <h2 className="font-display mt-2 text-2xl font-semibold uppercase tracking-tight text-balance sm:text-3xl">
         {title}
       </h2>
+      {/* Accento greco, come il bordo del logo */}
+      <Meander
+        units={4}
+        className={cn("mt-3 text-accent", align === "center" && "mx-auto")}
+      />
       {description && (
         <p className="mt-3 text-muted text-pretty">{description}</p>
       )}
