@@ -7,6 +7,8 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { balanceFor, addEntry } from "@/features/rewards";
 import { maxRedeemablePoints, discountCentsFor } from "@/lib/rewards";
+import { listProducts } from "@/features/products";
+import { priceLine } from "@/features/products/pricing";
 import type { CartLine } from "@/types";
 
 export interface CheckoutResult {
@@ -66,11 +68,39 @@ export async function createOrder(
   }
 
   const d = parsed.data;
-  const lines = parseLines(String(formData.get("lines") ?? "[]"));
-  const subtotalCents = Math.max(
-    0,
-    Math.round(Number(formData.get("totalCents") ?? 0)) || 0,
-  );
+
+  // Ricostruisce l'ordine dai PREZZI REALI del database (mai fidarsi dei valori
+  // inviati dal client): dal carrello si usano solo prodotto e quantità.
+  const requested = parseLines(String(formData.get("lines") ?? "[]"));
+  const catalog = await listProducts();
+  const byId = new Map(catalog.map((p) => [p.id, p] as const));
+  const bySlug = new Map(catalog.map((p) => [p.slug, p] as const));
+
+  const lines: CartLine[] = [];
+  let subtotalCents = 0;
+  for (const r of requested) {
+    const product = byId.get(r.productId) ?? bySlug.get(r.slug);
+    if (!product) continue; // prodotto inesistente o non più attivo
+    const qty = Math.max(1, Math.min(999, Math.floor(r.quantity) || 0));
+    subtotalCents += priceLine(product.priceCents, qty).netCents;
+    lines.push({
+      productId: product.id,
+      slug: product.slug,
+      title: product.title,
+      brand: product.brand,
+      imageUrl: product.images[0]?.url ?? "",
+      unitPriceCents: product.priceCents,
+      quantity: qty,
+    });
+  }
+  if (lines.length === 0) {
+    return {
+      ok: false,
+      message:
+        "Il carrello non è valido o i prodotti non sono più disponibili.",
+    };
+  }
+
   const requestedPoints = Math.max(
     0,
     Math.floor(Number(formData.get("redeemPoints") ?? 0)) || 0,
