@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   ClipboardList,
+  Images,
   LayoutDashboard,
   Package,
   Settings,
@@ -17,6 +18,7 @@ import { cn } from "@/lib/utils";
 const ICONS: Record<string, LucideIcon> = {
   "/admin": LayoutDashboard,
   "/admin/products": Package,
+  "/admin/images": Images,
   "/admin/categories": Tags,
   "/admin/orders": ClipboardList,
   "/admin/users": Users,
