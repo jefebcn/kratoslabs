@@ -75,7 +75,7 @@ export function CheckoutForm({
   const lines = useCart((s) => s.lines);
   const clear = useCart((s) => s.clear);
   const empty = lines.length === 0;
-  const [usePoints, setUsePoints] = useState(false);
+  const [redeem, setRedeem] = useState(0);
 
   // Totale netto (sconti quantità inclusi): stesso valore mostrato nel riepilogo.
   const netTotalCents = lines.reduce(
@@ -83,9 +83,9 @@ export function CheckoutForm({
     0,
   );
 
-  // Punti spendibili su questo carrello e sconto risultante.
+  // Punti spendibili su questo carrello (max 70%) e sconto risultante.
   const redeemable = maxRedeemablePoints(points, netTotalCents);
-  const appliedPoints = usePoints ? redeemable : 0;
+  const appliedPoints = Math.max(0, Math.min(Math.floor(redeem) || 0, redeemable));
   const discountCents = discountCentsFor(appliedPoints);
   const payableCents = Math.max(0, netTotalCents - discountCents);
 
@@ -163,45 +163,65 @@ export function CheckoutForm({
       <input type="hidden" name="totalCents" value={netTotalCents} />
       <input type="hidden" name="redeemPoints" value={appliedPoints} />
 
-      {redeemable > 0 && (
+      {points > 0 && (
         <div className="rounded-base border border-accent/30 bg-accent-soft/40 p-4">
-          <label className="flex cursor-pointer items-start gap-3">
-            <input
-              type="checkbox"
-              checked={usePoints}
-              onChange={(e) => setUsePoints(e.target.checked)}
-              className="mt-0.5 [accent-color:#dc2626]"
-            />
-            <span className="text-sm">
-              <span className="font-semibold">
-                {t("rewards.use", {
-                  points: redeemable,
-                  value: formatPrice(discountCentsFor(redeemable)),
-                })}
-              </span>
-              <span className="mt-0.5 block text-xs text-muted">
-                {t("rewards.balance", {
-                  points,
-                  value: formatPrice(pointsValueCents(points)),
-                })}
-              </span>
-            </span>
-          </label>
-          {appliedPoints > 0 && (
-            <dl className="mt-3 space-y-1 border-t border-accent/20 pt-3 text-sm">
-              <div className="flex justify-between text-muted">
-                <dt>{t("rewards.subtotal")}</dt>
-                <dd className="num">{formatPrice(netTotalCents)}</dd>
+          <p className="text-sm font-semibold">{t("rewards.title")}</p>
+          <p className="mt-0.5 text-xs text-muted">
+            {t("rewards.balance", {
+              points,
+              value: formatPrice(pointsValueCents(points)),
+            })}
+          </p>
+
+          {redeemable > 0 ? (
+            <>
+              <div className="mt-3 flex items-end gap-2">
+                <label className="flex-1">
+                  <span className="mb-1 block text-xs font-medium">
+                    {t("rewards.pointsToUse", { max: redeemable })}
+                  </span>
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={0}
+                    max={redeemable}
+                    step={1}
+                    value={redeem}
+                    onChange={(e) => setRedeem(Number(e.target.value))}
+                    className="w-full rounded-base border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setRedeem(redeemable)}
+                  className="rounded-base border border-accent px-3 py-2 text-xs font-semibold text-accent"
+                >
+                  {t("rewards.useMax")}
+                </button>
               </div>
-              <div className="flex justify-between text-accent">
-                <dt>{t("rewards.discount")}</dt>
-                <dd className="num">−{formatPrice(discountCents)}</dd>
-              </div>
-              <div className="flex justify-between font-semibold">
-                <dt>{t("rewards.toPay")}</dt>
-                <dd className="num">{formatPrice(payableCents)}</dd>
-              </div>
-            </dl>
+              <p className="mt-1.5 text-xs text-muted">{t("rewards.note70")}</p>
+
+              {appliedPoints > 0 && (
+                <dl className="mt-3 space-y-1 border-t border-accent/20 pt-3 text-sm">
+                  <div className="flex justify-between text-muted">
+                    <dt>{t("rewards.subtotal")}</dt>
+                    <dd className="num">{formatPrice(netTotalCents)}</dd>
+                  </div>
+                  <div className="flex justify-between text-accent">
+                    <dt>
+                      {t("rewards.discount")} ({appliedPoints} pt)
+                    </dt>
+                    <dd className="num">−{formatPrice(discountCents)}</dd>
+                  </div>
+                  <div className="flex justify-between font-semibold">
+                    <dt>{t("rewards.toPay")}</dt>
+                    <dd className="num">{formatPrice(payableCents)}</dd>
+                  </div>
+                </dl>
+              )}
+            </>
+          ) : (
+            <p className="mt-2 text-xs text-muted">{t("rewards.note70")}</p>
           )}
         </div>
       )}

@@ -4,7 +4,16 @@ import { formatPrice, cn } from "@/lib/utils";
 import { pointsValueCents } from "@/lib/rewards";
 import type { RewardEntry } from "@/features/rewards";
 
-const KNOWN = new Set(["earn", "redeem", "refund", "reverse", "adjust"]);
+const KNOWN = new Set([
+  "earn",
+  "redeem",
+  "refund",
+  "reverse",
+  "adjust",
+  "bonus_account",
+  "bonus_newsletter",
+  "bonus_first_order",
+]);
 
 /** Card "Punti fedeltà": saldo, valore e storico movimenti. */
 export async function AccountRewards({

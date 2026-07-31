@@ -56,7 +56,10 @@
         "redeem": "Pontos usados",
         "refund": "Pontos devolvidos",
         "reverse": "Ajuste",
-        "adjust": "Ajuste"
+        "adjust": "Ajuste",
+        "bonus_account": "Bónus de registo",
+        "bonus_newsletter": "Bónus newsletter",
+        "bonus_first_order": "Bónus primeira encomenda"
       }
     }
   },
@@ -121,7 +124,8 @@
     "tabLab": "Teste lab / QC",
     "tabReviews": "Avaliações",
     "notFound": "Produto não encontrado",
-    "rewardPoints": "Ganhe {points} pontos com esta compra"
+    "rewardPoints": "Ganhe {points} pontos com esta compra",
+    "priceInPoints": "Preço em pontos: {points}"
   },
   "auth": {
     "loginTitle": "Entrar",
@@ -197,7 +201,11 @@
       "balance": "Tem {points} pontos = {value}",
       "subtotal": "Subtotal",
       "discount": "Desconto de pontos",
-      "toPay": "Total a pagar"
+      "toPay": "Total a pagar",
+      "title": "Pontos de fidelidade",
+      "pointsToUse": "Pontos a usar (máx {max})",
+      "useMax": "Usar o máximo",
+      "note70": "Pode cobrir até 70% da encomenda (envio excluído)."
     }
   },
   "toggle": {
@@ -221,7 +229,19 @@
     "valueTitle": "Quanto valem",
     "valueText": "100 pontos valem 25€ de desconto (1 ponto = 0,25€).",
     "useTitle": "Como os usa",
-    "useText": "No checkout pode optar por usar os seus pontos: o desconto é aplicado de imediato ao total a pagar.",
-    "note": "O saldo e o histórico de pontos estão sempre visíveis na sua área reservada."
+    "useText": "No checkout indica quantos pontos usar (até 70% da encomenda, envio excluído): o desconto é aplicado de imediato ao total.",
+    "note": "O saldo e o histórico de pontos estão sempre visíveis na sua área reservada.",
+    "productTitle": "Na página do produto",
+    "productText": "Cada produto mostra os pontos que ganha (“Ganhe N pontos”) e o preço em pontos, ou seja, quantos pontos o pagariam.",
+    "bonusTitle": "Pontos bónus",
+    "bonusIntro": "Comece com vantagem com estes bónus únicos:",
+    "bAccount": "Criar uma conta: +{n} pontos",
+    "bNewsletter": "Subscrever a newsletter: +{n} pontos",
+    "bFirst": "Concluir a primeira encomenda: +{n} pontos",
+    "condTitle": "Condições",
+    "c1": "Tem de ser cliente registado para participar.",
+    "c2": "Os pontos são creditados quando o pagamento é recebido e a encomenda é enviada.",
+    "c3": "Os pontos expiram 90 dias após a data de crédito.",
+    "c4": "Os pontos não são convertíveis em dinheiro e não são reembolsáveis nem transferíveis."
   }
 }

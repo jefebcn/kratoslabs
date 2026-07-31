@@ -56,7 +56,10 @@
         "redeem": "Points used",
         "refund": "Points refunded",
         "reverse": "Adjustment",
-        "adjust": "Adjustment"
+        "adjust": "Adjustment",
+        "bonus_account": "Sign-up bonus",
+        "bonus_newsletter": "Newsletter bonus",
+        "bonus_first_order": "First-order bonus"
       }
     }
   },
@@ -121,7 +124,8 @@
     "tabLab": "Lab test / QC",
     "tabReviews": "Reviews",
     "notFound": "Product not found",
-    "rewardPoints": "Earn {points} points with this purchase"
+    "rewardPoints": "Earn {points} points with this purchase",
+    "priceInPoints": "Price in points: {points}"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -197,7 +201,11 @@
       "balance": "You have {points} points = {value}",
       "subtotal": "Subtotal",
       "discount": "Points discount",
-      "toPay": "Total to pay"
+      "toPay": "Total to pay",
+      "title": "Reward points",
+      "pointsToUse": "Points to use (max {max})",
+      "useMax": "Use max",
+      "note70": "You can cover up to 70% of the order (shipping excluded)."
     }
   },
   "toggle": {
@@ -221,7 +229,19 @@
     "valueTitle": "What they are worth",
     "valueText": "100 points are worth €25 off (1 point = €0.25).",
     "useTitle": "How to use them",
-    "useText": "At checkout you can choose to spend your points: the discount is applied immediately to the total to pay.",
-    "note": "Your points balance and history are always visible in your account area."
+    "useText": "At checkout you enter how many points to use (up to 70% of the order, shipping excluded): the discount is applied to the total immediately.",
+    "note": "Your points balance and history are always visible in your account area.",
+    "productTitle": "On the product page",
+    "productText": "Each product shows the points you earn (“Earn N points”) and its price in points, i.e. how many points would pay for it.",
+    "bonusTitle": "Bonus points",
+    "bonusIntro": "Get a head start with these one-time bonuses:",
+    "bAccount": "Create an account: +{n} points",
+    "bNewsletter": "Subscribe to the newsletter: +{n} points",
+    "bFirst": "Complete your first order: +{n} points",
+    "condTitle": "Conditions",
+    "c1": "You must be a registered customer to take part.",
+    "c2": "Points are credited once payment is received and the order is dispatched.",
+    "c3": "Points expire 90 days after the date they are added.",
+    "c4": "Points cannot be exchanged for money and are non-refundable and non-transferable."
   }
 }

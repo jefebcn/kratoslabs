@@ -1,19 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { subscribeNewsletter } from "@/features/newsletter/actions";
 
 export function NewsletterForm() {
   const t = useTranslations("newsletter");
   const [done, setDone] = useState(false);
+  const [awarded, setAwarded] = useState(0);
+  const [, startTransition] = useTransition();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Da collegare al provider email. Per ora conferma soltanto.
-    setDone(true);
+    // Da collegare all'ESP per l'email; qui accredita l'eventuale bonus punti.
+    startTransition(async () => {
+      const r = await subscribeNewsletter();
+      setAwarded(r.awardedPoints ?? 0);
+      setDone(true);
+    });
   }
 
   if (done) {
@@ -21,6 +28,7 @@ export function NewsletterForm() {
       <p className="inline-flex items-center gap-2 text-sm text-accent">
         <Check className="size-4" aria-hidden />
         {t("done")}
+        {awarded > 0 ? ` +${awarded} pt` : ""}
       </p>
     );
   }

@@ -11,7 +11,12 @@ import { signOut } from "@/features/auth/actions";
 import { listOrdersForUser } from "@/features/orders";
 import { AccountOrders } from "@/components/account/AccountOrders";
 import { AccountRewards } from "@/components/account/AccountRewards";
-import { getPointsBalance, getPointsHistory } from "@/features/rewards";
+import {
+  getPointsBalance,
+  getPointsHistory,
+  grantOnceBonus,
+} from "@/features/rewards";
+import { BONUS_ACCOUNT } from "@/lib/rewards";
 
 export const metadata: Metadata = {
   title: "Il mio account",
@@ -28,6 +33,8 @@ export default async function AccountPage() {
   const name = (user.user_metadata?.full_name as string | undefined) ?? null;
   const admin = isAdminUser(user);
   const orders = await listOrdersForUser(user.id, user.email ?? "");
+  // Bonus benvenuto per la creazione dell'account (una tantum).
+  await grantOnceBonus(user.id, "bonus_account", BONUS_ACCOUNT);
   const pointsBalance = await getPointsBalance(user.id);
   const pointsHistory = await getPointsHistory(user.id);
 

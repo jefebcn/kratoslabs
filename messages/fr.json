@@ -56,7 +56,10 @@
         "redeem": "Points utilisés",
         "refund": "Points remboursés",
         "reverse": "Ajustement",
-        "adjust": "Ajustement"
+        "adjust": "Ajustement",
+        "bonus_account": "Bonus d’inscription",
+        "bonus_newsletter": "Bonus newsletter",
+        "bonus_first_order": "Bonus première commande"
       }
     }
   },
@@ -121,7 +124,8 @@
     "tabLab": "Test labo / QC",
     "tabReviews": "Avis",
     "notFound": "Produit introuvable",
-    "rewardPoints": "Gagnez {points} points avec cet achat"
+    "rewardPoints": "Gagnez {points} points avec cet achat",
+    "priceInPoints": "Prix en points : {points}"
   },
   "auth": {
     "loginTitle": "Se connecter",
@@ -197,7 +201,11 @@
       "balance": "Vous avez {points} points = {value}",
       "subtotal": "Sous-total",
       "discount": "Remise points",
-      "toPay": "Total à payer"
+      "toPay": "Total à payer",
+      "title": "Points de fidélité",
+      "pointsToUse": "Points à utiliser (max {max})",
+      "useMax": "Utiliser le maximum",
+      "note70": "Vous pouvez couvrir jusqu’à 70% de la commande (hors livraison)."
     }
   },
   "toggle": {
@@ -221,7 +229,19 @@
     "valueTitle": "Leur valeur",
     "valueText": "100 points valent 25€ de remise (1 point = 0,25€).",
     "useTitle": "Comment les utiliser",
-    "useText": "Au paiement, vous pouvez utiliser vos points : la remise est appliquée immédiatement au total à payer.",
-    "note": "Votre solde et votre historique de points sont toujours visibles dans votre espace membre."
+    "useText": "Au paiement, vous saisissez combien de points utiliser (jusqu’à 70% de la commande, hors livraison) : la remise est appliquée immédiatement au total.",
+    "note": "Votre solde et votre historique de points sont toujours visibles dans votre espace membre.",
+    "productTitle": "Sur la fiche produit",
+    "productText": "Chaque produit affiche les points gagnés (« Gagnez N points ») et son prix en points, c’est-à-dire combien de points le paieraient.",
+    "bonusTitle": "Points bonus",
+    "bonusIntro": "Prenez de l’avance avec ces bonus uniques :",
+    "bAccount": "Créer un compte : +{n} points",
+    "bNewsletter": "S’inscrire à la newsletter : +{n} points",
+    "bFirst": "Terminer la première commande : +{n} points",
+    "condTitle": "Conditions",
+    "c1": "Vous devez être un client enregistré pour participer.",
+    "c2": "Les points sont crédités une fois le paiement reçu et la commande expédiée.",
+    "c3": "Les points expirent 90 jours après leur date d’ajout.",
+    "c4": "Les points ne sont pas convertibles en argent, ni remboursables ni transférables."
   }
 }
