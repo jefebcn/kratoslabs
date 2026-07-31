@@ -243,5 +243,13 @@
     "c2": "Les points sont crédités une fois le paiement reçu et la commande expédiée.",
     "c3": "Les points expirent 90 jours après leur date d’ajout.",
     "c4": "Les points ne sont pas convertibles en argent, ni remboursables ni transférables."
+  },
+  "testimonial": {
+    "title": "Témoignages",
+    "home": "Accueil",
+    "crumb": "Témoignage",
+    "images": "Vos photos",
+    "review": "Avis",
+    "products": "Produits"
   }
 }

@@ -33,6 +33,10 @@ export async function addGalleryImages(
     .filter((f): f is File => f instanceof File && f.size > 0);
   if (files.length === 0) return { ok: false, message: "Nessun file." };
   const caption = String(formData.get("caption") || "").trim();
+  const author = String(formData.get("author") || "").trim();
+  const country = String(formData.get("country") || "").trim();
+  const reviewDate = String(formData.get("date") || "").trim();
+  const rating = Math.min(5, Math.max(1, Number(formData.get("rating")) || 5));
 
   try {
     const { data: last } = await admin
@@ -60,9 +64,16 @@ export async function addGalleryImages(
         .from("product-images")
         .getPublicUrl(path);
       pos += 1;
-      const { error: insErr } = await admin
-        .from("gallery")
-        .insert({ url: pub.publicUrl, alt: "Touchdown", caption, position: pos });
+      const { error: insErr } = await admin.from("gallery").insert({
+        url: pub.publicUrl,
+        alt: "Touchdown",
+        caption,
+        author,
+        country,
+        review_date: reviewDate,
+        rating,
+        position: pos,
+      });
       if (!insErr) added += 1;
     }
 
@@ -108,17 +119,35 @@ export async function deleteGalleryImage(
   }
 }
 
-/** Aggiorna il testo recensione (caption) di una foto della galleria. */
-export async function updateGalleryCaption(
+export interface GalleryReviewInput {
+  caption: string;
+  author: string;
+  country: string;
+  date: string;
+  rating: number;
+  productSlugs: string[];
+}
+
+/** Aggiorna i dati recensione (testo, autore, paese, data, voto, prodotti). */
+export async function updateGalleryReview(
   id: string,
-  caption: string,
+  data: GalleryReviewInput,
 ): Promise<GalleryOpResult> {
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   try {
     const { error } = await admin
       .from("gallery")
-      .update({ caption: caption.trim() })
+      .update({
+        caption: data.caption.trim(),
+        author: data.author.trim(),
+        country: data.country.trim(),
+        review_date: data.date.trim(),
+        rating: Math.min(5, Math.max(1, Number(data.rating) || 5)),
+        product_slugs: data.productSlugs
+          .map((s) => s.trim())
+          .filter(Boolean),
+      })
       .eq("id", id);
     if (error) return { ok: false, message: `DB: ${error.message}` };
     refreshSite();

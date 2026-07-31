@@ -243,5 +243,13 @@
     "c2": "Points are credited once payment is received and the order is dispatched.",
     "c3": "Points expire 90 days after the date they are added.",
     "c4": "Points cannot be exchanged for money and are non-refundable and non-transferable."
+  },
+  "testimonial": {
+    "title": "Testimonials",
+    "home": "Home",
+    "crumb": "Testimonial",
+    "images": "Your photos",
+    "review": "Review",
+    "products": "Products"
   }
 }

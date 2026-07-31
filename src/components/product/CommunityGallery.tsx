@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import type { GalleryImage } from "@/features/gallery/queries";
 
@@ -62,9 +63,10 @@ export function CommunityGallery({ items }: { items: GalleryImage[] }) {
         className="flex gap-4 overflow-x-auto scroll-smooth px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item) => (
-          <figure
+          <Link
             key={item.id}
-            className="group relative h-52 w-72 shrink-0 snap-start overflow-hidden rounded-base border border-border bg-surface-2 sm:h-60 sm:w-80"
+            href={`/testimonianze/${item.id}`}
+            className="group relative block h-52 w-72 shrink-0 snap-start overflow-hidden rounded-base border border-border bg-surface-2 sm:h-60 sm:w-80"
           >
             <Image
               src={item.url}
@@ -73,15 +75,13 @@ export function CommunityGallery({ items }: { items: GalleryImage[] }) {
               sizes="(max-width: 640px) 72vw, 320px"
               className="object-cover"
             />
-            {item.caption && (
-              <figcaption className="absolute inset-0 flex items-center justify-center bg-accent/92 p-5 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                <span className="flex flex-col items-center gap-2">
-                  <span className="text-pretty">{item.caption}</span>
-                  <ArrowRight className="size-4" aria-hidden />
-                </span>
-              </figcaption>
-            )}
-          </figure>
+            <span className="absolute inset-0 flex items-center justify-center bg-accent/92 p-5 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <span className="flex flex-col items-center gap-2">
+                {item.caption && <span className="text-pretty">{item.caption}</span>}
+                <ArrowRight className="size-4" aria-hidden />
+              </span>
+            </span>
+          </Link>
         ))}
       </div>
 
