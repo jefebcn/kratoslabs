@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "allProducts": "Tous les produits",
+    "guide": "Guides",
+    "reviews": "Avis",
+    "analysis": "Analyses",
+    "analysisLong": "Analyses de laboratoire",
+    "aboutUs": "À propos",
+    "contact": "Contact",
+    "wholesale": "En gros"
+  },
+  "account": {
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "logout": "Se déconnecter"
+  },
+  "search": {
+    "placeholder": "Rechercher…"
+  },
+  "cart": {
+    "summary": "{count, plural, one {# produit} other {# produits}} · {total}",
+    "open": "Ouvrir le panier"
+  },
+  "payments": {
+    "accept": "Nous acceptons"
+  },
+  "home": {
+    "newProducts": "Nouveaux produits",
+    "bestsellers": "Meilleures ventes",
+    "viewAll": "Voir tout — {category}",
+    "touchdownGallery": "Galerie Touchdown",
+    "sendTouchdown": "Envoie ton touchdown ici"
+  },
+  "menu": {
+    "title": "Menu",
+    "categories": "Catégories"
+  },
+  "footer": {
+    "catalog": "Catalogue",
+    "info": "Informations",
+    "legal": "Mentions légales",
+    "contact": "Contact",
+    "communityRefs": "Références indépendantes de la communauté",
+    "newsletterTitle": "Newsletter",
+    "newsletterSubtitle": "Restez informé des promotions, soldes et offres exclusives de {site}.",
+    "telegramCta": "Rejoignez notre Telegram",
+    "email": "E-mail",
+    "paymentMethods": "Moyens de paiement",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "shipping": "Livraison et retours",
+    "disclaimer": "© {year} {site}. Tous les produits sont fournis exclusivement à des fins de recherche et d'évaluation et ne sont pas présentés comme des traitements médicaux ou des solutions de santé."
+  },
+  "newsletter": {
+    "placeholder": "Votre e-mail",
+    "subscribe": "S'abonner",
+    "done": "Inscription enregistrée. Merci."
+  }
+}
