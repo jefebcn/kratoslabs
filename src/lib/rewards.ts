@@ -8,10 +8,27 @@
 export const POINT_VALUE_CENTS = 25; // 1 punto = 0,25 €
 export const EARN_DIVISOR_CENTS = 500; // 1 punto ogni 5€ → 5 punti / 25€
 
+/** Quota massima dell'ordine copribile con i punti (esclusa spedizione). */
+export const REDEEM_MAX_FRACTION = 0.7; // max 70%
+
+/** Validità dei punti guadagnati, in giorni. */
+export const POINTS_EXPIRY_DAYS = 90;
+
+/** Bonus una tantum (come deuspower). */
+export const BONUS_ACCOUNT = 10;
+export const BONUS_NEWSLETTER = 10;
+export const BONUS_FIRST_ORDER = 20;
+
 /** Punti guadagnati per un ordine di `cents` (arrotondati per difetto). */
 export function pointsEarnedFor(cents: number): number {
   if (!Number.isFinite(cents) || cents <= 0) return 0;
   return Math.floor(cents / EARN_DIVISOR_CENTS);
+}
+
+/** "Prezzo in punti": punti necessari per pagare interamente il prodotto. */
+export function priceInPoints(cents: number): number {
+  if (!Number.isFinite(cents) || cents <= 0) return 0;
+  return Math.ceil(cents / POINT_VALUE_CENTS);
 }
 
 /** Sconto in centesimi ottenibile con `points` punti. */
@@ -26,14 +43,15 @@ export function pointsValueCents(points: number): number {
 }
 
 /**
- * Punti massimi spendibili: non oltre il saldo, e mai tanti da scontare più del
- * subtotale (lo sconto non può superare l'importo dell'ordine).
+ * Punti massimi spendibili: non oltre il saldo e non oltre il 70% del subtotale
+ * (spedizione esclusa), così lo sconto copre al massimo il 70% dell'ordine.
  */
 export function maxRedeemablePoints(
   balance: number,
   subtotalCents: number,
 ): number {
   const byBalance = Math.max(0, Math.floor(balance || 0));
-  const byTotal = Math.max(0, Math.floor((subtotalCents || 0) / POINT_VALUE_CENTS));
+  const cap = Math.floor((subtotalCents || 0) * REDEEM_MAX_FRACTION);
+  const byTotal = Math.max(0, Math.floor(cap / POINT_VALUE_CENTS));
   return Math.min(byBalance, byTotal);
 }

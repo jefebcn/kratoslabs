@@ -56,7 +56,10 @@
         "redeem": "Punkte eingesetzt",
         "refund": "Punkte erstattet",
         "reverse": "Korrektur",
-        "adjust": "Korrektur"
+        "adjust": "Korrektur",
+        "bonus_account": "Registrierungsbonus",
+        "bonus_newsletter": "Newsletter-Bonus",
+        "bonus_first_order": "Bonus für Erstbestellung"
       }
     }
   },
@@ -121,7 +124,8 @@
     "tabLab": "Labortest / QC",
     "tabReviews": "Bewertungen",
     "notFound": "Produkt nicht gefunden",
-    "rewardPoints": "{points} Punkte mit diesem Kauf sammeln"
+    "rewardPoints": "{points} Punkte mit diesem Kauf sammeln",
+    "priceInPoints": "Preis in Punkten: {points}"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -197,7 +201,11 @@
       "balance": "Sie haben {points} Punkte = {value}",
       "subtotal": "Zwischensumme",
       "discount": "Punkte-Rabatt",
-      "toPay": "Zu zahlender Betrag"
+      "toPay": "Zu zahlender Betrag",
+      "title": "Treuepunkte",
+      "pointsToUse": "Zu nutzende Punkte (max {max})",
+      "useMax": "Maximum nutzen",
+      "note70": "Sie können bis zu 70% der Bestellung abdecken (ohne Versand)."
     }
   },
   "toggle": {
@@ -221,7 +229,19 @@
     "valueTitle": "Was sie wert sind",
     "valueText": "100 Punkte sind 25€ Rabatt wert (1 Punkt = 0,25€).",
     "useTitle": "So verwenden Sie sie",
-    "useText": "Im Checkout können Sie Ihre Punkte einsetzen: Der Rabatt wird sofort vom zu zahlenden Betrag abgezogen.",
-    "note": "Punktestand und Verlauf sind jederzeit in Ihrem Kontobereich sichtbar."
+    "useText": "Im Checkout geben Sie an, wie viele Punkte Sie einsetzen (bis 70% der Bestellung, ohne Versand): Der Rabatt wird sofort auf die Summe angewendet.",
+    "note": "Punktestand und Verlauf sind jederzeit in Ihrem Kontobereich sichtbar.",
+    "productTitle": "Auf der Produktseite",
+    "productText": "Jedes Produkt zeigt die Punkte, die Sie erhalten („N Punkte sammeln“), und den Preis in Punkten, d.h. wie viele Punkte es kosten würde.",
+    "bonusTitle": "Bonuspunkte",
+    "bonusIntro": "Ein Vorsprung mit diesen einmaligen Boni:",
+    "bAccount": "Konto erstellen: +{n} Punkte",
+    "bNewsletter": "Newsletter abonnieren: +{n} Punkte",
+    "bFirst": "Erste Bestellung abschließen: +{n} Punkte",
+    "condTitle": "Bedingungen",
+    "c1": "Sie müssen registrierter Kunde sein, um teilzunehmen.",
+    "c2": "Punkte werden gutgeschrieben, sobald die Zahlung eingegangen und die Bestellung versandt ist.",
+    "c3": "Punkte verfallen 90 Tage nach dem Gutschriftsdatum.",
+    "c4": "Punkte sind nicht in Geld umwandelbar, nicht erstattungs- und nicht übertragbar."
   }
 }

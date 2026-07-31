@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ChevronRight, Gift } from "lucide-react";
-import { pointsEarnedFor } from "@/lib/rewards";
+import { pointsEarnedFor, priceInPoints } from "@/lib/rewards";
 import {
   Tabs,
   TabsContent,
@@ -101,12 +101,19 @@ export default async function ProductDetailPage({
               {product.shortDescription}
             </p>
             {pointsEarnedFor(product.priceCents) > 0 && (
-              <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
-                <Gift className="size-3.5" aria-hidden />
-                {t("rewardPoints", {
-                  points: pointsEarnedFor(product.priceCents),
-                })}
-              </p>
+              <div className="mt-3 flex flex-col gap-1">
+                <p className="inline-flex w-fit items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
+                  <Gift className="size-3.5" aria-hidden />
+                  {t("rewardPoints", {
+                    points: pointsEarnedFor(product.priceCents),
+                  })}
+                </p>
+                <p className="text-xs text-muted">
+                  {t("priceInPoints", {
+                    points: priceInPoints(product.priceCents),
+                  })}
+                </p>
+              </div>
             )}
             {rating.count > 0 && (
               <a

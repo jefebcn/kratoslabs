@@ -56,7 +56,10 @@
         "redeem": "Punti usati",
         "refund": "Punti restituiti",
         "reverse": "Rettifica",
-        "adjust": "Rettifica"
+        "adjust": "Rettifica",
+        "bonus_account": "Bonus registrazione",
+        "bonus_newsletter": "Bonus newsletter",
+        "bonus_first_order": "Bonus primo ordine"
       }
     }
   },
@@ -121,7 +124,8 @@
     "tabLab": "Lab test / QC",
     "tabReviews": "Recensioni",
     "notFound": "Prodotto non trovato",
-    "rewardPoints": "Ricevi {points} punti con questo acquisto"
+    "rewardPoints": "Ricevi {points} punti con questo acquisto",
+    "priceInPoints": "Prezzo in punti: {points}"
   },
   "auth": {
     "loginTitle": "Accedi",
@@ -197,7 +201,11 @@
       "balance": "Hai {points} punti = {value}",
       "subtotal": "Subtotale",
       "discount": "Sconto punti",
-      "toPay": "Totale da pagare"
+      "toPay": "Totale da pagare",
+      "title": "Punti fedeltà",
+      "pointsToUse": "Punti da usare (max {max})",
+      "useMax": "Usa il massimo",
+      "note70": "Puoi coprire fino al 70% dell’ordine (spedizione esclusa)."
     }
   },
   "toggle": {
@@ -221,7 +229,19 @@
     "valueTitle": "Quanto valgono",
     "valueText": "100 punti valgono 25€ di sconto (1 punto = 0,25€).",
     "useTitle": "Come li usi",
-    "useText": "Al checkout puoi scegliere di usare i tuoi punti: lo sconto viene applicato subito al totale da pagare.",
-    "note": "Il saldo punti e lo storico sono sempre visibili nella tua area riservata."
+    "useText": "Al checkout inserisci quanti punti usare (max il 70% dell’ordine, spedizione esclusa): lo sconto è applicato subito al totale.",
+    "note": "Il saldo punti e lo storico sono sempre visibili nella tua area riservata.",
+    "productTitle": "Sulla scheda prodotto",
+    "productText": "Ogni prodotto mostra i punti che guadagni (“Ricevi N punti”) e il prezzo in punti, cioè quanti punti servirebbero per pagarlo.",
+    "bonusTitle": "Punti bonus",
+    "bonusIntro": "Un vantaggio iniziale con questi bonus una tantum:",
+    "bAccount": "Crea un account: +{n} punti",
+    "bNewsletter": "Iscriviti alla newsletter: +{n} punti",
+    "bFirst": "Primo ordine completato: +{n} punti",
+    "condTitle": "Condizioni",
+    "c1": "Devi essere un cliente registrato per partecipare.",
+    "c2": "I punti sono accreditati quando il pagamento è ricevuto e l’ordine è spedito.",
+    "c3": "I punti scadono dopo 90 giorni dalla data di accredito.",
+    "c4": "I punti non sono convertibili in denaro e non sono rimborsabili né trasferibili."
   }
 }

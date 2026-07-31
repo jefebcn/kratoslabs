@@ -6,8 +6,8 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getAdminCaller } from "@/lib/auth/require-admin";
 import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
 import { orderConfirmedEmail } from "@/lib/email/templates";
-import { addEntry, hasEntry } from "@/features/rewards";
-import { pointsEarnedFor } from "@/lib/rewards";
+import { addEntry, hasEntry, grantOnceBonus } from "@/features/rewards";
+import { pointsEarnedFor, BONUS_FIRST_ORDER } from "@/lib/rewards";
 
 const statusSchema = z.object({
   orderId: z.string().min(1),
@@ -83,6 +83,8 @@ export async function confirmPayment(formData: FormData): Promise<void> {
       if (earned > 0) {
         await addEntry(admin, String(data.user_id), earned, "earn", ref);
       }
+      // Bonus primo ordine (una tantum per cliente).
+      await grantOnceBonus(String(data.user_id), "bonus_first_order", BONUS_FIRST_ORDER);
     }
     if (isEmailConfigured) {
       const { subject, html } = orderConfirmedEmail({ reference: ref });
