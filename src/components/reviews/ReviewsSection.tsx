@@ -4,12 +4,15 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
 import { RatingOverview } from "@/components/reviews/RatingOverview";
-import { featuredReviews, ratingSummary } from "@/features/reviews";
+import { listReviews, ratingSummary } from "@/features/reviews";
 
-/** Blocco "feedback verificati" per la homepage. */
-export function ReviewsSection() {
-  const reviews = featuredReviews(3);
-  const summary = ratingSummary();
+/** Blocco "feedback verificati" per la homepage. Nascosto se non ci sono
+ *  recensioni reali (niente contenuti finti). */
+export async function ReviewsSection() {
+  const all = await listReviews();
+  if (all.length === 0) return null;
+  const reviews = all.filter((r) => r.rating >= 5).slice(0, 3);
+  const summary = ratingSummary(all);
 
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
