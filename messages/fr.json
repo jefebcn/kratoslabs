@@ -13,7 +13,13 @@
   "account": {
     "login": "Se connecter",
     "register": "S'inscrire",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "title": "Mon compte",
+    "area": "Espace membre",
+    "name": "Nom",
+    "email": "E-mail",
+    "adminDashboard": "Aller au tableau de bord admin",
+    "signOut": "Se déconnecter"
   },
   "search": {
     "placeholder": "Rechercher…"
@@ -93,5 +99,58 @@
     "goToLogin": "Aller à la connexion",
     "noAccount": "Vous n'avez pas de compte ?",
     "haveAccount": "Vous avez déjà un compte ?"
+  },
+  "checkout": {
+    "title": "Paiement",
+    "contactShipping": "Contact et livraison",
+    "email": "E-mail",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "address": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "payment": "Paiement",
+    "notesOptional": "Notes (facultatif)",
+    "notesPlaceholder": "Instructions de livraison…",
+    "confirmOrder": "Confirmer la commande",
+    "cartEmpty": "Panier vide",
+    "cryptoHint": "Avec le paiement en crypto, après confirmation vous verrez l'adresse où envoyer les fonds et la référence de votre commande.",
+    "orderReceived": "Commande reçue",
+    "reference": "Référence",
+    "emailPreconfirm": "Nous vous avons envoyé un e-mail de pré-confirmation.",
+    "confirmedAfterPayment": "La commande est confirmée après vérification du paiement.",
+    "summary": "Récapitulatif",
+    "goToCatalog": "Aller au catalogue",
+    "pm": {
+      "cards": "Cartes",
+      "paypal": "PayPal",
+      "bank": "Virement",
+      "crypto": "Bitcoin"
+    },
+    "payWithBank": "Payer par virement",
+    "awaitingPayment": "En attente de paiement",
+    "causalRequired": "Référence (obligatoire)",
+    "transferAmount": "Montant du virement",
+    "doTransfer": "Effectuez le virement avec les informations ci-dessous, en indiquant obligatoirement la référence.",
+    "holder": "Titulaire",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "bank": "Banque",
+    "causal": "Référence",
+    "causalWarning": "Sans la référence {ref}, nous ne pouvons pas associer le paiement à votre commande.",
+    "bankPending": "Le paiement par virement est en cours d'activation. Nous vous contacterons par e-mail avec les coordonnées pour finaliser la commande {ref}.",
+    "bankFlow": "Par virement, la confirmation de commande arrive sous 24–48 heures après réception du paiement : vous recevrez un second e-mail de confirmation.",
+    "payWithCrypto": "Payer en crypto",
+    "orderReference": "Référence de commande",
+    "totalToPay": "Total à payer",
+    "cryptoInstruction": "Envoyez l'équivalent du montant à l'une des adresses ci-dessous, en indiquant la référence en note.",
+    "network": "Réseau",
+    "openInWallet": "Ouvrir dans le wallet",
+    "cryptoWarning": "Envoyez le montant exact et utilisez la référence {ref} en note. Des réseaux autres que ceux indiqués = fonds perdus.",
+    "cryptoPending": "Le paiement en crypto est en cours d'activation. Nous vous contacterons par e-mail avec l'adresse pour finaliser la commande {ref}.",
+    "cryptoFlow": "La commande est confirmée après vérification de la réception du paiement : vous recevrez un second e-mail de confirmation.",
+    "copy": "Copier",
+    "copied": "Copié"
   }
 }

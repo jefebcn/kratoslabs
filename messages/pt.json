@@ -13,7 +13,13 @@
   "account": {
     "login": "Entrar",
     "register": "Registar",
-    "logout": "Sair"
+    "logout": "Sair",
+    "title": "A minha conta",
+    "area": "Área reservada",
+    "name": "Nome",
+    "email": "E-mail",
+    "adminDashboard": "Ir para o painel de admin",
+    "signOut": "Terminar sessão"
   },
   "search": {
     "placeholder": "Pesquisar…"
@@ -93,5 +99,58 @@
     "goToLogin": "Ir para o login",
     "noAccount": "Não tens conta?",
     "haveAccount": "Já tens conta?"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contactShipping": "Contacto e envio",
+    "email": "E-mail",
+    "firstName": "Nome",
+    "lastName": "Apelido",
+    "address": "Morada",
+    "city": "Cidade",
+    "postalCode": "Código postal",
+    "country": "País",
+    "payment": "Pagamento",
+    "notesOptional": "Notas (opcional)",
+    "notesPlaceholder": "Instruções de entrega…",
+    "confirmOrder": "Confirmar encomenda",
+    "cartEmpty": "Carrinho vazio",
+    "cryptoHint": "Com pagamento em cripto, após a confirmação verás o endereço para enviar os fundos e a referência da encomenda.",
+    "orderReceived": "Encomenda recebida",
+    "reference": "Referência",
+    "emailPreconfirm": "Enviámos-te um e-mail de pré-confirmação.",
+    "confirmedAfterPayment": "A encomenda é confirmada após a verificação do pagamento.",
+    "summary": "Resumo",
+    "goToCatalog": "Ir para o catálogo",
+    "pm": {
+      "cards": "Cartões",
+      "paypal": "PayPal",
+      "bank": "Transferência",
+      "crypto": "Bitcoin"
+    },
+    "payWithBank": "Pagar por transferência",
+    "awaitingPayment": "A aguardar pagamento",
+    "causalRequired": "Referência (obrigatória)",
+    "transferAmount": "Montante da transferência",
+    "doTransfer": "Faz a transferência com os dados abaixo, indicando obrigatoriamente a referência.",
+    "holder": "Titular",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "bank": "Banco",
+    "causal": "Referência",
+    "causalWarning": "Sem a referência {ref} não conseguimos associar o pagamento à encomenda.",
+    "bankPending": "O pagamento por transferência está a ser ativado. Vamos contactar-te por e-mail com os dados para concluir a encomenda {ref}.",
+    "bankFlow": "Por transferência, a confirmação da encomenda chega em 24–48 horas após a receção do pagamento: receberás um segundo e-mail de confirmação.",
+    "payWithCrypto": "Pagar com cripto",
+    "orderReference": "Referência da encomenda",
+    "totalToPay": "Total a pagar",
+    "cryptoInstruction": "Envia o equivalente ao montante para um dos endereços abaixo, indicando a referência como nota.",
+    "network": "Rede",
+    "openInWallet": "Abrir na wallet",
+    "cryptoWarning": "Envia o montante exato e usa a referência {ref} como nota. Redes diferentes das indicadas = fundos perdidos.",
+    "cryptoPending": "O pagamento em cripto está a ser ativado. Vamos contactar-te por e-mail com o endereço para concluir a encomenda {ref}.",
+    "cryptoFlow": "A encomenda é confirmada depois de verificarmos a receção do pagamento: receberás um segundo e-mail de confirmação.",
+    "copy": "Copiar",
+    "copied": "Copiado"
   }
 }
