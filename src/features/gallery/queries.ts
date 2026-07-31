@@ -5,6 +5,8 @@ export interface GalleryImage {
   id: string;
   url: string;
   alt: string;
+  /** Testo recensione mostrato in overlay al passaggio del mouse. */
+  caption: string;
 }
 
 /** Fallback dal codice quando la tabella è vuota o non configurata. */
@@ -12,6 +14,7 @@ const FALLBACK: GalleryImage[] = GALLERY_ITEMS.map((g) => ({
   id: g.id,
   url: g.imageUrl,
   alt: g.alt,
+  caption: g.author ? `${g.author}${g.location ? ` — ${g.location}` : ""}` : "",
 }));
 
 /**
@@ -25,7 +28,7 @@ export async function listGalleryImages(): Promise<GalleryImage[]> {
   try {
     const { data, error } = await sb
       .from("gallery")
-      .select("id,url,alt")
+      .select("id,url,alt,caption")
       .order("position", { ascending: true })
       .order("created_at", { ascending: true });
     if (error || !data || data.length === 0) return FALLBACK;
@@ -33,6 +36,7 @@ export async function listGalleryImages(): Promise<GalleryImage[]> {
       id: String(r.id),
       url: String(r.url),
       alt: String(r.alt ?? ""),
+      caption: String(r.caption ?? ""),
     }));
   } catch {
     return FALLBACK;

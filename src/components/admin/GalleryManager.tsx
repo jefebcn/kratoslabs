@@ -2,11 +2,12 @@
 
 import { useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check, Trash2, Upload, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Save, Trash2, Upload, X } from "lucide-react";
 import {
   addGalleryImages,
   deleteGalleryImage,
   reorderGallery,
+  updateGalleryCaption,
   type GalleryOpResult,
 } from "@/features/gallery/actions";
 import type { GalleryImage } from "@/features/gallery/queries";
@@ -54,7 +55,7 @@ export function GalleryManager({ images }: { images: GalleryImage[] }) {
       <form
         ref={formRef}
         onSubmit={onUpload}
-        className="flex flex-wrap items-center gap-3 rounded-base border border-border bg-surface p-4"
+        className="flex flex-col gap-3 rounded-base border border-border bg-surface p-4"
       >
         <label className="text-sm font-medium">Carica foto</label>
         <input
@@ -65,10 +66,16 @@ export function GalleryManager({ images }: { images: GalleryImage[] }) {
           required
           className="text-sm"
         />
+        <input
+          type="text"
+          name="caption"
+          placeholder="Recensione (facoltativa) — compare al passaggio del mouse"
+          className="rounded-base border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
+        />
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center gap-1.5 rounded-base bg-accent px-3 py-2 text-sm font-semibold text-white disabled:opacity-50"
+          className="inline-flex w-fit items-center gap-1.5 rounded-base bg-accent px-3 py-2 text-sm font-semibold text-white disabled:opacity-50"
         >
           <Upload className="size-4" aria-hidden />
           Aggiungi
@@ -124,6 +131,7 @@ function GalleryCard({
   run: (fn: () => Promise<GalleryOpResult>) => void;
 }) {
   const [confirmDel, setConfirmDel] = useState(false);
+  const [caption, setCaption] = useState(img.caption);
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -184,6 +192,25 @@ function GalleryCard({
             <Trash2 className="size-4" aria-hidden />
           </button>
         )}
+      </div>
+
+      <div className="flex items-start gap-1">
+        <textarea
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
+          rows={2}
+          placeholder="Recensione…"
+          className="min-w-0 flex-1 resize-none rounded-sm border border-border bg-surface px-2 py-1 text-xs outline-none focus:border-accent"
+        />
+        <button
+          type="button"
+          title="Salva recensione"
+          disabled={caption === img.caption}
+          onClick={() => run(() => updateGalleryCaption(img.id, caption))}
+          className="rounded-sm p-1 text-muted hover:text-accent disabled:opacity-30"
+        >
+          <Save className="size-4" aria-hidden />
+        </button>
       </div>
     </div>
   );
