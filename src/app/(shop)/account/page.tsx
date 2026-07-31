@@ -10,6 +10,8 @@ import { isSupabaseConfigured, isAdminUser } from "@/lib/supabase/config";
 import { signOut } from "@/features/auth/actions";
 import { listOrdersForUser } from "@/features/orders";
 import { AccountOrders } from "@/components/account/AccountOrders";
+import { AccountRewards } from "@/components/account/AccountRewards";
+import { getPointsBalance, getPointsHistory } from "@/features/rewards";
 
 export const metadata: Metadata = {
   title: "Il mio account",
@@ -26,6 +28,8 @@ export default async function AccountPage() {
   const name = (user.user_metadata?.full_name as string | undefined) ?? null;
   const admin = isAdminUser(user);
   const orders = await listOrdersForUser(user.id, user.email ?? "");
+  const pointsBalance = await getPointsBalance(user.id);
+  const pointsHistory = await getPointsHistory(user.id);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
@@ -59,6 +63,15 @@ export default async function AccountPage() {
           </Link>
         )}
       </div>
+
+      <section className="mt-10">
+        <h2 className="text-lg font-semibold uppercase tracking-tight">
+          {t("rewards.title")}
+        </h2>
+        <div className="mt-4">
+          <AccountRewards balance={pointsBalance} history={pointsHistory} />
+        </div>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-lg font-semibold uppercase tracking-tight">

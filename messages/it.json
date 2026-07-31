@@ -8,7 +8,8 @@
     "analysisLong": "Analisi di laboratorio",
     "aboutUs": "Chi siamo",
     "contact": "Contatto",
-    "wholesale": "All'ingrosso"
+    "wholesale": "All'ingrosso",
+    "rewards": "Punti fedeltà"
   },
   "account": {
     "login": "Accedi",
@@ -42,6 +43,20 @@
         "paid": "Pagato",
         "refunded": "Rimborsato",
         "failed": "Fallito"
+      }
+    },
+    "rewards": {
+      "title": "Punti fedeltà",
+      "balance": "Saldo punti",
+      "value": "pari a {value}",
+      "empty": "Nessun movimento punti finora.",
+      "order": "Ordine",
+      "reason": {
+        "earn": "Punti guadagnati",
+        "redeem": "Punti usati",
+        "refund": "Punti restituiti",
+        "reverse": "Rettifica",
+        "adjust": "Rettifica"
       }
     }
   },
@@ -105,7 +120,8 @@
     "tabSpecs": "Specifiche",
     "tabLab": "Lab test / QC",
     "tabReviews": "Recensioni",
-    "notFound": "Prodotto non trovato"
+    "notFound": "Prodotto non trovato",
+    "rewardPoints": "Ricevi {points} punti con questo acquisto"
   },
   "auth": {
     "loginTitle": "Accedi",
@@ -175,7 +191,14 @@
     "cryptoPending": "Il pagamento in criptovaluta è in fase di attivazione. Ti contatteremo via email con l'indirizzo per completare l'ordine {ref}.",
     "cryptoFlow": "L'ordine viene confermato dopo che verifichiamo la ricezione del pagamento: riceverai una seconda email con la conferma.",
     "copy": "Copia",
-    "copied": "Copiato"
+    "copied": "Copiato",
+    "rewards": {
+      "use": "Usa i miei {points} punti (−{value})",
+      "balance": "Hai {points} punti = {value}",
+      "subtotal": "Subtotale",
+      "discount": "Sconto punti",
+      "toPay": "Totale da pagare"
+    }
   },
   "toggle": {
     "language": "Lingua",
@@ -189,5 +212,16 @@
       "Spedizione tracciata in 24/48h",
       "Reso entro 30 giorni"
     ]
+  },
+  "rewards": {
+    "title": "Programma Punti Fedeltà",
+    "intro": "Accumula punti a ogni acquisto e usali per ottenere sconti sui prossimi ordini.",
+    "earnTitle": "Come guadagni i punti",
+    "earnText": "Ricevi 5 punti ogni 25€ di spesa. I punti vengono accreditati quando il pagamento dell’ordine è confermato.",
+    "valueTitle": "Quanto valgono",
+    "valueText": "100 punti valgono 25€ di sconto (1 punto = 0,25€).",
+    "useTitle": "Come li usi",
+    "useText": "Al checkout puoi scegliere di usare i tuoi punti: lo sconto viene applicato subito al totale da pagare.",
+    "note": "Il saldo punti e lo storico sono sempre visibili nella tua area riservata."
   }
 }

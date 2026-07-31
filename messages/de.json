@@ -8,7 +8,8 @@
     "analysisLong": "Laboranalysen",
     "aboutUs": "Über uns",
     "contact": "Kontakt",
-    "wholesale": "Großhandel"
+    "wholesale": "Großhandel",
+    "rewards": "Treuepunkte"
   },
   "account": {
     "login": "Anmelden",
@@ -42,6 +43,20 @@
         "paid": "Bezahlt",
         "refunded": "Erstattet",
         "failed": "Fehlgeschlagen"
+      }
+    },
+    "rewards": {
+      "title": "Treuepunkte",
+      "balance": "Punktestand",
+      "value": "entspricht {value}",
+      "empty": "Noch keine Punktebewegungen.",
+      "order": "Bestellung",
+      "reason": {
+        "earn": "Punkte erhalten",
+        "redeem": "Punkte eingesetzt",
+        "refund": "Punkte erstattet",
+        "reverse": "Korrektur",
+        "adjust": "Korrektur"
       }
     }
   },
@@ -105,7 +120,8 @@
     "tabSpecs": "Details",
     "tabLab": "Labortest / QC",
     "tabReviews": "Bewertungen",
-    "notFound": "Produkt nicht gefunden"
+    "notFound": "Produkt nicht gefunden",
+    "rewardPoints": "{points} Punkte mit diesem Kauf sammeln"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -175,7 +191,14 @@
     "cryptoPending": "Die Krypto-Zahlung wird gerade eingerichtet. Wir kontaktieren dich per E-Mail mit der Adresse, um Bestellung {ref} abzuschließen.",
     "cryptoFlow": "Die Bestellung wird bestätigt, sobald wir den Zahlungseingang geprüft haben: du erhältst eine zweite Bestätigungs-E-Mail.",
     "copy": "Kopieren",
-    "copied": "Kopiert"
+    "copied": "Kopiert",
+    "rewards": {
+      "use": "Meine {points} Punkte einsetzen (−{value})",
+      "balance": "Sie haben {points} Punkte = {value}",
+      "subtotal": "Zwischensumme",
+      "discount": "Punkte-Rabatt",
+      "toPay": "Zu zahlender Betrag"
+    }
   },
   "toggle": {
     "language": "Sprache",
@@ -189,5 +212,16 @@
       "Verfolgter Versand in 24/48 Std.",
       "Rückgabe innerhalb von 30 Tagen"
     ]
+  },
+  "rewards": {
+    "title": "Treuepunkte-Programm",
+    "intro": "Sammeln Sie bei jedem Einkauf Punkte und nutzen Sie sie für Rabatte auf zukünftige Bestellungen.",
+    "earnTitle": "So sammeln Sie Punkte",
+    "earnText": "5 Punkte je 25€ Umsatz. Die Punkte werden gutgeschrieben, sobald die Zahlung der Bestellung bestätigt ist.",
+    "valueTitle": "Was sie wert sind",
+    "valueText": "100 Punkte sind 25€ Rabatt wert (1 Punkt = 0,25€).",
+    "useTitle": "So verwenden Sie sie",
+    "useText": "Im Checkout können Sie Ihre Punkte einsetzen: Der Rabatt wird sofort vom zu zahlenden Betrag abgezogen.",
+    "note": "Punktestand und Verlauf sind jederzeit in Ihrem Kontobereich sichtbar."
   }
 }

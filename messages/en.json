@@ -8,7 +8,8 @@
     "analysisLong": "Lab analysis",
     "aboutUs": "About us",
     "contact": "Contact",
-    "wholesale": "Wholesale"
+    "wholesale": "Wholesale",
+    "rewards": "Reward points"
   },
   "account": {
     "login": "Log in",
@@ -42,6 +43,20 @@
         "paid": "Paid",
         "refunded": "Refunded",
         "failed": "Failed"
+      }
+    },
+    "rewards": {
+      "title": "Reward points",
+      "balance": "Points balance",
+      "value": "worth {value}",
+      "empty": "No points activity yet.",
+      "order": "Order",
+      "reason": {
+        "earn": "Points earned",
+        "redeem": "Points used",
+        "refund": "Points refunded",
+        "reverse": "Adjustment",
+        "adjust": "Adjustment"
       }
     }
   },
@@ -105,7 +120,8 @@
     "tabSpecs": "Specs",
     "tabLab": "Lab test / QC",
     "tabReviews": "Reviews",
-    "notFound": "Product not found"
+    "notFound": "Product not found",
+    "rewardPoints": "Earn {points} points with this purchase"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -175,7 +191,14 @@
     "cryptoPending": "Crypto payment is being set up. We'll contact you by email with the address to complete order {ref}.",
     "cryptoFlow": "The order is confirmed after we verify receipt of payment: you'll get a second confirmation email.",
     "copy": "Copy",
-    "copied": "Copied"
+    "copied": "Copied",
+    "rewards": {
+      "use": "Use my {points} points (−{value})",
+      "balance": "You have {points} points = {value}",
+      "subtotal": "Subtotal",
+      "discount": "Points discount",
+      "toPay": "Total to pay"
+    }
   },
   "toggle": {
     "language": "Language",
@@ -189,5 +212,16 @@
       "Tracked shipping in 24/48h",
       "Returns within 30 days"
     ]
+  },
+  "rewards": {
+    "title": "Reward Points Programme",
+    "intro": "Earn points on every purchase and use them for discounts on future orders.",
+    "earnTitle": "How you earn points",
+    "earnText": "Get 5 points for every €25 spent. Points are credited once the order payment is confirmed.",
+    "valueTitle": "What they are worth",
+    "valueText": "100 points are worth €25 off (1 point = €0.25).",
+    "useTitle": "How to use them",
+    "useText": "At checkout you can choose to spend your points: the discount is applied immediately to the total to pay.",
+    "note": "Your points balance and history are always visible in your account area."
   }
 }

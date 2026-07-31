@@ -8,7 +8,8 @@
     "analysisLong": "Análises de laboratório",
     "aboutUs": "Sobre nós",
     "contact": "Contacto",
-    "wholesale": "Grossista"
+    "wholesale": "Grossista",
+    "rewards": "Pontos de fidelidade"
   },
   "account": {
     "login": "Entrar",
@@ -42,6 +43,20 @@
         "paid": "Pago",
         "refunded": "Reembolsado",
         "failed": "Falhou"
+      }
+    },
+    "rewards": {
+      "title": "Pontos de fidelidade",
+      "balance": "Saldo de pontos",
+      "value": "equivale a {value}",
+      "empty": "Ainda sem movimentos de pontos.",
+      "order": "Encomenda",
+      "reason": {
+        "earn": "Pontos ganhos",
+        "redeem": "Pontos usados",
+        "refund": "Pontos devolvidos",
+        "reverse": "Ajuste",
+        "adjust": "Ajuste"
       }
     }
   },
@@ -105,7 +120,8 @@
     "tabSpecs": "Especificações",
     "tabLab": "Teste lab / QC",
     "tabReviews": "Avaliações",
-    "notFound": "Produto não encontrado"
+    "notFound": "Produto não encontrado",
+    "rewardPoints": "Ganhe {points} pontos com esta compra"
   },
   "auth": {
     "loginTitle": "Entrar",
@@ -175,7 +191,14 @@
     "cryptoPending": "O pagamento em cripto está a ser ativado. Vamos contactar-te por e-mail com o endereço para concluir a encomenda {ref}.",
     "cryptoFlow": "A encomenda é confirmada depois de verificarmos a receção do pagamento: receberás um segundo e-mail de confirmação.",
     "copy": "Copiar",
-    "copied": "Copiado"
+    "copied": "Copiado",
+    "rewards": {
+      "use": "Usar os meus {points} pontos (−{value})",
+      "balance": "Tem {points} pontos = {value}",
+      "subtotal": "Subtotal",
+      "discount": "Desconto de pontos",
+      "toPay": "Total a pagar"
+    }
   },
   "toggle": {
     "language": "Idioma",
@@ -189,5 +212,16 @@
       "Envio rastreado em 24/48h",
       "Devoluções em 30 dias"
     ]
+  },
+  "rewards": {
+    "title": "Programa de Pontos",
+    "intro": "Acumule pontos em cada compra e use-os para obter descontos nas próximas encomendas.",
+    "earnTitle": "Como ganha pontos",
+    "earnText": "Receba 5 pontos por cada 25€ gastos. Os pontos são creditados quando o pagamento da encomenda é confirmado.",
+    "valueTitle": "Quanto valem",
+    "valueText": "100 pontos valem 25€ de desconto (1 ponto = 0,25€).",
+    "useTitle": "Como os usa",
+    "useText": "No checkout pode optar por usar os seus pontos: o desconto é aplicado de imediato ao total a pagar.",
+    "note": "O saldo e o histórico de pontos estão sempre visíveis na sua área reservada."
   }
 }

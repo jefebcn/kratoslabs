@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Gift } from "lucide-react";
+import { pointsEarnedFor } from "@/lib/rewards";
 import {
   Tabs,
   TabsContent,
@@ -99,6 +100,14 @@ export default async function ProductDetailPage({
             <p className="mt-3 text-pretty text-muted">
               {product.shortDescription}
             </p>
+            {pointsEarnedFor(product.priceCents) > 0 && (
+              <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
+                <Gift className="size-3.5" aria-hidden />
+                {t("rewardPoints", {
+                  points: pointsEarnedFor(product.priceCents),
+                })}
+              </p>
+            )}
             {rating.count > 0 && (
               <a
                 href="#recensioni"
