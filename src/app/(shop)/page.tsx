@@ -13,6 +13,7 @@ import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts, listProducts } from "@/features/products";
 import { HERO, SITE, TRUST_BADGES } from "@/lib/constants";
 import { listCategories } from "@/features/categories";
+import { listGalleryImages } from "@/features/gallery/queries";
 
 const SLIDES: HeroSlide[] = [
   {
@@ -58,6 +59,7 @@ export default async function HomePage() {
   const bestseller = await listFeaturedProducts();
   const all = await listProducts();
   const categories = await listCategories();
+  const galleryItems = await listGalleryImages();
   // "Nuovi prodotti": i più recenti (già ordinati per data desc).
   const newest = all.slice(0, 10);
   // Sezioni per categoria: prime 5 di ogni categoria con prodotti.
@@ -136,7 +138,7 @@ export default async function HomePage() {
         </div>
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
           <Reveal>
-            <CommunityGallery />
+            <CommunityGallery items={galleryItems} />
           </Reveal>
         </div>
         <Link

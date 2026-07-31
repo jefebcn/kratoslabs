@@ -244,6 +244,7 @@ export const ADMIN_NAV: NavLink[] = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/products", label: "Prodotti" },
   { href: "/admin/images", label: "Immagini" },
+  { href: "/admin/gallery", label: "Galleria" },
   { href: "/admin/categories", label: "Categorie" },
   { href: "/admin/orders", label: "Ordini" },
   { href: "/admin/users", label: "Utenti" },

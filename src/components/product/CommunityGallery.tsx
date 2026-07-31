@@ -1,17 +1,18 @@
 import Image from "next/image";
-import { GALLERY_ITEMS } from "@/lib/constants";
+import type { GalleryImage } from "@/features/gallery/queries";
 
 /** "Galleria Touchdown": foto reali dei clienti, in una fascia orizzontale. */
-export function CommunityGallery() {
+export function CommunityGallery({ items }: { items: GalleryImage[] }) {
+  if (items.length === 0) return null;
   return (
     <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-      {GALLERY_ITEMS.map((item) => (
+      {items.map((item) => (
         <figure
           key={item.id}
           className="overflow-hidden rounded-base border border-border bg-surface"
         >
           <Image
-            src={item.imageUrl}
+            src={item.url}
             alt={item.alt}
             width={400}
             height={300}
