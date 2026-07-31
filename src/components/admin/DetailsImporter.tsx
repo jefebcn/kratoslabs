@@ -34,7 +34,8 @@ export function DetailsImporter({ bookmarklet }: { bookmarklet: string }) {
       <p className="mt-1 text-sm text-muted">
         Apre ogni scheda prodotto su deuspower, ne prende la{" "}
         <strong>descrizione completa</strong> (Panoramica, Caratteristiche,
-        Benefici, Uso, Avvertenze…) e la salva sul prodotto corrispondente.
+        Benefici, Uso, Avvertenze, Conservazione e <strong>FAQ</strong>) e la
+        salva sul prodotto corrispondente.
       </p>
 
       <ol className="mt-4 flex list-decimal flex-col gap-1.5 pl-5 text-sm text-muted">
