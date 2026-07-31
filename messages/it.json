@@ -19,7 +19,31 @@
     "name": "Nome",
     "email": "Email",
     "adminDashboard": "Vai alla dashboard admin",
-    "signOut": "Esci dall'account"
+    "signOut": "Esci dall'account",
+    "orders": {
+      "title": "I miei ordini",
+      "empty": "Non hai ancora effettuato ordini.",
+      "reference": "Riferimento",
+      "date": "Data",
+      "total": "Totale",
+      "payment": "Pagamento",
+      "tracking": "Tracciamento",
+      "trackingWaiting": "In preparazione — il codice di tracciamento arriverà appena spedito.",
+      "items": "Articoli",
+      "status": {
+        "pending": "In attesa",
+        "processing": "In lavorazione",
+        "shipped": "Spedito",
+        "delivered": "Consegnato",
+        "cancelled": "Annullato"
+      },
+      "pay": {
+        "unpaid": "Da pagare",
+        "paid": "Pagato",
+        "refunded": "Rimborsato",
+        "failed": "Fallito"
+      }
+    }
   },
   "search": {
     "placeholder": "Ricerca…"

@@ -8,6 +8,8 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { isSupabaseConfigured, isAdminUser } from "@/lib/supabase/config";
 import { signOut } from "@/features/auth/actions";
+import { listOrdersForUser } from "@/features/orders";
+import { AccountOrders } from "@/components/account/AccountOrders";
 
 export const metadata: Metadata = {
   title: "Il mio account",
@@ -23,6 +25,7 @@ export default async function AccountPage() {
   const t = await getTranslations("account");
   const name = (user.user_metadata?.full_name as string | undefined) ?? null;
   const admin = isAdminUser(user);
+  const orders = await listOrdersForUser(user.id, user.email ?? "");
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
@@ -57,7 +60,14 @@ export default async function AccountPage() {
         )}
       </div>
 
-      <form action={signOut} className="mt-6">
+      <section className="mt-10">
+        <h2 className="text-lg font-semibold uppercase tracking-tight">
+          {t("orders.title")}
+        </h2>
+        <AccountOrders orders={orders} />
+      </section>
+
+      <form action={signOut} className="mt-8">
         <Button type="submit" variant="outline" size="lg">
           {t("signOut")}
         </Button>

@@ -19,7 +19,31 @@
     "name": "Name",
     "email": "Email",
     "adminDashboard": "Go to admin dashboard",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "orders": {
+      "title": "My orders",
+      "empty": "You haven’t placed any orders yet.",
+      "reference": "Reference",
+      "date": "Date",
+      "total": "Total",
+      "payment": "Payment",
+      "tracking": "Tracking",
+      "trackingWaiting": "Being prepared — the tracking number will appear once shipped.",
+      "items": "Items",
+      "status": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      },
+      "pay": {
+        "unpaid": "Unpaid",
+        "paid": "Paid",
+        "refunded": "Refunded",
+        "failed": "Failed"
+      }
+    }
   },
   "search": {
     "placeholder": "Search…"

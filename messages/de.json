@@ -19,7 +19,31 @@
     "name": "Name",
     "email": "E-Mail",
     "adminDashboard": "Zum Admin-Dashboard",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "orders": {
+      "title": "Meine Bestellungen",
+      "empty": "Sie haben noch keine Bestellungen aufgegeben.",
+      "reference": "Referenz",
+      "date": "Datum",
+      "total": "Gesamt",
+      "payment": "Zahlung",
+      "tracking": "Sendungsverfolgung",
+      "trackingWaiting": "In Vorbereitung — die Sendungsnummer erscheint nach dem Versand.",
+      "items": "Artikel",
+      "status": {
+        "pending": "Ausstehend",
+        "processing": "In Bearbeitung",
+        "shipped": "Versandt",
+        "delivered": "Zugestellt",
+        "cancelled": "Storniert"
+      },
+      "pay": {
+        "unpaid": "Offen",
+        "paid": "Bezahlt",
+        "refunded": "Erstattet",
+        "failed": "Fehlgeschlagen"
+      }
+    }
   },
   "search": {
     "placeholder": "Suche…"
