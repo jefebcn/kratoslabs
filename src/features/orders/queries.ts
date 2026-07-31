@@ -58,6 +58,35 @@ export async function listOrders(): Promise<AdminOrder[]> {
   }
 }
 
+/**
+ * Ordini di un singolo cliente (per l'area riservata). Usa il service role e
+ * filtra per user_id o email, così il cliente vede tutti i propri ordini anche
+ * se effettuati prima del login. Ritorna lista vuota se non configurato.
+ */
+export async function listOrdersForUser(
+  userId: string,
+  email: string,
+): Promise<AdminOrder[]> {
+  const admin = createAdminClient();
+  if (!admin) return [];
+  const filters: string[] = [];
+  if (userId) filters.push(`user_id.eq.${userId}`);
+  if (email) filters.push(`customer_email.eq.${email}`);
+  if (filters.length === 0) return [];
+  try {
+    const { data, error } = await admin
+      .from("orders")
+      .select("*")
+      .or(filters.join(","))
+      .order("created_at", { ascending: false })
+      .limit(100);
+    if (error || !data) return [];
+    return data.map(rowToAdminOrder);
+  } catch {
+    return [];
+  }
+}
+
 export interface OrderStats {
   revenueCents: number;
   ordersCount: number;

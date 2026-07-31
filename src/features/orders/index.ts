@@ -1,5 +1,6 @@
 export {
   listOrders,
+  listOrdersForUser,
   summarizeOrders,
   type AdminOrder,
   type PaymentStatus,

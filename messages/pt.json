@@ -19,7 +19,31 @@
     "name": "Nome",
     "email": "E-mail",
     "adminDashboard": "Ir para o painel de admin",
-    "signOut": "Terminar sessão"
+    "signOut": "Terminar sessão",
+    "orders": {
+      "title": "As minhas encomendas",
+      "empty": "Ainda não efetuou encomendas.",
+      "reference": "Referência",
+      "date": "Data",
+      "total": "Total",
+      "payment": "Pagamento",
+      "tracking": "Rastreio",
+      "trackingWaiting": "Em preparação — o código de rastreio aparecerá após o envio.",
+      "items": "Artigos",
+      "status": {
+        "pending": "Pendente",
+        "processing": "Em processamento",
+        "shipped": "Enviado",
+        "delivered": "Entregue",
+        "cancelled": "Cancelado"
+      },
+      "pay": {
+        "unpaid": "Por pagar",
+        "paid": "Pago",
+        "refunded": "Reembolsado",
+        "failed": "Falhou"
+      }
+    }
   },
   "search": {
     "placeholder": "Pesquisar…"
