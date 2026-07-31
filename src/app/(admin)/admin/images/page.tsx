@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { ImageImporter } from "@/components/admin/ImageImporter";
+import { ImageManager } from "@/components/admin/ImageManager";
 import { BrowserImageImporter } from "@/components/admin/BrowserImageImporter";
 import { createAdminClient, hasServiceRole } from "@/lib/supabase/admin";
 import { createImportToken } from "@/lib/import-token";
 
 export const metadata: Metadata = { title: "Immagini" };
 
+type Img = { url: string; alt: string };
+
 interface Row {
   slug: string;
   title: string;
-  imageUrl: string | null;
+  images: Img[];
 }
 
 /** Bookmarklet: dalla pagina elenco di deuspower apre ogni scheda prodotto,
@@ -26,16 +29,11 @@ export default async function AdminImagesPage() {
       .from("products")
       .select("slug,title,images")
       .order("title");
-    products = (data ?? []).map((r) => {
-      const images = Array.isArray(r.images)
-        ? (r.images as { url: string }[])
-        : [];
-      return {
-        slug: r.slug as string,
-        title: r.title as string,
-        imageUrl: images[0]?.url ?? null,
-      };
-    });
+    products = (data ?? []).map((r) => ({
+      slug: r.slug as string,
+      title: r.title as string,
+      images: Array.isArray(r.images) ? (r.images as Img[]) : [],
+    }));
   }
 
   const h = await headers();
@@ -46,6 +44,12 @@ export default async function AdminImagesPage() {
     "__TOKEN__",
     createImportToken(),
   );
+
+  const importerRows = products.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    imageUrl: p.images[0]?.url ?? null,
+  }));
 
   return (
     <div className="flex flex-col gap-6">
@@ -68,13 +72,22 @@ export default async function AdminImagesPage() {
       {hasServiceRole && <BrowserImageImporter bookmarklet={bookmarklet} />}
 
       <div>
-        <h2 className="text-sm font-semibold">Stato prodotti / fallback</h2>
+        <h2 className="text-sm font-semibold">Gestisci immagini</h2>
         <p className="mb-3 mt-1 text-sm text-muted">
-          Elenco prodotti con anteprima. Puoi anche provare l&apos;auto-download
-          da DeusMedical o incollare un URL immagine (funziona solo se la fonte
-          non blocca il server).
+          Elimina le foto sbagliate, riordina (la prima è la copertina) o
+          spostane una su un altro prodotto. Le modifiche sono immediate.
         </p>
-        <ImageImporter products={products} />
+        <ImageManager products={products} />
+      </div>
+
+      <div>
+        <h2 className="text-sm font-semibold">Auto-download / URL manuale</h2>
+        <p className="mb-3 mt-1 text-sm text-muted">
+          In alternativa puoi provare l&apos;auto-download da DeusMedical o
+          incollare un URL immagine (funziona solo se la fonte non blocca il
+          server).
+        </p>
+        <ImageImporter products={importerRows} />
       </div>
     </div>
   );
