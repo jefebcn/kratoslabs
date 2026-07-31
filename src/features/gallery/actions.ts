@@ -32,6 +32,7 @@ export async function addGalleryImages(
     .getAll("files")
     .filter((f): f is File => f instanceof File && f.size > 0);
   if (files.length === 0) return { ok: false, message: "Nessun file." };
+  const caption = String(formData.get("caption") || "").trim();
 
   try {
     const { data: last } = await admin
@@ -61,7 +62,7 @@ export async function addGalleryImages(
       pos += 1;
       const { error: insErr } = await admin
         .from("gallery")
-        .insert({ url: pub.publicUrl, alt: "Touchdown", position: pos });
+        .insert({ url: pub.publicUrl, alt: "Touchdown", caption, position: pos });
       if (!insErr) added += 1;
     }
 
@@ -99,6 +100,29 @@ export async function deleteGalleryImage(
     }
     refreshSite();
     return { ok: true, message: "Foto eliminata." };
+  } catch (e) {
+    return {
+      ok: false,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
+/** Aggiorna il testo recensione (caption) di una foto della galleria. */
+export async function updateGalleryCaption(
+  id: string,
+  caption: string,
+): Promise<GalleryOpResult> {
+  const admin = createAdminClient();
+  if (!admin) return { ok: false, message: NO_ADMIN };
+  try {
+    const { error } = await admin
+      .from("gallery")
+      .update({ caption: caption.trim() })
+      .eq("id", id);
+    if (error) return { ok: false, message: `DB: ${error.message}` };
+    refreshSite();
+    return { ok: true, message: "Recensione salvata." };
   } catch (e) {
     return {
       ok: false,
