@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 
 /** Form di ricerca riutilizzabile: header desktop e drawer mobile. */
@@ -13,6 +14,7 @@ export function SearchForm({
   onSubmitted?: () => void;
 }) {
   const router = useRouter();
+  const t = useTranslations("search");
   const [q, setQ] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
@@ -33,8 +35,8 @@ export function SearchForm({
         autoFocus={autoFocus}
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Ricerca…"
-        aria-label="Cerca prodotti"
+        placeholder={t("placeholder")}
+        aria-label={t("placeholder")}
         className="h-full min-w-0 flex-1 bg-transparent px-4 text-sm text-text outline-none placeholder:text-muted"
       />
       <button

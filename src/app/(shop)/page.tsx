@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { ArrowRight, Bitcoin, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -53,6 +54,7 @@ const SLIDES: HeroSlide[] = [
 ];
 
 export default async function HomePage() {
+  const t = await getTranslations("home");
   const bestseller = await listFeaturedProducts();
   const all = await listProducts();
   const categories = await listCategories();
@@ -97,7 +99,7 @@ export default async function HomePage() {
                 href={`/products?category=${category.slug}`}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-accent transition-colors hover:underline"
               >
-                Vedi tutti — {category.name}
+                {t("viewAll", { category: category.name })}
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
             </div>
@@ -129,7 +131,7 @@ export default async function HomePage() {
       <section className="border-t border-border bg-surface">
         <div className="bg-accent">
           <p className="mx-auto max-w-7xl px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.2em] text-white sm:px-6">
-            Galleria Touchdown
+            {t("touchdownGallery")}
           </p>
         </div>
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -145,7 +147,7 @@ export default async function HomePage() {
         >
           <span className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-3.5 text-center font-display text-sm font-bold uppercase tracking-[0.15em] text-white sm:px-6">
             <Mail className="size-4" aria-hidden />
-            Invia il tuo touchdown qui
+            {t("sendTouchdown")}
           </span>
         </Link>
       </section>

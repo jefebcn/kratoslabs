@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Oswald } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
 
@@ -42,14 +44,17 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
   return (
-    <html lang="it" className={`${inter.variable} ${oswald.variable}`}>
-      <body className="min-h-dvh antialiased">{children}</body>
+    <html lang={locale} className={`${inter.variable} ${oswald.variable}`}>
+      <body className="min-h-dvh antialiased">
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
     </html>
   );
 }

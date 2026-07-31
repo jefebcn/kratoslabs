@@ -1,6 +1,8 @@
 "use client";
 
 import { Globe } from "lucide-react";
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,17 +11,19 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { usePreferences } from "@/features/preferences";
-import { useHasMounted } from "@/hooks/use-has-mounted";
-import { LOCALES } from "@/lib/constants";
-import type { LocaleCode } from "@/types";
+import { LOCALES, LOCALE_COOKIE } from "@/lib/constants";
 
 export function LanguageToggle() {
-  const mounted = useHasMounted();
-  const locale = usePreferences((s) => s.locale);
-  const setLocale = usePreferences((s) => s.setLocale);
-  const current = mounted ? locale : "it";
+  const current = useLocale();
+  const router = useRouter();
   const short = LOCALES.find((l) => l.code === current)?.short ?? "IT";
+
+  function change(value: string) {
+    // Cookie leggibile lato server: al refresh il sito si ri-renderizza
+    // nella lingua scelta (interfaccia; i nomi prodotto restano invariati).
+    document.cookie = `${LOCALE_COOKIE}=${value}; path=/; max-age=31536000; samesite=lax`;
+    router.refresh();
+  }
 
   return (
     <DropdownMenu>
@@ -32,10 +36,7 @@ export function LanguageToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Lingua</DropdownMenuLabel>
-        <DropdownMenuRadioGroup
-          value={current}
-          onValueChange={(v) => setLocale(v as LocaleCode)}
-        >
+        <DropdownMenuRadioGroup value={current} onValueChange={change}>
           {LOCALES.map((l) => (
             <DropdownMenuRadioItem key={l.code} value={l.code}>
               {l.label}

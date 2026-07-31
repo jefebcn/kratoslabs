@@ -117,6 +117,9 @@ export const LOCALES: LocaleMeta[] = [
 
 export const DEFAULT_LOCALE = "it" as const;
 
+/** Cookie che conserva la lingua scelta (leggibile lato server da next-intl). */
+export const LOCALE_COOKIE = "NEXT_LOCALE";
+
 /* -------------------------------------------------------------------------- */
 /*  Sezioni di homepage                                                       */
 /* -------------------------------------------------------------------------- */

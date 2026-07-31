@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import {
   Tabs,
   TabsContent,
@@ -20,14 +21,15 @@ export function ProductTabs({
   all: Product[];
   bestseller: Product[];
 }) {
+  const t = useTranslations("home");
   return (
     <Tabs defaultValue="all">
       <TabsList className="grid w-full grid-cols-2 gap-2 border-0">
         <TabsTrigger value="all" className={triggerClass}>
-          Nuovi prodotti
+          {t("newProducts")}
         </TabsTrigger>
         <TabsTrigger value="bestseller" className={triggerClass}>
-          Bestseller
+          {t("bestsellers")}
         </TabsTrigger>
       </TabsList>
       <TabsContent value="all">

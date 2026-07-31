@@ -1,14 +1,9 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Info, Mail, Store, type LucideIcon } from "lucide-react";
 import { CurrencyToggle } from "@/components/layout/CurrencyToggle";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { AccountMenu } from "@/components/layout/AccountMenu";
-
-const TOP_LINKS: { href: string; label: string; icon: LucideIcon }[] = [
-  { href: "/chi-siamo", label: "Chi siamo", icon: Info },
-  { href: "/contatto", label: "Contatto", icon: Mail },
-  { href: "/all-ingrosso", label: "All'ingrosso", icon: Store },
-];
 
 /**
  * Barra utility in cima.
@@ -17,13 +12,19 @@ const TOP_LINKS: { href: string; label: string; icon: LucideIcon }[] = [
  *  - Desktop: voci informative a sinistra; valuta, lingua e account a destra.
  */
 export function AccountBar() {
+  const t = useTranslations("nav");
+  const topLinks: { href: string; label: string; icon: LucideIcon }[] = [
+    { href: "/chi-siamo", label: t("aboutUs"), icon: Info },
+    { href: "/contatto", label: t("contact"), icon: Mail },
+    { href: "/all-ingrosso", label: t("wholesale"), icon: Store },
+  ];
   return (
     <div className="bg-[#2a2e35] text-white">
       <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6">
         {/* Sinistra */}
         <div className="flex items-center">
           <nav className="hidden items-center gap-3 sm:flex">
-            {TOP_LINKS.map(({ href, label, icon: Icon }) => (
+            {topLinks.map(({ href, label, icon: Icon }) => (
               <Link
                 key={href}
                 href={href}
