@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
+import { resolveDeusImageUrl, downloadImage } from "@/lib/deus-images";
 
 export interface ActionResult {
   ok: boolean;
@@ -119,6 +120,101 @@ export async function deleteProduct(formData: FormData): Promise<void> {
   if (!admin || !id) return;
   await admin.from("products").delete().eq("id", id);
   refreshSite();
+}
+
+export interface ImageImportResult {
+  ok: boolean;
+  slug: string;
+  message: string;
+  imageUrl?: string;
+}
+
+/** Scarica i byte immagine, li carica su Storage e li imposta sul prodotto. */
+async function storeImage(
+  slug: string,
+  url: string,
+): Promise<ImageImportResult> {
+  const admin = createAdminClient();
+  if (!admin) return { ok: false, slug, message: NO_ADMIN };
+  try {
+    const img = await downloadImage(url);
+    const path = `${slug}/deus-${Date.now()}.${img.ext}`;
+    const { error: upErr } = await admin.storage
+      .from("product-images")
+      .upload(path, new Blob([img.bytes], { type: img.contentType }), {
+        contentType: img.contentType,
+        upsert: true,
+      });
+    if (upErr) return { ok: false, slug, message: `Upload: ${upErr.message}` };
+
+    const { data: pub } = admin.storage
+      .from("product-images")
+      .getPublicUrl(path);
+
+    const { data: prod } = await admin
+      .from("products")
+      .select("title")
+      .eq("slug", slug)
+      .maybeSingle();
+    const alt = (prod?.title as string) || slug;
+
+    const { error: updErr } = await admin
+      .from("products")
+      .update({
+        images: [{ url: pub.publicUrl, alt }],
+        updated_at: new Date().toISOString(),
+      })
+      .eq("slug", slug);
+    if (updErr) return { ok: false, slug, message: `DB: ${updErr.message}` };
+
+    refreshSite();
+    return { ok: true, slug, message: "Immagine importata.", imageUrl: pub.publicUrl };
+  } catch (e) {
+    return {
+      ok: false,
+      slug,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
+/**
+ * Importa automaticamente la foto ufficiale del prodotto da DeusMedical,
+ * la salva su Supabase Storage e la imposta come immagine del prodotto.
+ */
+export async function importProductImage(
+  slug: string,
+): Promise<ImageImportResult> {
+  if (!slug) return { ok: false, slug, message: "Slug mancante." };
+  try {
+    const url = await resolveDeusImageUrl(slug);
+    if (!url) {
+      return {
+        ok: false,
+        slug,
+        message: "Immagine non trovata su DeusMedical (nome diverso o assente).",
+      };
+    }
+    return await storeImage(slug, url);
+  } catch (e) {
+    return {
+      ok: false,
+      slug,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
+/** Fallback: importa l'immagine da un URL fornito manualmente. */
+export async function importProductImageFromUrl(
+  slug: string,
+  url: string,
+): Promise<ImageImportResult> {
+  const clean = url.trim();
+  if (!slug) return { ok: false, slug, message: "Slug mancante." };
+  if (!/^https?:\/\//i.test(clean))
+    return { ok: false, slug, message: "URL non valido." };
+  return storeImage(slug, clean);
 }
 
 /**
