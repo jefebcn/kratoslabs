@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { ImageImporter } from "@/components/admin/ImageImporter";
 import { ImageManager } from "@/components/admin/ImageManager";
 import { BrowserImageImporter } from "@/components/admin/BrowserImageImporter";
+import { DetailsImporter } from "@/components/admin/DetailsImporter";
 import { createAdminClient, hasServiceRole } from "@/lib/supabase/admin";
 import { createImportToken } from "@/lib/import-token";
 
@@ -19,6 +20,10 @@ interface Row {
 /** Bookmarklet: dalla pagina elenco di deuspower apre ogni scheda prodotto,
  *  legge TUTTE le foto della galleria nell'ordine del sito sorgente e le invia
  *  all'API. __API__ e __TOKEN__ vengono sostituiti a runtime. */
+/** Bookmarklet: apre ogni scheda prodotto e ne importa la descrizione estesa
+ *  (Product Overview, Key Features, …) nel campo details_html del prodotto. */
+const DETAILS_BOOKMARKLET = `javascript:(async()=>{try{var A="__API__",T="__TOKEN__";var RX=/image\\/(cache\\/)?catalog/i,BAD=/@logo|\\/logo\\/|payment|manufacturer|banner|blog/i;var seen={},P=[];[].slice.call(document.images).forEach(function(m){var s=m.getAttribute("data-src")||m.currentSrc||m.src||"";if(!RX.test(s)||BAD.test(s))return;var a=m.closest("a");if(!a||!a.href)return;var n=(m.getAttribute("alt")||a.getAttribute("title")||a.textContent||"").replace(/\\s+/g," ").trim();if(!n||/logo|payment|carrello|cart|wishlist/i.test(n))return;if(seen[a.href])return;seen[a.href]=1;P.push({n:n,u:a.href})});if(!P.length){alert("Nessun prodotto trovato. Apri 'Tutti i prodotti'.");return}function ser(node){var o="";var ch=node.childNodes;for(var i=0;i<ch.length;i++){var c=ch[i];if(c.nodeType===3){o+=c.textContent}else if(c.nodeType===1){var t=c.tagName.toLowerCase();if(t==="script"||t==="style")continue;if(/^(h1|h2|h3|h4|p|ul|ol|li|strong|b|em)$/.test(t)){var tg=t==="h1"?"h2":t;o+="<"+tg+">"+ser(c)+"</"+tg+">"}else if(t==="br"){o+="<br>"}else{o+=ser(c)}}}return o}function findBox(doc){var b=doc.querySelector("#tab-description");if(b)return b;b=doc.querySelector("[id*=description i],[class*=description i]");if(b&&/product overview|panoramica|key features|caratteristiche/i.test(b.textContent||""))return b;var els=[].slice.call(doc.querySelectorAll("h1,h2,h3,h4,strong,b")),ov=null;for(var i=0;i<els.length;i++){if(/product overview|panoramica del prodotto/i.test(els[i].textContent||"")){ov=els[i];break}}if(ov){var box=ov.parentElement;while(box&&box.parentElement&&!/legal disclaimer|disclaimer/i.test(box.textContent)&&box.textContent.length<6000){box=box.parentElement}return box}return null}var d=document.createElement("div");d.style.cssText="position:fixed;z-index:2147483647;right:16px;bottom:16px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;font:13px system-ui,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.4)";document.body.appendChild(d);var ok=0,ko=0,nm=0;function u(t){d.textContent=t||("KratosLabs: "+ok+"/"+P.length+" schede"+(ko?", "+ko+" ko":"")+(nm?", "+nm+" senza match":""))}u();for(var i=0;i<P.length;i++){var it=P[i],html="";try{var r=await fetch(it.u,{credentials:"include"});var tx=await r.text();var doc=new DOMParser().parseFromString(tx,"text/html");var box=findBox(doc);if(box)html=ser(box).replace(/[ \\t]+/g," ").replace(/\\n{3,}/g,"\\n\\n").trim()}catch(e){}if(!html||html.length<20){ko++;u();continue}try{var f=new FormData();f.append("token",T);f.append("name",it.n);f.append("html",html);var up=await fetch(A,{method:"POST",body:f});var jd=await up.json().catch(function(){return{}});if(up.ok&&jd.ok)ok++;else{ko++;if(jd&&jd.error==="no_match")nm++}}catch(e){ko++}u()}d.textContent="Fatto: "+ok+"/"+P.length+" schede importate ("+ko+" ko, "+nm+" senza match). Ricarica il sito.";}catch(e){alert("Errore: "+e)}})();`;
+
 const BOOKMARKLET = `javascript:(async()=>{try{var A="__API__",T="__TOKEN__";var RX=/image\\/(cache\\/)?catalog/i,BAD=/@logo|\\/logo\\/|payment|manufacturer|banner|blog/i;function folder(x){try{var p=new URL(x,location.href).pathname.replace("/cache","").replace(/-\\d+x\\d+(?=\\.[a-z0-9]+$)/i,"");return p.replace(/\\/[^\\/]*$/,"")}catch(e){return""}}function norm(x){try{return new URL(x,location.href).pathname.replace("/cache","").replace(/-\\d+x\\d+(?=\\.[a-z0-9]+$)/i,"")}catch(e){return x}}var seen={},P=[];[].slice.call(document.images).forEach(function(m){var s=m.getAttribute("data-src")||m.currentSrc||m.src||"";if(!RX.test(s)||BAD.test(s))return;var a=m.closest("a");if(!a||!a.href)return;var n=(m.getAttribute("alt")||a.getAttribute("title")||a.textContent||"").replace(/\\s+/g," ").trim();if(!n||/logo|payment|carrello|cart|wishlist/i.test(n))return;if(seen[a.href])return;seen[a.href]=1;P.push({n:n,u:a.href})});if(!P.length){alert("Nessun prodotto trovato. Apri la pagina 'Tutti i prodotti'.");return}var b=document.createElement("div");b.style.cssText="position:fixed;z-index:2147483647;right:16px;bottom:16px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;font:13px system-ui,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.4)";document.body.appendChild(b);var ok=0,ko=0,nm=0,img=0;function u(t){b.textContent=t||("KratosLabs: "+ok+"/"+P.length+" prodotti, "+img+" foto"+(ko?", "+ko+" ko":"")+(nm?", "+nm+" senza match":""))}u();for(var i=0;i<P.length;i++){var it=P[i],urls=[];try{var r=await fetch(it.u,{credentials:"include"});var html=await r.text();var doc=new DOMParser().parseFromString(html,"text/html");var og=doc.querySelector('meta[property="og:image"]');var base=og?folder(og.getAttribute("content")||""):"";var cand=[].slice.call(doc.querySelectorAll("a[href],img"));if(!base){for(var c=0;c<cand.length;c++){var el0=cand[c],s0=el0.tagName==="A"?(el0.getAttribute("href")||""):(el0.getAttribute("data-src")||el0.getAttribute("data-original")||el0.getAttribute("src")||"");if(RX.test(s0)&&!BAD.test(s0)){base=folder(s0);break}}}var pick={},order=[];cand.forEach(function(el){var s=el.tagName==="A"?(el.getAttribute("href")||""):(el.getAttribute("data-src")||el.getAttribute("data-original")||el.getAttribute("src")||"");var w=el.tagName==="A"?2:1;if(!RX.test(s)||BAD.test(s))return;if(base&&folder(s)!==base)return;var k=norm(s);if(!(k in pick)){order.push(k);pick[k]={u:s,w:w}}else if(w>pick[k].w){pick[k].u=s;pick[k].w=w}});urls=order.map(function(k){try{return new URL(pick[k].u,location.href).href}catch(e){return pick[k].u}})}catch(e){}if(!urls.length){ko++;u();continue}var f=new FormData();f.append("token",T);f.append("name",it.n);var got=0;for(var j=0;j<urls.length;j++){try{var ir=await fetch(urls[j],{credentials:"include"});if(ir.ok){var bl=await ir.blob();if(bl&&bl.size>0){f.append("file"+got,bl,"image"+got);got++;img++}}}catch(e){}}if(!got){ko++;u();continue}try{var up=await fetch(A,{method:"POST",body:f});var jd=await up.json().catch(function(){return{}});if(up.ok&&jd.ok)ok++;else{ko++;if(jd&&jd.error==="no_match")nm++}}catch(e){ko++}u()}b.textContent="Fatto: "+ok+"/"+P.length+" prodotti, "+img+" foto importate ("+ko+" ko, "+nm+" senza match). Ricarica l'admin.";}catch(e){alert("Errore: "+e)}})();`;
 
 export default async function AdminImagesPage() {
@@ -40,10 +45,16 @@ export default async function AdminImagesPage() {
   const host = h.get("host") ?? "";
   const proto = host.startsWith("localhost") ? "http" : "https";
   const apiUrl = `${proto}://${host}/api/admin/import-image`;
+  const token = createImportToken();
   const bookmarklet = BOOKMARKLET.replace("__API__", apiUrl).replace(
     "__TOKEN__",
-    createImportToken(),
+    token,
   );
+  const detailsApiUrl = `${proto}://${host}/api/admin/import-details`;
+  const detailsBookmarklet = DETAILS_BOOKMARKLET.replace(
+    "__API__",
+    detailsApiUrl,
+  ).replace("__TOKEN__", token);
 
   const importerRows = products.map((p) => ({
     slug: p.slug,
@@ -70,6 +81,8 @@ export default async function AdminImagesPage() {
       )}
 
       {hasServiceRole && <BrowserImageImporter bookmarklet={bookmarklet} />}
+
+      {hasServiceRole && <DetailsImporter bookmarklet={detailsBookmarklet} />}
 
       <div>
         <h2 className="text-sm font-semibold">Gestisci immagini</h2>

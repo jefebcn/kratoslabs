@@ -10,6 +10,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import { ProductGallery } from "@/components/product/ProductGallery";
+import { ProductDetails } from "@/components/product/ProductDetails";
 import { SpecsTable } from "@/components/product/SpecsTable";
 import { LabReportCard } from "@/components/product/LabReportCard";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
@@ -124,9 +125,13 @@ export default async function ProductDetailPage({
             <TabsTrigger value="lab">{t("tabLab")}</TabsTrigger>
           </TabsList>
           <TabsContent value="descrizione">
-            <p className="max-w-prose text-pretty text-muted">
-              {product.description}
-            </p>
+            {product.detailsHtml ? (
+              <ProductDetails html={product.detailsHtml} />
+            ) : (
+              <p className="max-w-prose text-pretty text-muted">
+                {product.description}
+              </p>
+            )}
           </TabsContent>
           <TabsContent value="specifiche">
             <SpecsTable specs={product.specs} />
