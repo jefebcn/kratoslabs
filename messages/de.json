@@ -13,7 +13,13 @@
   "account": {
     "login": "Anmelden",
     "register": "Registrieren",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "title": "Mein Konto",
+    "area": "Mitgliederbereich",
+    "name": "Name",
+    "email": "E-Mail",
+    "adminDashboard": "Zum Admin-Dashboard",
+    "signOut": "Abmelden"
   },
   "search": {
     "placeholder": "Suche…"
@@ -93,5 +99,58 @@
     "goToLogin": "Zur Anmeldung",
     "noAccount": "Noch kein Konto?",
     "haveAccount": "Schon ein Konto?"
+  },
+  "checkout": {
+    "title": "Kasse",
+    "contactShipping": "Kontakt & Versand",
+    "email": "E-Mail",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "address": "Adresse",
+    "city": "Stadt",
+    "postalCode": "PLZ",
+    "country": "Land",
+    "payment": "Zahlung",
+    "notesOptional": "Anmerkungen (optional)",
+    "notesPlaceholder": "Lieferhinweise…",
+    "confirmOrder": "Bestellung bestätigen",
+    "cartEmpty": "Warenkorb leer",
+    "cryptoHint": "Bei Krypto-Zahlung siehst du nach der Bestätigung die Adresse für die Überweisung und deine Bestellreferenz.",
+    "orderReceived": "Bestellung erhalten",
+    "reference": "Referenz",
+    "emailPreconfirm": "Wir haben dir eine Vorbestätigungs-E-Mail geschickt.",
+    "confirmedAfterPayment": "Die Bestellung wird nach Zahlungsprüfung bestätigt.",
+    "summary": "Zusammenfassung",
+    "goToCatalog": "Zum Katalog",
+    "pm": {
+      "cards": "Karten",
+      "paypal": "PayPal",
+      "bank": "Überweisung",
+      "crypto": "Bitcoin"
+    },
+    "payWithBank": "Per Überweisung zahlen",
+    "awaitingPayment": "Warten auf Zahlung",
+    "causalRequired": "Verwendungszweck (erforderlich)",
+    "transferAmount": "Überweisungsbetrag",
+    "doTransfer": "Führe die Überweisung mit den Daten unten aus und gib unbedingt den Verwendungszweck an.",
+    "holder": "Kontoinhaber",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "bank": "Bank",
+    "causal": "Verwendungszweck",
+    "causalWarning": "Ohne den Verwendungszweck {ref} können wir die Zahlung nicht deiner Bestellung zuordnen.",
+    "bankPending": "Die Zahlung per Überweisung wird gerade eingerichtet. Wir kontaktieren dich per E-Mail mit den Daten, um Bestellung {ref} abzuschließen.",
+    "bankFlow": "Bei Überweisung erfolgt die Bestellbestätigung innerhalb von 24–48 Stunden nach Zahlungseingang: du erhältst eine zweite Bestätigungs-E-Mail.",
+    "payWithCrypto": "Mit Krypto zahlen",
+    "orderReference": "Bestellreferenz",
+    "totalToPay": "Zu zahlender Betrag",
+    "cryptoInstruction": "Sende den entsprechenden Betrag an eine der Adressen unten und gib die Referenz als Verwendungszweck an.",
+    "network": "Netzwerk",
+    "openInWallet": "In Wallet öffnen",
+    "cryptoWarning": "Sende den genauen Betrag und nutze die Referenz {ref} als Notiz. Andere Netzwerke als angegeben = verlorene Gelder.",
+    "cryptoPending": "Die Krypto-Zahlung wird gerade eingerichtet. Wir kontaktieren dich per E-Mail mit der Adresse, um Bestellung {ref} abzuschließen.",
+    "cryptoFlow": "Die Bestellung wird bestätigt, sobald wir den Zahlungseingang geprüft haben: du erhältst eine zweite Bestätigungs-E-Mail.",
+    "copy": "Kopieren",
+    "copied": "Kopiert"
   }
 }

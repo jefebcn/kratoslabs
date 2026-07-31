@@ -13,7 +13,13 @@
   "account": {
     "login": "Log in",
     "register": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "title": "My account",
+    "area": "Members area",
+    "name": "Name",
+    "email": "Email",
+    "adminDashboard": "Go to admin dashboard",
+    "signOut": "Sign out"
   },
   "search": {
     "placeholder": "Search…"
@@ -93,5 +99,58 @@
     "goToLogin": "Go to login",
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contactShipping": "Contact & shipping",
+    "email": "Email",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "country": "Country",
+    "payment": "Payment",
+    "notesOptional": "Notes (optional)",
+    "notesPlaceholder": "Delivery instructions…",
+    "confirmOrder": "Confirm order",
+    "cartEmpty": "Cart empty",
+    "cryptoHint": "With crypto payment, after confirmation you'll see the address to send funds to and your order reference.",
+    "orderReceived": "Order received",
+    "reference": "Reference",
+    "emailPreconfirm": "We've sent you a pre-confirmation email.",
+    "confirmedAfterPayment": "The order is confirmed after payment verification.",
+    "summary": "Summary",
+    "goToCatalog": "Go to the catalog",
+    "pm": {
+      "cards": "Cards",
+      "paypal": "PayPal",
+      "bank": "Bank transfer",
+      "crypto": "Bitcoin"
+    },
+    "payWithBank": "Pay by bank transfer",
+    "awaitingPayment": "Awaiting payment",
+    "causalRequired": "Reference (required)",
+    "transferAmount": "Transfer amount",
+    "doTransfer": "Make the transfer with the details below, making sure to include the reference.",
+    "holder": "Account holder",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "bank": "Bank",
+    "causal": "Reference",
+    "causalWarning": "Without the reference {ref} we can't match the payment to your order.",
+    "bankPending": "Bank transfer payment is being set up. We'll contact you by email with the details to complete order {ref}.",
+    "bankFlow": "With bank transfer, order confirmation arrives within 24–48 hours of receiving payment: you'll get a second confirmation email.",
+    "payWithCrypto": "Pay with crypto",
+    "orderReference": "Order reference",
+    "totalToPay": "Total to pay",
+    "cryptoInstruction": "Send the equivalent amount to one of the addresses below, adding the reference as a note.",
+    "network": "Network",
+    "openInWallet": "Open in wallet",
+    "cryptoWarning": "Send the exact amount and use reference {ref} as a note. Networks other than those shown = lost funds.",
+    "cryptoPending": "Crypto payment is being set up. We'll contact you by email with the address to complete order {ref}.",
+    "cryptoFlow": "The order is confirmed after we verify receipt of payment: you'll get a second confirmation email.",
+    "copy": "Copy",
+    "copied": "Copied"
   }
 }

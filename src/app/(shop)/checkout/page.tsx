@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Truck } from "lucide-react";
 import { CheckoutForm } from "@/components/checkout/CheckoutForm";
 import { OrderSummary } from "@/components/checkout/OrderSummary";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CheckoutPage() {
+  const t = await getTranslations("checkout");
   const settings = await getSiteSettings();
   const payment = {
     bank: settings.bank,
@@ -19,7 +21,9 @@ export default async function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-      <h1 className="text-2xl font-semibold uppercase tracking-tight">Checkout</h1>
+      <h1 className="text-2xl font-semibold uppercase tracking-tight">
+        {t("title")}
+      </h1>
       {settings.shipping.note && (
         <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted">
           <Truck className="size-4 text-accent" aria-hidden />

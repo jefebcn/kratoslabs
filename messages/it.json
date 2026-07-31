@@ -13,7 +13,13 @@
   "account": {
     "login": "Accedi",
     "register": "Registrati",
-    "logout": "Esci"
+    "logout": "Esci",
+    "title": "Il mio account",
+    "area": "Area riservata",
+    "name": "Nome",
+    "email": "Email",
+    "adminDashboard": "Vai alla dashboard admin",
+    "signOut": "Esci dall'account"
   },
   "search": {
     "placeholder": "Ricerca…"
@@ -93,5 +99,58 @@
     "goToLogin": "Vai al login",
     "noAccount": "Non hai un account?",
     "haveAccount": "Hai già un account?"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contactShipping": "Contatti e spedizione",
+    "email": "Email",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "address": "Indirizzo",
+    "city": "Città",
+    "postalCode": "CAP",
+    "country": "Paese",
+    "payment": "Pagamento",
+    "notesOptional": "Note (opzionale)",
+    "notesPlaceholder": "Istruzioni per la consegna…",
+    "confirmOrder": "Conferma ordine",
+    "cartEmpty": "Carrello vuoto",
+    "cryptoHint": "Con pagamento in criptovaluta, dopo la conferma vedrai l'indirizzo dove inviare i fondi e il riferimento dell'ordine.",
+    "orderReceived": "Ordine ricevuto",
+    "reference": "Riferimento",
+    "emailPreconfirm": "Ti abbiamo inviato un'email di pre-conferma.",
+    "confirmedAfterPayment": "L'ordine è confermato dopo la verifica del pagamento.",
+    "summary": "Riepilogo",
+    "goToCatalog": "Vai al catalogo",
+    "pm": {
+      "cards": "Carte",
+      "paypal": "PayPal",
+      "bank": "Bonifico",
+      "crypto": "Bitcoin"
+    },
+    "payWithBank": "Paga con bonifico",
+    "awaitingPayment": "In attesa di pagamento",
+    "causalRequired": "Causale (obbligatoria)",
+    "transferAmount": "Importo del bonifico",
+    "doTransfer": "Esegui il bonifico con i dati qui sotto, indicando obbligatoriamente la causale.",
+    "holder": "Intestatario",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "bank": "Banca",
+    "causal": "Causale",
+    "causalWarning": "Senza la causale {ref} non riusciamo ad abbinare il pagamento all'ordine.",
+    "bankPending": "Il pagamento con bonifico è in fase di attivazione. Ti contatteremo via email con le coordinate per completare l'ordine {ref}.",
+    "bankFlow": "Con bonifico la conferma dell'ordine arriva entro 24–48 ore dalla ricezione del pagamento: riceverai una seconda email con la conferma.",
+    "payWithCrypto": "Paga in criptovaluta",
+    "orderReference": "Riferimento ordine",
+    "totalToPay": "Totale da pagare",
+    "cryptoInstruction": "Invia l'equivalente dell'importo a uno degli indirizzi qui sotto, indicando il riferimento come nota.",
+    "network": "Rete",
+    "openInWallet": "Apri nel wallet",
+    "cryptoWarning": "Invia l'importo esatto e usa il riferimento {ref} come nota. Reti diverse da quelle indicate = fondi persi.",
+    "cryptoPending": "Il pagamento in criptovaluta è in fase di attivazione. Ti contatteremo via email con l'indirizzo per completare l'ordine {ref}.",
+    "cryptoFlow": "L'ordine viene confermato dopo che verifichiamo la ricezione del pagamento: riceverai una seconda email con la conferma.",
+    "copy": "Copia",
+    "copied": "Copiato"
   }
 }

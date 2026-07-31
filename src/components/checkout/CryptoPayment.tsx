@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Bitcoin, Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyRow } from "@/components/checkout/CopyRow";
@@ -18,6 +19,8 @@ export function CryptoPayment({
   emailSent?: boolean;
   assets: CryptoAsset[];
 }) {
+  const t = useTranslations("checkout");
+  const tCart = useTranslations("cart");
   const isCryptoConfigured = assets.length > 0;
   return (
     <div className="rounded-base border border-accent/30 bg-surface p-6 sm:p-8">
@@ -27,11 +30,11 @@ export function CryptoPayment({
         </span>
         <div>
           <h2 className="font-display text-lg font-semibold uppercase tracking-tight">
-            Paga in criptovaluta
+            {t("payWithCrypto")}
           </h2>
           <p className="inline-flex items-center gap-1.5 text-xs text-muted">
             <Clock className="size-3.5" aria-hidden />
-            In attesa di pagamento
+            {t("awaitingPayment")}
           </p>
         </div>
       </div>
@@ -39,14 +42,14 @@ export function CryptoPayment({
       <dl className="mt-6 grid gap-3 rounded-base border border-border bg-surface-2 p-4 text-sm sm:grid-cols-2">
         <div>
           <dt className="text-xs uppercase tracking-wide text-muted">
-            Riferimento ordine
+            {t("orderReference")}
           </dt>
           <dd className="num mt-0.5 font-semibold">{reference}</dd>
         </div>
         {typeof totalCents === "number" && (
           <div className="sm:text-right">
             <dt className="text-xs uppercase tracking-wide text-muted">
-              Totale da pagare
+              {t("totalToPay")}
             </dt>
             <dd className="num mt-0.5 font-semibold">
               {formatPrice(totalCents)}
@@ -57,10 +60,7 @@ export function CryptoPayment({
 
       {isCryptoConfigured ? (
         <>
-          <p className="mt-6 text-sm text-muted">
-            Invia l&apos;equivalente dell&apos;importo a uno degli indirizzi qui
-            sotto, indicando il riferimento come nota.
-          </p>
+          <p className="mt-6 text-sm text-muted">{t("cryptoInstruction")}</p>
 
           <div className="mt-4 flex flex-col gap-4">
             {assets.map((a) => (
@@ -72,7 +72,7 @@ export function CryptoPayment({
                   </p>
                   {a.network && (
                     <span className="rounded-base border border-border px-1.5 py-0.5 text-[11px] text-muted">
-                      Rete: {a.network}
+                      {t("network")}: {a.network}
                     </span>
                   )}
                 </div>
@@ -84,7 +84,7 @@ export function CryptoPayment({
                     href={bitcoinUri(a.address, `Kratos Labs ${reference}`)}
                     className="mt-1.5 inline-block text-xs font-medium text-accent hover:underline"
                   >
-                    Apri nel wallet →
+                    {t("openInWallet")} →
                   </a>
                 )}
               </div>
@@ -92,16 +92,12 @@ export function CryptoPayment({
           </div>
 
           <p className="mt-5 rounded-base border border-border bg-surface-2 px-3 py-2 text-xs text-muted">
-            Invia l&apos;importo <span className="text-text">esatto</span> e usa
-            il riferimento <span className="num text-text">{reference}</span>{" "}
-            come nota. Reti diverse da quelle indicate = fondi persi.
+            {t("cryptoWarning", { ref: reference })}
           </p>
         </>
       ) : (
         <div className="mt-6 rounded-base border border-border bg-surface-2 p-4 text-sm text-muted">
-          Il pagamento in criptovaluta è in fase di attivazione. Ti
-          contatteremo via email con l&apos;indirizzo per completare
-          l&apos;ordine <span className="num text-text">{reference}</span>.
+          {t("cryptoPending", { ref: reference })}
         </div>
       )}
 
@@ -109,18 +105,14 @@ export function CryptoPayment({
       <div className="mt-6 flex items-start gap-2.5 rounded-base border border-border p-3 text-sm text-muted">
         <Mail className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
         <p>
-          {emailSent
-            ? "Ti abbiamo inviato un'email di pre-conferma. "
-            : null}
-          L&apos;ordine viene <span className="text-text">confermato</span> dopo
-          che verifichiamo la ricezione del pagamento: riceverai una seconda
-          email con la conferma.
+          {emailSent ? t("emailPreconfirm") + " " : null}
+          {t("cryptoFlow")}
         </p>
       </div>
 
       <div className="mt-6">
         <Button asChild variant="outline">
-          <Link href="/products">Continua lo shopping</Link>
+          <Link href="/products">{tCart("continueShopping")}</Link>
         </Button>
       </div>
     </div>

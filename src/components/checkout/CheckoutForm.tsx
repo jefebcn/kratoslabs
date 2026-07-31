@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -54,6 +55,8 @@ function Field({
 }
 
 export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
+  const t = useTranslations("checkout");
+  const tCart = useTranslations("cart");
   const [state, action, pending] = useActionState<CheckoutResult | null, FormData>(
     createOrder,
     null,
@@ -104,17 +107,15 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
         <div className="mx-auto grid size-12 place-items-center rounded-full border border-emerald-500/40 text-emerald-600">
           <Check className="size-6" aria-hidden />
         </div>
-        <h2 className="mt-4 text-lg font-semibold">Ordine ricevuto</h2>
+        <h2 className="mt-4 text-lg font-semibold">{t("orderReceived")}</h2>
         <p className="mt-1 text-sm text-muted">
-          Riferimento{" "}
+          {t("reference")}{" "}
           <span className="num text-text">{state.reference}</span>.
-          {state.emailSent
-            ? " Ti abbiamo inviato un'email di pre-conferma."
-            : ""}{" "}
-          L&apos;ordine è confermato dopo la verifica del pagamento.
+          {state.emailSent ? " " + t("emailPreconfirm") : ""}{" "}
+          {t("confirmedAfterPayment")}
         </p>
         <Button asChild className="mt-6" variant="outline">
-          <Link href="/products">Continua lo shopping</Link>
+          <Link href="/products">{tCart("continueShopping")}</Link>
         </Button>
       </div>
     );
@@ -150,10 +151,10 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
 
       <fieldset className="grid gap-4 sm:grid-cols-2">
         <legend className="mb-2 text-sm font-medium">
-          Contatti e spedizione
+          {t("contactShipping")}
         </legend>
         <Field
-          label="Email"
+          label={t("email")}
           name="email"
           type="email"
           autoComplete="email"
@@ -161,38 +162,38 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
           className="sm:col-span-2"
         />
         <Field
-          label="Nome"
+          label={t("firstName")}
           name="firstName"
           autoComplete="given-name"
           error={err("firstName")}
         />
         <Field
-          label="Cognome"
+          label={t("lastName")}
           name="lastName"
           autoComplete="family-name"
           error={err("lastName")}
         />
         <Field
-          label="Indirizzo"
+          label={t("address")}
           name="address"
           autoComplete="address-line1"
           error={err("address")}
           className="sm:col-span-2"
         />
         <Field
-          label="Città"
+          label={t("city")}
           name="city"
           autoComplete="address-level2"
           error={err("city")}
         />
         <Field
-          label="CAP"
+          label={t("postalCode")}
           name="postalCode"
           autoComplete="postal-code"
           error={err("postalCode")}
         />
         <Field
-          label="Paese"
+          label={t("country")}
           name="country"
           autoComplete="country-name"
           error={err("country")}
@@ -201,7 +202,7 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
       </fieldset>
 
       <fieldset>
-        <legend className="mb-2 text-sm font-medium">Pagamento</legend>
+        <legend className="mb-2 text-sm font-medium">{t("payment")}</legend>
         <div className="grid gap-2 sm:grid-cols-2">
           {PAYMENT_METHODS.map((m) => (
             <label
@@ -216,28 +217,25 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
                 className="[accent-color:#dc2626]"
               />
               <Icon name={m.icon} className="size-4" />
-              {m.label}
+              {t(`pm.${m.id}`)}
             </label>
           ))}
         </div>
       </fieldset>
 
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="notes">Note (opzionale)</Label>
+        <Label htmlFor="notes">{t("notesOptional")}</Label>
         <Textarea
           id="notes"
           name="notes"
-          placeholder="Istruzioni per la consegna…"
+          placeholder={t("notesPlaceholder")}
         />
       </div>
 
       <Button type="submit" size="lg" loading={pending} disabled={empty}>
-        {empty ? "Carrello vuoto" : "Conferma ordine"}
+        {empty ? t("cartEmpty") : t("confirmOrder")}
       </Button>
-      <p className="text-xs text-muted">
-        Con pagamento in criptovaluta, dopo la conferma vedrai l&apos;indirizzo
-        dove inviare i fondi e il riferimento dell&apos;ordine.
-      </p>
+      <p className="text-xs text-muted">{t("cryptoHint")}</p>
     </form>
   );
 }

@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Check, Copy } from "lucide-react";
 
 /** Riga con valore monospace + pulsante copia. Riusata dai pannelli di pagamento. */
 export function CopyRow({ value }: { value: string }) {
+  const t = useTranslations("checkout");
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -23,16 +25,16 @@ export function CopyRow({ value }: { value: string }) {
       <button
         type="button"
         onClick={copy}
-        aria-label="Copia"
+        aria-label={t("copy")}
         className="inline-flex shrink-0 items-center gap-1 rounded-base border border-border bg-surface px-2 py-1 text-xs font-medium transition-colors hover:text-accent"
       >
         {copied ? (
           <>
-            <Check className="size-3.5 text-accent" aria-hidden /> Copiato
+            <Check className="size-3.5 text-accent" aria-hidden /> {t("copied")}
           </>
         ) : (
           <>
-            <Copy className="size-3.5" aria-hidden /> Copia
+            <Copy className="size-3.5" aria-hidden /> {t("copy")}
           </>
         )}
       </button>
