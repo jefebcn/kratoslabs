@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "allProducts": "Alle Produkte",
+    "guide": "Ratgeber",
+    "reviews": "Bewertungen",
+    "analysis": "Analysen",
+    "analysisLong": "Laboranalysen",
+    "aboutUs": "Über uns",
+    "contact": "Kontakt",
+    "wholesale": "Großhandel"
+  },
+  "account": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden"
+  },
+  "search": {
+    "placeholder": "Suche…"
+  },
+  "cart": {
+    "summary": "{count, plural, one {# Produkt} other {# Produkte}} · {total}",
+    "open": "Warenkorb öffnen"
+  },
+  "payments": {
+    "accept": "Wir akzeptieren"
+  },
+  "home": {
+    "newProducts": "Neue Produkte",
+    "bestsellers": "Bestseller",
+    "viewAll": "Alle ansehen — {category}",
+    "touchdownGallery": "Touchdown-Galerie",
+    "sendTouchdown": "Sende deinen Touchdown hier"
+  },
+  "menu": {
+    "title": "Menü",
+    "categories": "Kategorien"
+  },
+  "footer": {
+    "catalog": "Katalog",
+    "info": "Informationen",
+    "legal": "Rechtliches",
+    "contact": "Kontakt",
+    "communityRefs": "Unabhängige Community-Referenzen",
+    "newsletterTitle": "Newsletter",
+    "newsletterSubtitle": "Bleib auf dem Laufenden über Aktionen, Sales und exklusive Angebote von {site}.",
+    "telegramCta": "Tritt unserem Telegram bei",
+    "email": "E-Mail",
+    "paymentMethods": "Zahlungsmethoden",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "shipping": "Versand & Rückgabe",
+    "disclaimer": "© {year} {site}. Alle Produkte werden ausschließlich zu Forschungs- und Bewertungszwecken bereitgestellt und sind nicht als medizinische Behandlungen oder Gesundheitslösungen zu verstehen."
+  },
+  "newsletter": {
+    "placeholder": "Deine E-Mail",
+    "subscribe": "Abonnieren",
+    "done": "Anmeldung gespeichert. Danke."
+  }
+}

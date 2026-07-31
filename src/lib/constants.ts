@@ -113,6 +113,8 @@ export const DEFAULT_CURRENCY = "EUR" as const;
 export const LOCALES: LocaleMeta[] = [
   { code: "it", label: "Italiano", short: "IT" },
   { code: "en", label: "English", short: "EN" },
+  { code: "de", label: "Deutsch", short: "DE" },
+  { code: "fr", label: "Français", short: "FR" },
 ];
 
 export const DEFAULT_LOCALE = "it" as const;
