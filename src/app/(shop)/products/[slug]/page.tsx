@@ -55,7 +55,7 @@ export default async function ProductDetailPage({
   const related = (await listByCategory(product.category)).filter(
     (p) => p.id !== product.id,
   );
-  const reviews = reviewsForProduct(slug);
+  const reviews = await reviewsForProduct(slug);
   const rating = ratingSummary(reviews);
 
   return (

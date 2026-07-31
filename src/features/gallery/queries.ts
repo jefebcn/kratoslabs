@@ -1,5 +1,4 @@
 import { createReadClient } from "@/lib/supabase/read";
-import { GALLERY_ITEMS } from "@/lib/constants";
 
 export interface GalleryImage {
   id: string;
@@ -13,19 +12,6 @@ export interface GalleryImage {
   date: string;
   productSlugs: string[];
 }
-
-/** Fallback dal codice quando la tabella è vuota o non configurata. */
-const FALLBACK: GalleryImage[] = GALLERY_ITEMS.map((g) => ({
-  id: g.id,
-  url: g.imageUrl,
-  alt: g.alt,
-  caption: g.author ? `${g.author}${g.location ? ` — ${g.location}` : ""}` : "",
-  rating: 5,
-  author: g.author ?? "",
-  country: g.location ?? "",
-  date: "",
-  productSlugs: [],
-}));
 
 function rowToGallery(r: Record<string, unknown>): GalleryImage {
   return {
@@ -48,22 +34,22 @@ const GALLERY_COLS =
 
 /**
  * Foto della galleria "Touchdown" mostrate in home. Legge da Supabase
- * ordinando per `position`; su qualsiasi problema (non configurata, errore,
- * tabella vuota) torna alle immagini di default, così la sezione resta piena.
+ * ordinando per `position`. Se non configurata/vuota ritorna lista vuota (la
+ * sezione si nasconde): niente immagini demo residue.
  */
 export async function listGalleryImages(): Promise<GalleryImage[]> {
   const sb = createReadClient();
-  if (!sb) return FALLBACK;
+  if (!sb) return [];
   try {
     const { data, error } = await sb
       .from("gallery")
       .select(GALLERY_COLS)
       .order("position", { ascending: true })
       .order("created_at", { ascending: true });
-    if (error || !data || data.length === 0) return FALLBACK;
+    if (error || !data || data.length === 0) return [];
     return data.map(rowToGallery);
   } catch {
-    return FALLBACK;
+    return [];
   }
 }
 
