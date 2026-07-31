@@ -243,5 +243,13 @@
     "c2": "Os pontos são creditados quando o pagamento é recebido e a encomenda é enviada.",
     "c3": "Os pontos expiram 90 dias após a data de crédito.",
     "c4": "Os pontos não são convertíveis em dinheiro e não são reembolsáveis nem transferíveis."
+  },
+  "testimonial": {
+    "title": "Testemunhos",
+    "home": "Página inicial",
+    "crumb": "Testemunho",
+    "images": "As tuas fotos",
+    "review": "Avaliação",
+    "products": "Produtos"
   }
 }

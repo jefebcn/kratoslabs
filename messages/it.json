@@ -243,5 +243,13 @@
     "c2": "I punti sono accreditati quando il pagamento è ricevuto e l’ordine è spedito.",
     "c3": "I punti scadono dopo 90 giorni dalla data di accredito.",
     "c4": "I punti non sono convertibili in denaro e non sono rimborsabili né trasferibili."
+  },
+  "testimonial": {
+    "title": "Testimonianze",
+    "home": "Pagina iniziale",
+    "crumb": "Testimonianza",
+    "images": "Le tue immagini",
+    "review": "Revisione",
+    "products": "Prodotti"
   }
 }

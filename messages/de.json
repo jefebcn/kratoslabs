@@ -243,5 +243,13 @@
     "c2": "Punkte werden gutgeschrieben, sobald die Zahlung eingegangen und die Bestellung versandt ist.",
     "c3": "Punkte verfallen 90 Tage nach dem Gutschriftsdatum.",
     "c4": "Punkte sind nicht in Geld umwandelbar, nicht erstattungs- und nicht übertragbar."
+  },
+  "testimonial": {
+    "title": "Erfahrungsberichte",
+    "home": "Startseite",
+    "crumb": "Erfahrungsbericht",
+    "images": "Deine Fotos",
+    "review": "Bewertung",
+    "products": "Produkte"
   }
 }
