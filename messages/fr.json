@@ -152,5 +152,18 @@
     "cryptoFlow": "La commande est confirmée après vérification de la réception du paiement : vous recevrez un second e-mail de confirmation.",
     "copy": "Copier",
     "copied": "Copié"
+  },
+  "toggle": {
+    "language": "Langue",
+    "changeLanguage": "Changer de langue",
+    "currency": "Devise",
+    "changeCurrency": "Changer de devise"
+  },
+  "topbar": {
+    "announcements": [
+      "Analyses tierces sur chaque lot",
+      "Livraison suivie en 24/48h",
+      "Retours sous 30 jours"
+    ]
   }
 }

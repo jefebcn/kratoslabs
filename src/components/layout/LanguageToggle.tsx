@@ -1,7 +1,7 @@
 "use client";
 
 import { Globe } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
@@ -15,6 +15,7 @@ import { LOCALES, LOCALE_COOKIE } from "@/lib/constants";
 
 export function LanguageToggle() {
   const current = useLocale();
+  const t = useTranslations("toggle");
   const router = useRouter();
   const short = LOCALES.find((l) => l.code === current)?.short ?? "IT";
 
@@ -28,14 +29,14 @@ export function LanguageToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        aria-label="Cambia lingua"
+        aria-label={t("changeLanguage")}
         className="inline-flex h-9 items-center gap-1.5 rounded-base px-2 text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
         <Globe className="size-4" aria-hidden />
         <span className="font-medium text-white">{short}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Lingua</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("language")}</DropdownMenuLabel>
         <DropdownMenuRadioGroup value={current} onValueChange={change}>
           {LOCALES.map((l) => (
             <DropdownMenuRadioItem key={l.code} value={l.code}>

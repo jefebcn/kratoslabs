@@ -152,5 +152,18 @@
     "cryptoFlow": "Die Bestellung wird bestätigt, sobald wir den Zahlungseingang geprüft haben: du erhältst eine zweite Bestätigungs-E-Mail.",
     "copy": "Kopieren",
     "copied": "Kopiert"
+  },
+  "toggle": {
+    "language": "Sprache",
+    "changeLanguage": "Sprache ändern",
+    "currency": "Währung",
+    "changeCurrency": "Währung ändern"
+  },
+  "topbar": {
+    "announcements": [
+      "Drittanbieter-Analyse für jede Charge",
+      "Verfolgter Versand in 24/48 Std.",
+      "Rückgabe innerhalb von 30 Tagen"
+    ]
   }
 }

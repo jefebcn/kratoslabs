@@ -8,6 +8,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslations } from "next-intl";
 import { usePreferences } from "@/features/preferences";
 import { useHasMounted } from "@/hooks/use-has-mounted";
 import { CURRENCIES } from "@/lib/constants";
@@ -15,6 +16,7 @@ import type { CurrencyCode } from "@/types";
 
 export function CurrencyToggle() {
   const mounted = useHasMounted();
+  const t = useTranslations("toggle");
   const currency = usePreferences((s) => s.currency);
   const setCurrency = usePreferences((s) => s.setCurrency);
   const current = mounted ? currency : "EUR";
@@ -22,13 +24,13 @@ export function CurrencyToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        aria-label="Cambia valuta"
+        aria-label={t("changeCurrency")}
         className="inline-flex h-9 items-center rounded-base px-2 text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
         <span className="num font-medium text-white">{current}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Valuta</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("currency")}</DropdownMenuLabel>
         <DropdownMenuRadioGroup
           value={current}
           onValueChange={(v) => setCurrency(v as CurrencyCode)}
