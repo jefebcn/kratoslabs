@@ -8,7 +8,8 @@
     "analysisLong": "Analyses de laboratoire",
     "aboutUs": "À propos",
     "contact": "Contact",
-    "wholesale": "En gros"
+    "wholesale": "En gros",
+    "rewards": "Points de fidélité"
   },
   "account": {
     "login": "Se connecter",
@@ -42,6 +43,20 @@
         "paid": "Payé",
         "refunded": "Remboursé",
         "failed": "Échoué"
+      }
+    },
+    "rewards": {
+      "title": "Points de fidélité",
+      "balance": "Solde de points",
+      "value": "soit {value}",
+      "empty": "Aucun mouvement de points pour l’instant.",
+      "order": "Commande",
+      "reason": {
+        "earn": "Points gagnés",
+        "redeem": "Points utilisés",
+        "refund": "Points remboursés",
+        "reverse": "Ajustement",
+        "adjust": "Ajustement"
       }
     }
   },
@@ -105,7 +120,8 @@
     "tabSpecs": "Caractéristiques",
     "tabLab": "Test labo / QC",
     "tabReviews": "Avis",
-    "notFound": "Produit introuvable"
+    "notFound": "Produit introuvable",
+    "rewardPoints": "Gagnez {points} points avec cet achat"
   },
   "auth": {
     "loginTitle": "Se connecter",
@@ -175,7 +191,14 @@
     "cryptoPending": "Le paiement en crypto est en cours d'activation. Nous vous contacterons par e-mail avec l'adresse pour finaliser la commande {ref}.",
     "cryptoFlow": "La commande est confirmée après vérification de la réception du paiement : vous recevrez un second e-mail de confirmation.",
     "copy": "Copier",
-    "copied": "Copié"
+    "copied": "Copié",
+    "rewards": {
+      "use": "Utiliser mes {points} points (−{value})",
+      "balance": "Vous avez {points} points = {value}",
+      "subtotal": "Sous-total",
+      "discount": "Remise points",
+      "toPay": "Total à payer"
+    }
   },
   "toggle": {
     "language": "Langue",
@@ -189,5 +212,16 @@
       "Livraison suivie en 24/48h",
       "Retours sous 30 jours"
     ]
+  },
+  "rewards": {
+    "title": "Programme de fidélité",
+    "intro": "Gagnez des points à chaque achat et utilisez-les pour obtenir des remises sur vos prochaines commandes.",
+    "earnTitle": "Comment gagner des points",
+    "earnText": "Recevez 5 points pour chaque 25€ dépensés. Les points sont crédités une fois le paiement de la commande confirmé.",
+    "valueTitle": "Leur valeur",
+    "valueText": "100 points valent 25€ de remise (1 point = 0,25€).",
+    "useTitle": "Comment les utiliser",
+    "useText": "Au paiement, vous pouvez utiliser vos points : la remise est appliquée immédiatement au total à payer.",
+    "note": "Votre solde et votre historique de points sont toujours visibles dans votre espace membre."
   }
 }

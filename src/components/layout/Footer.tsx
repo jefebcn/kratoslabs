@@ -48,6 +48,7 @@ export async function Footer() {
   const handle = "@" + SITE.telegramUrl.replace(/^https?:\/\/t\.me\//, "");
 
   const infoLinks = [
+    { href: "/rewards", label: tNav("rewards") },
     { href: "/guide", label: tNav("guide") },
     { href: "/recensioni", label: tNav("reviews") },
     { href: "/analisi", label: tNav("analysisLong") },

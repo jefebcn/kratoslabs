@@ -15,7 +15,12 @@ import { createOrder, type CheckoutResult } from "@/features/checkout";
 import { useCart } from "@/features/cart";
 import { priceLine } from "@/features/products/pricing";
 import { PAYMENT_METHODS } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
+import {
+  maxRedeemablePoints,
+  discountCentsFor,
+  pointsValueCents,
+} from "@/lib/rewards";
 import type { BankConfig } from "@/lib/payments/bank";
 import type { CryptoAsset } from "@/lib/payments/crypto";
 
@@ -54,7 +59,13 @@ function Field({
   );
 }
 
-export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
+export function CheckoutForm({
+  payment,
+  points = 0,
+}: {
+  payment: CheckoutPayment;
+  points?: number;
+}) {
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
   const [state, action, pending] = useActionState<CheckoutResult | null, FormData>(
@@ -64,12 +75,19 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
   const lines = useCart((s) => s.lines);
   const clear = useCart((s) => s.clear);
   const empty = lines.length === 0;
+  const [usePoints, setUsePoints] = useState(false);
 
   // Totale netto (sconti quantità inclusi): stesso valore mostrato nel riepilogo.
   const netTotalCents = lines.reduce(
     (sum, l) => sum + priceLine(l.unitPriceCents, l.quantity).netCents,
     0,
   );
+
+  // Punti spendibili su questo carrello e sconto risultante.
+  const redeemable = maxRedeemablePoints(points, netTotalCents);
+  const appliedPoints = usePoints ? redeemable : 0;
+  const discountCents = discountCentsFor(appliedPoints);
+  const payableCents = Math.max(0, netTotalCents - discountCents);
 
   // Congela il totale al momento della conferma, prima di svuotare il carrello.
   const [orderTotalCents, setOrderTotalCents] = useState<number | null>(null);
@@ -82,11 +100,12 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
   }, [state?.ok, orderTotalCents, netTotalCents, clear]);
 
   if (state?.ok && state.reference) {
+    const paidCents = state.totalCents ?? orderTotalCents ?? undefined;
     if (state.paymentMethod === "crypto") {
       return (
         <CryptoPayment
           reference={state.reference}
-          totalCents={orderTotalCents ?? undefined}
+          totalCents={paidCents}
           emailSent={state.emailSent}
           assets={payment.assets}
         />
@@ -96,7 +115,7 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
       return (
         <BankTransfer
           reference={state.reference}
-          totalCents={orderTotalCents ?? undefined}
+          totalCents={paidCents}
           emailSent={state.emailSent}
           bank={payment.bank}
         />
@@ -142,6 +161,50 @@ export function CheckoutForm({ payment }: { payment: CheckoutPayment }) {
         )}
       />
       <input type="hidden" name="totalCents" value={netTotalCents} />
+      <input type="hidden" name="redeemPoints" value={appliedPoints} />
+
+      {redeemable > 0 && (
+        <div className="rounded-base border border-accent/30 bg-accent-soft/40 p-4">
+          <label className="flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              checked={usePoints}
+              onChange={(e) => setUsePoints(e.target.checked)}
+              className="mt-0.5 [accent-color:#dc2626]"
+            />
+            <span className="text-sm">
+              <span className="font-semibold">
+                {t("rewards.use", {
+                  points: redeemable,
+                  value: formatPrice(discountCentsFor(redeemable)),
+                })}
+              </span>
+              <span className="mt-0.5 block text-xs text-muted">
+                {t("rewards.balance", {
+                  points,
+                  value: formatPrice(pointsValueCents(points)),
+                })}
+              </span>
+            </span>
+          </label>
+          {appliedPoints > 0 && (
+            <dl className="mt-3 space-y-1 border-t border-accent/20 pt-3 text-sm">
+              <div className="flex justify-between text-muted">
+                <dt>{t("rewards.subtotal")}</dt>
+                <dd className="num">{formatPrice(netTotalCents)}</dd>
+              </div>
+              <div className="flex justify-between text-accent">
+                <dt>{t("rewards.discount")}</dt>
+                <dd className="num">−{formatPrice(discountCents)}</dd>
+              </div>
+              <div className="flex justify-between font-semibold">
+                <dt>{t("rewards.toPay")}</dt>
+                <dd className="num">{formatPrice(payableCents)}</dd>
+              </div>
+            </dl>
+          )}
+        </div>
+      )}
 
       {state?.message && (
         <div className="rounded-base border border-danger/50 px-4 py-3 text-sm text-danger">

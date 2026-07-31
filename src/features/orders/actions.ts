@@ -6,6 +6,8 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getAdminCaller } from "@/lib/auth/require-admin";
 import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
 import { orderConfirmedEmail } from "@/lib/email/templates";
+import { addEntry, hasEntry } from "@/features/rewards";
+import { pointsEarnedFor } from "@/lib/rewards";
 
 const statusSchema = z.object({
   orderId: z.string().min(1),
@@ -35,7 +37,22 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
   if (parsed.data.trackingId !== undefined) {
     patch.tracking_id = parsed.data.trackingId.trim() || null;
   }
-  await admin.from("orders").update(patch).eq("id", parsed.data.orderId);
+  const { data: ord } = await admin
+    .from("orders")
+    .update(patch)
+    .eq("id", parsed.data.orderId)
+    .select("reference, user_id, points_redeemed")
+    .maybeSingle();
+
+  // Se l'ordine viene annullato, restituisci al cliente i punti eventualmente
+  // usati (una sola volta).
+  if (parsed.data.status === "cancelled" && ord?.user_id) {
+    const ref = String(ord.reference ?? "");
+    const redeemed = Number(ord.points_redeemed ?? 0);
+    if (redeemed > 0 && !(await hasEntry(admin, ref, "refund"))) {
+      await addEntry(admin, String(ord.user_id), redeemed, "refund", ref);
+    }
+  }
   refresh();
 }
 
@@ -55,14 +72,22 @@ export async function confirmPayment(formData: FormData): Promise<void> {
     .from("orders")
     .update({ payment_status: "paid", status: "processing" })
     .eq("id", orderId)
-    .select("reference, customer_email, status")
+    .select("reference, customer_email, status, user_id, total_cents")
     .maybeSingle();
 
-  if (!error && data && isEmailConfigured) {
-    const { subject, html } = orderConfirmedEmail({
-      reference: String(data.reference),
-    });
-    await sendEmail({ to: String(data.customer_email), subject, html });
+  if (!error && data) {
+    // Accredita i punti guadagnati (5 ogni 25€), una sola volta per ordine.
+    const ref = String(data.reference ?? "");
+    if (data.user_id && ref && !(await hasEntry(admin, ref, "earn"))) {
+      const earned = pointsEarnedFor(Number(data.total_cents ?? 0));
+      if (earned > 0) {
+        await addEntry(admin, String(data.user_id), earned, "earn", ref);
+      }
+    }
+    if (isEmailConfigured) {
+      const { subject, html } = orderConfirmedEmail({ reference: ref });
+      await sendEmail({ to: String(data.customer_email), subject, html });
+    }
   }
   refresh();
 }
