@@ -47,7 +47,7 @@ export function CommunityGallery({ items }: { items: GalleryImage[] }) {
               alt={item.alt}
               fill
               sizes="(max-width: 640px) 72vw, 320px"
-              className="object-contain"
+              className="object-cover"
             />
             {item.caption && (
               <figcaption className="absolute inset-0 flex items-center justify-center bg-accent/92 p-5 text-center text-sm font-medium text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
