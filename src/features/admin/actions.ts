@@ -301,6 +301,56 @@ export async function deleteProductImage(
 }
 
 /**
+ * Elimina in blocco più immagini (anche di prodotti diversi). Raggruppa per
+ * prodotto per una sola scrittura per prodotto, poi ripulisce lo Storage dei
+ * file non più referenziati.
+ */
+export async function deleteProductImages(
+  targets: { slug: string; url: string }[],
+): Promise<ImageOpResult> {
+  const admin = createAdminClient();
+  if (!admin) return { ok: false, message: NO_ADMIN };
+  if (!targets.length) return { ok: false, message: "Niente da eliminare." };
+  try {
+    const bySlug = new Map<string, Set<string>>();
+    for (const t of targets) {
+      if (!bySlug.has(t.slug)) bySlug.set(t.slug, new Set());
+      bySlug.get(t.slug)!.add(t.url);
+    }
+
+    let removed = 0;
+    for (const [slug, urls] of bySlug) {
+      const images = await readImages(admin, slug);
+      const next = images.filter((i) => !urls.has(i.url));
+      removed += images.length - next.length;
+      const err = await writeImages(admin, slug, next);
+      if (err) return { ok: false, message: `DB: ${err}` };
+    }
+
+    // Storage: rimuovi i file non più referenziati da alcun prodotto.
+    for (const t of targets) {
+      const path = storagePath(t.url);
+      if (!path) continue;
+      const { data: others } = await admin
+        .from("products")
+        .select("id")
+        .contains("images", [{ url: t.url }]);
+      if (!others || others.length === 0) {
+        await admin.storage.from("product-images").remove([path]);
+      }
+    }
+
+    refreshSite();
+    return { ok: true, message: `${removed} foto eliminate.` };
+  } catch (e) {
+    return {
+      ok: false,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
+/**
  * Riordina le immagini di un prodotto secondo l'ordine di `urls`. La prima
  * immagine diventa la copertina (usata nelle card e come miniatura).
  */
