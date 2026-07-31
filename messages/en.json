@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Home",
+    "allProducts": "All products",
+    "guide": "Guides",
+    "reviews": "Reviews",
+    "analysis": "Lab tests",
+    "analysisLong": "Lab analysis",
+    "aboutUs": "About us",
+    "contact": "Contact",
+    "wholesale": "Wholesale"
+  },
+  "account": {
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out"
+  },
+  "search": {
+    "placeholder": "Search…"
+  },
+  "cart": {
+    "summary": "{count, plural, one {# product} other {# products}} · {total}",
+    "open": "Open cart"
+  },
+  "payments": {
+    "accept": "We accept"
+  },
+  "home": {
+    "newProducts": "New products",
+    "bestsellers": "Bestsellers",
+    "viewAll": "View all — {category}",
+    "touchdownGallery": "Touchdown Gallery",
+    "sendTouchdown": "Send your touchdown here"
+  },
+  "menu": {
+    "title": "Menu",
+    "categories": "Categories"
+  },
+  "footer": {
+    "catalog": "Catalog",
+    "info": "Information",
+    "legal": "Legal",
+    "contact": "Contact",
+    "communityRefs": "Independent community references",
+    "newsletterTitle": "Newsletter",
+    "newsletterSubtitle": "Stay up to date on promotions, sales and exclusive offers from {site}.",
+    "telegramCta": "Join our Telegram",
+    "email": "Email",
+    "paymentMethods": "Payment methods",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "shipping": "Shipping & returns",
+    "disclaimer": "© {year} {site}. All products are supplied strictly for research and evaluation purposes and are not presented as medical treatments or health solutions."
+  },
+  "newsletter": {
+    "placeholder": "Your email",
+    "subscribe": "Subscribe",
+    "done": "You're subscribed. Thank you."
+  }
+}

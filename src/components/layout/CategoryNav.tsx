@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   BookOpen,
   Home,
@@ -18,17 +19,18 @@ interface NavItem {
 
 /** Barra categorie desktop (nascosta su mobile: lì c'è il drawer). */
 export function CategoryNav({ categories }: { categories: Category[] }) {
+  const t = useTranslations("nav");
   const items: NavItem[] = [
-    { href: "/", label: "Home", icon: Home },
+    { href: "/", label: t("home"), icon: Home },
     ...categories.map((c) => ({
       href: `/products?category=${c.slug}`,
       label: c.name,
       icon: categoryIcon(c.slug),
     })),
-    { href: "/products", label: "Tutti i prodotti", icon: LayoutGrid },
-    { href: "/guide", label: "Guide", icon: BookOpen },
-    { href: "/analisi", label: "Analisi", icon: ScrollText },
-    { href: "/recensioni", label: "Recensioni", icon: Star },
+    { href: "/products", label: t("allProducts"), icon: LayoutGrid },
+    { href: "/guide", label: t("guide"), icon: BookOpen },
+    { href: "/analisi", label: t("analysis"), icon: ScrollText },
+    { href: "/recensioni", label: t("reviews"), icon: Star },
   ];
 
   return (

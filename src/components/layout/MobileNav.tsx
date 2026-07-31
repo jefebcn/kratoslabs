@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   BookOpen,
   Info,
@@ -23,37 +24,30 @@ import { Button } from "@/components/ui/button";
 import { SearchForm } from "@/components/layout/SearchBar";
 import { CurrencyToggle } from "@/components/layout/CurrencyToggle";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
-import { NAV_LINKS } from "@/lib/constants";
 import type { Category } from "@/types";
 import { categoryIcon } from "@/lib/category-icons";
 
-/** Icona per le pagine informative del menu, mappata per href. */
-const PAGE_ICON: Record<string, LucideIcon> = {
-  "/guide": BookOpen,
-  "/recensioni": Star,
-  "/analisi": ScrollText,
-  "/chi-siamo": Info,
-  "/contatto": Mail,
-  "/all-ingrosso": Store,
-};
-
-/** Pagine nel drawer: risorse + voci informative (queste su mobile stanno
- *  solo qui, per non affollare la barra utility in alto). */
-const PAGES: { href: string; label: string }[] = [
-  ...NAV_LINKS,
-  { href: "/chi-siamo", label: "Chi siamo" },
-  { href: "/contatto", label: "Contatto" },
-  { href: "/all-ingrosso", label: "All'ingrosso" },
+/** Pagine nel drawer: href, icona e chiave di traduzione (namespace nav). */
+const PAGES: { href: string; icon: LucideIcon; key: string }[] = [
+  { href: "/guide", icon: BookOpen, key: "guide" },
+  { href: "/recensioni", icon: Star, key: "reviews" },
+  { href: "/analisi", icon: ScrollText, key: "analysisLong" },
+  { href: "/chi-siamo", icon: Info, key: "aboutUs" },
+  { href: "/contatto", icon: Mail, key: "contact" },
+  { href: "/all-ingrosso", icon: Store, key: "wholesale" },
 ];
 
 export function MobileNav({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const tNav = useTranslations("nav");
+  const tMenu = useTranslations("menu");
+  const tAcc = useTranslations("account");
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
-        aria-label="Apri menu"
+        aria-label={tMenu("title")}
         className="inline-flex size-10 items-center justify-center rounded-base text-text transition-colors hover:bg-surface-2 lg:hidden"
       >
         <Menu className="size-5" aria-hidden />
@@ -66,15 +60,15 @@ export function MobileNav({ categories }: { categories: Category[] }) {
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <SheetHeader>
-          <SheetTitle>Menu</SheetTitle>
+          <SheetTitle>{tMenu("title")}</SheetTitle>
         </SheetHeader>
 
         <div className="flex flex-1 flex-col gap-6 overflow-y-auto p-5">
           <SearchForm onSubmitted={close} />
 
-          <nav className="flex flex-col" aria-label="Categorie">
+          <nav className="flex flex-col" aria-label={tMenu("categories")}>
             <p className="pb-1 text-xs font-medium uppercase tracking-wide text-muted">
-              Categorie
+              {tMenu("categories")}
             </p>
             {categories.map((c) => {
               const Icon = categoryIcon(c.slug);
@@ -96,30 +90,25 @@ export function MobileNav({ categories }: { categories: Category[] }) {
             className="flex flex-col border-t border-border pt-4"
             aria-label="Pagine"
           >
-            {PAGES.map((l) => {
-              const Icon = PAGE_ICON[l.href];
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  onClick={close}
-                  className="flex items-center gap-3 py-2 text-sm transition-colors hover:text-accent"
-                >
-                  {Icon && (
-                    <Icon className="size-4 shrink-0 text-muted" aria-hidden />
-                  )}
-                  {l.label}
-                </Link>
-              );
-            })}
+            {PAGES.map(({ href, icon: Icon, key }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={close}
+                className="flex items-center gap-3 py-2 text-sm transition-colors hover:text-accent"
+              >
+                <Icon className="size-4 shrink-0 text-muted" aria-hidden />
+                {tNav(key)}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex flex-col gap-2 border-t border-border pt-4">
             <Button asChild onClick={close}>
-              <Link href="/login">Accedi</Link>
+              <Link href="/login">{tAcc("login")}</Link>
             </Button>
             <Button asChild variant="outline" onClick={close}>
-              <Link href="/register">Registrati</Link>
+              <Link href="/register">{tAcc("register")}</Link>
             </Button>
           </div>
         </div>

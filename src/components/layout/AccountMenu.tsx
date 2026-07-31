@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { LogIn, UserPlus, LogOut, User as UserIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -13,6 +14,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
  */
 export function AccountMenu() {
   const router = useRouter();
+  const t = useTranslations("account");
   const [email, setEmail] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
 
@@ -61,7 +63,7 @@ export function AccountMenu() {
           className="inline-flex items-center gap-1.5 py-2 pl-2 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:text-accent"
         >
           <LogOut className="size-3.5 text-accent" aria-hidden />
-          Esci
+          {t("logout")}
         </button>
       </div>
     );
@@ -74,7 +76,7 @@ export function AccountMenu() {
         className="inline-flex items-center gap-1.5 py-2 pr-3 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:text-accent"
       >
         <LogIn className="size-3.5 text-accent" aria-hidden />
-        Accedi
+        {t("login")}
       </Link>
       <span className="text-border">|</span>
       <Link
@@ -82,7 +84,7 @@ export function AccountMenu() {
         className="inline-flex items-center gap-1.5 py-2 pl-3 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:text-accent"
       >
         <UserPlus className="size-3.5 text-accent" aria-hidden />
-        Registrati
+        {t("register")}
       </Link>
     </div>
   );
