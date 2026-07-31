@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Zap } from "lucide-react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { useCart } from "@/features/cart";
@@ -23,6 +24,7 @@ export function QuickCheckoutButton({
   className?: string;
 }) {
   const router = useRouter();
+  const t = useTranslations("product");
   const add = useCart((s) => s.add);
   const close = useCart((s) => s.close);
 
@@ -40,11 +42,11 @@ export function QuickCheckoutButton({
       className={className}
       disabled={product.stock <= 0}
       onClick={handleClick}
-      title="Acquisto rapido"
-      aria-label={`Acquisto rapido di ${product.title}`}
+      title={t("quickCheckout")}
+      aria-label={t("quickCheckout")}
     >
       <Zap className="size-4" aria-hidden />
-      {!iconOnly && "Quick checkout"}
+      {!iconOnly && t("quickCheckout")}
     </Button>
   );
 }

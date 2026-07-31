@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Check, ShoppingBag } from "lucide-react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { useCart } from "@/features/cart";
@@ -9,7 +10,7 @@ import type { Product } from "@/types";
 export function AddToCartButton({
   product,
   quantity = 1,
-  label = "Aggiungi",
+  label,
   variant = "primary",
   size = "md",
   className,
@@ -21,6 +22,7 @@ export function AddToCartButton({
   size?: ButtonProps["size"];
   className?: string;
 }) {
+  const t = useTranslations("product");
   const add = useCart((s) => s.add);
   const [added, setAdded] = useState(false);
   const soldOut = product.stock <= 0;
@@ -39,19 +41,19 @@ export function AddToCartButton({
       className={className}
       disabled={soldOut}
       onClick={handleClick}
-      aria-label={soldOut ? "Prodotto esaurito" : `Aggiungi ${product.title} al carrello`}
+      aria-label={soldOut ? t("soldOutAria") : t("addAria")}
     >
       {soldOut ? (
-        "Esaurito"
+        t("soldOut")
       ) : added ? (
         <>
           <Check className="size-4" aria-hidden />
-          Aggiunto
+          {t("added")}
         </>
       ) : (
         <>
           <ShoppingBag className="size-4" aria-hidden />
-          {label}
+          {label ?? t("addToCart")}
         </>
       )}
     </Button>

@@ -20,7 +20,12 @@
   },
   "cart": {
     "summary": "{count, plural, one {# prodotto} other {# prodotti}} · {total}",
-    "open": "Apri carrello"
+    "open": "Apri carrello",
+    "empty": "Il carrello è vuoto.",
+    "exploreCatalog": "Esplora il catalogo",
+    "goToCheckout": "Vai al checkout",
+    "title": "Carrello",
+    "continueShopping": "Continua lo shopping"
   },
   "payments": {
     "accept": "Accettiamo"
@@ -56,5 +61,37 @@
     "placeholder": "La tua email",
     "subscribe": "Iscriviti",
     "done": "Iscrizione registrata. Grazie."
+  },
+  "product": {
+    "inStock": "Disponibile",
+    "soldOut": "Esaurito",
+    "lastFew": "Ultimi {count}",
+    "addToCart": "Aggiungi",
+    "added": "Aggiunto",
+    "quickCheckout": "Acquisto rapido",
+    "addAria": "Aggiungi al carrello",
+    "soldOutAria": "Prodotto esaurito",
+    "tabDescription": "Descrizione",
+    "tabSpecs": "Specifiche",
+    "tabLab": "Lab test / QC",
+    "tabReviews": "Recensioni",
+    "notFound": "Prodotto non trovato"
+  },
+  "auth": {
+    "loginTitle": "Accedi",
+    "registerTitle": "Crea un account",
+    "loginSubtitle": "Bentornato.",
+    "registerSubtitle": "Bastano pochi secondi.",
+    "name": "Nome",
+    "email": "Email",
+    "password": "Password",
+    "invalidCredentials": "Email o password non corretti.",
+    "captchaRequired": "Completa la verifica anti-bot qui sotto.",
+    "notConfigured": "Autenticazione non configurata: manca la chiave Supabase nell'ambiente.",
+    "checkEmailTitle": "Controlla la tua email",
+    "checkEmailBody": "Ti abbiamo inviato un link di conferma. Aprilo per attivare l'account, poi torna qui per accedere.",
+    "goToLogin": "Vai al login",
+    "noAccount": "Non hai un account?",
+    "haveAccount": "Hai già un account?"
   }
 }

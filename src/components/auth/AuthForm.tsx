@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -40,6 +41,8 @@ function Field({
 
 export function AuthForm({ mode }: { mode: "login" | "register" }) {
   const isLogin = mode === "login";
+  const t = useTranslations("auth");
+  const tAcc = useTranslations("account");
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "/";
@@ -57,9 +60,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     setError(null);
 
     if (!isSupabaseConfigured) {
-      setError(
-        "Autenticazione non configurata: manca la chiave Supabase nell'ambiente.",
-      );
+      setError(t("notConfigured"));
       return;
     }
 
@@ -75,7 +76,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     // registrazione: senza token l'endpoint auth rifiuta la richiesta.
     if (turnstileEnabled && !captchaToken) {
       setLoading(false);
-      setError("Completa la verifica anti-bot qui sotto.");
+      setError(t("captchaRequired"));
       return;
     }
 
@@ -89,7 +90,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
       if (error) {
         setError(
           error.message === "Invalid login credentials"
-            ? "Email o password non corretti."
+            ? t("invalidCredentials")
             : error.message,
         );
         // Rigenera il captcha: il token appena usato non è più valido.
@@ -138,14 +139,11 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     return (
       <div className="flex flex-col gap-3">
         <h1 className="text-lg font-semibold uppercase tracking-tight">
-          Controlla la tua email
+          {t("checkEmailTitle")}
         </h1>
-        <p className="text-sm text-muted">
-          Ti abbiamo inviato un link di conferma. Aprilo per attivare
-          l&apos;account, poi torna qui per accedere.
-        </p>
+        <p className="text-sm text-muted">{t("checkEmailBody")}</p>
         <Button asChild size="lg" className="mt-1">
-          <Link href="/login">Vai al login</Link>
+          <Link href="/login">{t("goToLogin")}</Link>
         </Button>
       </div>
     );
@@ -155,17 +153,19 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
         <h1 className="text-lg font-semibold uppercase tracking-tight">
-          {isLogin ? "Accedi" : "Crea un account"}
+          {isLogin ? t("loginTitle") : t("registerTitle")}
         </h1>
         <p className="mt-1 text-sm text-muted">
-          {isLogin ? "Bentornato." : "Bastano pochi secondi."}
+          {isLogin ? t("loginSubtitle") : t("registerSubtitle")}
         </p>
       </div>
 
-      {!isLogin && <Field label="Nome" name="name" autoComplete="name" />}
-      <Field label="Email" name="email" type="email" autoComplete="email" />
+      {!isLogin && (
+        <Field label={t("name")} name="name" autoComplete="name" />
+      )}
+      <Field label={t("email")} name="email" type="email" autoComplete="email" />
       <Field
-        label="Password"
+        label={t("password")}
         name="password"
         type="password"
         autoComplete={isLogin ? "current-password" : "new-password"}
@@ -180,22 +180,22 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
       )}
 
       <Button type="submit" size="lg" loading={loading}>
-        {isLogin ? "Accedi" : "Registrati"}
+        {isLogin ? tAcc("login") : tAcc("register")}
       </Button>
 
       <p className="text-center text-sm text-muted">
         {isLogin ? (
           <>
-            Non hai un account?{" "}
+            {t("noAccount")}{" "}
             <Link href="/register" className="text-accent hover:underline">
-              Registrati
+              {tAcc("register")}
             </Link>
           </>
         ) : (
           <>
-            Hai già un account?{" "}
+            {t("haveAccount")}{" "}
             <Link href="/login" className="text-accent hover:underline">
-              Accedi
+              {tAcc("login")}
             </Link>
           </>
         )}

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ShoppingBag } from "lucide-react";
 import {
   Sheet,
@@ -15,6 +16,7 @@ import { CartSummary } from "@/components/cart/CartSummary";
 import { useCart, useCartCount } from "@/features/cart";
 
 export function CartDrawer() {
+  const t = useTranslations("cart");
   const isOpen = useCart((s) => s.isOpen);
   const open = useCart((s) => s.open);
   const close = useCart((s) => s.close);
@@ -26,7 +28,7 @@ export function CartDrawer() {
       <SheetContent side="right" aria-describedby={undefined}>
         <SheetHeader>
           <SheetTitle>
-            Carrello
+            {t("title")}
             {count > 0 && <span className="num text-muted"> ({count})</span>}
           </SheetTitle>
         </SheetHeader>
@@ -34,9 +36,9 @@ export function CartDrawer() {
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
             <ShoppingBag className="size-8 text-muted" aria-hidden />
-            <p className="text-muted">Il carrello è vuoto.</p>
+            <p className="text-muted">{t("empty")}</p>
             <Button variant="outline" asChild onClick={close}>
-              <Link href="/products">Esplora il catalogo</Link>
+              <Link href="/products">{t("exploreCatalog")}</Link>
             </Button>
           </div>
         ) : (
@@ -51,10 +53,10 @@ export function CartDrawer() {
               <CartSummary />
               <div className="flex flex-col gap-2">
                 <Button asChild size="lg" onClick={close}>
-                  <Link href="/checkout">Vai al checkout</Link>
+                  <Link href="/checkout">{t("goToCheckout")}</Link>
                 </Button>
                 <Button variant="ghost" onClick={close}>
-                  Continua lo shopping
+                  {t("continueShopping")}
                 </Button>
               </div>
             </SheetFooter>

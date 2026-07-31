@@ -20,7 +20,12 @@
   },
   "cart": {
     "summary": "{count, plural, one {# product} other {# products}} · {total}",
-    "open": "Open cart"
+    "open": "Open cart",
+    "empty": "Your cart is empty.",
+    "exploreCatalog": "Browse the catalog",
+    "goToCheckout": "Go to checkout",
+    "title": "Cart",
+    "continueShopping": "Continue shopping"
   },
   "payments": {
     "accept": "We accept"
@@ -56,5 +61,37 @@
     "placeholder": "Your email",
     "subscribe": "Subscribe",
     "done": "You're subscribed. Thank you."
+  },
+  "product": {
+    "inStock": "In stock",
+    "soldOut": "Sold out",
+    "lastFew": "Only {count} left",
+    "addToCart": "Add",
+    "added": "Added",
+    "quickCheckout": "Quick checkout",
+    "addAria": "Add to cart",
+    "soldOutAria": "Product sold out",
+    "tabDescription": "Description",
+    "tabSpecs": "Specs",
+    "tabLab": "Lab test / QC",
+    "tabReviews": "Reviews",
+    "notFound": "Product not found"
+  },
+  "auth": {
+    "loginTitle": "Log in",
+    "registerTitle": "Create an account",
+    "loginSubtitle": "Welcome back.",
+    "registerSubtitle": "It only takes a few seconds.",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "invalidCredentials": "Incorrect email or password.",
+    "captchaRequired": "Complete the anti-bot check below.",
+    "notConfigured": "Authentication not configured: the Supabase key is missing.",
+    "checkEmailTitle": "Check your email",
+    "checkEmailBody": "We sent you a confirmation link. Open it to activate your account, then come back here to log in.",
+    "goToLogin": "Go to login",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
   }
 }
