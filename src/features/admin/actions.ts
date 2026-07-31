@@ -217,6 +217,178 @@ export async function importProductImageFromUrl(
   return storeImage(slug, clean);
 }
 
+/* ------------------------------------------------------------------ *
+ * Gestione immagini prodotto (elimina / riordina / sposta)           *
+ * ------------------------------------------------------------------ */
+
+export interface ImageOpResult {
+  ok: boolean;
+  message: string;
+}
+
+type Img = { url: string; alt: string };
+
+/** Legge l'array immagini di un prodotto. */
+async function readImages(
+  admin: NonNullable<ReturnType<typeof createAdminClient>>,
+  slug: string,
+): Promise<Img[]> {
+  const { data } = await admin
+    .from("products")
+    .select("images")
+    .eq("slug", slug)
+    .maybeSingle();
+  return Array.isArray(data?.images) ? (data.images as Img[]) : [];
+}
+
+/** Salva l'array immagini di un prodotto. */
+async function writeImages(
+  admin: NonNullable<ReturnType<typeof createAdminClient>>,
+  slug: string,
+  images: Img[],
+): Promise<string | null> {
+  const { error } = await admin
+    .from("products")
+    .update({ images, updated_at: new Date().toISOString() })
+    .eq("slug", slug);
+  return error ? error.message : null;
+}
+
+/** Ricava il path dentro il bucket da un URL pubblico di Supabase Storage. */
+function storagePath(url: string): string | null {
+  const m = url.match(/\/product-images\/(.+)$/);
+  return m?.[1] ? decodeURIComponent(m[1]) : null;
+}
+
+/**
+ * Elimina un'immagine da un prodotto (e prova a rimuoverla dallo Storage se il
+ * file non è più referenziato da nessun altro prodotto).
+ */
+export async function deleteProductImage(
+  slug: string,
+  url: string,
+): Promise<ImageOpResult> {
+  const admin = createAdminClient();
+  if (!admin) return { ok: false, message: NO_ADMIN };
+  try {
+    const images = await readImages(admin, slug);
+    const next = images.filter((i) => i.url !== url);
+    if (next.length === images.length)
+      return { ok: false, message: "Immagine non trovata." };
+    const err = await writeImages(admin, slug, next);
+    if (err) return { ok: false, message: `DB: ${err}` };
+
+    // Rimuovi dallo Storage solo se nessun altro prodotto usa lo stesso file.
+    const path = storagePath(url);
+    if (path) {
+      const { data: others } = await admin
+        .from("products")
+        .select("id")
+        .contains("images", [{ url }]);
+      if (!others || others.length === 0) {
+        await admin.storage.from("product-images").remove([path]);
+      }
+    }
+
+    refreshSite();
+    return { ok: true, message: "Immagine eliminata." };
+  } catch (e) {
+    return {
+      ok: false,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
+/**
+ * Riordina le immagini di un prodotto secondo l'ordine di `urls`. La prima
+ * immagine diventa la copertina (usata nelle card e come miniatura).
+ */
+export async function reorderProductImages(
+  slug: string,
+  urls: string[],
+): Promise<ImageOpResult> {
+  const admin = createAdminClient();
+  if (!admin) return { ok: false, message: NO_ADMIN };
+  try {
+    const images = await readImages(admin, slug);
+    const byUrl = new Map(images.map((i) => [i.url, i]));
+    const next: Img[] = [];
+    for (const u of urls) {
+      const img = byUrl.get(u);
+      if (img) {
+        next.push(img);
+        byUrl.delete(u);
+      }
+    }
+    // Eventuali immagini non incluse restano in coda (nessuna perdita).
+    for (const img of byUrl.values()) next.push(img);
+
+    const err = await writeImages(admin, slug, next);
+    if (err) return { ok: false, message: `DB: ${err}` };
+    refreshSite();
+    return { ok: true, message: "Ordine aggiornato." };
+  } catch (e) {
+    return {
+      ok: false,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
+/**
+ * Sposta un'immagine da un prodotto a un altro. Il file resta su Storage (URL
+ * invariato): viene solo tolto il riferimento dall'origine e aggiunto alla
+ * destinazione, con `alt` aggiornato al titolo del prodotto di destinazione.
+ */
+export async function moveProductImage(
+  fromSlug: string,
+  toSlug: string,
+  url: string,
+): Promise<ImageOpResult> {
+  const admin = createAdminClient();
+  if (!admin) return { ok: false, message: NO_ADMIN };
+  if (fromSlug === toSlug)
+    return { ok: false, message: "Origine e destinazione coincidono." };
+  try {
+    const fromImages = await readImages(admin, fromSlug);
+    const moving = fromImages.find((i) => i.url === url);
+    if (!moving) return { ok: false, message: "Immagine non trovata." };
+
+    const { data: dest } = await admin
+      .from("products")
+      .select("title,images")
+      .eq("slug", toSlug)
+      .maybeSingle();
+    if (!dest) return { ok: false, message: "Prodotto destinazione assente." };
+
+    const alt = (dest.title as string) || toSlug;
+    const destImages = Array.isArray(dest.images) ? (dest.images as Img[]) : [];
+    if (destImages.some((i) => i.url === url))
+      return { ok: false, message: "La destinazione ha già questa immagine." };
+
+    const err1 = await writeImages(
+      admin,
+      fromSlug,
+      fromImages.filter((i) => i.url !== url),
+    );
+    if (err1) return { ok: false, message: `DB origine: ${err1}` };
+    const err2 = await writeImages(admin, toSlug, [
+      ...destImages,
+      { url, alt },
+    ]);
+    if (err2) return { ok: false, message: `DB destinazione: ${err2}` };
+
+    refreshSite();
+    return { ok: true, message: `Immagine spostata su "${alt}".` };
+  } catch (e) {
+    return {
+      ok: false,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
 /**
  * Importa il catalogo Deus Medical (categorie + prodotti) nel DB. Idempotente:
  * aggiorna nome/prezzi/costo dei prodotti già presenti senza crearne di doppi.

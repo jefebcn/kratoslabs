@@ -50,6 +50,8 @@ export interface Product {
   images: { url: string; alt: string }[];
   specs: ProductSpecs;
   labReport?: LabReport;
+  /** Scheda descrittiva estesa (HTML sanificato: h2/h3/p/ul/li/strong…). */
+  detailsHtml?: string;
   stock: number;
   featured: boolean;
 }
