@@ -20,7 +20,12 @@
   },
   "cart": {
     "summary": "{count, plural, one {# produto} other {# produtos}} · {total}",
-    "open": "Abrir carrinho"
+    "open": "Abrir carrinho",
+    "empty": "O teu carrinho está vazio.",
+    "exploreCatalog": "Explorar o catálogo",
+    "goToCheckout": "Ir para o checkout",
+    "title": "Carrinho",
+    "continueShopping": "Continuar a comprar"
   },
   "payments": {
     "accept": "Aceitamos"
@@ -56,5 +61,37 @@
     "placeholder": "O teu e-mail",
     "subscribe": "Subscrever",
     "done": "Subscrição registada. Obrigado."
+  },
+  "product": {
+    "inStock": "Disponível",
+    "soldOut": "Esgotado",
+    "lastFew": "Últimas {count}",
+    "addToCart": "Adicionar",
+    "added": "Adicionado",
+    "quickCheckout": "Compra rápida",
+    "addAria": "Adicionar ao carrinho",
+    "soldOutAria": "Produto esgotado",
+    "tabDescription": "Descrição",
+    "tabSpecs": "Especificações",
+    "tabLab": "Teste lab / QC",
+    "tabReviews": "Avaliações",
+    "notFound": "Produto não encontrado"
+  },
+  "auth": {
+    "loginTitle": "Entrar",
+    "registerTitle": "Criar uma conta",
+    "loginSubtitle": "Bem-vindo de volta.",
+    "registerSubtitle": "Demora apenas alguns segundos.",
+    "name": "Nome",
+    "email": "E-mail",
+    "password": "Palavra-passe",
+    "invalidCredentials": "E-mail ou palavra-passe incorretos.",
+    "captchaRequired": "Conclui a verificação anti-bot abaixo.",
+    "notConfigured": "Autenticação não configurada: falta a chave Supabase.",
+    "checkEmailTitle": "Verifica o teu e-mail",
+    "checkEmailBody": "Enviámos-te um link de confirmação. Abre-o para ativar a conta e depois volta aqui para entrar.",
+    "goToLogin": "Ir para o login",
+    "noAccount": "Não tens conta?",
+    "haveAccount": "Já tens conta?"
   }
 }

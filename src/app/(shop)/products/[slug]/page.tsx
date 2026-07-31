@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { ChevronRight } from "lucide-react";
 import {
   Tabs,
@@ -16,13 +17,9 @@ import { ProductGrid } from "@/components/product/ProductGrid";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
 import { RatingOverview } from "@/components/reviews/RatingOverview";
 import { Stars } from "@/components/reviews/Stars";
-import { findProduct, listByCategory, listProducts } from "@/features/products";
+import { findProduct, listByCategory } from "@/features/products";
 import { ratingSummary, reviewsForProduct } from "@/features/reviews";
 import { listCategories } from "@/features/categories";
-
-export async function generateStaticParams() {
-  return (await listProducts()).map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({
   params,
@@ -31,7 +28,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = await findProduct(slug);
-  if (!product) return { title: "Prodotto non trovato" };
+  if (!product) {
+    const t = await getTranslations("product");
+    return { title: t("notFound") };
+  }
   return {
     title: product.title,
     description: product.shortDescription,
@@ -47,6 +47,7 @@ export default async function ProductDetailPage({
   const product = await findProduct(slug);
   if (!product) notFound();
 
+  const t = await getTranslations("product");
   const categories = await listCategories();
   const category = categories.find((c) => c.slug === product.category);
   const related = (await listByCategory(product.category)).filter(
@@ -118,9 +119,9 @@ export default async function ProductDetailPage({
       <div className="mt-14 max-w-3xl">
         <Tabs defaultValue="descrizione">
           <TabsList>
-            <TabsTrigger value="descrizione">Descrizione</TabsTrigger>
-            <TabsTrigger value="specifiche">Specifiche</TabsTrigger>
-            <TabsTrigger value="lab">Lab test / QC</TabsTrigger>
+            <TabsTrigger value="descrizione">{t("tabDescription")}</TabsTrigger>
+            <TabsTrigger value="specifiche">{t("tabSpecs")}</TabsTrigger>
+            <TabsTrigger value="lab">{t("tabLab")}</TabsTrigger>
           </TabsList>
           <TabsContent value="descrizione">
             <p className="max-w-prose text-pretty text-muted">
@@ -138,7 +139,9 @@ export default async function ProductDetailPage({
 
       <section id="recensioni" className="mt-16 scroll-mt-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 className="text-lg font-semibold uppercase tracking-tight">Recensioni</h2>
+          <h2 className="text-lg font-semibold uppercase tracking-tight">
+            {t("tabReviews")}
+          </h2>
           {rating.count > 0 && (
             <RatingOverview average={rating.average} count={rating.count} />
           )}
