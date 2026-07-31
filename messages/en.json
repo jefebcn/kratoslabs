@@ -152,5 +152,18 @@
     "cryptoFlow": "The order is confirmed after we verify receipt of payment: you'll get a second confirmation email.",
     "copy": "Copy",
     "copied": "Copied"
+  },
+  "toggle": {
+    "language": "Language",
+    "changeLanguage": "Change language",
+    "currency": "Currency",
+    "changeCurrency": "Change currency"
+  },
+  "topbar": {
+    "announcements": [
+      "Third-party testing on every batch",
+      "Tracked shipping in 24/48h",
+      "Returns within 30 days"
+    ]
   }
 }

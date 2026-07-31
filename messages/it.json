@@ -152,5 +152,18 @@
     "cryptoFlow": "L'ordine viene confermato dopo che verifichiamo la ricezione del pagamento: riceverai una seconda email con la conferma.",
     "copy": "Copia",
     "copied": "Copiato"
+  },
+  "toggle": {
+    "language": "Lingua",
+    "changeLanguage": "Cambia lingua",
+    "currency": "Valuta",
+    "changeCurrency": "Cambia valuta"
+  },
+  "topbar": {
+    "announcements": [
+      "Analisi di terza parte su ogni lotto",
+      "Spedizione tracciata in 24/48h",
+      "Reso entro 30 giorni"
+    ]
   }
 }
