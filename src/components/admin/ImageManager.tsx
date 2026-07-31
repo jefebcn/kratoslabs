@@ -10,6 +10,7 @@ import {
   Trash2,
   Check,
   X,
+  ZoomIn,
 } from "lucide-react";
 import {
   deleteProductImage,
@@ -17,6 +18,7 @@ import {
   reorderProductImages,
   type ImageOpResult,
 } from "@/features/admin/actions";
+import { Lightbox } from "@/components/ui/Lightbox";
 
 type Img = { url: string; alt: string };
 type Prod = { slug: string; title: string; images: Img[] };
@@ -32,6 +34,9 @@ export function ImageManager({ products }: { products: Prod[] }) {
   const [msg, setMsg] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [showEmpty, setShowEmpty] = useState(false);
+  const [zoom, setZoom] = useState<{ images: Img[]; index: number } | null>(
+    null,
+  );
 
   function run(fn: () => Promise<ImageOpResult>) {
     startTransition(async () => {
@@ -109,6 +114,9 @@ export function ImageManager({ products }: { products: Prod[] }) {
                         total={p.images.length}
                         products={products}
                         run={run}
+                        onZoom={() =>
+                          setZoom({ images: p.images, index: i })
+                        }
                       />
                     ))}
                   </div>
@@ -118,6 +126,15 @@ export function ImageManager({ products }: { products: Prod[] }) {
           </ul>
         )}
       </div>
+
+      {zoom && (
+        <Lightbox
+          images={zoom.images}
+          index={zoom.index}
+          onIndex={(i) => setZoom((z) => (z ? { ...z, index: i } : z))}
+          onClose={() => setZoom(null)}
+        />
+      )}
     </div>
   );
 }
@@ -129,6 +146,7 @@ function ImageCard({
   total,
   products,
   run,
+  onZoom,
 }: {
   product: Prod;
   img: Img;
@@ -136,6 +154,7 @@ function ImageCard({
   total: number;
   products: Prod[];
   run: (fn: () => Promise<ImageOpResult>) => void;
+  onZoom: () => void;
 }) {
   const [moving, setMoving] = useState(false);
   const [confirmDel, setConfirmDel] = useState(false);
@@ -151,20 +170,28 @@ function ImageCard({
 
   return (
     <div className="flex flex-col gap-1.5">
-      <div className="relative aspect-square overflow-hidden rounded-base border border-border bg-surface-2">
+      <button
+        type="button"
+        onClick={onZoom}
+        title="Ingrandisci"
+        className="group relative aspect-square cursor-zoom-in overflow-hidden rounded-base border border-border bg-surface-2"
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={img.url}
           alt={img.alt}
           loading="lazy"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform group-hover:scale-105"
         />
+        <span className="absolute inset-0 grid place-items-center bg-black/0 text-white opacity-0 transition-opacity group-hover:bg-black/30 group-hover:opacity-100">
+          <ZoomIn className="size-6" aria-hidden />
+        </span>
         {index === 0 && (
           <span className="absolute left-1 top-1 rounded-sm bg-accent px-1.5 py-0.5 text-[10px] font-semibold text-white">
             Copertina
           </span>
         )}
-      </div>
+      </button>
 
       <div className="flex items-center justify-between gap-0.5">
         <button
