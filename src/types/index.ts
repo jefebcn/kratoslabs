@@ -103,7 +103,7 @@ export interface CurrencyMeta {
   rateFromEur: number;
 }
 
-export type LocaleCode = "it" | "en" | "de" | "fr";
+export type LocaleCode = "it" | "en" | "de" | "fr" | "pt";
 
 export interface LocaleMeta {
   code: LocaleCode;

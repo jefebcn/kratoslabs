@@ -115,6 +115,7 @@ export const LOCALES: LocaleMeta[] = [
   { code: "en", label: "English", short: "EN" },
   { code: "de", label: "Deutsch", short: "DE" },
   { code: "fr", label: "Français", short: "FR" },
+  { code: "pt", label: "Português", short: "PT" },
 ];
 
 export const DEFAULT_LOCALE = "it" as const;

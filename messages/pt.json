@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Início",
+    "allProducts": "Todos os produtos",
+    "guide": "Guias",
+    "reviews": "Avaliações",
+    "analysis": "Análises",
+    "analysisLong": "Análises de laboratório",
+    "aboutUs": "Sobre nós",
+    "contact": "Contacto",
+    "wholesale": "Grossista"
+  },
+  "account": {
+    "login": "Entrar",
+    "register": "Registar",
+    "logout": "Sair"
+  },
+  "search": {
+    "placeholder": "Pesquisar…"
+  },
+  "cart": {
+    "summary": "{count, plural, one {# produto} other {# produtos}} · {total}",
+    "open": "Abrir carrinho"
+  },
+  "payments": {
+    "accept": "Aceitamos"
+  },
+  "home": {
+    "newProducts": "Novos produtos",
+    "bestsellers": "Mais vendidos",
+    "viewAll": "Ver todos — {category}",
+    "touchdownGallery": "Galeria Touchdown",
+    "sendTouchdown": "Envia o teu touchdown aqui"
+  },
+  "menu": {
+    "title": "Menu",
+    "categories": "Categorias"
+  },
+  "footer": {
+    "catalog": "Catálogo",
+    "info": "Informações",
+    "legal": "Legal",
+    "contact": "Contacto",
+    "communityRefs": "Referências independentes da comunidade",
+    "newsletterTitle": "Newsletter",
+    "newsletterSubtitle": "Fica a par de promoções, saldos e ofertas exclusivas da {site}.",
+    "telegramCta": "Junta-te ao nosso Telegram",
+    "email": "E-mail",
+    "paymentMethods": "Métodos de pagamento",
+    "privacy": "Política de privacidade",
+    "terms": "Termos de serviço",
+    "shipping": "Envios e devoluções",
+    "disclaimer": "© {year} {site}. Todos os produtos são fornecidos exclusivamente para fins de investigação e avaliação e não são apresentados como tratamentos médicos ou soluções de saúde."
+  },
+  "newsletter": {
+    "placeholder": "O teu e-mail",
+    "subscribe": "Subscrever",
+    "done": "Subscrição registada. Obrigado."
+  }
+}
