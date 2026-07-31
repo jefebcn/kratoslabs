@@ -34,8 +34,10 @@ export function BrowserImageImporter({ bookmarklet }: { bookmarklet: string }) {
       </h2>
       <p className="mt-1 text-sm text-muted">
         deuspower e deusmedical bloccano il nostro server (Cloudflare). Questo
-        metodo usa il <strong>tuo browser</strong>: scarica le foto e le carica
-        qui, abbinandole ai prodotti per nome.
+        metodo usa il <strong>tuo browser</strong>: apre ogni scheda prodotto,
+        scarica <strong>tutte le foto della galleria</strong> nello stesso
+        ordine del sito sorgente e le carica qui, abbinandole ai prodotti per
+        nome.
       </p>
 
       <ol className="mt-4 flex list-decimal flex-col gap-1.5 pl-5 text-sm text-muted">
@@ -78,8 +80,10 @@ export function BrowserImageImporter({ bookmarklet }: { bookmarklet: string }) {
           prodotti possibile per pagina).
         </li>
         <li>
-          Clicca il preferito appena creato: partirà il download e in basso a
-          destra vedrai l&apos;avanzamento.
+          Clicca il preferito appena creato: aprirà ogni scheda una alla volta
+          per prenderne tutte le foto, quindi impiega qualche minuto. In basso a
+          destra vedrai l&apos;avanzamento (prodotti e foto). Lascia la scheda
+          aperta fino a &quot;Fatto&quot;.
         </li>
         <li>
           Torna qui e ricarica: i prodotti abbinati avranno la foto. Il tasto
