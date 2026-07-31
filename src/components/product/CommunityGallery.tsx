@@ -1,16 +1,37 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import type { GalleryImage } from "@/features/gallery/queries";
 
 /**
  * "Galleria Touchdown": carosello orizzontale di foto/recensioni dei clienti.
- * Al passaggio del mouse su una foto compare il testo della recensione.
+ * Scorre in automatico (in pausa al passaggio del mouse) e mostra il testo
+ * della recensione in overlay quando ci si passa sopra.
  */
 export function CommunityGallery({ items }: { items: GalleryImage[] }) {
   const scroller = useRef<HTMLDivElement>(null);
+  const paused = useRef(false);
+
+  // Scorrimento automatico: avanza di una tessera ogni pochi secondi e riparte
+  // dall'inizio alla fine. In pausa quando il mouse è sopra il carosello.
+  useEffect(() => {
+    if (items.length <= 1) return;
+    const el = scroller.current;
+    if (!el) return;
+    const id = setInterval(() => {
+      if (paused.current) return;
+      const tile = el.querySelector("figure");
+      const step = tile ? tile.clientWidth + 16 : Math.round(el.clientWidth * 0.8);
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 2) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: step, behavior: "smooth" });
+      }
+    }, 3500);
+    return () => clearInterval(id);
+  }, [items.length]);
 
   if (items.length === 0) return null;
 
@@ -35,6 +56,9 @@ export function CommunityGallery({ items }: { items: GalleryImage[] }) {
 
       <div
         ref={scroller}
+        onMouseEnter={() => (paused.current = true)}
+        onMouseLeave={() => (paused.current = false)}
+        onTouchStart={() => (paused.current = true)}
         className="flex gap-4 overflow-x-auto scroll-smooth px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item) => (
