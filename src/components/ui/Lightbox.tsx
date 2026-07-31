@@ -74,12 +74,14 @@ export function Lightbox({
         </button>
       )}
 
+      {/* h/w piene + object-contain: la foto riempie lo spazio (anche ingrandendo
+          le immagini piccole) mantenendo le proporzioni. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={cur.url}
         alt={cur.alt}
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[90vh] max-w-[92vw] rounded-base object-contain shadow-2xl"
+        className="h-[90vh] w-[90vw] rounded-base object-contain"
       />
 
       {n > 1 && (
