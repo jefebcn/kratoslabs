@@ -105,7 +105,8 @@
     "privacy": "Politique de confidentialité",
     "terms": "Conditions d'utilisation",
     "shipping": "Livraison et retours",
-    "disclaimer": "© {year} {site}. Tous les produits sont fournis exclusivement à des fins de recherche et d'évaluation et ne sont pas présentés comme des traitements médicaux ou des solutions de santé."
+    "disclaimer": "© {year} {site}. Tous les produits sont fournis exclusivement à des fins de recherche et d'évaluation et ne sont pas présentés comme des traitements médicaux ou des solutions de santé.",
+    "fastShipping": "Livraison rapide"
   },
   "newsletter": {
     "placeholder": "Votre e-mail",

@@ -2,9 +2,8 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { Send } from "lucide-react";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
-import { Icon } from "@/components/ui/icon";
 import { listCategories } from "@/features/categories";
-import { PAYMENT_METHODS, SITE } from "@/lib/constants";
+import { SITE } from "@/lib/constants";
 
 /** Riferimenti indipendenti della community (link esterni). */
 const COMMUNITY_REFS: { label: string; href: string }[] = [
@@ -128,17 +127,6 @@ export async function Footer() {
             >
               {SITE.email}
             </a>
-            <p className="mt-4 text-xs uppercase tracking-wide text-white/50">
-              {t("paymentMethods")}
-            </p>
-            <div className="mt-2 flex items-center gap-3 text-white/80">
-              {PAYMENT_METHODS.map((m) => (
-                <span key={m.id} title={m.label}>
-                  <Icon name={m.icon} className="size-5" />
-                  <span className="sr-only">{m.label}</span>
-                </span>
-              ))}
-            </div>
           </div>
 
           <Column
@@ -150,6 +138,42 @@ export async function Footer() {
           />
           <Column title={t("info")} links={infoLinks} />
           <Column title={t("legal")} links={legalLinks} />
+        </div>
+      </div>
+
+      {/* Metodi di pagamento + spedizione (loghi trasparenti) */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-4 py-6 sm:px-6">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">
+            {t("paymentMethods")}
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            {/* eslint-disable @next/next/no-img-element */}
+            <span className="flex h-8 items-center rounded-[6px] bg-white px-2.5">
+              <img
+                src="/images/pay/cards.png"
+                alt="PayPal, Visa, Mastercard, American Express"
+                className="h-4 w-auto"
+              />
+            </span>
+            <span className="flex h-8 items-center rounded-[6px] bg-white px-2">
+              <img src="/images/pay/btc.png" alt="Bitcoin" className="h-6 w-auto" />
+            </span>
+            <span className="flex h-8 items-center rounded-[6px] bg-white px-2">
+              <img src="/images/pay/usdt.png" alt="Tether USDT" className="h-6 w-auto" />
+            </span>
+            <span className="inline-flex items-center gap-2 text-xs font-medium text-white/70">
+              <span className="flex h-8 items-center rounded-[6px] bg-white px-2">
+                <img
+                  src="/images/pay/shipping.png"
+                  alt=""
+                  className="h-5 w-auto"
+                />
+              </span>
+              {t("fastShipping")}
+            </span>
+            {/* eslint-enable @next/next/no-img-element */}
+          </div>
         </div>
       </div>
 

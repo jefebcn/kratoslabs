@@ -105,7 +105,8 @@
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
     "shipping": "Versand & Rückgabe",
-    "disclaimer": "© {year} {site}. Alle Produkte werden ausschließlich zu Forschungs- und Bewertungszwecken bereitgestellt und sind nicht als medizinische Behandlungen oder Gesundheitslösungen zu verstehen."
+    "disclaimer": "© {year} {site}. Alle Produkte werden ausschließlich zu Forschungs- und Bewertungszwecken bereitgestellt und sind nicht als medizinische Behandlungen oder Gesundheitslösungen zu verstehen.",
+    "fastShipping": "Schneller Versand"
   },
   "newsletter": {
     "placeholder": "Deine E-Mail",
