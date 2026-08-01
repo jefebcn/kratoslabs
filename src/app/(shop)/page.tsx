@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { Icon } from "@/components/ui/icon";
 import { HeroCarousel, type HeroSlide } from "@/components/home/HeroCarousel";
-import { PaymentsBand } from "@/components/layout/PaymentsBand";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
@@ -72,9 +71,6 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col">
-      {/* We accept: banda subito sotto l'header, sopra il carosello */}
-      <PaymentsBand />
-
       {/* Carosello promozionale */}
       <HeroCarousel slides={SLIDES} />
 

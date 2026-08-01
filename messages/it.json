@@ -105,7 +105,8 @@
     "privacy": "Privacy policy",
     "terms": "Termini di servizio",
     "shipping": "Spedizioni e resi",
-    "disclaimer": "© {year} {site}. Tutti i prodotti sono forniti esclusivamente a scopo di ricerca e valutazione e non sono presentati come trattamenti medici o soluzioni per la salute."
+    "disclaimer": "© {year} {site}. Tutti i prodotti sono forniti esclusivamente a scopo di ricerca e valutazione e non sono presentati come trattamenti medici o soluzioni per la salute.",
+    "fastShipping": "Spedizione veloce"
   },
   "newsletter": {
     "placeholder": "La tua email",
