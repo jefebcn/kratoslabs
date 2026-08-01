@@ -52,6 +52,10 @@ export default async function TestimonialPage({
               {t("home")}
             </Link>
             <ChevronRight className="size-3" aria-hidden />
+            <Link href="/testimonianze" className="hover:text-text">
+              {t("title")}
+            </Link>
+            <ChevronRight className="size-3" aria-hidden />
             <span className="text-text">{t("crumb")}</span>
           </nav>
         </div>

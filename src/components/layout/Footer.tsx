@@ -49,6 +49,7 @@ export async function Footer() {
 
   const infoLinks = [
     { href: "/rewards", label: tNav("rewards") },
+    { href: "/testimonianze", label: tNav("testimonials") },
     { href: "/guide", label: tNav("guide") },
     { href: "/recensioni", label: tNav("reviews") },
     { href: "/analisi", label: tNav("analysisLong") },

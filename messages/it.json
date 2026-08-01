@@ -9,7 +9,8 @@
     "aboutUs": "Chi siamo",
     "contact": "Contatto",
     "wholesale": "All'ingrosso",
-    "rewards": "Punti fedeltà"
+    "rewards": "Punti fedeltà",
+    "testimonials": "Testimonianze"
   },
   "account": {
     "login": "Accedi",
@@ -251,6 +252,8 @@
     "crumb": "Testimonianza",
     "images": "Le tue immagini",
     "review": "Revisione",
-    "products": "Prodotti"
+    "products": "Prodotti",
+    "subtitle": "Foto e recensioni reali dei nostri clienti.",
+    "empty": "Non ci sono ancora testimonianze."
   }
 }
