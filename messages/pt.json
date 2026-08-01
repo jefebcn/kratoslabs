@@ -9,7 +9,8 @@
     "aboutUs": "Sobre nós",
     "contact": "Contacto",
     "wholesale": "Grossista",
-    "rewards": "Pontos de fidelidade"
+    "rewards": "Pontos de fidelidade",
+    "testimonials": "Testemunhos"
   },
   "account": {
     "login": "Entrar",
@@ -251,6 +252,8 @@
     "crumb": "Testemunho",
     "images": "As tuas fotos",
     "review": "Avaliação",
-    "products": "Produtos"
+    "products": "Produtos",
+    "subtitle": "Fotos e avaliações reais dos nossos clientes.",
+    "empty": "Ainda sem testemunhos."
   }
 }

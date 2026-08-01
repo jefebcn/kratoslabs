@@ -9,7 +9,8 @@
     "aboutUs": "About us",
     "contact": "Contact",
     "wholesale": "Wholesale",
-    "rewards": "Reward points"
+    "rewards": "Reward points",
+    "testimonials": "Testimonials"
   },
   "account": {
     "login": "Log in",
@@ -251,6 +252,8 @@
     "crumb": "Testimonial",
     "images": "Your photos",
     "review": "Review",
-    "products": "Products"
+    "products": "Products",
+    "subtitle": "Real photos and reviews from our customers.",
+    "empty": "No testimonials yet."
   }
 }

@@ -9,7 +9,8 @@
     "aboutUs": "À propos",
     "contact": "Contact",
     "wholesale": "En gros",
-    "rewards": "Points de fidélité"
+    "rewards": "Points de fidélité",
+    "testimonials": "Témoignages"
   },
   "account": {
     "login": "Se connecter",
@@ -251,6 +252,8 @@
     "crumb": "Témoignage",
     "images": "Vos photos",
     "review": "Avis",
-    "products": "Produits"
+    "products": "Produits",
+    "subtitle": "Photos et avis réels de nos clients.",
+    "empty": "Aucun témoignage pour l’instant."
   }
 }

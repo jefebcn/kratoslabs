@@ -9,7 +9,8 @@
     "aboutUs": "Über uns",
     "contact": "Kontakt",
     "wholesale": "Großhandel",
-    "rewards": "Treuepunkte"
+    "rewards": "Treuepunkte",
+    "testimonials": "Erfahrungsberichte"
   },
   "account": {
     "login": "Anmelden",
@@ -251,6 +252,8 @@
     "crumb": "Erfahrungsbericht",
     "images": "Deine Fotos",
     "review": "Bewertung",
-    "products": "Produkte"
+    "products": "Produkte",
+    "subtitle": "Echte Fotos und Bewertungen unserer Kunden.",
+    "empty": "Noch keine Erfahrungsberichte."
   }
 }
