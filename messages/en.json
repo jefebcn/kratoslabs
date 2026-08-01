@@ -76,7 +76,8 @@
     "continueShopping": "Continue shopping"
   },
   "payments": {
-    "accept": "We accept"
+    "accept": "We accept",
+    "fastShipping": "Fast shipping"
   },
   "home": {
     "newProducts": "New products",
