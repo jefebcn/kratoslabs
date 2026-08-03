@@ -5,7 +5,7 @@
  *  - Guadagno: 5 punti ogni 25€ spesi (≈ 1 punto ogni 5€).
  *  - Valore: 100 punti = 25€ di sconto (1 punto = 0,25€).
  */
-export const POINT_VALUE_CENTS = 25; // 1 punto = 0,25 €
+export const POINT_VALUE_CENTS = 10; // 1 punto = 0,10 €
 export const EARN_DIVISOR_CENTS = 500; // 1 punto ogni 5€ → 5 punti / 25€
 
 /** Quota massima dell'ordine copribile con i punti (esclusa spedizione). */
@@ -14,10 +14,10 @@ export const REDEEM_MAX_FRACTION = 0.7; // max 70%
 /** Validità dei punti guadagnati, in giorni. */
 export const POINTS_EXPIRY_DAYS = 90;
 
-/** Bonus una tantum (come deuspower). */
-export const BONUS_ACCOUNT = 10;
-export const BONUS_NEWSLETTER = 10;
-export const BONUS_FIRST_ORDER = 20;
+/** Bonus una tantum. */
+export const BONUS_ACCOUNT = 5;
+export const BONUS_NEWSLETTER = 5;
+export const BONUS_FIRST_ORDER = 10;
 
 /** Punti guadagnati per un ordine di `cents` (arrotondati per difetto). */
 export function pointsEarnedFor(cents: number): number {
