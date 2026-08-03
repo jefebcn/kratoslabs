@@ -10,7 +10,7 @@ import { ProductGrid } from "@/components/product/ProductGrid";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
 import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts, listProducts } from "@/features/products";
-import { HERO, SITE, TRUST_BADGES } from "@/lib/constants";
+import { SITE, TRUST_BADGES } from "@/lib/constants";
 import { listCategories } from "@/features/categories";
 import { listGalleryImages } from "@/features/gallery/queries";
 
@@ -35,21 +35,6 @@ const SLIDES: HeroSlide[] = [
     subtitle: "",
     cta: { label: "Esplora il catalogo", href: "/products" },
     banner: "/images/carousel-hero.jpg",
-  },
-  {
-    eyebrow: HERO.eyebrow,
-    title: "Dosaggi dichiarati, verificati",
-    subtitle: HERO.subtitle,
-    cta: { label: "Esplora il catalogo", href: "/products" },
-    image: "/images/products/tub.svg",
-  },
-  {
-    eyebrow: "Quality control",
-    title: "Ogni lotto, analizzato",
-    subtitle:
-      "Un laboratorio indipendente verifica contenuto e contaminanti. Referto pubblico con il numero di lotto verificabile.",
-    cta: { label: "Come testiamo", href: "/analisi" },
-    icon: "FlaskConical",
   },
 ];
 
