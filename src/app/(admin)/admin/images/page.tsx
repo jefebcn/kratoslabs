@@ -95,11 +95,13 @@ export default async function AdminImagesPage() {
       </div>
 
       <div>
-        <h2 className="text-sm font-semibold">Auto-download / URL manuale</h2>
+        <h2 className="text-sm font-semibold">
+          Carica file / Auto-download / URL
+        </h2>
         <p className="mb-3 mt-1 text-sm text-muted">
-          In alternativa puoi provare l&apos;auto-download da DeusMedical o
-          incollare un URL immagine (funziona solo se la fonte non blocca il
-          server).
+          Per ogni prodotto puoi <strong>caricare un file</strong> dal
+          dispositivo, provare l&apos;auto-download da DeusMedical o incollare un
+          URL immagine.
         </p>
         <ImageImporter products={importerRows} />
       </div>
