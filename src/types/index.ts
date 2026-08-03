@@ -24,6 +24,14 @@ export interface ProductSpecs {
   activeName: string;
   /** Confezione/formato (es. "10 fiale / 1 mL"). Opzionale. */
   packaging?: string;
+  /** Classe farmacologica (es. "Inibitore dell'aromatasi"). */
+  productClass?: string;
+  /** Forma (es. "Soluzione iniettabile", "Compresse"). */
+  form?: string;
+  /** Concentrazione/dosaggio (es. "250 mg/ml"). */
+  concentration?: string;
+  /** Produttore. */
+  manufacturer?: string;
 }
 
 export interface LabReport {

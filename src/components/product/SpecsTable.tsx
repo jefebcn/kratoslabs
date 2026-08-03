@@ -17,7 +17,17 @@ export function SpecsTable({ specs }: { specs: ProductSpecs }) {
       {specs.activeName && (
         <Row label="Principio attivo" value={specs.activeName} />
       )}
+      {specs.concentration && (
+        <Row label="Concentrazione" value={specs.concentration} />
+      )}
+      {specs.productClass && (
+        <Row label="Classe" value={specs.productClass} />
+      )}
+      {specs.form && <Row label="Forma" value={specs.form} />}
       {specs.packaging && <Row label="Confezione" value={specs.packaging} />}
+      {specs.manufacturer && (
+        <Row label="Produttore" value={specs.manufacturer} />
+      )}
       {specs.netWeightG > 0 && (
         <Row label="Peso netto" value={`${specs.netWeightG} g`} />
       )}
