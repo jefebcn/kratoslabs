@@ -8,6 +8,7 @@ import { HeroCarousel, type HeroSlide } from "@/components/home/HeroCarousel";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { CommunityGallery } from "@/components/product/CommunityGallery";
+import { HomeInfoCards } from "@/components/home/HomeInfoCards";
 import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts, listProducts } from "@/features/products";
 import { SITE, TRUST_BADGES } from "@/lib/constants";
@@ -106,6 +107,9 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Info: cosa trattiamo / spedizione / pagamenti */}
+      <HomeInfoCards />
 
       {/* Feedback verificati */}
       <ReviewsSection />
