@@ -5,6 +5,7 @@ export {
   importCatalog,
   importProductImage,
   importProductImageFromUrl,
+  uploadProductImage,
   type ActionResult,
   type ImageImportResult,
 } from "./actions";

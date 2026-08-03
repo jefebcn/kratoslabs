@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Check, DownloadCloud, Loader2, RefreshCw, X } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import { Check, DownloadCloud, Loader2, RefreshCw, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   importProductImage,
   importProductImageFromUrl,
+  uploadProductImage,
 } from "@/features/admin";
 import { cn } from "@/lib/utils";
 
@@ -59,6 +60,21 @@ export function ImageImporter({ products }: { products: Row[] }) {
   async function runManual(slug: string, url: string) {
     setStatus((s) => ({ ...s, [slug]: { state: "loading" } }));
     const res = await importProductImageFromUrl(slug, url);
+    setStatus((s) => ({
+      ...s,
+      [slug]: {
+        state: res.ok ? "ok" : "error",
+        message: res.message,
+        imageUrl: res.imageUrl,
+      },
+    }));
+  }
+
+  async function runUpload(slug: string, file: File) {
+    setStatus((s) => ({ ...s, [slug]: { state: "loading" } }));
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await uploadProductImage(slug, fd);
     setStatus((s) => ({
       ...s,
       [slug]: {
@@ -140,6 +156,7 @@ export function ImageImporter({ products }: { products: Row[] }) {
               imageUrl={imageOf(r)}
               onAuto={() => runAuto(r.slug)}
               onManual={(url) => runManual(r.slug, url)}
+              onUpload={(file) => runUpload(r.slug, file)}
             />
           ))}
           {visible.length === 0 && (
@@ -159,14 +176,17 @@ function ImporterRow({
   imageUrl,
   onAuto,
   onManual,
+  onUpload,
 }: {
   row: Row;
   status?: Status;
   imageUrl: string | null;
   onAuto: () => void;
   onManual: (url: string) => void;
+  onUpload: (file: File) => void;
 }) {
   const [url, setUrl] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
   const state = status?.state ?? "idle";
   const showManual = state === "error";
 
@@ -211,6 +231,26 @@ function ImporterRow({
           <Check className="size-4 text-emerald-600" aria-hidden />
         )}
         {state === "error" && <X className="size-4 text-danger" aria-hidden />}
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            if (f) onUpload(f);
+            e.target.value = "";
+          }}
+        />
+        <button
+          type="button"
+          onClick={() => fileRef.current?.click()}
+          disabled={state === "loading"}
+          className="inline-flex items-center gap-1 rounded-base border border-border px-2 py-1.5 text-xs font-medium transition-colors hover:text-accent disabled:opacity-50"
+        >
+          <Upload className="size-3.5" aria-hidden />
+          Carica file
+        </button>
         <button
           type="button"
           onClick={onAuto}

@@ -206,6 +206,70 @@ export async function importProductImage(
   }
 }
 
+/** Carica un file immagine dal dispositivo e lo aggiunge al prodotto. */
+export async function uploadProductImage(
+  slug: string,
+  formData: FormData,
+): Promise<ImageImportResult> {
+  if (!slug) return { ok: false, slug, message: "Slug mancante." };
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) {
+    return { ok: false, slug, message: "Nessun file selezionato." };
+  }
+  const admin = createAdminClient();
+  if (!admin) return { ok: false, slug, message: NO_ADMIN };
+  try {
+    const type = file.type || "image/jpeg";
+    const ext = type.includes("png")
+      ? "png"
+      : type.includes("webp")
+        ? "webp"
+        : "jpg";
+    const path = `${slug}/upload-${Date.now()}.${ext}`;
+    const { error: upErr } = await admin.storage
+      .from("product-images")
+      .upload(path, file, { contentType: type, upsert: true });
+    if (upErr) return { ok: false, slug, message: `Upload: ${upErr.message}` };
+
+    const { data: pub } = admin.storage
+      .from("product-images")
+      .getPublicUrl(path);
+
+    const { data: prod } = await admin
+      .from("products")
+      .select("title, images")
+      .eq("slug", slug)
+      .maybeSingle();
+    const alt = (prod?.title as string) || slug;
+    const existing = Array.isArray(prod?.images)
+      ? (prod.images as { url: string; alt: string }[])
+      : [];
+
+    const { error: updErr } = await admin
+      .from("products")
+      .update({
+        images: [...existing, { url: pub.publicUrl, alt }],
+        updated_at: new Date().toISOString(),
+      })
+      .eq("slug", slug);
+    if (updErr) return { ok: false, slug, message: `DB: ${updErr.message}` };
+
+    refreshSite();
+    return {
+      ok: true,
+      slug,
+      message: "Immagine caricata.",
+      imageUrl: pub.publicUrl,
+    };
+  } catch (e) {
+    return {
+      ok: false,
+      slug,
+      message: e instanceof Error ? e.message : "Errore imprevisto.",
+    };
+  }
+}
+
 /** Fallback: importa l'immagine da un URL fornito manualmente. */
 export async function importProductImageFromUrl(
   slug: string,
