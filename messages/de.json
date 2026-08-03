@@ -209,7 +209,8 @@
       "pointsToUse": "Zu nutzende Punkte (max {max})",
       "useMax": "Maximum nutzen",
       "note70": "Sie können bis zu 70% der Bestellung abdecken (ohne Versand)."
-    }
+    },
+    "unavailable": "Nicht verfügbar"
   },
   "toggle": {
     "language": "Sprache",

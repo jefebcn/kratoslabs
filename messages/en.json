@@ -209,7 +209,8 @@
       "pointsToUse": "Points to use (max {max})",
       "useMax": "Use max",
       "note70": "You can cover up to 70% of the order (shipping excluded)."
-    }
+    },
+    "unavailable": "Unavailable"
   },
   "toggle": {
     "language": "Language",

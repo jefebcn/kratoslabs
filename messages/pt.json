@@ -209,7 +209,8 @@
       "pointsToUse": "Pontos a usar (máx {max})",
       "useMax": "Usar o máximo",
       "note70": "Pode cobrir até 70% da encomenda (envio excluído)."
-    }
+    },
+    "unavailable": "Indisponível"
   },
   "toggle": {
     "language": "Idioma",

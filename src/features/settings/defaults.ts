@@ -17,8 +17,12 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     bank: clean(process.env.NEXT_PUBLIC_BANK_NAME),
   },
   crypto: {
-    btc: clean(process.env.NEXT_PUBLIC_BTC_ADDRESS),
-    usdtTrc20: clean(process.env.NEXT_PUBLIC_USDT_TRC20_ADDRESS),
+    btc:
+      clean(process.env.NEXT_PUBLIC_BTC_ADDRESS) ||
+      "3BprV9NXnMUXLcoXicQgeo6R15qfLCJHJf",
+    usdtTrc20:
+      clean(process.env.NEXT_PUBLIC_USDT_TRC20_ADDRESS) ||
+      "TW4dKCiXKsGy4vdfRGpcXge9EqVpTzSx33",
   },
   shipping: {
     freeThresholdCents: null,

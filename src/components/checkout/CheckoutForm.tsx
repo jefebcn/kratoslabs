@@ -311,17 +311,28 @@ export function CheckoutForm({
           {PAYMENT_METHODS.map((m) => (
             <label
               key={m.id}
-              className="flex cursor-pointer items-center gap-3 rounded-base border border-border p-3 text-sm transition-colors has-[:checked]:border-accent has-[:checked]:text-accent"
+              className={cn(
+                "flex items-center gap-3 rounded-base border border-border p-3 text-sm transition-colors",
+                m.disabled
+                  ? "cursor-not-allowed opacity-50"
+                  : "cursor-pointer has-[:checked]:border-accent has-[:checked]:text-accent",
+              )}
             >
               <input
                 type="radio"
                 name="paymentMethod"
                 value={m.id}
                 defaultChecked={m.id === "crypto"}
+                disabled={m.disabled}
                 className="[accent-color:#dc2626]"
               />
               <MethodLogo id={m.id} />
               {t(`pm.${m.id}`)}
+              {m.disabled && (
+                <span className="ml-auto text-xs text-muted">
+                  {t("unavailable")}
+                </span>
+              )}
             </label>
           ))}
         </div>

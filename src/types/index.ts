@@ -129,6 +129,8 @@ export interface PaymentMethod {
   id: string;
   label: string;
   icon: string;
+  /** Metodo mostrato ma non selezionabile (non ancora attivo). */
+  disabled?: boolean;
 }
 
 /** Foto dalla community: prova sociale, non decorazione. */
