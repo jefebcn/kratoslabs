@@ -46,43 +46,74 @@ export function ImageImporter({ products }: { products: Row[] }) {
 
   async function runAuto(slug: string) {
     setStatus((s) => ({ ...s, [slug]: { state: "loading" } }));
-    const res = await importProductImage(slug);
-    setStatus((s) => ({
-      ...s,
-      [slug]: {
-        state: res.ok ? "ok" : "error",
-        message: res.message,
-        imageUrl: res.imageUrl,
-      },
-    }));
+    try {
+      const res = await importProductImage(slug);
+      setStatus((s) => ({
+        ...s,
+        [slug]: {
+          state: res.ok ? "ok" : "error",
+          message: res.message,
+          imageUrl: res.imageUrl,
+        },
+      }));
+    } catch {
+      setStatus((s) => ({
+        ...s,
+        [slug]: { state: "error", message: "Operazione non riuscita." },
+      }));
+    }
   }
 
   async function runManual(slug: string, url: string) {
     setStatus((s) => ({ ...s, [slug]: { state: "loading" } }));
-    const res = await importProductImageFromUrl(slug, url);
-    setStatus((s) => ({
-      ...s,
-      [slug]: {
-        state: res.ok ? "ok" : "error",
-        message: res.message,
-        imageUrl: res.imageUrl,
-      },
-    }));
+    try {
+      const res = await importProductImageFromUrl(slug, url);
+      setStatus((s) => ({
+        ...s,
+        [slug]: {
+          state: res.ok ? "ok" : "error",
+          message: res.message,
+          imageUrl: res.imageUrl,
+        },
+      }));
+    } catch {
+      setStatus((s) => ({
+        ...s,
+        [slug]: { state: "error", message: "Operazione non riuscita." },
+      }));
+    }
   }
 
   async function runUpload(slug: string, file: File) {
+    if (file.size > 15 * 1024 * 1024) {
+      setStatus((s) => ({
+        ...s,
+        [slug]: { state: "error", message: "File troppo grande (max 15 MB)." },
+      }));
+      return;
+    }
     setStatus((s) => ({ ...s, [slug]: { state: "loading" } }));
-    const fd = new FormData();
-    fd.append("file", file);
-    const res = await uploadProductImage(slug, fd);
-    setStatus((s) => ({
-      ...s,
-      [slug]: {
-        state: res.ok ? "ok" : "error",
-        message: res.message,
-        imageUrl: res.imageUrl,
-      },
-    }));
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await uploadProductImage(slug, fd);
+      setStatus((s) => ({
+        ...s,
+        [slug]: {
+          state: res.ok ? "ok" : "error",
+          message: res.message,
+          imageUrl: res.imageUrl,
+        },
+      }));
+    } catch {
+      setStatus((s) => ({
+        ...s,
+        [slug]: {
+          state: "error",
+          message: "Caricamento non riuscito (file troppo grande o rete).",
+        },
+      }));
+    }
   }
 
   async function downloadAllMissing() {
