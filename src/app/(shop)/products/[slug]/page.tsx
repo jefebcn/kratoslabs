@@ -21,7 +21,9 @@ import { RatingOverview } from "@/components/reviews/RatingOverview";
 import { Stars } from "@/components/reviews/Stars";
 import { findProduct, listByCategory } from "@/features/products";
 import { ratingSummary, reviewsForProduct } from "@/features/reviews";
+import { ReviewForm } from "@/components/reviews/ReviewForm";
 import { listCategories } from "@/features/categories";
+import { getCurrentUser } from "@/lib/supabase/server";
 
 export async function generateMetadata({
   params,
@@ -57,6 +59,7 @@ export default async function ProductDetailPage({
   );
   const reviews = await reviewsForProduct(slug);
   const rating = ratingSummary(reviews);
+  const user = await getCurrentUser();
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -177,6 +180,20 @@ export default async function ProductDetailPage({
           <p className="mt-4 text-sm text-muted">
             Questo prodotto non ha ancora recensioni. Sarai tra i primi a
             lasciarne una dopo l&apos;acquisto.
+          </p>
+        )}
+
+        {user ? (
+          <ReviewForm productSlug={slug} />
+        ) : (
+          <p className="mt-6 text-sm text-muted">
+            {t("reviewForm.loginToReview")}{" "}
+            <Link
+              href={`/login?next=/products/${slug}`}
+              className="text-accent hover:underline"
+            >
+              {t("reviewForm.login")}
+            </Link>
           </p>
         )}
       </section>

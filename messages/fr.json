@@ -128,7 +128,16 @@
     "tabReviews": "Avis",
     "notFound": "Produit introuvable",
     "rewardPoints": "Gagnez {points} points avec cet achat",
-    "priceInPoints": "Prix en points : {points}"
+    "priceInPoints": "Prix en points : {points}",
+    "reviewForm": {
+      "formTitle": "Laisser un avis",
+      "yourRating": "Votre note",
+      "titleLabel": "Titre (facultatif)",
+      "textLabel": "Votre avis",
+      "submit": "Publier l’avis",
+      "loginToReview": "Connectez-vous pour laisser un avis.",
+      "login": "Se connecter"
+    }
   },
   "auth": {
     "loginTitle": "Se connecter",

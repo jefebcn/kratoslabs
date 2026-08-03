@@ -82,20 +82,26 @@ export async function AccountOrders({ orders }: { orders: AdminOrder[] }) {
               </span>
             </div>
 
-            <div className="mt-3 flex items-center gap-2 rounded-base bg-surface-2 px-3 py-2 text-xs">
-              {o.trackingId ? (
-                <>
-                  <Truck className="size-4 text-accent" aria-hidden />
-                  <span className="font-medium text-text">{t("tracking")}:</span>
-                  <span className="font-mono">{o.trackingId}</span>
-                </>
-              ) : (
-                <>
-                  <Package className="size-4 text-muted" aria-hidden />
-                  <span className="text-muted">{t("trackingWaiting")}</span>
-                </>
-              )}
-            </div>
+            {(o.trackingId ||
+              o.status === "pending" ||
+              o.status === "processing") && (
+              <div className="mt-3 flex items-center gap-2 rounded-base bg-surface-2 px-3 py-2 text-xs">
+                {o.trackingId ? (
+                  <>
+                    <Truck className="size-4 text-accent" aria-hidden />
+                    <span className="font-medium text-text">
+                      {t("tracking")}:
+                    </span>
+                    <span className="font-mono">{o.trackingId}</span>
+                  </>
+                ) : (
+                  <>
+                    <Package className="size-4 text-muted" aria-hidden />
+                    <span className="text-muted">{t("trackingWaiting")}</span>
+                  </>
+                )}
+              </div>
+            )}
           </li>
         );
       })}
