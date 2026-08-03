@@ -3,12 +3,11 @@
 import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Check } from "lucide-react";
+import { Check, Landmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Icon } from "@/components/ui/icon";
 import { CryptoPayment } from "@/components/checkout/CryptoPayment";
 import { BankTransfer } from "@/components/checkout/BankTransfer";
 import { createOrder, type CheckoutResult } from "@/features/checkout";
@@ -27,6 +26,28 @@ import type { CryptoAsset } from "@/lib/payments/crypto";
 export interface CheckoutPayment {
   bank: BankConfig;
   assets: CryptoAsset[];
+}
+
+/** Logo del metodo di pagamento (loghi reali; icona banca per il bonifico). */
+function MethodLogo({ id }: { id: string }) {
+  /* eslint-disable @next/next/no-img-element */
+  if (id === "cards")
+    return (
+      <img src="/images/pay/method-card.png" alt="" className="h-5 w-auto" />
+    );
+  if (id === "paypal")
+    return (
+      <img src="/images/pay/method-paypal.png" alt="" className="h-5 w-auto" />
+    );
+  if (id === "crypto")
+    return (
+      <span className="flex items-center gap-1.5">
+        <img src="/images/pay/btc.png" alt="" className="size-5" />
+        <img src="/images/pay/usdt.png" alt="" className="size-5" />
+      </span>
+    );
+  /* eslint-enable @next/next/no-img-element */
+  return <Landmark className="size-5 text-accent" aria-hidden />;
 }
 
 function Field({
@@ -299,7 +320,7 @@ export function CheckoutForm({
                 defaultChecked={m.id === "crypto"}
                 className="[accent-color:#dc2626]"
               />
-              <Icon name={m.icon} className="size-4" />
+              <MethodLogo id={m.id} />
               {t(`pm.${m.id}`)}
             </label>
           ))}
