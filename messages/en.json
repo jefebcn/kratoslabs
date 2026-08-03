@@ -128,7 +128,16 @@
     "tabReviews": "Reviews",
     "notFound": "Product not found",
     "rewardPoints": "Earn {points} points with this purchase",
-    "priceInPoints": "Price in points: {points}"
+    "priceInPoints": "Price in points: {points}",
+    "reviewForm": {
+      "formTitle": "Write a review",
+      "yourRating": "Your rating",
+      "titleLabel": "Title (optional)",
+      "textLabel": "Your review",
+      "submit": "Publish review",
+      "loginToReview": "Log in to leave a review.",
+      "login": "Log in"
+    }
   },
   "auth": {
     "loginTitle": "Log in",

@@ -128,7 +128,16 @@
     "tabReviews": "Recensioni",
     "notFound": "Prodotto non trovato",
     "rewardPoints": "Ricevi {points} punti con questo acquisto",
-    "priceInPoints": "Prezzo in punti: {points}"
+    "priceInPoints": "Prezzo in punti: {points}",
+    "reviewForm": {
+      "formTitle": "Lascia una recensione",
+      "yourRating": "La tua valutazione",
+      "titleLabel": "Titolo (facoltativo)",
+      "textLabel": "La tua recensione",
+      "submit": "Pubblica recensione",
+      "loginToReview": "Accedi per lasciare una recensione.",
+      "login": "Accedi"
+    }
   },
   "auth": {
     "loginTitle": "Accedi",
