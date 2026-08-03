@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
+import { enrichDeus } from "@/lib/deus-descriptions";
 import { resolveDeusImageUrl, downloadImage } from "@/lib/deus-images";
 
 export interface ActionResult {
@@ -466,20 +467,28 @@ export async function importCatalog(
     return { ok: false, message: `Errore categorie: ${catErr.message}` };
 
   // 2) Prodotti. Non sovrascrive le immagini esistenti.
-  const rows = DEUS_PRODUCTS.map((p) => ({
-    slug: p.slug,
-    brand: "Deus Medical",
-    title: p.title,
-    short_description: p.shortDescription,
-    description: p.description,
-    category: p.category,
-    price_cents: p.priceCents,
-    cost_cents: p.costCents,
-    specs: p.specs,
-    stock: p.stock,
-    active: p.active,
-    updated_at: new Date().toISOString(),
-  }));
+  const rows = DEUS_PRODUCTS.map((p) => {
+    const enriched = enrichDeus({
+      title: p.title,
+      category: p.category,
+      activeName: p.specs.activeName,
+      packaging: p.specs.packaging,
+    });
+    return {
+      slug: p.slug,
+      brand: "Deus Medical",
+      title: p.title,
+      short_description: p.shortDescription,
+      description: enriched.description,
+      category: p.category,
+      price_cents: p.priceCents,
+      cost_cents: p.costCents,
+      specs: enriched.specs,
+      stock: p.stock,
+      active: p.active,
+      updated_at: new Date().toISOString(),
+    };
+  });
   const { error: prodErr } = await admin
     .from("products")
     .upsert(rows, { onConflict: "slug" });
