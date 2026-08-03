@@ -209,7 +209,8 @@
       "pointsToUse": "Points à utiliser (max {max})",
       "useMax": "Utiliser le maximum",
       "note70": "Vous pouvez couvrir jusqu’à 70% de la commande (hors livraison)."
-    }
+    },
+    "unavailable": "Indisponible"
   },
   "toggle": {
     "language": "Langue",

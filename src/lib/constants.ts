@@ -164,10 +164,10 @@ export const TRUST_BADGES: TrustBadge[] = [
 ];
 
 export const PAYMENT_METHODS: PaymentMethod[] = [
-  { id: "cards", label: "Carte", icon: "CreditCard" },
-  { id: "paypal", label: "PayPal", icon: "Wallet" },
+  { id: "crypto", label: "Crypto (BTC/USDT)", icon: "Bitcoin" },
   { id: "bank", label: "Bonifico", icon: "Landmark" },
-  { id: "crypto", label: "Bitcoin", icon: "Bitcoin" },
+  { id: "cards", label: "Carte", icon: "CreditCard", disabled: true },
+  { id: "paypal", label: "PayPal", icon: "Wallet", disabled: true },
 ];
 
 /** Metodi realmente accettati al checkout: mostrati nella banda che ruota. */

@@ -9,7 +9,12 @@ import { balanceFor, addEntry } from "@/features/rewards";
 import { maxRedeemablePoints, discountCentsFor } from "@/lib/rewards";
 import { listProducts } from "@/features/products";
 import { priceLine } from "@/features/products/pricing";
+import { PAYMENT_METHODS } from "@/lib/constants";
 import type { CartLine } from "@/types";
+
+const DISABLED_METHODS = new Set(
+  PAYMENT_METHODS.filter((m) => m.disabled).map((m) => m.id),
+);
 
 export interface CheckoutResult {
   ok: boolean;
@@ -68,6 +73,10 @@ export async function createOrder(
   }
 
   const d = parsed.data;
+
+  if (DISABLED_METHODS.has(d.paymentMethod)) {
+    return { ok: false, message: "Metodo di pagamento non disponibile." };
+  }
 
   // Ricostruisce l'ordine dai PREZZI REALI del database (mai fidarsi dei valori
   // inviati dal client): dal carrello si usano solo prodotto e quantità.
