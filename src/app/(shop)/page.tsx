@@ -15,6 +15,9 @@ import { SITE, TRUST_BADGES } from "@/lib/constants";
 import { listCategories } from "@/features/categories";
 import { listGalleryImages } from "@/features/gallery/queries";
 
+// Ordine allineato a TRUST_BADGES: mappa ogni badge alla sua chiave i18n.
+const BADGE_KEYS = ["analysis", "shipping", "packaging", "payments"] as const;
+
 const SLIDES: HeroSlide[] = [
   {
     eyebrow: "Community",
@@ -94,17 +97,22 @@ export default async function HomePage() {
       {/* Trust badges: perché sceglierci */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
-          {TRUST_BADGES.map((b) => (
-            <div key={b.title} className="flex gap-3">
-              <span className="grid size-10 shrink-0 place-items-center rounded-base border border-border text-accent">
-                <Icon name={b.icon} className="size-5" />
-              </span>
-              <div>
-                <p className="text-sm font-medium">{b.title}</p>
-                <p className="mt-1 text-sm text-muted">{b.description}</p>
+          {TRUST_BADGES.map((b, i) => {
+            const key = BADGE_KEYS[i] ?? "analysis";
+            return (
+              <div key={key} className="flex gap-3">
+                <span className="grid size-10 shrink-0 place-items-center rounded-base border border-border text-accent">
+                  <Icon name={b.icon} className="size-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-medium">{t(`badges.${key}.title`)}</p>
+                  <p className="mt-1 text-sm text-muted">
+                    {t(`badges.${key}.desc`)}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -146,15 +154,12 @@ export default async function HomePage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-base border border-accent/30 bg-white px-2.5 py-1 text-xs font-medium text-accent">
                 <Bitcoin className="size-3.5" aria-hidden />
-                Accettiamo Bitcoin e criptovalute
+                {t("community.badge")}
               </div>
               <h2 className="mt-4 text-2xl font-semibold uppercase tracking-tight">
-                Unisciti al canale Kratos Labs
+                {t("community.title")}
               </h2>
-              <p className="mt-2 text-muted">
-                Nuovi lotti, referti di laboratorio in anteprima e offerte
-                riservate. Nessuno spam, solo aggiornamenti che contano.
-              </p>
+              <p className="mt-2 text-muted">{t("community.body")}</p>
             </div>
             <div className="flex md:justify-end">
               <Button asChild size="lg">
@@ -164,7 +169,7 @@ export default async function HomePage() {
                   rel="noopener noreferrer"
                 >
                   <Send className="size-4" aria-hidden />
-                  Vai al canale Telegram
+                  {t("community.cta")}
                 </a>
               </Button>
             </div>

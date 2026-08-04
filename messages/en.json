@@ -91,7 +91,48 @@
     "bestsellers": "Bestsellers",
     "viewAll": "View all — {category}",
     "touchdownGallery": "Touchdown Gallery",
-    "sendTouchdown": "Send your touchdown here"
+    "sendTouchdown": "Send your touchdown here",
+    "badges": {
+      "analysis": {
+        "title": "Independent testing",
+        "desc": "Third-party report published for every batch, with a verifiable batch number."
+      },
+      "shipping": {
+        "title": "Tracked shipping",
+        "desc": "Tracked courier in 24/48h, neutral and recyclable packaging on request."
+      },
+      "packaging": {
+        "title": "Discreet packaging",
+        "desc": "Plain box with no indication of the contents, to protect your privacy on delivery."
+      },
+      "payments": {
+        "title": "Secure payments",
+        "desc": "Bank transfer and cryptocurrencies (Bitcoin, USDT). Encrypted checkout, no payment data stored."
+      }
+    },
+    "info": {
+      "products": {
+        "title": "What we carry",
+        "body": "<b>Injectables</b>, <b>Orals</b>, <b>PCT</b>, <b>HGH & Peptides</b>, <b>SARMs</b> and <b>Fat burners</b> — all <b>Deus Medical</b> products.",
+        "cta": "Browse all products"
+      },
+      "shipping": {
+        "title": "Shipping & delivery",
+        "body": "Shipped within 3 business days of payment. <b>Discreet</b> packaging, with no identifying labels and <b>tracking</b> on every order. Delivery in 5–28 days.",
+        "cta": "Shipping & returns"
+      },
+      "payments": {
+        "title": "Payment methods",
+        "body": "<b>Bank transfer</b>, <b>Bitcoin</b> and <b>USDT (TRC-20)</b>. Data handled with the utmost confidentiality.",
+        "cta": "Payment guide"
+      }
+    },
+    "community": {
+      "badge": "We accept Bitcoin and crypto",
+      "title": "Join the Kratos Labs channel",
+      "body": "New batches, early lab reports and members-only offers. No spam, only updates that matter.",
+      "cta": "Go to the Telegram channel"
+    }
   },
   "menu": {
     "title": "Menu",
@@ -281,5 +322,18 @@
     "products": "Products",
     "subtitle": "Real photos and reviews from our customers.",
     "empty": "No testimonials yet."
+  },
+  "specs": {
+    "active": "Active ingredient",
+    "concentration": "Concentration",
+    "class": "Class",
+    "form": "Form",
+    "packaging": "Packaging",
+    "manufacturer": "Manufacturer",
+    "netWeight": "Net weight",
+    "serving": "Serving",
+    "servingsPerContainer": "Servings per container",
+    "perServing": "{active} per serving",
+    "totalActive": "Total {active}"
   }
 }

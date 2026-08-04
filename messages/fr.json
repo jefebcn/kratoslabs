@@ -91,7 +91,48 @@
     "bestsellers": "Meilleures ventes",
     "viewAll": "Voir tout — {category}",
     "touchdownGallery": "Galerie Touchdown",
-    "sendTouchdown": "Envoie ton touchdown ici"
+    "sendTouchdown": "Envoie ton touchdown ici",
+    "badges": {
+      "analysis": {
+        "title": "Analyses indépendantes",
+        "desc": "Rapport tiers publié pour chaque lot, avec numéro de lot vérifiable."
+      },
+      "shipping": {
+        "title": "Livraison suivie",
+        "desc": "Coursier suivi en 24/48h, emballage neutre et recyclable sur demande."
+      },
+      "packaging": {
+        "title": "Emballage anonyme",
+        "desc": "Boîte neutre sans indication du contenu, pour protéger votre vie privée à la livraison."
+      },
+      "payments": {
+        "title": "Paiements sécurisés",
+        "desc": "Virement et cryptomonnaies (Bitcoin, USDT). Paiement chiffré, aucune donnée de paiement conservée."
+      }
+    },
+    "info": {
+      "products": {
+        "title": "Ce que nous proposons",
+        "body": "<b>Injectables</b>, <b>Oraux</b>, <b>PCT</b>, <b>HGH & Peptides</b>, <b>SARMs</b> et <b>Brûleurs de graisse</b> — tous des produits <b>Deus Medical</b>.",
+        "cta": "Voir tous les produits"
+      },
+      "shipping": {
+        "title": "Expédition & livraison",
+        "body": "Expédié sous 3 jours ouvrés après paiement. Emballage <b>anonyme</b>, sans étiquettes d'identification et avec <b>suivi</b> sur chaque commande. Livraison en 5–28 jours.",
+        "cta": "Expédition & retours"
+      },
+      "payments": {
+        "title": "Moyens de paiement",
+        "body": "<b>Virement bancaire</b>, <b>Bitcoin</b> et <b>USDT (TRC-20)</b>. Données traitées avec la plus grande confidentialité.",
+        "cta": "Guide des paiements"
+      }
+    },
+    "community": {
+      "badge": "Nous acceptons Bitcoin et les cryptos",
+      "title": "Rejoignez le canal Kratos Labs",
+      "body": "Nouveaux lots, rapports de laboratoire en avant-première et offres réservées. Pas de spam, seulement les mises à jour qui comptent.",
+      "cta": "Aller au canal Telegram"
+    }
   },
   "menu": {
     "title": "Menu",
@@ -281,5 +322,18 @@
     "products": "Produits",
     "subtitle": "Photos et avis réels de nos clients.",
     "empty": "Aucun témoignage pour l’instant."
+  },
+  "specs": {
+    "active": "Principe actif",
+    "concentration": "Concentration",
+    "class": "Classe",
+    "form": "Forme",
+    "packaging": "Conditionnement",
+    "manufacturer": "Fabricant",
+    "netWeight": "Poids net",
+    "serving": "Portion",
+    "servingsPerContainer": "Portions par contenant",
+    "perServing": "{active} par portion",
+    "totalActive": "{active} au total"
   }
 }
