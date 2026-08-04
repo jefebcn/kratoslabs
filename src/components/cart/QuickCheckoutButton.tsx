@@ -15,6 +15,7 @@ export function QuickCheckoutButton({
   size = "md",
   iconOnly = false,
   className,
+  iconClassName = "size-4",
 }: {
   product: Product;
   quantity?: number;
@@ -22,6 +23,7 @@ export function QuickCheckoutButton({
   size?: ButtonProps["size"];
   iconOnly?: boolean;
   className?: string;
+  iconClassName?: string;
 }) {
   const router = useRouter();
   const t = useTranslations("product");
@@ -45,7 +47,7 @@ export function QuickCheckoutButton({
       title={t("quickCheckout")}
       aria-label={t("quickCheckout")}
     >
-      <Zap className="size-4" aria-hidden />
+      <Zap className={iconClassName} aria-hidden />
       {!iconOnly && t("quickCheckout")}
     </Button>
   );
