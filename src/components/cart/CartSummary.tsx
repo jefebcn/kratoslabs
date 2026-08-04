@@ -1,12 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Money } from "@/components/ui/money";
 import { Separator } from "@/components/ui/separator";
 import { useCartSummary } from "@/features/cart";
-import {
-  FREE_SHIPPING_THRESHOLD_CENTS,
-  SHIPPING_FLAT_CENTS,
-} from "@/lib/constants";
 
 function Row({
   label,
@@ -26,49 +23,35 @@ function Row({
 }
 
 export function CartSummary() {
+  const t = useTranslations("cart");
   const { subtotalGrossCents, subtotalNetCents, discountCents } =
     useCartSummary();
 
-  const empty = subtotalNetCents === 0;
-  const freeShipping = subtotalNetCents >= FREE_SHIPPING_THRESHOLD_CENTS;
-  const shippingCents = empty || freeShipping ? 0 : SHIPPING_FLAT_CENTS;
-  const totalCents = subtotalNetCents + shippingCents;
-
+  // La spedizione dipende dal paese di destinazione: si calcola al checkout
+  // (modello a zone, nessuna soglia gratuita). Il totale qui è la sola merce.
   return (
     <div className="flex flex-col gap-2">
-      <Row label="Subtotale" muted>
+      <Row label={t("subtotal")} muted>
         <Money cents={subtotalGrossCents} />
       </Row>
 
       {discountCents > 0 && (
-        <Row label="Sconto quantità" muted>
+        <Row label={t("quantityDiscount")} muted>
           <span className="text-accent">
             −<Money cents={discountCents} />
           </span>
         </Row>
       )}
 
-      <Row label="Spedizione" muted>
-        {shippingCents === 0 ? (
-          <span className="text-accent">Gratuita</span>
-        ) : (
-          <Money cents={shippingCents} />
-        )}
+      <Row label={t("shipping")} muted>
+        <span className="text-xs text-muted">{t("shippingAtCheckout")}</span>
       </Row>
 
       <Separator className="my-1" />
 
-      <Row label="Totale">
-        <Money cents={totalCents} className="text-base text-accent" />
+      <Row label={t("total")}>
+        <Money cents={subtotalNetCents} className="text-base text-accent" />
       </Row>
-
-      {!empty && !freeShipping && (
-        <p className="text-xs text-muted">
-          Aggiungi{" "}
-          <Money cents={FREE_SHIPPING_THRESHOLD_CENTS - subtotalNetCents} /> per
-          la spedizione gratuita.
-        </p>
-      )}
     </div>
   );
 }

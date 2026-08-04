@@ -75,7 +75,12 @@
     "exploreCatalog": "Explorar o catálogo",
     "goToCheckout": "Ir para o checkout",
     "title": "Carrinho",
-    "continueShopping": "Continuar a comprar"
+    "continueShopping": "Continuar a comprar",
+    "subtotal": "Subtotal",
+    "quantityDiscount": "Desconto quantidade",
+    "shipping": "Envio",
+    "shippingAtCheckout": "Calculado no checkout",
+    "total": "Total"
   },
   "payments": {
     "accept": "Aceitamos",
@@ -220,7 +225,15 @@
       "useMax": "Usar o máximo",
       "note70": "Pode cobrir até 70% da encomenda (envio excluído)."
     },
-    "unavailable": "Indisponível"
+    "unavailable": "Indisponível",
+    "shipping": "Envio",
+    "total": "Total",
+    "zones": {
+      "eu": "UE",
+      "europe": "Resto da Europa",
+      "usa": "Estados Unidos",
+      "world": "Resto do mundo"
+    }
   },
   "toggle": {
     "language": "Idioma",

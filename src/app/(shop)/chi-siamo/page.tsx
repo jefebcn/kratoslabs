@@ -1,40 +1,42 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { SITE } from "@/lib/constants";
+import type { LocaleCode } from "@/types";
+import contentByLocale from "./content.json";
 
-export const metadata: Metadata = {
-  title: "Chi siamo",
-  description: `Chi siamo: la missione e i valori di ${SITE.name}.`,
-};
+interface AboutContent {
+  metaTitle: string;
+  metaDescription: string;
+  title: string;
+  paragraphs: string[];
+}
 
-export default function ChiSiamoPage() {
+const CONTENT = contentByLocale as Record<LocaleCode, AboutContent | null>;
+
+function pick(locale: LocaleCode): AboutContent {
+  return CONTENT[locale] ?? (CONTENT.it as AboutContent);
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const c = pick((await getLocale()) as LocaleCode);
+  return { title: c.metaTitle, description: c.metaDescription };
+}
+
+export default async function ChiSiamoPage() {
+  const c = pick((await getLocale()) as LocaleCode);
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
         {SITE.name}
       </p>
       <h1 className="font-display mt-2 text-3xl font-bold uppercase tracking-tight sm:text-4xl">
-        Chi siamo
+        {c.title}
       </h1>
 
       <div className="mt-6 flex flex-col gap-4 text-pretty text-muted">
-        <p>
-          {SITE.name} nasce con un obiettivo semplice: offrire prodotti con{" "}
-          <strong className="text-text">dosaggi dichiarati</strong> e qualità
-          verificabile, senza promesse che non possiamo dimostrare.
-        </p>
-        <p>
-          Lavoriamo con distributori ufficiali e selezioniamo ogni referenza in
-          base a purezza e affidabilità. Ci teniamo alla trasparenza: quello che
-          leggi in etichetta è quello che trovi nel prodotto.
-        </p>
-        <p>
-          Il nostro team è raggiungibile ogni giorno tramite Telegram per
-          consigli, tracciamento degli ordini e assistenza post-vendita.
-        </p>
-        <p className="text-sm italic">
-          (Testo segnaposto: personalizza questa pagina con la storia e i valori
-          del tuo brand.)
-        </p>
+        {c.paragraphs.map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
       </div>
     </div>
   );

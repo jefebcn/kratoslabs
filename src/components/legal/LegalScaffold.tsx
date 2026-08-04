@@ -9,23 +9,37 @@ export interface LegalSectionData {
   todo?: string[];
 }
 
+export interface LegalScaffoldLabels {
+  documents: string;
+  onThisPage: string;
+  updated: string;
+}
+
+const DEFAULT_LABELS: LegalScaffoldLabels = {
+  documents: "Documenti",
+  onThisPage: "In questa pagina",
+  updated: "Ultimo aggiornamento",
+};
+
 export function LegalScaffold({
   title,
   updated,
   intro,
   sections,
+  labels = DEFAULT_LABELS,
 }: {
   title: string;
   updated: string;
   intro?: string;
   sections: LegalSectionData[];
+  labels?: LegalScaffoldLabels;
 }) {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
       <div className="grid gap-10 lg:grid-cols-[220px_1fr]">
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <p className="text-xs font-medium uppercase tracking-wide text-muted">
-            Documenti
+            {labels.documents}
           </p>
           <nav className="mt-3 flex flex-col gap-1">
             {LEGAL_LINKS.map((l) => (
@@ -40,7 +54,7 @@ export function LegalScaffold({
           </nav>
 
           <p className="mt-6 text-xs font-medium uppercase tracking-wide text-muted">
-            In questa pagina
+            {labels.onThisPage}
           </p>
           <nav className="mt-3 flex flex-col gap-1">
             {sections.map((s) => (
@@ -58,7 +72,7 @@ export function LegalScaffold({
         <article>
           <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
           <p className="mt-2 text-sm text-muted">
-            Ultimo aggiornamento: {updated}
+            {labels.updated}: {updated}
           </p>
           {intro && (
             <p className="mt-6 max-w-prose text-pretty text-muted">{intro}</p>

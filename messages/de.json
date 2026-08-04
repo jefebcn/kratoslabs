@@ -75,7 +75,12 @@
     "exploreCatalog": "Katalog durchsuchen",
     "goToCheckout": "Zur Kasse",
     "title": "Warenkorb",
-    "continueShopping": "Weiter einkaufen"
+    "continueShopping": "Weiter einkaufen",
+    "subtotal": "Zwischensumme",
+    "quantityDiscount": "Mengenrabatt",
+    "shipping": "Versand",
+    "shippingAtCheckout": "Wird an der Kasse berechnet",
+    "total": "Gesamt"
   },
   "payments": {
     "accept": "Wir akzeptieren",
@@ -220,7 +225,15 @@
       "useMax": "Maximum nutzen",
       "note70": "Sie können bis zu 70% der Bestellung abdecken (ohne Versand)."
     },
-    "unavailable": "Nicht verfügbar"
+    "unavailable": "Nicht verfügbar",
+    "shipping": "Versand",
+    "total": "Gesamt",
+    "zones": {
+      "eu": "EU",
+      "europe": "Übriges Europa",
+      "usa": "USA",
+      "world": "Übrige Welt"
+    }
   },
   "toggle": {
     "language": "Sprache",

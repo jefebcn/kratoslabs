@@ -79,8 +79,7 @@ export const BULK_TIERS: BulkTier[] = [
   { minQuantity: 10, discount: 0.15 },
 ];
 
-export const FREE_SHIPPING_THRESHOLD_CENTS = 5900;
-export const SHIPPING_FLAT_CENTS = 590;
+// Le tariffe di spedizione seguono un modello a zone: vedi `src/lib/shipping.ts`.
 
 export const NAV_LINKS: readonly NavLink[] = [
   { href: "/guide", label: "Guide" },

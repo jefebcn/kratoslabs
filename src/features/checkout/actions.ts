@@ -10,6 +10,7 @@ import { maxRedeemablePoints, discountCentsFor } from "@/lib/rewards";
 import { listProducts } from "@/features/products";
 import { priceLine } from "@/features/products/pricing";
 import { PAYMENT_METHODS } from "@/lib/constants";
+import { shippingCentsForCountry } from "@/lib/shipping";
 import type { CartLine } from "@/types";
 
 const DISABLED_METHODS = new Set(
@@ -116,10 +117,13 @@ export async function createOrder(
   );
   const reference = `KL-${Date.now().toString().slice(-6)}`;
 
+  // Spedizione: ricalcolata lato server dalla zona del paese (mai dal client).
+  const shippingCents = shippingCentsForCountry(d.country);
+
   // Sconto punti: validato lato server (mai fidarsi del client).
   let pointsRedeemed = 0;
   let discountCents = 0;
-  let totalCents = subtotalCents;
+  let totalCents = subtotalCents + shippingCents;
 
   // Persistenza su Supabase (best-effort: non blocca il checkout se assente).
   const admin = createAdminClient();
@@ -134,7 +138,7 @@ export async function createOrder(
           subtotalCents,
         );
         discountCents = discountCentsFor(pointsRedeemed);
-        totalCents = Math.max(0, subtotalCents - discountCents);
+        totalCents = Math.max(0, subtotalCents - discountCents) + shippingCents;
       }
 
       await admin.from("orders").insert({
@@ -153,6 +157,7 @@ export async function createOrder(
           city: d.city,
           postalCode: d.postalCode,
           country: d.country,
+          costCents: shippingCents,
           notes: d.notes ?? "",
         },
         payment_method: d.paymentMethod,
@@ -167,7 +172,7 @@ export async function createOrder(
       // Persistenza non riuscita: si prosegue comunque con la pre-conferma.
       pointsRedeemed = 0;
       discountCents = 0;
-      totalCents = subtotalCents;
+      totalCents = subtotalCents + shippingCents;
     }
   }
 
