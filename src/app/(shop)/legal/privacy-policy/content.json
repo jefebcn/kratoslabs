@@ -1,0 +1,297 @@
+{
+  "it": {
+    "metaTitle": "Privacy policy",
+    "metaDescription": "Come KratosLabs tratta i dati personali, in linea con il GDPR.",
+    "title": "Privacy policy",
+    "updated": "Agosto 2026",
+    "intro": "Questa informativa descrive come trattiamo i dati personali degli utenti del sito, in conformità al Regolamento (UE) 2016/679 (GDPR).",
+    "labels": {
+      "documents": "Documenti",
+      "onThisPage": "In questa pagina",
+      "updated": "Ultimo aggiornamento"
+    },
+    "sections": [
+      {
+        "id": "titolare",
+        "title": "1. Titolare del trattamento",
+        "body": "Il titolare del trattamento dei dati è KratosLabs. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere a {email} o contattarci tramite Telegram."
+      },
+      {
+        "id": "dati",
+        "title": "2. Dati raccolti",
+        "body": "Raccogliamo i dati che ci fornisci al momento dell'ordine: nome e cognome, email, indirizzo di spedizione (via, città, CAP, paese) ed eventuali note. Trattiamo inoltre i dati relativi ai tuoi ordini e alle comunicazioni con l'assistenza (email e Telegram) e dati tecnici di navigazione (indirizzo IP, tipo di dispositivo e browser) raccolti tramite cookie tecnici. Non trattiamo i dati completi delle carte di pagamento: il pagamento avviene tramite bonifico o criptovaluta e gli indirizzi crypto sono di sola ricezione."
+      },
+      {
+        "id": "finalita",
+        "title": "3. Finalità e basi giuridiche",
+        "body": "Trattiamo i dati per: eseguire il contratto, cioè gestire l'ordine, il pagamento e la spedizione (art. 6.1.b GDPR); adempiere agli obblighi di legge, ad esempio contabili e fiscali (art. 6.1.c); perseguire il nostro legittimo interesse a garantire la sicurezza del sito e prevenire frodi (art. 6.1.f); inviare la newsletter, solo previo tuo consenso (art. 6.1.a), che puoi revocare in ogni momento."
+      },
+      {
+        "id": "conservazione",
+        "title": "4. Periodo di conservazione",
+        "body": "Conserviamo i dati dell'ordine per il tempo necessario a evadere l'acquisto e a rispettare gli obblighi contabili e fiscali previsti dalla legge. I dati raccolti per la newsletter sono conservati fino alla revoca del consenso o alla cancellazione dalla lista. I dati tecnici di navigazione sono conservati per periodi limitati e proporzionati alle finalità di sicurezza."
+      },
+      {
+        "id": "destinatari",
+        "title": "5. Comunicazione dei dati",
+        "body": "I dati possono essere comunicati ai corrieri e agli operatori logistici per la consegna, e ai fornitori tecnici che gestiscono l'hosting e l'infrastruttura del sito, che agiscono come responsabili del trattamento. Non vendiamo né cediamo i tuoi dati a terzi per finalità di marketing."
+      },
+      {
+        "id": "diritti",
+        "title": "6. Diritti dell'interessato",
+        "body": "Puoi esercitare in ogni momento i diritti di accesso, rettifica, cancellazione, limitazione, portabilità e opposizione previsti dagli articoli 15–22 del GDPR, oltre alla revoca del consenso. Per farlo scrivi a {email}: rispondiamo nei tempi previsti dalla normativa. Hai inoltre il diritto di proporre reclamo all'autorità di controllo (in Italia, il Garante per la protezione dei dati personali)."
+      },
+      {
+        "id": "cookie",
+        "title": "7. Cookie e tecnologie simili",
+        "body": "Il sito utilizza cookie tecnici necessari al funzionamento: gestione della sessione e del carrello, autenticazione e memorizzazione della lingua selezionata. Questi cookie non richiedono consenso. Al momento non utilizziamo cookie di profilazione pubblicitaria di terze parti; qualora venissero introdotti, ti verrà richiesto il consenso tramite apposito banner."
+      },
+      {
+        "id": "sicurezza",
+        "title": "8. Sicurezza",
+        "body": "Adottiamo misure tecniche e organizzative adeguate per proteggere i dati: connessione cifrata (HTTPS), accesso limitato ai dati e nessuna conservazione di dati di pagamento sensibili. Gli indirizzi crypto sono utilizzati esclusivamente per ricevere i pagamenti."
+      },
+      {
+        "id": "contatti",
+        "title": "9. Contatti",
+        "body": "Per esercitare i tuoi diritti o per domande su questa informativa scrivi a {email}."
+      }
+    ]
+  },
+  "en": {
+    "metaTitle": "Privacy policy",
+    "metaDescription": "How KratosLabs processes personal data, in line with the GDPR.",
+    "title": "Privacy policy",
+    "updated": "August 2026",
+    "intro": "This notice describes how we process the personal data of the website's users, in accordance with Regulation (EU) 2016/679 (GDPR).",
+    "labels": {
+      "documents": "Documents",
+      "onThisPage": "On this page",
+      "updated": "Last updated"
+    },
+    "sections": [
+      {
+        "id": "titolare",
+        "title": "1. Data controller",
+        "body": "The data controller is KratosLabs. For any request concerning your data, you can write to {email} or contact us via Telegram."
+      },
+      {
+        "id": "dati",
+        "title": "2. Data collected",
+        "body": "We collect the data you provide when placing an order: first and last name, email, shipping address (street, city, postal code, country) and any notes. We also process data relating to your orders and to your communications with customer support (email and Telegram), as well as technical browsing data (IP address, device type and browser) collected through technical cookies. We do not process full payment card data: payment is made by bank transfer or cryptocurrency, and the crypto addresses are receive-only."
+      },
+      {
+        "id": "finalita",
+        "title": "3. Purposes and legal bases",
+        "body": "We process data in order to: perform the contract, that is, to manage the order, payment and shipping (art. 6.1.b GDPR); comply with legal obligations, for example accounting and tax obligations (art. 6.1.c); pursue our legitimate interest in ensuring the security of the site and preventing fraud (art. 6.1.f); send the newsletter, only with your prior consent (art. 6.1.a), which you can withdraw at any time."
+      },
+      {
+        "id": "conservazione",
+        "title": "4. Retention period",
+        "body": "We retain order data for the time necessary to fulfil the purchase and to comply with the accounting and tax obligations required by law. Data collected for the newsletter is retained until consent is withdrawn or you unsubscribe from the list. Technical browsing data is retained for limited periods, proportionate to the security purposes."
+      },
+      {
+        "id": "destinatari",
+        "title": "5. Disclosure of data",
+        "body": "Data may be disclosed to couriers and logistics operators for delivery, and to the technical providers that manage the hosting and infrastructure of the site, who act as data processors. We do not sell or transfer your data to third parties for marketing purposes."
+      },
+      {
+        "id": "diritti",
+        "title": "6. Rights of the data subject",
+        "body": "You may exercise at any time the rights of access, rectification, erasure, restriction, portability and objection provided for by articles 15–22 of the GDPR, as well as the withdrawal of consent. To do so, write to {email}: we will respond within the time limits set by the applicable legislation. You also have the right to lodge a complaint with the competent supervisory authority (in Italy, the Italian Data Protection Authority — Garante per la protezione dei dati personali)."
+      },
+      {
+        "id": "cookie",
+        "title": "7. Cookies and similar technologies",
+        "body": "The site uses technical cookies necessary for its operation: session and cart management, authentication and storage of the selected language. These cookies do not require consent. We currently do not use third-party advertising profiling cookies; should they be introduced, your consent will be requested through a dedicated banner."
+      },
+      {
+        "id": "sicurezza",
+        "title": "8. Security",
+        "body": "We adopt appropriate technical and organizational measures to protect data: an encrypted connection (HTTPS), restricted access to data and no storage of sensitive payment data. The crypto addresses are used solely to receive payments."
+      },
+      {
+        "id": "contatti",
+        "title": "9. Contacts",
+        "body": "To exercise your rights or for questions about this notice, write to {email}."
+      }
+    ]
+  },
+  "de": {
+    "metaTitle": "Datenschutzerklärung",
+    "metaDescription": "Wie KratosLabs personenbezogene Daten verarbeitet, im Einklang mit der DSGVO.",
+    "title": "Datenschutzerklärung",
+    "updated": "August 2026",
+    "intro": "Diese Erklärung beschreibt, wie wir die personenbezogenen Daten der Nutzer der Website verarbeiten, in Übereinstimmung mit der Verordnung (EU) 2016/679 (GDPR).",
+    "labels": {
+      "documents": "Dokumente",
+      "onThisPage": "Auf dieser Seite",
+      "updated": "Zuletzt aktualisiert"
+    },
+    "sections": [
+      {
+        "id": "titolare",
+        "title": "1. Verantwortlicher",
+        "body": "Der für die Verarbeitung Verantwortliche ist KratosLabs. Für jede Anfrage zu Ihren Daten können Sie an {email} schreiben oder uns über Telegram kontaktieren."
+      },
+      {
+        "id": "dati",
+        "title": "2. Erhobene Daten",
+        "body": "Wir erheben die Daten, die Sie uns bei der Bestellung übermitteln: Vor- und Nachname, E-Mail, Lieferadresse (Straße, Stadt, Postleitzahl, Land) sowie etwaige Anmerkungen. Darüber hinaus verarbeiten wir Daten zu Ihren Bestellungen und zur Kommunikation mit dem Kundendienst (E-Mail und Telegram) sowie technische Navigationsdaten (IP-Adresse, Geräte- und Browsertyp), die über technische Cookies erhoben werden. Wir verarbeiten keine vollständigen Zahlungskartendaten: Die Zahlung erfolgt per Überweisung oder Kryptowährung, und die Krypto-Adressen dienen ausschließlich dem Empfang."
+      },
+      {
+        "id": "finalita",
+        "title": "3. Zwecke und Rechtsgrundlagen",
+        "body": "Wir verarbeiten die Daten, um: den Vertrag zu erfüllen, das heißt die Bestellung, die Zahlung und den Versand abzuwickeln (art. 6.1.b GDPR); gesetzlichen Verpflichtungen nachzukommen, zum Beispiel buchhalterischen und steuerlichen (art. 6.1.c); unser berechtigtes Interesse zu verfolgen, die Sicherheit der Website zu gewährleisten und Betrug vorzubeugen (art. 6.1.f); den Newsletter zu versenden, nur mit Ihrer vorherigen Einwilligung (art. 6.1.a), die Sie jederzeit widerrufen können."
+      },
+      {
+        "id": "conservazione",
+        "title": "4. Speicherdauer",
+        "body": "Wir speichern die Bestelldaten für den Zeitraum, der erforderlich ist, um den Kauf abzuwickeln und die gesetzlich vorgeschriebenen buchhalterischen und steuerlichen Verpflichtungen zu erfüllen. Die für den Newsletter erhobenen Daten werden bis zum Widerruf der Einwilligung oder zur Abmeldung von der Liste gespeichert. Die technischen Navigationsdaten werden für begrenzte und den Sicherheitszwecken angemessene Zeiträume gespeichert."
+      },
+      {
+        "id": "destinatari",
+        "title": "5. Weitergabe der Daten",
+        "body": "Die Daten können an Kurierdienste und Logistikdienstleister für die Zustellung sowie an die technischen Anbieter weitergegeben werden, die das Hosting und die Infrastruktur der Website verwalten und als Auftragsverarbeiter tätig sind. Wir verkaufen oder übermitteln Ihre Daten nicht an Dritte zu Marketingzwecken."
+      },
+      {
+        "id": "diritti",
+        "title": "6. Rechte der betroffenen Person",
+        "body": "Sie können jederzeit die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Übertragbarkeit und Widerspruch ausüben, die in den articoli 15–22 der GDPR vorgesehen sind, sowie die Einwilligung widerrufen. Schreiben Sie hierzu an {email}: Wir antworten innerhalb der gesetzlich vorgesehenen Fristen. Außerdem haben Sie das Recht, Beschwerde bei der zuständigen Aufsichtsbehörde einzulegen (in Italien der italienischen Datenschutzbehörde — Garante per la protezione dei dati personali)."
+      },
+      {
+        "id": "cookie",
+        "title": "7. Cookies und ähnliche Technologien",
+        "body": "Die Website verwendet technische Cookies, die für ihren Betrieb erforderlich sind: Verwaltung der Sitzung und des Warenkorbs, Authentifizierung und Speicherung der ausgewählten Sprache. Diese Cookies erfordern keine Einwilligung. Derzeit verwenden wir keine Profiling-Cookies für Werbung von Drittanbietern; sollten diese eingeführt werden, wird Ihre Einwilligung über ein entsprechendes Banner eingeholt."
+      },
+      {
+        "id": "sicurezza",
+        "title": "8. Sicherheit",
+        "body": "Wir treffen angemessene technische und organisatorische Maßnahmen zum Schutz der Daten: eine verschlüsselte Verbindung (HTTPS), einen eingeschränkten Zugriff auf die Daten und keine Speicherung sensibler Zahlungsdaten. Die Krypto-Adressen werden ausschließlich zum Empfang von Zahlungen verwendet."
+      },
+      {
+        "id": "contatti",
+        "title": "9. Kontakt",
+        "body": "Um Ihre Rechte auszuüben oder bei Fragen zu dieser Erklärung schreiben Sie an {email}."
+      }
+    ]
+  },
+  "fr": {
+    "metaTitle": "Politique de confidentialité",
+    "metaDescription": "Comment KratosLabs traite les données personnelles, conformément au GDPR.",
+    "title": "Politique de confidentialité",
+    "updated": "Août 2026",
+    "intro": "Cette notice décrit comment nous traitons les données personnelles des utilisateurs du site, conformément au Règlement (UE) 2016/679 (GDPR).",
+    "labels": {
+      "documents": "Documents",
+      "onThisPage": "Sur cette page",
+      "updated": "Dernière mise à jour"
+    },
+    "sections": [
+      {
+        "id": "titolare",
+        "title": "1. Responsable du traitement",
+        "body": "Le responsable du traitement des données est KratosLabs. Pour toute demande relative à vos données, vous pouvez écrire à {email} ou nous contacter via Telegram."
+      },
+      {
+        "id": "dati",
+        "title": "2. Données collectées",
+        "body": "Nous collectons les données que vous nous fournissez au moment de la commande : nom et prénom, e-mail, adresse de livraison (rue, ville, code postal, pays) et éventuelles remarques. Nous traitons également les données relatives à vos commandes et à vos communications avec le service d'assistance (e-mail et Telegram) ainsi que des données techniques de navigation (adresse IP, type d'appareil et navigateur) collectées au moyen de cookies techniques. Nous ne traitons pas les données complètes des cartes de paiement : le paiement s'effectue par virement bancaire ou en cryptomonnaie, et les adresses crypto servent uniquement à la réception."
+      },
+      {
+        "id": "finalita",
+        "title": "3. Finalités et bases juridiques",
+        "body": "Nous traitons les données afin de : exécuter le contrat, c'est-à-dire gérer la commande, le paiement et l'expédition (art. 6.1.b GDPR) ; respecter les obligations légales, par exemple comptables et fiscales (art. 6.1.c) ; poursuivre notre intérêt légitime à garantir la sécurité du site et à prévenir la fraude (art. 6.1.f) ; envoyer la newsletter, uniquement avec votre consentement préalable (art. 6.1.a), que vous pouvez retirer à tout moment."
+      },
+      {
+        "id": "conservazione",
+        "title": "4. Durée de conservation",
+        "body": "Nous conservons les données de la commande pendant le temps nécessaire à l'exécution de l'achat et au respect des obligations comptables et fiscales prévues par la loi. Les données collectées pour la newsletter sont conservées jusqu'au retrait du consentement ou à la désinscription de la liste. Les données techniques de navigation sont conservées pendant des périodes limitées et proportionnées aux finalités de sécurité."
+      },
+      {
+        "id": "destinatari",
+        "title": "5. Communication des données",
+        "body": "Les données peuvent être communiquées aux transporteurs et aux opérateurs logistiques pour la livraison, ainsi qu'aux prestataires techniques qui gèrent l'hébergement et l'infrastructure du site, lesquels agissent en qualité de sous-traitants. Nous ne vendons ni ne cédons vos données à des tiers à des fins de marketing."
+      },
+      {
+        "id": "diritti",
+        "title": "6. Droits de la personne concernée",
+        "body": "Vous pouvez exercer à tout moment les droits d'accès, de rectification, d'effacement, de limitation, de portabilité et d'opposition prévus par les articoli 15–22 du GDPR, ainsi que le retrait du consentement. Pour ce faire, écrivez à {email} : nous répondons dans les délais prévus par la réglementation. Vous avez en outre le droit d'introduire une réclamation auprès de l'autorité de contrôle compétente (en Italie, l'autorité italienne de protection des données — Garante per la protezione dei dati personali)."
+      },
+      {
+        "id": "cookie",
+        "title": "7. Cookies et technologies similaires",
+        "body": "Le site utilise des cookies techniques nécessaires à son fonctionnement : gestion de la session et du panier, authentification et mémorisation de la langue sélectionnée. Ces cookies ne nécessitent pas de consentement. Nous n'utilisons pas actuellement de cookies de profilage publicitaire de tiers ; s'ils venaient à être introduits, votre consentement vous serait demandé au moyen d'une bannière dédiée."
+      },
+      {
+        "id": "sicurezza",
+        "title": "8. Sécurité",
+        "body": "Nous adoptons des mesures techniques et organisationnelles appropriées pour protéger les données : une connexion chiffrée (HTTPS), un accès limité aux données et aucune conservation de données de paiement sensibles. Les adresses crypto sont utilisées exclusivement pour recevoir les paiements."
+      },
+      {
+        "id": "contatti",
+        "title": "9. Contacts",
+        "body": "Pour exercer vos droits ou pour toute question concernant cette notice, écrivez à {email}."
+      }
+    ]
+  },
+  "pt": {
+    "metaTitle": "Política de privacidade",
+    "metaDescription": "Como a KratosLabs trata os dados pessoais, em conformidade com o GDPR.",
+    "title": "Política de privacidade",
+    "updated": "Agosto de 2026",
+    "intro": "Esta política descreve como tratamos os dados pessoais dos utilizadores do site, em conformidade com o Regulamento (UE) 2016/679 (GDPR).",
+    "labels": {
+      "documents": "Documentos",
+      "onThisPage": "Nesta página",
+      "updated": "Última atualização"
+    },
+    "sections": [
+      {
+        "id": "titolare",
+        "title": "1. Responsável pelo tratamento",
+        "body": "O responsável pelo tratamento dos dados é a KratosLabs. Para qualquer pedido relativo aos seus dados pode escrever para {email} ou contactar-nos através do Telegram."
+      },
+      {
+        "id": "dati",
+        "title": "2. Dados recolhidos",
+        "body": "Recolhemos os dados que nos fornece no momento da encomenda: nome e apelido, email, endereço de envio (rua, cidade, código postal, país) e eventuais notas. Tratamos ainda os dados relativos às suas encomendas e às comunicações com o apoio ao cliente (email e Telegram) e dados técnicos de navegação (endereço IP, tipo de dispositivo e navegador) recolhidos através de cookies técnicos. Não tratamos os dados completos dos cartões de pagamento: o pagamento é efetuado por transferência bancária ou criptomoeda, e os endereços crypto destinam-se apenas à receção."
+      },
+      {
+        "id": "finalita",
+        "title": "3. Finalidades e bases jurídicas",
+        "body": "Tratamos os dados para: executar o contrato, ou seja, gerir a encomenda, o pagamento e o envio (art. 6.1.b GDPR); cumprir as obrigações legais, por exemplo contabilísticas e fiscais (art. 6.1.c); prosseguir o nosso interesse legítimo em garantir a segurança do site e prevenir fraudes (art. 6.1.f); enviar a newsletter, apenas mediante o seu consentimento prévio (art. 6.1.a), que pode revogar a qualquer momento."
+      },
+      {
+        "id": "conservazione",
+        "title": "4. Período de conservação",
+        "body": "Conservamos os dados da encomenda pelo tempo necessário para concluir a compra e cumprir as obrigações contabilísticas e fiscais previstas na lei. Os dados recolhidos para a newsletter são conservados até à revogação do consentimento ou ao cancelamento da subscrição da lista. Os dados técnicos de navegação são conservados por períodos limitados e proporcionais às finalidades de segurança."
+      },
+      {
+        "id": "destinatari",
+        "title": "5. Comunicação dos dados",
+        "body": "Os dados podem ser comunicados às transportadoras e aos operadores logísticos para a entrega, e aos fornecedores técnicos que gerem o alojamento e a infraestrutura do site, que atuam na qualidade de subcontratantes. Não vendemos nem cedemos os seus dados a terceiros para fins de marketing."
+      },
+      {
+        "id": "diritti",
+        "title": "6. Direitos do titular dos dados",
+        "body": "Pode exercer a qualquer momento os direitos de acesso, retificação, apagamento, limitação, portabilidade e oposição previstos nos articoli 15–22 do GDPR, além da revogação do consentimento. Para o fazer, escreva para {email}: respondemos nos prazos previstos pela legislação. Tem ainda o direito de apresentar reclamação junto da autoridade de controlo competente (em Itália, a autoridade italiana de proteção de dados — Garante per la protezione dei dati personali)."
+      },
+      {
+        "id": "cookie",
+        "title": "7. Cookies e tecnologias semelhantes",
+        "body": "O site utiliza cookies técnicos necessários ao seu funcionamento: gestão da sessão e do carrinho, autenticação e memorização do idioma selecionado. Estes cookies não requerem consentimento. Atualmente não utilizamos cookies de definição de perfis publicitários de terceiros; caso venham a ser introduzidos, o seu consentimento será solicitado através de um banner específico."
+      },
+      {
+        "id": "sicurezza",
+        "title": "8. Segurança",
+        "body": "Adotamos medidas técnicas e organizativas adequadas para proteger os dados: ligação cifrada (HTTPS), acesso limitado aos dados e nenhuma conservação de dados de pagamento sensíveis. Os endereços crypto são utilizados exclusivamente para receber os pagamentos."
+      },
+      {
+        "id": "contatti",
+        "title": "9. Contactos",
+        "body": "Para exercer os seus direitos ou para questões sobre esta política, escreva para {email}."
+      }
+    ]
+  }
+}
