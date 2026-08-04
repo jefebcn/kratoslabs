@@ -5,7 +5,7 @@ import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
 import { enrichDeus } from "@/lib/deus-descriptions";
-import { faqsForProduct } from "@/lib/deus-faqs";
+import { faqsForProduct, faqsI18nForProduct } from "@/lib/deus-faqs";
 import { resolveDeusImageUrl, downloadImage } from "@/lib/deus-images";
 
 export interface ActionResult {
@@ -539,15 +539,14 @@ export async function importCatalog(
       activeName: p.specs.activeName,
       packaging: p.specs.packaging,
     });
-    const faqs = faqsForProduct(
-      {
-        title: p.title,
-        category: p.category,
-        activeName: p.specs.activeName,
-        packaging: p.specs.packaging,
-      },
-      enriched.specs,
-    );
+    const faqInput = {
+      title: p.title,
+      category: p.category,
+      activeName: p.specs.activeName,
+      packaging: p.specs.packaging,
+    };
+    const faqs = faqsForProduct(faqInput, enriched.specs, "it");
+    const faqsI18n = faqsI18nForProduct(faqInput, enriched.specs);
     return {
       slug: p.slug,
       brand: "Deus Medical",
@@ -559,6 +558,7 @@ export async function importCatalog(
       cost_cents: p.costCents,
       specs: enriched.specs,
       faqs,
+      faqs_i18n: faqsI18n,
       stock: p.stock,
       active: p.active,
       updated_at: new Date().toISOString(),
