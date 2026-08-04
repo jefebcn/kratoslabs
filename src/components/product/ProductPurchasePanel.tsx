@@ -52,18 +52,20 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         </p>
       )}
 
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex flex-col gap-2.5 sm:flex-row">
         <AddToCartButton
           product={product}
           quantity={qty}
           size="lg"
-          className="flex-1"
+          className="h-14 flex-1 text-base font-semibold sm:h-12"
+          iconClassName="size-5"
         />
         <QuickCheckoutButton
           product={product}
           quantity={qty}
           size="lg"
-          className="flex-1"
+          className="h-14 flex-1 text-base font-semibold sm:h-12"
+          iconClassName="size-5"
         />
       </div>
 

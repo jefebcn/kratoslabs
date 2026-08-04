@@ -14,6 +14,7 @@ export function AddToCartButton({
   variant = "primary",
   size = "md",
   className,
+  iconClassName = "size-4",
 }: {
   product: Product;
   quantity?: number;
@@ -21,6 +22,7 @@ export function AddToCartButton({
   variant?: ButtonProps["variant"];
   size?: ButtonProps["size"];
   className?: string;
+  iconClassName?: string;
 }) {
   const t = useTranslations("product");
   const add = useCart((s) => s.add);
@@ -47,12 +49,12 @@ export function AddToCartButton({
         t("soldOut")
       ) : added ? (
         <>
-          <Check className="size-4" aria-hidden />
+          <Check className={iconClassName} aria-hidden />
           {t("added")}
         </>
       ) : (
         <>
-          <ShoppingBag className="size-4" aria-hidden />
+          <ShoppingBag className={iconClassName} aria-hidden />
           {label ?? t("addToCart")}
         </>
       )}
