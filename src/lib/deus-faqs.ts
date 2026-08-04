@@ -75,15 +75,26 @@ export function classKeyFor(
   return "generic";
 }
 
-/** FAQ pronte per un prodotto (segnaposto già riempiti). */
+/** Lingue supportate dalla libreria FAQ. */
+export const FAQ_LOCALES = ["it", "en", "de", "fr", "pt"] as const;
+
+// Libreria: locale -> classe -> FAQ[]. (Cast via unknown: la forma del JSON
+// evolve — vedi deus-faqs-library.json con chiavi di lingua al primo livello.)
+const LIBRARY = LIB as unknown as Record<
+  string,
+  Record<string, ProductFaq[]>
+>;
+
+/** FAQ pronte per un prodotto in una lingua (segnaposto già riempiti). */
 export function faqsForProduct(
   p: EnrichInput,
   specs: EnrichedSpecs,
+  locale: string = "it",
 ): ProductFaq[] {
   const injectable = /iniett|penna|flacon/i.test(specs.form);
   const key = classKeyFor(p.activeName, injectable, p.category);
-  const lib = LIB as Record<string, ProductFaq[]>;
-  const template = lib[key] ?? lib.generic ?? [];
+  const byClass = LIBRARY[locale] ?? LIBRARY.it ?? {};
+  const template = byClass[key] ?? byClass.generic ?? [];
 
   const vars: Record<string, string> = {
     title: p.title,
@@ -97,4 +108,14 @@ export function faqsForProduct(
     t.replace(/\{(\w+)\}/g, (_, k: string) => vars[k] ?? `{${k}}`);
 
   return template.map((f) => ({ q: fill(f.q), a: fill(f.a) }));
+}
+
+/** FAQ in tutte le lingue: { it: [...], en: [...], ... }. */
+export function faqsI18nForProduct(
+  p: EnrichInput,
+  specs: EnrichedSpecs,
+): Record<string, ProductFaq[]> {
+  return Object.fromEntries(
+    FAQ_LOCALES.map((l) => [l, faqsForProduct(p, specs, l)]),
+  );
 }

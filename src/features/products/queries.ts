@@ -1,3 +1,4 @@
+import { getLocale } from "next-intl/server";
 import { createReadClient } from "@/lib/supabase/read";
 import { MOCK_PRODUCTS } from "@/lib/mock-data";
 import type { CategorySlug, Product, ProductSpecs } from "@/types";
@@ -10,15 +11,46 @@ const DEFAULT_SPECS: ProductSpecs = {
   activeName: "",
 };
 
+/** Locale corrente lato server; "it" se fuori dal contesto di richiesta. */
+async function currentLocale(): Promise<string> {
+  try {
+    return await getLocale();
+  } catch {
+    return "it";
+  }
+}
+
+/** Sceglie il valore per la lingua da una mappa {it,en,...}; fallback su it. */
+function pickI18n<T>(
+  map: unknown,
+  locale: string,
+  fallback: T | undefined,
+): T | undefined {
+  if (map && typeof map === "object") {
+    const m = map as Record<string, T>;
+    return m[locale] ?? m.it ?? fallback;
+  }
+  return fallback;
+}
+
 /** Riga DB (snake_case) -> Product (camelCase). Tollerante ai campi mancanti. */
-function rowToProduct(r: Record<string, unknown>): Product {
+function rowToProduct(r: Record<string, unknown>, locale = "it"): Product {
+  const faqsIt = Array.isArray(r.faqs)
+    ? (r.faqs as Product["faqs"])
+    : undefined;
   return {
     id: String(r.id),
     slug: String(r.slug),
     brand: (r.brand as string) || "KratosLabs",
     title: (r.title as string) || "",
-    shortDescription: (r.short_description as string) || "",
-    description: (r.description as string) || "",
+    shortDescription:
+      pickI18n<string>(r.short_description_i18n, locale, undefined) ||
+      (r.short_description as string) ||
+      "",
+    description:
+      pickI18n<string>(r.description_i18n, locale, undefined) ||
+      (r.description as string) ||
+      "",
     category: (r.category as CategorySlug) ?? "",
     priceCents: Number(r.price_cents ?? 0),
     compareAtPriceCents:
@@ -32,7 +64,7 @@ function rowToProduct(r: Record<string, unknown>): Product {
     specs: { ...DEFAULT_SPECS, ...((r.specs as object) ?? {}) },
     labReport: (r.lab_report as Product["labReport"]) ?? undefined,
     detailsHtml: (r.details_html as string) || undefined,
-    faqs: Array.isArray(r.faqs) ? (r.faqs as Product["faqs"]) : undefined,
+    faqs: pickI18n<Product["faqs"]>(r.faqs_i18n, locale, faqsIt),
     stock: Number(r.stock ?? 0),
     featured: Boolean(r.featured),
   };
@@ -53,7 +85,8 @@ async function fetchProducts(): Promise<Product[]> {
       .eq("active", true)
       .order("created_at", { ascending: false });
     if (error || !data || data.length === 0) return MOCK_PRODUCTS;
-    return data.map(rowToProduct);
+    const locale = await currentLocale();
+    return data.map((r) => rowToProduct(r, locale));
   } catch {
     return MOCK_PRODUCTS;
   }
