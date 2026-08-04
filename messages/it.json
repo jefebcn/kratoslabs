@@ -102,7 +102,6 @@
     "info": "Informazioni",
     "legal": "Legale",
     "contact": "Contatto",
-    "communityRefs": "Riferimenti indipendenti della community",
     "newsletterTitle": "Newsletter",
     "newsletterSubtitle": "Rimani aggiornato su promozioni, saldi e offerte esclusive di {site}.",
     "telegramCta": "Unisciti al nostro Telegram",
@@ -112,7 +111,8 @@
     "terms": "Termini di servizio",
     "shipping": "Spedizioni e resi",
     "disclaimer": "© {year} {site}. Tutti i prodotti sono forniti esclusivamente a scopo di ricerca e valutazione e non sono presentati come trattamenti medici o soluzioni per la salute.",
-    "fastShipping": "Spedizione veloce"
+    "fastShipping": "Spedizione veloce",
+    "follow": "Seguici"
   },
   "newsletter": {
     "placeholder": "La tua email",

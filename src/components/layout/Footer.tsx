@@ -1,15 +1,52 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { Send } from "lucide-react";
+import { Instagram, Send } from "lucide-react";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { listCategories } from "@/features/categories";
 import { SITE } from "@/lib/constants";
 
-/** Riferimenti indipendenti della community (link esterni). */
-const COMMUNITY_REFS: { label: string; href: string }[] = [
-  { label: "MesoRx", href: "https://thinksteroids.com" },
-  { label: "Eroids", href: "https://eroids.com" },
-];
+/** Glyph TikTok (lucide non ha l'icona del brand). */
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+      className={className}
+    >
+      <path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.2.1-2.4-.2-3.5-.8v5.9c0 3-2 5.4-5 5.4-2.8 0-5-2.2-5-4.9 0-2.8 2.3-4.9 5.2-4.6v2.7c-.4-.1-.8-.2-1.2-.1-1.1.1-1.9 1-1.9 2.1 0 1.2 1 2.1 2.1 2.1 1.2 0 2.1-.9 2.1-2.4V3h3.2z" />
+    </svg>
+  );
+}
+
+/** Link social a icona circolare (sfondo scuro del footer). */
+function SocialLinks({ label }: { label: string }) {
+  const items = [
+    { href: SITE.instagramUrl, name: "Instagram", Icon: Instagram },
+    { href: SITE.tiktokUrl, name: "TikTok", Icon: TikTokIcon },
+  ];
+  return (
+    <>
+      <p className="mt-4 text-xs uppercase tracking-wide text-white/50">
+        {label}
+      </p>
+      <div className="mt-2 flex items-center gap-2.5">
+        {items.map(({ href, name, Icon }) => (
+          <a
+            key={name}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={name}
+            className="grid size-9 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition-colors hover:border-accent hover:text-accent"
+          >
+            <Icon className="size-4" />
+          </a>
+        ))}
+      </div>
+    </>
+  );
+}
 
 function Column({
   title,
@@ -62,26 +99,6 @@ export async function Footer() {
 
   return (
     <footer className="mt-16 border-t-2 border-accent bg-[#15181d] text-white/70">
-      {/* Riferimenti indipendenti della community */}
-      <div className="border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-1 px-4 py-3 text-center text-xs sm:px-6">
-          <span className="font-semibold uppercase tracking-wide text-white">
-            {t("communityRefs")}
-          </span>
-          {COMMUNITY_REFS.map((r) => (
-            <a
-              key={r.label}
-              href={r.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/60 transition-colors hover:text-accent"
-            >
-              • {r.label}
-            </a>
-          ))}
-        </div>
-      </div>
-
       {/* Newsletter */}
       <div className="border-b border-white/10">
         <div className="mx-auto flex max-w-2xl flex-col items-center px-4 py-8 text-center sm:px-6">
@@ -128,6 +145,7 @@ export async function Footer() {
             >
               {SITE.email}
             </a>
+            <SocialLinks label={t("follow")} />
           </div>
 
           <Column
