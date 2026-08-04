@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
-import { enrichDeus } from "@/lib/deus-descriptions";
+import { enrichDeus, describeI18n } from "@/lib/deus-descriptions";
 import { faqsForProduct, faqsI18nForProduct } from "@/lib/deus-faqs";
 import { resolveDeusImageUrl, downloadImage } from "@/lib/deus-images";
 
@@ -557,6 +557,7 @@ export async function importCatalog(
       price_cents: p.priceCents,
       cost_cents: p.costCents,
       specs: enriched.specs,
+      description_i18n: describeI18n(faqInput),
       faqs,
       faqs_i18n: faqsI18n,
       stock: p.stock,

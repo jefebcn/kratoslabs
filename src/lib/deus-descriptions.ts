@@ -5,12 +5,27 @@
  * claim di efficacia. Ogni scheda riporta il disclaimer "solo ricerca".
  */
 
+import DESC_I18N from "./deus-descriptions-i18n.json";
+
 export interface EnrichInput {
   title: string;
   category: string;
   activeName: string;
   packaging?: string;
 }
+
+/** Lingue supportate dalle descrizioni. */
+export const DESC_LOCALES = ["it", "en", "de", "fr", "pt"] as const;
+
+interface DescTable {
+  contains: string;
+  packaging: string;
+  qc: string;
+  storage: string;
+  disclaimer: string;
+  clauses: Record<string, string>;
+}
+const DESC = DESC_I18N as unknown as Record<string, DescTable | null>;
 
 export interface EnrichedSpecs {
   activeName: string;
@@ -26,6 +41,8 @@ interface ClassInfo {
   label: string;
   /** Frase per la descrizione (termina senza punto). */
   clause: string;
+  /** Chiave di classe per la libreria descrizioni multilingua. */
+  key: string;
 }
 
 /** Regole di classificazione per principio attivo (prima corrispondenza vince). */
@@ -36,6 +53,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
       label: "Inibitore dell'aromatasi",
       clause:
         "è un inibitore dell'aromatasi, impiegato per il controllo dei livelli di estradiolo",
+      key: "aromatase-inhibitor",
     }),
   },
   {
@@ -43,6 +61,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "SERM (anti-estrogeno)",
       clause: "è un modulatore selettivo del recettore degli estrogeni (SERM)",
+      key: "serm",
     }),
   },
   {
@@ -50,6 +69,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Gonadotropina corionica (hCG)",
       clause: "è gonadotropina corionica umana (hCG)",
+      key: "hcg",
     }),
   },
   {
@@ -57,6 +77,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Agonista dopaminergico",
       clause: "è un agonista dei recettori della dopamina",
+      key: "dopamine-agonist",
     }),
   },
   {
@@ -64,6 +85,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Agonista beta-2 (termogenico)",
       clause: "è un agonista beta-2 adrenergico ad azione termogenica",
+      key: "beta2",
     }),
   },
   {
@@ -71,6 +93,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Ormone tiroideo",
       clause: "è un ormone tiroideo sintetico",
+      key: "thyroid",
     }),
   },
   {
@@ -78,6 +101,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Agonista GLP-1",
       clause: "è un agonista del recettore del GLP-1",
+      key: "glp1",
     }),
   },
   {
@@ -86,6 +110,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
       label: "Inibitore PDE5",
       clause:
         "è un inibitore della PDE5, per il supporto della funzione sessuale",
+      key: "pde5",
     }),
   },
   {
@@ -93,6 +118,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Ormone della crescita (somatropina)",
       clause: "è somatropina, ormone della crescita umano ricombinante",
+      key: "hgh",
     }),
   },
   {
@@ -100,6 +126,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Secretagogo GH",
       clause: "è un secretagogo dell'ormone della crescita",
+      key: "gh-secretagogue",
     }),
   },
   {
@@ -107,6 +134,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Agonista PPARδ",
       clause: "è un agonista del recettore PPARδ",
+      key: "ppar-delta",
     }),
   },
   {
@@ -115,6 +143,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
       label: "SARM",
       clause:
         "è un modulatore selettivo del recettore degli androgeni (SARM)",
+      key: "sarm",
     }),
   },
   {
@@ -122,6 +151,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
     info: () => ({
       label: "Peptide",
       clause: "è un peptide di sintesi",
+      key: "peptide",
     }),
   },
   {
@@ -133,6 +163,7 @@ const RULES: { re: RegExp; info: (inj: boolean) => ClassInfo }[] = [
       clause: inj
         ? "appartiene alla classe degli steroidi androgeno-anabolizzanti, in soluzione oleosa per uso intramuscolare"
         : "è uno steroide androgeno-anabolizzante in forma orale",
+      key: inj ? "steroid-injectable" : "steroid-oral",
     }),
   },
 ];
@@ -224,4 +255,34 @@ export function enrichDeus(p: EnrichInput): {
 
 function capitalize(s: string): string {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+}
+
+/**
+ * Descrizione in tutte le lingue: { it, en, de, fr, pt }. L'italiano riproduce
+ * esattamente il testo di `enrichDeus`; le altre lingue usano le stesse frasi
+ * tradotte in `deus-descriptions-i18n.json`, con la stessa classificazione.
+ */
+export function describeI18n(p: EnrichInput): Record<string, string> {
+  const { form } = detectForm(p.packaging || "", p.category);
+  const injectable = /iniett|penna|flacon/i.test(form);
+  const info = classify(p.activeName, injectable);
+  const packaging = (p.packaging || "").replace(/\.\s*$/, "");
+
+  const fill = (t: string) =>
+    t
+      .replace(/\{title\}/g, p.title)
+      .replace(/\{active\}/g, p.activeName)
+      .replace(/\{packaging\}/g, packaging);
+
+  const out: Record<string, string> = {};
+  for (const loc of DESC_LOCALES) {
+    const T = DESC[loc] ?? (DESC.it as DescTable);
+    const parts: string[] = [fill(T.contains)];
+    const clause = info ? T.clauses[info.key] : undefined;
+    if (clause) parts.push(clause);
+    if (packaging) parts.push(fill(T.packaging));
+    parts.push(T.qc, T.storage, T.disclaimer);
+    out[loc] = parts.join(" ");
+  }
+  return out;
 }

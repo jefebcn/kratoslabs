@@ -1,0 +1,122 @@
+{
+  "it": {
+    "contains": "{title} di Deus Medical contiene {active}.",
+    "packaging": "Confezione: {packaging}.",
+    "qc": "La qualità di ogni lotto è verificabile nella sezione Lab test / QC.",
+    "storage": "Conservare al riparo da luce e calore, fuori dalla portata dei bambini.",
+    "disclaimer": "Prodotto fornito esclusivamente a scopo di ricerca e valutazione analitica, non presentato come trattamento medico.",
+    "clauses": {
+      "aromatase-inhibitor": "È un inibitore dell'aromatasi, impiegato per il controllo dei livelli di estradiolo.",
+      "serm": "È un modulatore selettivo del recettore degli estrogeni (SERM).",
+      "hcg": "È gonadotropina corionica umana (hCG).",
+      "dopamine-agonist": "È un agonista dei recettori della dopamina.",
+      "beta2": "È un agonista beta-2 adrenergico ad azione termogenica.",
+      "thyroid": "È un ormone tiroideo sintetico.",
+      "glp1": "È un agonista del recettore del GLP-1.",
+      "pde5": "È un inibitore della PDE5, per il supporto della funzione sessuale.",
+      "hgh": "È somatropina, ormone della crescita umano ricombinante.",
+      "gh-secretagogue": "È un secretagogo dell'ormone della crescita.",
+      "ppar-delta": "È un agonista del recettore PPARδ.",
+      "sarm": "È un modulatore selettivo del recettore degli androgeni (SARM).",
+      "peptide": "È un peptide di sintesi.",
+      "steroid-injectable": "Appartiene alla classe degli steroidi androgeno-anabolizzanti, in soluzione oleosa per uso intramuscolare.",
+      "steroid-oral": "È uno steroide androgeno-anabolizzante in forma orale."
+    }
+  },
+  "en": {
+    "contains": "{title} by Deus Medical contains {active}.",
+    "packaging": "Packaging: {packaging}.",
+    "qc": "The quality of each batch can be verified in the Lab test / QC section.",
+    "storage": "Store away from light and heat, out of the reach of children.",
+    "disclaimer": "Product supplied for research and analytical evaluation purposes only, not presented as a medical treatment.",
+    "clauses": {
+      "aromatase-inhibitor": "It is an aromatase inhibitor used to control estradiol levels.",
+      "serm": "It is a selective estrogen receptor modulator (SERM).",
+      "hcg": "It is human chorionic gonadotropin (hCG).",
+      "dopamine-agonist": "It is a dopamine receptor agonist.",
+      "beta2": "It is a beta-2 adrenergic agonist with a thermogenic action.",
+      "thyroid": "It is a synthetic thyroid hormone.",
+      "glp1": "It is a GLP-1 receptor agonist.",
+      "pde5": "It is a PDE5 inhibitor, supporting sexual function.",
+      "hgh": "It is somatropin, recombinant human growth hormone.",
+      "gh-secretagogue": "It is a growth hormone secretagogue.",
+      "ppar-delta": "It is a PPARδ receptor agonist.",
+      "sarm": "It is a selective androgen receptor modulator (SARM).",
+      "peptide": "It is a synthetic peptide.",
+      "steroid-injectable": "It belongs to the class of androgenic-anabolic steroids, in an oily solution for intramuscular use.",
+      "steroid-oral": "It is an androgenic-anabolic steroid in oral form."
+    }
+  },
+  "de": {
+    "contains": "{title} von Deus Medical enthält {active}.",
+    "packaging": "Verpackung: {packaging}.",
+    "qc": "Die Qualität jeder Charge kann im Bereich Lab test / QC überprüft werden.",
+    "storage": "Vor Licht und Hitze geschützt aufbewahren, außerhalb der Reichweite von Kindern.",
+    "disclaimer": "Produkt ausschließlich zu Forschungs- und Analysezwecken bereitgestellt, nicht als medizinische Behandlung dargestellt.",
+    "clauses": {
+      "aromatase-inhibitor": "Es ist ein Aromatasehemmer zur Kontrolle des Östradiolspiegels.",
+      "serm": "Es ist ein selektiver Östrogenrezeptor-Modulator (SERM).",
+      "hcg": "Es ist humanes Choriongonadotropin (hCG).",
+      "dopamine-agonist": "Es ist ein Dopaminrezeptor-Agonist.",
+      "beta2": "Es ist ein Beta-2-adrenerger Agonist mit thermogener Wirkung.",
+      "thyroid": "Es ist ein synthetisches Schilddrüsenhormon.",
+      "glp1": "Es ist ein GLP-1-Rezeptor-Agonist.",
+      "pde5": "Es ist ein PDE5-Hemmer zur Unterstützung der Sexualfunktion.",
+      "hgh": "Es ist Somatropin, rekombinantes menschliches Wachstumshormon.",
+      "gh-secretagogue": "Es ist ein Wachstumshormon-Sekretagogum.",
+      "ppar-delta": "Es ist ein PPARδ-Rezeptor-Agonist.",
+      "sarm": "Es ist ein selektiver Androgenrezeptor-Modulator (SARM).",
+      "peptide": "Es ist ein synthetisches Peptid.",
+      "steroid-injectable": "Es gehört zur Klasse der androgen-anabolen Steroide, in öliger Lösung zur intramuskulären Anwendung.",
+      "steroid-oral": "Es ist ein androgen-anaboles Steroid in oraler Form."
+    }
+  },
+  "fr": {
+    "contains": "{title} de Deus Medical contient {active}.",
+    "packaging": "Conditionnement : {packaging}.",
+    "qc": "La qualité de chaque lot peut être vérifiée dans la section Lab test / QC.",
+    "storage": "Conserver à l'abri de la lumière et de la chaleur, hors de portée des enfants.",
+    "disclaimer": "Produit fourni exclusivement à des fins de recherche et d'évaluation analytique, non présenté comme un traitement médical.",
+    "clauses": {
+      "aromatase-inhibitor": "C'est un inhibiteur de l'aromatase, utilisé pour contrôler les niveaux d'œstradiol.",
+      "serm": "C'est un modulateur sélectif des récepteurs des œstrogènes (SERM).",
+      "hcg": "C'est de la gonadotrophine chorionique humaine (hCG).",
+      "dopamine-agonist": "C'est un agoniste des récepteurs de la dopamine.",
+      "beta2": "C'est un agoniste bêta-2 adrénergique à action thermogénique.",
+      "thyroid": "C'est une hormone thyroïdienne synthétique.",
+      "glp1": "C'est un agoniste du récepteur du GLP-1.",
+      "pde5": "C'est un inhibiteur de la PDE5, pour le soutien de la fonction sexuelle.",
+      "hgh": "C'est de la somatropine, hormone de croissance humaine recombinante.",
+      "gh-secretagogue": "C'est un sécrétagogue de l'hormone de croissance.",
+      "ppar-delta": "C'est un agoniste du récepteur PPARδ.",
+      "sarm": "C'est un modulateur sélectif des récepteurs aux androgènes (SARM).",
+      "peptide": "C'est un peptide de synthèse.",
+      "steroid-injectable": "Il appartient à la classe des stéroïdes androgéno-anabolisants, en solution huileuse pour usage intramusculaire.",
+      "steroid-oral": "C'est un stéroïde androgéno-anabolisant sous forme orale."
+    }
+  },
+  "pt": {
+    "contains": "{title} da Deus Medical contém {active}.",
+    "packaging": "Embalagem: {packaging}.",
+    "qc": "A qualidade de cada lote pode ser verificada na seção Lab test / QC.",
+    "storage": "Conservar ao abrigo da luz e do calor, fora do alcance das crianças.",
+    "disclaimer": "Produto fornecido exclusivamente para fins de pesquisa e avaliação analítica, não apresentado como tratamento médico.",
+    "clauses": {
+      "aromatase-inhibitor": "É um inibidor da aromatase, utilizado para controlar os níveis de estradiol.",
+      "serm": "É um modulador seletivo do receptor de estrogênio (SERM).",
+      "hcg": "É gonadotrofina coriônica humana (hCG).",
+      "dopamine-agonist": "É um agonista dos receptores da dopamina.",
+      "beta2": "É um agonista beta-2 adrenérgico com ação termogênica.",
+      "thyroid": "É um hormônio tireoidiano sintético.",
+      "glp1": "É um agonista do receptor de GLP-1.",
+      "pde5": "É um inibidor da PDE5, para o suporte da função sexual.",
+      "hgh": "É somatropina, hormônio do crescimento humano recombinante.",
+      "gh-secretagogue": "É um secretagogo do hormônio do crescimento.",
+      "ppar-delta": "É um agonista do receptor PPARδ.",
+      "sarm": "É um modulador seletivo do receptor de androgênio (SARM).",
+      "peptide": "É um peptídeo de síntese.",
+      "steroid-injectable": "Pertence à classe dos esteroides androgênico-anabolizantes, em solução oleosa para uso intramuscular.",
+      "steroid-oral": "É um esteroide androgênico-anabolizante em forma oral."
+    }
+  }
+}
