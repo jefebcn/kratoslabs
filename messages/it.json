@@ -91,7 +91,48 @@
     "bestsellers": "Bestseller",
     "viewAll": "Vedi tutti — {category}",
     "touchdownGallery": "Galleria Touchdown",
-    "sendTouchdown": "Invia il tuo touchdown qui"
+    "sendTouchdown": "Invia il tuo touchdown qui",
+    "badges": {
+      "analysis": {
+        "title": "Analisi indipendenti",
+        "desc": "Referto di terza parte pubblicato per ogni lotto, con numero di batch verificabile."
+      },
+      "shipping": {
+        "title": "Spedizione tracciata",
+        "desc": "Corriere tracciato in 24/48h, imballo neutro e riciclabile su richiesta."
+      },
+      "packaging": {
+        "title": "Imballo anonimo",
+        "desc": "Scatola neutra senza indicazioni del contenuto, per tutelare la tua privacy alla consegna."
+      },
+      "payments": {
+        "title": "Pagamenti sicuri",
+        "desc": "Bonifico e criptovalute (Bitcoin, USDT). Checkout cifrato, nessun dato di pagamento conservato."
+      }
+    },
+    "info": {
+      "products": {
+        "title": "Cosa trattiamo",
+        "body": "<b>Iniettabili</b>, <b>Orali</b>, <b>PCT</b>, <b>HGH & Peptidi</b>, <b>SARMs</b> e <b>Brucia grassi</b> — tutti prodotti <b>Deus Medical</b>.",
+        "cta": "Sfoglia tutti i prodotti"
+      },
+      "shipping": {
+        "title": "Spedizione e consegna",
+        "body": "Spedizione entro 3 giorni lavorativi dal pagamento. Imballo <b>anonimo</b>, senza etichette identificative, con <b>tracciamento</b> su ogni ordine. Consegna in 5–28 giorni.",
+        "cta": "Spedizioni e resi"
+      },
+      "payments": {
+        "title": "Metodi di pagamento",
+        "body": "<b>Bonifico bancario</b>, <b>Bitcoin</b> e <b>USDT (TRC-20)</b>. Dati trattati con la massima riservatezza.",
+        "cta": "Guida ai pagamenti"
+      }
+    },
+    "community": {
+      "badge": "Accettiamo Bitcoin e criptovalute",
+      "title": "Unisciti al canale Kratos Labs",
+      "body": "Nuovi lotti, referti di laboratorio in anteprima e offerte riservate. Nessuno spam, solo aggiornamenti che contano.",
+      "cta": "Vai al canale Telegram"
+    }
   },
   "menu": {
     "title": "Menu",
@@ -281,5 +322,18 @@
     "products": "Prodotti",
     "subtitle": "Foto e recensioni reali dei nostri clienti.",
     "empty": "Non ci sono ancora testimonianze."
+  },
+  "specs": {
+    "active": "Principio attivo",
+    "concentration": "Concentrazione",
+    "class": "Classe",
+    "form": "Forma",
+    "packaging": "Confezione",
+    "manufacturer": "Produttore",
+    "netWeight": "Peso netto",
+    "serving": "Porzione",
+    "servingsPerContainer": "Porzioni per confezione",
+    "perServing": "{active} per porzione",
+    "totalActive": "{active} totali"
   }
 }

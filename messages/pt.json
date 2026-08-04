@@ -91,7 +91,48 @@
     "bestsellers": "Mais vendidos",
     "viewAll": "Ver todos — {category}",
     "touchdownGallery": "Galeria Touchdown",
-    "sendTouchdown": "Envia o teu touchdown aqui"
+    "sendTouchdown": "Envia o teu touchdown aqui",
+    "badges": {
+      "analysis": {
+        "title": "Análises independentes",
+        "desc": "Relatório de terceiros publicado para cada lote, com número de lote verificável."
+      },
+      "shipping": {
+        "title": "Envio rastreado",
+        "desc": "Correio rastreado em 24/48h, embalagem neutra e reciclável a pedido."
+      },
+      "packaging": {
+        "title": "Embalagem anónima",
+        "desc": "Caixa neutra sem indicação do conteúdo, para proteger a sua privacidade na entrega."
+      },
+      "payments": {
+        "title": "Pagamentos seguros",
+        "desc": "Transferência bancária e criptomoedas (Bitcoin, USDT). Checkout cifrado, nenhum dado de pagamento guardado."
+      }
+    },
+    "info": {
+      "products": {
+        "title": "O que oferecemos",
+        "body": "<b>Injetáveis</b>, <b>Orais</b>, <b>PCT</b>, <b>HGH & Peptídeos</b>, <b>SARMs</b> e <b>Queimadores de gordura</b> — todos produtos <b>Deus Medical</b>.",
+        "cta": "Ver todos os produtos"
+      },
+      "shipping": {
+        "title": "Envio & entrega",
+        "body": "Enviado em até 3 dias úteis após o pagamento. Embalagem <b>anónima</b>, sem etiquetas de identificação e com <b>rastreamento</b> em cada encomenda. Entrega em 5–28 dias.",
+        "cta": "Envios & devoluções"
+      },
+      "payments": {
+        "title": "Métodos de pagamento",
+        "body": "<b>Transferência bancária</b>, <b>Bitcoin</b> e <b>USDT (TRC-20)</b>. Dados tratados com a máxima confidencialidade.",
+        "cta": "Guia de pagamentos"
+      }
+    },
+    "community": {
+      "badge": "Aceitamos Bitcoin e cripto",
+      "title": "Junte-se ao canal Kratos Labs",
+      "body": "Novos lotes, relatórios de laboratório em primeira mão e ofertas reservadas. Sem spam, apenas atualizações que importam.",
+      "cta": "Ir para o canal Telegram"
+    }
   },
   "menu": {
     "title": "Menu",
@@ -281,5 +322,18 @@
     "products": "Produtos",
     "subtitle": "Fotos e avaliações reais dos nossos clientes.",
     "empty": "Ainda sem testemunhos."
+  },
+  "specs": {
+    "active": "Princípio ativo",
+    "concentration": "Concentração",
+    "class": "Classe",
+    "form": "Forma",
+    "packaging": "Embalagem",
+    "manufacturer": "Fabricante",
+    "netWeight": "Peso líquido",
+    "serving": "Porção",
+    "servingsPerContainer": "Porções por embalagem",
+    "perServing": "{active} por porção",
+    "totalActive": "{active} no total"
   }
 }

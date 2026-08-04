@@ -91,7 +91,48 @@
     "bestsellers": "Bestseller",
     "viewAll": "Alle ansehen — {category}",
     "touchdownGallery": "Touchdown-Galerie",
-    "sendTouchdown": "Sende deinen Touchdown hier"
+    "sendTouchdown": "Sende deinen Touchdown hier",
+    "badges": {
+      "analysis": {
+        "title": "Unabhängige Analysen",
+        "desc": "Für jede Charge ein Drittanbieter-Bericht mit überprüfbarer Chargennummer."
+      },
+      "shipping": {
+        "title": "Versand mit Sendungsverfolgung",
+        "desc": "Sendungsverfolgter Kurier in 24/48h, neutrale und recycelbare Verpackung auf Wunsch."
+      },
+      "packaging": {
+        "title": "Neutrale Verpackung",
+        "desc": "Anonymer Karton ohne Hinweis auf den Inhalt, um deine Privatsphäre bei der Zustellung zu schützen."
+      },
+      "payments": {
+        "title": "Sichere Zahlungen",
+        "desc": "Überweisung und Kryptowährungen (Bitcoin, USDT). Verschlüsselter Checkout, keine Zahlungsdaten gespeichert."
+      }
+    },
+    "info": {
+      "products": {
+        "title": "Was wir führen",
+        "body": "<b>Injektionen</b>, <b>Orale</b>, <b>PCT</b>, <b>HGH & Peptide</b>, <b>SARMs</b> und <b>Fatburner</b> — alles <b>Deus Medical</b>-Produkte.",
+        "cta": "Alle Produkte ansehen"
+      },
+      "shipping": {
+        "title": "Versand & Lieferung",
+        "body": "Versand innerhalb von 3 Werktagen nach Zahlung. <b>Anonyme</b> Verpackung ohne identifizierende Etiketten und mit <b>Sendungsverfolgung</b> bei jeder Bestellung. Lieferung in 5–28 Tagen.",
+        "cta": "Versand & Rückgabe"
+      },
+      "payments": {
+        "title": "Zahlungsmethoden",
+        "body": "<b>Banküberweisung</b>, <b>Bitcoin</b> und <b>USDT (TRC-20)</b>. Daten werden mit höchster Vertraulichkeit behandelt.",
+        "cta": "Zahlungsleitfaden"
+      }
+    },
+    "community": {
+      "badge": "Wir akzeptieren Bitcoin und Krypto",
+      "title": "Tritt dem Kratos-Labs-Kanal bei",
+      "body": "Neue Chargen, Laborberichte vorab und exklusive Angebote. Kein Spam, nur wichtige Updates.",
+      "cta": "Zum Telegram-Kanal"
+    }
   },
   "menu": {
     "title": "Menü",
@@ -281,5 +322,18 @@
     "products": "Produkte",
     "subtitle": "Echte Fotos und Bewertungen unserer Kunden.",
     "empty": "Noch keine Erfahrungsberichte."
+  },
+  "specs": {
+    "active": "Wirkstoff",
+    "concentration": "Konzentration",
+    "class": "Klasse",
+    "form": "Form",
+    "packaging": "Verpackung",
+    "manufacturer": "Hersteller",
+    "netWeight": "Nettogewicht",
+    "serving": "Portion",
+    "servingsPerContainer": "Portionen pro Packung",
+    "perServing": "{active} pro Portion",
+    "totalActive": "{active} gesamt"
   }
 }
