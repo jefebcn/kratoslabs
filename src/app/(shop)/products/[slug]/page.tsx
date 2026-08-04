@@ -13,6 +13,7 @@ import {
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductDetails } from "@/components/product/ProductDetails";
 import { SpecsTable } from "@/components/product/SpecsTable";
+import { ProductFaq } from "@/components/product/ProductFaq";
 import { LabReportCard } from "@/components/product/LabReportCard";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
 import { ProductGrid } from "@/components/product/ProductGrid";
@@ -160,6 +161,10 @@ export default async function ProductDetailPage({
           </TabsContent>
         </Tabs>
       </div>
+
+      {product.faqs && product.faqs.length > 0 && (
+        <ProductFaq title={t("faqTitle")} faqs={product.faqs} />
+      )}
 
       <section id="recensioni" className="mt-16 scroll-mt-24">
         <div className="flex flex-wrap items-end justify-between gap-4">

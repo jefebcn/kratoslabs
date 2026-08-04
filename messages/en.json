@@ -143,7 +143,8 @@
       "submit": "Publish review",
       "loginToReview": "Log in to leave a review.",
       "login": "Log in"
-    }
+    },
+    "faqTitle": "Frequently asked questions"
   },
   "auth": {
     "loginTitle": "Log in",

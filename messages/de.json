@@ -143,7 +143,8 @@
       "submit": "Bewertung veröffentlichen",
       "loginToReview": "Melde dich an, um eine Bewertung abzugeben.",
       "login": "Anmelden"
-    }
+    },
+    "faqTitle": "Häufige Fragen"
   },
   "auth": {
     "loginTitle": "Anmelden",

@@ -32,6 +32,7 @@ function rowToProduct(r: Record<string, unknown>): Product {
     specs: { ...DEFAULT_SPECS, ...((r.specs as object) ?? {}) },
     labReport: (r.lab_report as Product["labReport"]) ?? undefined,
     detailsHtml: (r.details_html as string) || undefined,
+    faqs: Array.isArray(r.faqs) ? (r.faqs as Product["faqs"]) : undefined,
     stock: Number(r.stock ?? 0),
     featured: Boolean(r.featured),
   };

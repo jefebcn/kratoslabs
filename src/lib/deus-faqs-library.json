@@ -1,0 +1,354 @@
+{
+  "aromatase-inhibitor": [
+    {
+      "q": "A cosa serve un inibitore dell'aromatasi?",
+      "a": "{title} appartiene alla classe degli inibitori dell'aromatasi ({class}). A livello farmacologico questa classe agisce sull'enzima aromatasi, che converte gli androgeni in estrogeni. Il prodotto contiene {active} ed è fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Come si presenta il prodotto?",
+      "a": "Si presenta in forma di {form} con concentrazione {concentration}. La confezione standard è {packaging}."
+    },
+    {
+      "q": "Che differenza c'è tra i vari inibitori dell'aromatasi?",
+      "a": "Anastrozolo, letrozolo ed exemestane sono tutti inibitori dell'aromatasi ma con struttura chimica differente: i primi due sono di tipo non steroideo e reversibile, l'exemestane è steroideo e irreversibile. Il principio attivo specifico di questo prodotto è indicato in {active}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "La conservazione consigliata è in luogo fresco e asciutto, al riparo dalla luce diretta e dall'umidità. Fare sempre riferimento alle indicazioni riportate sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "serm": [
+    {
+      "q": "Cos'è un SERM?",
+      "a": "{title} è un modulatore selettivo del recettore estrogenico ({class}), la categoria a cui appartengono molecole come tamoxifene e clomifene. Questi composti interagiscono in modo selettivo con i recettori degli estrogeni in diversi tessuti. Il principio attivo è {active} ed è fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "Il prodotto è disponibile in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Un SERM è un inibitore dell'aromatasi?",
+      "a": "No. Sono due classi distinte: un SERM modula il recettore estrogenico, mentre un inibitore dell'aromatasi agisce sull'enzima che produce gli estrogeni. Sono meccanismi differenti."
+    },
+    {
+      "q": "Come va conservato?",
+      "a": "Si consiglia di conservare il prodotto in luogo fresco e asciutto, lontano da fonti di calore e dalla luce diretta, secondo le indicazioni riportate sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "hcg": [
+    {
+      "q": "Cos'è l'hCG?",
+      "a": "{title} contiene {active}, ovvero gonadotropina corionica umana, un ormone glicoproteico che nella classe {class} agisce sui recettori dell'ormone luteinizzante. Il prodotto è fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "In che forma viene fornito?",
+      "a": "Viene fornito tipicamente come {form}, con concentrazione {concentration} e confezione {packaging}. La forma liofilizzata richiede ricostituzione prima dell'analisi."
+    },
+    {
+      "q": "Come si conserva l'hCG?",
+      "a": "Il prodotto liofilizzato si conserva generalmente in luogo fresco; una volta ricostituito richiede refrigerazione. Fare sempre riferimento alle indicazioni sulla confezione."
+    },
+    {
+      "q": "Fornite indicazioni su come utilizzarlo?",
+      "a": "Le informazioni disponibili sono di natura fattuale sulla composizione e sulla classe farmacologica e non costituiscono un protocollo o un consiglio medico. Il prodotto è destinato esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "dopamine-agonist": [
+    {
+      "q": "Cos'è un agonista dopaminergico?",
+      "a": "{title} appartiene alla classe degli agonisti dopaminergici ({class}), a cui appartiene la cabergolina. Queste molecole stimolano i recettori della dopamina e influenzano tra l'altro la secrezione di prolattina. Il principio attivo è {active}, fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Come si presenta?",
+      "a": "Il prodotto si presenta in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Su cosa agisce la cabergolina?",
+      "a": "A livello di classe, gli agonisti dopaminergici agiscono sui recettori D2 della dopamina. Questa è una descrizione del meccanismo farmacologico e non un consiglio d'uso."
+    },
+    {
+      "q": "Come va conservato?",
+      "a": "Si consiglia la conservazione in luogo fresco e asciutto, al riparo dalla luce, secondo quanto indicato sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "beta2": [
+    {
+      "q": "Cos'è un agonista beta-2?",
+      "a": "{title} appartiene alla classe degli agonisti beta-2 adrenergici ad azione termogenica ({class}), a cui appartiene il clenbuterolo. Queste molecole stimolano i recettori beta-2. Il principio attivo è {active}, fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "È disponibile in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Perché viene definito termogenico?",
+      "a": "A livello di classe, gli agonisti beta-2 sono descritti come termogenici perché la stimolazione dei recettori beta-2 è associata a un aumento del metabolismo. Si tratta di una descrizione della proprietà farmacologica, non di una promessa di risultati né di un consiglio d'uso."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Conservare in luogo fresco e asciutto, lontano dalla luce diretta e dall'umidità, come indicato sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "thyroid": [
+    {
+      "q": "Cosa contiene questo prodotto tiroideo?",
+      "a": "{title} contiene {active} e appartiene alla classe degli ormoni tiroidei ({class}), che comprende T3 (liotironina) e T4 (levotiroxina). È fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Che differenza c'è tra T3 e T4?",
+      "a": "Il T4 è l'ormone tiroideo con emivita più lunga e viene convertito a livello periferico in T3, la forma metabolicamente più attiva. Il principio attivo specifico di questo prodotto è indicato in {active}."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "È disponibile come {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Si consiglia la conservazione in luogo fresco e asciutto, al riparo dalla luce e dall'umidità, secondo le indicazioni sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "glp1": [
+    {
+      "q": "Cos'è un agonista GLP-1?",
+      "a": "{title} appartiene alla classe degli agonisti del recettore GLP-1 ({class}), a cui appartengono molecole come semaglutide e tirzepatide. Questi peptidi mimano l'azione dell'ormone GLP-1 sui suoi recettori. Il principio attivo è {active}, fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "In che forma viene fornito?",
+      "a": "Viene fornito tipicamente come {form} con concentrazione {concentration}; la forma liofilizzata richiede ricostituzione prima dell'analisi. La confezione è {packaging}."
+    },
+    {
+      "q": "Semaglutide e tirzepatide sono la stessa cosa?",
+      "a": "No. La semaglutide è un agonista del solo recettore GLP-1, mentre la tirzepatide è un doppio agonista GLP-1/GIP. Il principio attivo specifico è indicato in {active}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Il prodotto liofilizzato si conserva in luogo fresco; una volta ricostituito richiede in genere refrigerazione. Fare riferimento alle indicazioni sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "pde5": [
+    {
+      "q": "Cos'è un inibitore della PDE5?",
+      "a": "{title} appartiene alla classe degli inibitori della fosfodiesterasi di tipo 5 ({class}), a cui appartengono tadalafil e sildenafil. Queste molecole inibiscono l'enzima PDE5. Il principio attivo è {active}, fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Che differenza c'è tra tadalafil e sildenafil?",
+      "a": "Entrambi inibiscono la PDE5, ma differiscono per struttura chimica ed emivita: il tadalafil ha un'emivita più lunga rispetto al sildenafil. Il principio attivo specifico è indicato in {active}."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "È disponibile in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Conservare in luogo fresco e asciutto, al riparo dalla luce e dall'umidità, come indicato sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "hgh": [
+    {
+      "q": "Cos'è l'ormone della crescita?",
+      "a": "{title} contiene {active}, ovvero somatropina, la forma ricombinante dell'ormone della crescita umano; appartiene alla classe {class}. È fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "In che forma viene fornito?",
+      "a": "Viene fornito generalmente come {form} liofilizzato con titolo {concentration}, in confezione da {packaging}. La forma liofilizzata richiede ricostituzione prima dell'analisi."
+    },
+    {
+      "q": "Come si misura la somatropina?",
+      "a": "Il contenuto di somatropina viene espresso in unità internazionali (UI) o in milligrammi. Il titolo specifico di questo prodotto è riportato in {concentration}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Il prodotto liofilizzato si conserva in genere refrigerato; una volta ricostituito va mantenuto in frigorifero. Fare sempre riferimento alle indicazioni sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "gh-secretagogue": [
+    {
+      "q": "Cos'è un secretagogo del GH?",
+      "a": "{title} appartiene alla classe dei secretagoghi dell'ormone della crescita ({class}), a cui appartiene l'ibutamoren (MK-677). Queste molecole stimolano il recettore della grelina favorendo la secrezione endogena di GH. Il principio attivo è {active}, fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Un secretagogo è la stessa cosa dell'ormone della crescita?",
+      "a": "No. L'ormone della crescita è la somatropina somministrata direttamente, mentre un secretagogo come l'MK-677 agisce sul recettore della grelina stimolando la produzione endogena di GH. Sono due categorie distinte."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "È disponibile in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Conservare in luogo fresco e asciutto, al riparo dalla luce e dall'umidità, secondo le indicazioni sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "ppar-delta": [
+    {
+      "q": "Cos'è un agonista PPAR-delta?",
+      "a": "{title} appartiene alla classe degli agonisti del recettore PPARδ ({class}), a cui appartiene la cardarine (GW-501516). Queste molecole attivano il recettore nucleare PPARδ. Il principio attivo è {active}, fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "La cardarine è un SARM?",
+      "a": "No. Nonostante venga spesso associata ai SARM nella comunicazione commerciale, la cardarine è un agonista PPARδ e non interagisce con il recettore androgeno. Sono classi farmacologiche diverse."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "È disponibile in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Conservare in luogo fresco e asciutto, al riparo dalla luce diretta e dall'umidità, come indicato sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "sarm": [
+    {
+      "q": "Cos'è un SARM?",
+      "a": "{title} appartiene alla classe dei modulatori selettivi del recettore androgeno ({class}), a cui appartengono ostarine, ligandrol e RAD-140. Queste molecole interagiscono in modo selettivo con il recettore androgeno. Il principio attivo è {active}, fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Un SARM è uno steroide?",
+      "a": "No. I SARM agiscono sullo stesso recettore androgeno ma hanno struttura non steroidea e un profilo di selettività differente rispetto agli steroidi androgeno-anabolizzanti. Sono classi distinte."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "È disponibile in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Fornite indicazioni su come assumerlo?",
+      "a": "Le informazioni disponibili riguardano composizione, classe e meccanismo e sono di natura fattuale, non un protocollo o un consiglio medico. Il prodotto è destinato esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "peptide": [
+    {
+      "q": "Cosa contiene questo peptide?",
+      "a": "{title} contiene {active} e appartiene alla classe dei peptidi di sintesi ({class}), categoria che comprende molecole come BPC-157, TB-500, ipamorelin e melanotan. È fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "In che forma viene fornito?",
+      "a": "Viene fornito tipicamente come {form} liofilizzato con titolo {concentration}, in confezione da {packaging}. La forma liofilizzata richiede ricostituzione prima dell'analisi."
+    },
+    {
+      "q": "I peptidi hanno tutti lo stesso meccanismo?",
+      "a": "No. Sotto la definizione di peptidi di sintesi rientrano molecole con bersagli molto diversi tra loro. Il meccanismo dipende dal peptide specifico indicato in {active}."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Il prodotto liofilizzato si conserva in luogo fresco o refrigerato; una volta ricostituito richiede in genere refrigerazione. Fare riferimento alle indicazioni sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "steroid-injectable": [
+    {
+      "q": "Come si presenta {title}?",
+      "a": "{title} è uno steroide androgeno-anabolizzante iniettabile ({class}) e contiene {active}. Si presenta in forma di {form} con concentrazione {concentration}, in confezione da {packaging}. È fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Aromatizza?",
+      "a": "La tendenza ad aromatizzare, cioè a convertirsi in estrogeni tramite l'enzima aromatasi, è una proprietà chimica che dipende dalla molecola: ad esempio testosterone e boldenone aromatizzano, mentre nandrolone, trenbolone e drostanolone no o solo in misura trascurabile. Il principio attivo specifico è indicato in {active}."
+    },
+    {
+      "q": "Cos'è l'estere e a cosa serve?",
+      "a": "Molti steroidi iniettabili sono esterificati (es. enantato, propionato, decanoato): l'estere ne modula la velocità di rilascio e l'emivita. Questa è una caratteristica chimica della molecola, non un'indicazione d'uso."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Conservare in luogo fresco e asciutto, al riparo dalla luce diretta. È normale che una soluzione oleosa possa addensarsi a basse temperature. Fare riferimento alle indicazioni sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "steroid-oral": [
+    {
+      "q": "Come si presenta {title}?",
+      "a": "{title} è uno steroide androgeno-anabolizzante orale ({class}) e contiene {active}. Si presenta in forma di {form} con concentrazione o dosaggio unitario {concentration}, in confezione da {packaging}. È fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Aromatizza?",
+      "a": "La tendenza ad aromatizzare è una proprietà chimica della molecola: tra gli orali, ad esempio, la methandienone aromatizza, mentre oxandrolone e stanozolol non aromatizzano. Il principio attivo specifico è indicato in {active}."
+    },
+    {
+      "q": "Cosa significa che è 17-alfa-alchilato?",
+      "a": "Molti steroidi orali sono 17-alfa-alchilati, una modifica chimica che ne consente il passaggio per via orale resistendo al metabolismo epatico di primo passaggio. È una caratteristica strutturale della molecola, non un consiglio d'uso."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Conservare in luogo fresco e asciutto, al riparo dalla luce e dall'umidità, secondo le indicazioni sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ],
+  "generic": [
+    {
+      "q": "Cosa contiene {title}?",
+      "a": "{title} contiene {active} e appartiene alla classe {class}. È fornito esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "In che forma è disponibile?",
+      "a": "È disponibile in forma di {form} con concentrazione {concentration}, in confezione da {packaging}."
+    },
+    {
+      "q": "Fornite indicazioni su come utilizzarlo?",
+      "a": "Le informazioni disponibili riguardano composizione, classe farmacologica e caratteristiche del prodotto e sono di natura fattuale, non un protocollo o un consiglio medico. Il prodotto è destinato esclusivamente a scopo di ricerca e valutazione analitica."
+    },
+    {
+      "q": "Come si conserva?",
+      "a": "Si consiglia di conservare il prodotto in luogo fresco e asciutto, al riparo dalla luce diretta e dall'umidità, secondo le indicazioni riportate sulla confezione."
+    },
+    {
+      "q": "La qualità è verificata?",
+      "a": "Sì. Ogni lotto è verificabile nella sezione Lab test / QC della scheda prodotto."
+    }
+  ]
+}
