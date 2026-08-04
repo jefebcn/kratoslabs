@@ -1,0 +1,52 @@
+{
+  "it": {
+    "metaTitle": "Catalogo",
+    "metaDescription": "Tutti gli integratori KratosLabs, analizzati lotto per lotto.",
+    "eyebrow": "Catalogo",
+    "allProducts": "Tutti i prodotti",
+    "resultsFor": "Risultati per “{query}”",
+    "product": "prodotto",
+    "products": "prodotti",
+    "all": "Tutti"
+  },
+  "en": {
+    "metaTitle": "Catalog",
+    "metaDescription": "All KratosLabs supplements, tested batch by batch.",
+    "eyebrow": "Catalog",
+    "allProducts": "All products",
+    "resultsFor": "Results for “{query}”",
+    "product": "product",
+    "products": "products",
+    "all": "All"
+  },
+  "de": {
+    "metaTitle": "Katalog",
+    "metaDescription": "Alle KratosLabs-Nahrungsergänzungsmittel, Charge für Charge geprüft.",
+    "eyebrow": "Katalog",
+    "allProducts": "Alle Produkte",
+    "resultsFor": "Ergebnisse für „{query}“",
+    "product": "Produkt",
+    "products": "Produkte",
+    "all": "Alle"
+  },
+  "fr": {
+    "metaTitle": "Catalogue",
+    "metaDescription": "Tous les compléments KratosLabs, analysés lot par lot.",
+    "eyebrow": "Catalogue",
+    "allProducts": "Tous les produits",
+    "resultsFor": "Résultats pour « {query} »",
+    "product": "produit",
+    "products": "produits",
+    "all": "Tous"
+  },
+  "pt": {
+    "metaTitle": "Catálogo",
+    "metaDescription": "Todos os suplementos KratosLabs, analisados lote a lote.",
+    "eyebrow": "Catálogo",
+    "allProducts": "Todos os produtos",
+    "resultsFor": "Resultados para “{query}”",
+    "product": "produto",
+    "products": "produtos",
+    "all": "Todos"
+  }
+}

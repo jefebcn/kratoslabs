@@ -1,0 +1,147 @@
+{
+  "it": {
+    "metaTitle": "Guide",
+    "metaDescription": "Contenuti pratici su integrazione, dosaggi ed etichette.",
+    "eyebrow": "Guide",
+    "title": "Capire prima di comprare",
+    "description": "Contenuti pratici, senza promesse. Aggiornati quando cambia l'evidenza.",
+    "guides": [
+      {
+        "tag": "Proteine",
+        "title": "Proteine: quante e quando",
+        "excerpt": "Fabbisogno reale, timing e differenze tra isolato e concentrato."
+      },
+      {
+        "tag": "Creatina",
+        "title": "Creatina, istruzioni per l'uso",
+        "excerpt": "Dosaggio, fase di carico sì o no, cosa dice la letteratura."
+      },
+      {
+        "tag": "Etichette",
+        "title": "Come leggere un'etichetta",
+        "excerpt": "Riconoscere un proprietary blend e i dosaggi sottosoglia."
+      },
+      {
+        "tag": "Elettroliti",
+        "title": "Idratazione ed elettroliti",
+        "excerpt": "Quando servono davvero e in quali rapporti."
+      }
+    ]
+  },
+  "en": {
+    "metaTitle": "Guides",
+    "metaDescription": "Practical content on supplementation, dosages and labels.",
+    "eyebrow": "Guides",
+    "title": "Understand before you buy",
+    "description": "Practical content, no promises. Updated when the evidence changes.",
+    "guides": [
+      {
+        "tag": "Protein",
+        "title": "Protein: how much and when",
+        "excerpt": "Real requirements, timing and the difference between isolate and concentrate."
+      },
+      {
+        "tag": "Creatine",
+        "title": "Creatine, instructions for use",
+        "excerpt": "Dosage, loading phase yes or no, what the literature says."
+      },
+      {
+        "tag": "Labels",
+        "title": "How to read a label",
+        "excerpt": "Spotting a proprietary blend and underdosed ingredients."
+      },
+      {
+        "tag": "Electrolytes",
+        "title": "Hydration and electrolytes",
+        "excerpt": "When they are really needed and in what ratios."
+      }
+    ]
+  },
+  "de": {
+    "metaTitle": "Ratgeber",
+    "metaDescription": "Praktische Inhalte zu Supplementierung, Dosierungen und Etiketten.",
+    "eyebrow": "Ratgeber",
+    "title": "Verstehen, bevor du kaufst",
+    "description": "Praktische Inhalte, ohne Versprechen. Aktualisiert, wenn sich die Studienlage ändert.",
+    "guides": [
+      {
+        "tag": "Protein",
+        "title": "Protein: wie viel und wann",
+        "excerpt": "Tatsächlicher Bedarf, Timing und der Unterschied zwischen Isolat und Konzentrat."
+      },
+      {
+        "tag": "Kreatin",
+        "title": "Kreatin, Gebrauchsanweisung",
+        "excerpt": "Dosierung, Ladephase ja oder nein, was die Literatur sagt."
+      },
+      {
+        "tag": "Etiketten",
+        "title": "Wie man ein Etikett liest",
+        "excerpt": "Einen Proprietary Blend und unterdosierte Inhaltsstoffe erkennen."
+      },
+      {
+        "tag": "Elektrolyte",
+        "title": "Hydration und Elektrolyte",
+        "excerpt": "Wann sie wirklich nötig sind und in welchen Verhältnissen."
+      }
+    ]
+  },
+  "fr": {
+    "metaTitle": "Guides",
+    "metaDescription": "Contenus pratiques sur la supplémentation, les dosages et les étiquettes.",
+    "eyebrow": "Guides",
+    "title": "Comprendre avant d'acheter",
+    "description": "Des contenus pratiques, sans promesses. Mis à jour quand les preuves évoluent.",
+    "guides": [
+      {
+        "tag": "Protéines",
+        "title": "Protéines : combien et quand",
+        "excerpt": "Besoins réels, timing et différences entre isolat et concentré."
+      },
+      {
+        "tag": "Créatine",
+        "title": "Créatine, mode d'emploi",
+        "excerpt": "Dosage, phase de charge oui ou non, ce que dit la littérature."
+      },
+      {
+        "tag": "Étiquettes",
+        "title": "Comment lire une étiquette",
+        "excerpt": "Reconnaître un proprietary blend et les dosages sous le seuil."
+      },
+      {
+        "tag": "Électrolytes",
+        "title": "Hydratation et électrolytes",
+        "excerpt": "Quand ils sont vraiment utiles et dans quelles proportions."
+      }
+    ]
+  },
+  "pt": {
+    "metaTitle": "Guias",
+    "metaDescription": "Conteúdos práticos sobre suplementação, dosagens e rótulos.",
+    "eyebrow": "Guias",
+    "title": "Entender antes de comprar",
+    "description": "Conteúdos práticos, sem promessas. Atualizados quando a evidência muda.",
+    "guides": [
+      {
+        "tag": "Proteínas",
+        "title": "Proteínas: quanto e quando",
+        "excerpt": "Necessidade real, timing e diferenças entre isolado e concentrado."
+      },
+      {
+        "tag": "Creatina",
+        "title": "Creatina, instruções de uso",
+        "excerpt": "Dosagem, fase de carga sim ou não, o que diz a literatura."
+      },
+      {
+        "tag": "Rótulos",
+        "title": "Como ler um rótulo",
+        "excerpt": "Reconhecer um proprietary blend e as dosagens abaixo do limiar."
+      },
+      {
+        "tag": "Eletrólitos",
+        "title": "Hidratação e eletrólitos",
+        "excerpt": "Quando são realmente necessários e em que proporções."
+      }
+    ]
+  }
+}

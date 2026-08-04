@@ -1,0 +1,147 @@
+{
+  "it": {
+    "metaTitle": "Analisi di laboratorio",
+    "metaDescription": "Come testiamo ogni lotto e dove trovare i referti con il numero di batch.",
+    "eyebrow": "Quality control",
+    "title": "Ogni lotto, analizzato",
+    "description": "La dose dichiarata in etichetta deve corrispondere a quella nel barattolo. Lo verifichiamo e lo documentiamo.",
+    "steps": [
+      {
+        "title": "Prelievo",
+        "body": "Da ogni lotto di produzione preleviamo campioni casuali prima della messa in vendita."
+      },
+      {
+        "title": "Analisi indipendente",
+        "body": "Un laboratorio di terza parte misura il contenuto reale e cerca i contaminanti."
+      },
+      {
+        "title": "Referto pubblico",
+        "body": "Pubblichiamo il certificato con il numero di lotto, così puoi verificarlo."
+      }
+    ],
+    "recentTitle": "Referti recenti",
+    "tableHeaders": {
+      "product": "Prodotto",
+      "lab": "Laboratorio",
+      "batch": "Lotto",
+      "date": "Data",
+      "report": "Referto"
+    }
+  },
+  "en": {
+    "metaTitle": "Lab testing",
+    "metaDescription": "How we test every batch and where to find the reports with the batch number.",
+    "eyebrow": "Quality control",
+    "title": "Every batch, analyzed",
+    "description": "The dose declared on the label must match the one in the jar. We verify it and we document it.",
+    "steps": [
+      {
+        "title": "Sampling",
+        "body": "From every production batch we take random samples before it goes on sale."
+      },
+      {
+        "title": "Independent analysis",
+        "body": "A third-party laboratory measures the actual content and looks for contaminants."
+      },
+      {
+        "title": "Public report",
+        "body": "We publish the certificate with the batch number, so you can verify it."
+      }
+    ],
+    "recentTitle": "Recent reports",
+    "tableHeaders": {
+      "product": "Product",
+      "lab": "Laboratory",
+      "batch": "Batch",
+      "date": "Date",
+      "report": "Report"
+    }
+  },
+  "de": {
+    "metaTitle": "Laboranalysen",
+    "metaDescription": "Wie wir jede Charge testen und wo Sie die Prüfberichte mit der Chargennummer finden.",
+    "eyebrow": "Quality control",
+    "title": "Jede Charge, analysiert",
+    "description": "Die auf dem Etikett angegebene Dosis muss mit der im Behälter übereinstimmen. Wir überprüfen und dokumentieren das.",
+    "steps": [
+      {
+        "title": "Probenahme",
+        "body": "Aus jeder Produktionscharge entnehmen wir vor dem Verkauf stichprobenartig Proben."
+      },
+      {
+        "title": "Unabhängige Analyse",
+        "body": "Ein unabhängiges Labor misst den tatsächlichen Gehalt und sucht nach Verunreinigungen."
+      },
+      {
+        "title": "Öffentlicher Prüfbericht",
+        "body": "Wir veröffentlichen das Zertifikat mit der Chargennummer, damit Sie es überprüfen können."
+      }
+    ],
+    "recentTitle": "Aktuelle Prüfberichte",
+    "tableHeaders": {
+      "product": "Produkt",
+      "lab": "Labor",
+      "batch": "Charge",
+      "date": "Datum",
+      "report": "Prüfbericht"
+    }
+  },
+  "fr": {
+    "metaTitle": "Analyses de laboratoire",
+    "metaDescription": "Comment nous testons chaque lot et où trouver les rapports avec le numéro de lot.",
+    "eyebrow": "Quality control",
+    "title": "Chaque lot, analysé",
+    "description": "La dose déclarée sur l'étiquette doit correspondre à celle contenue dans le flacon. Nous le vérifions et le documentons.",
+    "steps": [
+      {
+        "title": "Prélèvement",
+        "body": "Sur chaque lot de production, nous prélevons des échantillons aléatoires avant la mise en vente."
+      },
+      {
+        "title": "Analyse indépendante",
+        "body": "Un laboratoire tiers mesure le contenu réel et recherche les contaminants."
+      },
+      {
+        "title": "Rapport public",
+        "body": "Nous publions le certificat avec le numéro de lot, afin que vous puissiez le vérifier."
+      }
+    ],
+    "recentTitle": "Rapports récents",
+    "tableHeaders": {
+      "product": "Produit",
+      "lab": "Laboratoire",
+      "batch": "Lot",
+      "date": "Date",
+      "report": "Rapport"
+    }
+  },
+  "pt": {
+    "metaTitle": "Análises de laboratório",
+    "metaDescription": "Como testamos cada lote e onde encontrar os laudos com o número do lote.",
+    "eyebrow": "Quality control",
+    "title": "Cada lote, analisado",
+    "description": "A dose declarada no rótulo deve corresponder à do frasco. Nós verificamos e documentamos isso.",
+    "steps": [
+      {
+        "title": "Amostragem",
+        "body": "De cada lote de produção retiramos amostras aleatórias antes de colocá-lo à venda."
+      },
+      {
+        "title": "Análise independente",
+        "body": "Um laboratório terceirizado mede o conteúdo real e procura por contaminantes."
+      },
+      {
+        "title": "Laudo público",
+        "body": "Publicamos o certificado com o número do lote, para que você possa verificá-lo."
+      }
+    ],
+    "recentTitle": "Laudos recentes",
+    "tableHeaders": {
+      "product": "Produto",
+      "lab": "Laboratório",
+      "batch": "Lote",
+      "date": "Data",
+      "report": "Laudo"
+    }
+  }
+}
