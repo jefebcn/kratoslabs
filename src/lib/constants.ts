@@ -17,9 +17,10 @@ export const SITE = {
   tagline: "Integratori testati, dosaggi dichiarati.",
   description:
     "Integratori per lo sport con dosaggi dichiarati e analisi di terza parte su ogni lotto.",
-  email: "support@kratoslabs.example",
+  email: "kratoslabs-eu@proton.me",
   telegramUrl: "https://t.me/kratoslabs",
-  instagramUrl: "https://instagram.com/kratoslabs",
+  instagramUrl: "https://www.instagram.com/kratoslabs.official",
+  tiktokUrl: "https://www.tiktok.com/@kratoslab.official",
 } as const;
 
 /** Barra annuncio. Tre claim, tutti verificabili. */
