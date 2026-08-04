@@ -1,0 +1,322 @@
+{
+  "it": {
+    "metaTitle": "Termini di servizio",
+    "metaDescription": "Condizioni generali di vendita e uso del sito KratosLabs.",
+    "title": "Termini di servizio",
+    "updated": "Agosto 2026",
+    "intro": "Condizioni generali di vendita e d'uso del sito KratosLabs. Ti invitiamo a leggerle prima di effettuare un ordine.",
+    "labels": {
+      "documents": "Documenti",
+      "onThisPage": "In questa pagina",
+      "updated": "Ultimo aggiornamento"
+    },
+    "sections": [
+      {
+        "id": "oggetto",
+        "title": "1. Oggetto",
+        "body": "Questi termini regolano l'uso del sito e l'acquisto dei prodotti KratosLabs. Effettuando un ordine dichiari di averli letti e accettati integralmente. KratosLabs può aggiornare i termini in qualsiasi momento: si applica la versione in vigore al momento dell'ordine."
+      },
+      {
+        "id": "ordini",
+        "title": "2. Ordini e prezzi",
+        "body": "I prezzi sono indicati in euro. Un ordine si intende concluso nel momento in cui ricevi la conferma via email con il relativo riferimento. Dopo l'invio, l'ordine non può essere modificato o annullato dal cliente. Ci riserviamo di non accettare o di annullare un ordine in caso di errore di prezzo manifesto, indisponibilità del prodotto o sospetto di uso fraudolento: in tal caso eventuali importi già versati per la parte non evasa vengono restituiti con lo stesso metodo di pagamento."
+      },
+      {
+        "id": "pagamenti",
+        "title": "3. Pagamenti",
+        "body": "Accettiamo bonifico bancario (SEPA) e criptovalute (Bitcoin e USDT sulla rete TRON/TRC-20). Il pagamento con carta e PayPal non è al momento disponibile. Gli indirizzi crypto sono di sola ricezione e non conserviamo dati di pagamento sensibili. L'ordine viene confermato e preso in carico dopo la ricezione del pagamento; per i dettagli operativi consulta la Guida ai pagamenti o scrivi a {email}."
+      },
+      {
+        "id": "spedizione",
+        "title": "4. Spedizione",
+        "body": "Le tariffe di spedizione seguono un modello a zone (Unione Europea, resto d'Europa, Stati Uniti) e sono indicate al checkout in base al paese di destinazione. Tempi, imballo neutro e condizioni sono descritti nella pagina Spedizioni e resi, che è parte integrante di questi termini."
+      },
+      {
+        "id": "resi",
+        "title": "5. Resi, recesso e rimborsi",
+        "body": "Per motivi di sicurezza e integrità del prodotto, gli articoli sigillati non sono restituibili una volta spediti. Ai sensi dell'art. 59 del Codice del Consumo, il diritto di recesso non si applica alla fornitura di beni sigillati che non si prestano a essere restituiti per motivi di tutela della salute o di igiene, se aperti dopo la consegna. Salvo gli obblighi inderogabili di legge, una volta effettuato il pagamento non sono previsti rimborsi. In caso di problemi di consegna fai riferimento alla procedura di ri-spedizione descritta nella pagina Spedizioni e resi."
+      },
+      {
+        "id": "garanzia",
+        "title": "6. Garanzia e prodotti danneggiati",
+        "body": "Ove applicabile, si applica la garanzia legale di conformità prevista dalla normativa a tutela del consumatore. Se ricevi un prodotto danneggiato o diverso da quello ordinato, contattaci entro 48 ore dalla consegna allegando le foto: valuteremo la sostituzione dell'articolo secondo quanto indicato nella pagina Spedizioni e resi."
+      },
+      {
+        "id": "uso",
+        "title": "7. Uso dei prodotti e responsabilità",
+        "body": "I prodotti sono forniti esclusivamente a scopo di ricerca e valutazione analitica. Le informazioni presenti sul sito hanno natura descrittiva e non costituiscono consulenza medica né incoraggiamento all'uso. L'acquirente è l'unico responsabile del rispetto delle leggi e dei regolamenti vigenti nel proprio paese in materia di acquisto, importazione e detenzione. Nei limiti consentiti dalla legge, KratosLabs non risponde di danni derivanti da un uso improprio dei prodotti."
+      },
+      {
+        "id": "proprieta",
+        "title": "8. Proprietà intellettuale",
+        "body": "I contenuti del sito (testi, grafica, logo, immagini e layout) sono di proprietà di KratosLabs o dei rispettivi titolari e non possono essere riprodotti senza autorizzazione."
+      },
+      {
+        "id": "legge",
+        "title": "9. Legge applicabile e foro",
+        "body": "I presenti termini sono regolati dalla legge italiana. Per le controversie con i consumatori è competente il foro del luogo di residenza o domicilio del consumatore, se situato in Italia. Resta ferma la possibilità di ricorrere alla piattaforma europea di risoluzione delle controversie online (ODR)."
+      },
+      {
+        "id": "contatti",
+        "title": "10. Contatti",
+        "body": "Per qualsiasi domanda su questi termini scrivi a {email} o contattaci tramite Telegram."
+      }
+    ]
+  },
+  "en": {
+    "metaTitle": "Terms of Service",
+    "metaDescription": "General terms of sale and use of the KratosLabs website.",
+    "title": "Terms of Service",
+    "updated": "August 2026",
+    "intro": "General terms of sale and use of the KratosLabs website. We invite you to read them before placing an order.",
+    "labels": {
+      "documents": "Documents",
+      "onThisPage": "On this page",
+      "updated": "Last updated"
+    },
+    "sections": [
+      {
+        "id": "oggetto",
+        "title": "1. Purpose",
+        "body": "These terms govern the use of the site and the purchase of KratosLabs products. By placing an order you declare that you have read and fully accepted them. KratosLabs may update the terms at any time: the version in force at the time of the order applies."
+      },
+      {
+        "id": "ordini",
+        "title": "2. Orders and prices",
+        "body": "Prices are shown in euros. An order is deemed concluded at the moment you receive the confirmation by email with the relevant reference. Once submitted, the order cannot be modified or cancelled by the customer. We reserve the right not to accept or to cancel an order in the event of a manifest pricing error, product unavailability or suspected fraudulent use: in such cases any amounts already paid for the unfulfilled portion are refunded using the same payment method."
+      },
+      {
+        "id": "pagamenti",
+        "title": "3. Payments",
+        "body": "We accept bank transfer (SEPA) and cryptocurrencies (Bitcoin and USDT on the TRON/TRC-20 network). Payment by card and PayPal is not currently available. Crypto addresses are receive-only and we do not store sensitive payment data. The order is confirmed and processed after payment is received; for operational details please consult the Payments Guide or write to {email}."
+      },
+      {
+        "id": "spedizione",
+        "title": "4. Shipping",
+        "body": "Shipping rates follow a zone-based model (European Union, rest of Europe, United States) and are shown at checkout based on the destination country. Delivery times, neutral packaging and conditions are described on the Shipping and returns page, which forms an integral part of these terms."
+      },
+      {
+        "id": "resi",
+        "title": "5. Returns, withdrawal and refunds",
+        "body": "For reasons of product safety and integrity, sealed items cannot be returned once shipped. Under art. 59 of the Italian Consumer Code, the right of withdrawal does not apply to the supply of sealed goods that are not suitable for return for reasons of health protection or hygiene, if opened after delivery. Except for mandatory legal obligations, once payment has been made no refunds are provided. In the event of delivery problems, please refer to the re-shipment procedure described on the Shipping and returns page."
+      },
+      {
+        "id": "garanzia",
+        "title": "6. Warranty and damaged products",
+        "body": "Where applicable, the legal guarantee of conformity provided for by consumer protection legislation applies. If you receive a damaged product or one different from the one ordered, contact us within 48 hours of delivery attaching photos: we will assess replacement of the item as indicated on the Shipping and returns page."
+      },
+      {
+        "id": "uso",
+        "title": "7. Use of products and liability",
+        "body": "The products are supplied exclusively for research and analytical evaluation purposes. The information on the site is descriptive in nature and does not constitute medical advice nor encouragement to use. The buyer is solely responsible for compliance with the laws and regulations in force in their own country regarding purchase, import and possession. To the extent permitted by law, KratosLabs is not liable for damages arising from improper use of the products."
+      },
+      {
+        "id": "proprieta",
+        "title": "8. Intellectual property",
+        "body": "The contents of the site (texts, graphics, logo, images and layout) are the property of KratosLabs or their respective owners and may not be reproduced without authorization."
+      },
+      {
+        "id": "legge",
+        "title": "9. Applicable law and jurisdiction",
+        "body": "These terms are governed by Italian law. For disputes with consumers, the court of the consumer's place of residence or domicile has jurisdiction, if located in Italy. The possibility of resorting to the European online dispute resolution (ODR) platform remains unaffected."
+      },
+      {
+        "id": "contatti",
+        "title": "10. Contact",
+        "body": "For any questions about these terms write to {email} or contact us via Telegram."
+      }
+    ]
+  },
+  "de": {
+    "metaTitle": "Nutzungsbedingungen",
+    "metaDescription": "Allgemeine Verkaufs- und Nutzungsbedingungen der KratosLabs-Website.",
+    "title": "Nutzungsbedingungen",
+    "updated": "August 2026",
+    "intro": "Allgemeine Verkaufs- und Nutzungsbedingungen der KratosLabs-Website. Wir bitten Sie, diese vor der Bestellung zu lesen.",
+    "labels": {
+      "documents": "Dokumente",
+      "onThisPage": "Auf dieser Seite",
+      "updated": "Zuletzt aktualisiert"
+    },
+    "sections": [
+      {
+        "id": "oggetto",
+        "title": "1. Gegenstand",
+        "body": "Diese Bedingungen regeln die Nutzung der Website und den Kauf von KratosLabs-Produkten. Mit der Aufgabe einer Bestellung erklären Sie, diese gelesen und vollständig akzeptiert zu haben. KratosLabs kann die Bedingungen jederzeit aktualisieren: Es gilt die zum Zeitpunkt der Bestellung geltende Fassung."
+      },
+      {
+        "id": "ordini",
+        "title": "2. Bestellungen und Preise",
+        "body": "Die Preise sind in Euro angegeben. Eine Bestellung gilt als abgeschlossen in dem Moment, in dem Sie die Bestätigung per E-Mail mit der entsprechenden Referenz erhalten. Nach dem Absenden kann die Bestellung vom Kunden nicht mehr geändert oder storniert werden. Wir behalten uns vor, eine Bestellung im Falle eines offensichtlichen Preisfehlers, der Nichtverfügbarkeit des Produkts oder des Verdachts einer betrügerischen Nutzung nicht anzunehmen oder zu stornieren: In diesem Fall werden etwaige bereits gezahlte Beträge für den nicht ausgeführten Teil mit derselben Zahlungsmethode zurückerstattet."
+      },
+      {
+        "id": "pagamenti",
+        "title": "3. Zahlungen",
+        "body": "Wir akzeptieren Banküberweisung (SEPA) und Kryptowährungen (Bitcoin und USDT im TRON/TRC-20-Netzwerk). Die Zahlung per Karte und PayPal ist derzeit nicht verfügbar. Krypto-Adressen dienen ausschließlich dem Empfang, und wir speichern keine sensiblen Zahlungsdaten. Die Bestellung wird nach Eingang der Zahlung bestätigt und bearbeitet; für die betrieblichen Einzelheiten konsultieren Sie den Zahlungsleitfaden oder schreiben Sie an {email}."
+      },
+      {
+        "id": "spedizione",
+        "title": "4. Versand",
+        "body": "Die Versandkosten folgen einem Zonenmodell (Europäische Union, übriges Europa, Vereinigte Staaten) und werden an der Kasse je nach Bestimmungsland angezeigt. Lieferzeiten, neutrale Verpackung und Bedingungen sind auf der Seite Versand und Rücksendungen beschrieben, die integraler Bestandteil dieser Bedingungen ist."
+      },
+      {
+        "id": "resi",
+        "title": "5. Rücksendungen, Widerruf und Erstattungen",
+        "body": "Aus Gründen der Produktsicherheit und -integrität können versiegelte Artikel nach dem Versand nicht zurückgesendet werden. Gemäß Art. 59 des italienischen Verbrauchergesetzbuchs (Codice del Consumo) gilt das Widerrufsrecht nicht für die Lieferung versiegelter Waren, die aus Gründen des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind, wenn sie nach der Lieferung geöffnet wurden. Vorbehaltlich zwingender gesetzlicher Verpflichtungen sind nach erfolgter Zahlung keine Erstattungen vorgesehen. Bei Lieferproblemen beachten Sie bitte das Verfahren zur erneuten Versendung, das auf der Seite Versand und Rücksendungen beschrieben ist."
+      },
+      {
+        "id": "garanzia",
+        "title": "6. Gewährleistung und beschädigte Produkte",
+        "body": "Sofern anwendbar, gilt die gesetzliche Konformitätsgewährleistung nach den verbraucherschutzrechtlichen Vorschriften. Wenn Sie ein beschädigtes oder ein anderes als das bestellte Produkt erhalten, kontaktieren Sie uns innerhalb von 48 Stunden nach der Lieferung und fügen Sie Fotos bei: Wir werden den Ersatz des Artikels gemäß den Angaben auf der Seite Versand und Rücksendungen prüfen."
+      },
+      {
+        "id": "uso",
+        "title": "7. Verwendung der Produkte und Haftung",
+        "body": "Die Produkte werden ausschließlich zu Forschungs- und Analysezwecken bereitgestellt. Die Informationen auf der Website sind beschreibender Natur und stellen weder eine medizinische Beratung noch eine Aufforderung zur Verwendung dar. Der Käufer ist allein verantwortlich für die Einhaltung der in seinem Land geltenden Gesetze und Vorschriften in Bezug auf Kauf, Einfuhr und Besitz. Soweit gesetzlich zulässig, haftet KratosLabs nicht für Schäden, die aus einer unsachgemäßen Verwendung der Produkte entstehen."
+      },
+      {
+        "id": "proprieta",
+        "title": "8. Geistiges Eigentum",
+        "body": "Die Inhalte der Website (Texte, Grafiken, Logo, Bilder und Layout) sind Eigentum von KratosLabs oder der jeweiligen Inhaber und dürfen ohne Genehmigung nicht vervielfältigt werden."
+      },
+      {
+        "id": "legge",
+        "title": "9. Anwendbares Recht und Gerichtsstand",
+        "body": "Diese Bedingungen unterliegen italienischem Recht. Für Streitigkeiten mit Verbrauchern ist das Gericht des Wohnsitzes oder Aufenthaltsorts des Verbrauchers zuständig, sofern dieser in Italien liegt. Die Möglichkeit, die europäische Plattform zur Online-Streitbeilegung (ODR) in Anspruch zu nehmen, bleibt unberührt."
+      },
+      {
+        "id": "contatti",
+        "title": "10. Kontakt",
+        "body": "Bei Fragen zu diesen Bedingungen schreiben Sie an {email} oder kontaktieren Sie uns über Telegram."
+      }
+    ]
+  },
+  "fr": {
+    "metaTitle": "Conditions d'utilisation",
+    "metaDescription": "Conditions générales de vente et d'utilisation du site KratosLabs.",
+    "title": "Conditions d'utilisation",
+    "updated": "Août 2026",
+    "intro": "Conditions générales de vente et d'utilisation du site KratosLabs. Nous vous invitons à les lire avant de passer une commande.",
+    "labels": {
+      "documents": "Documents",
+      "onThisPage": "Sur cette page",
+      "updated": "Dernière mise à jour"
+    },
+    "sections": [
+      {
+        "id": "oggetto",
+        "title": "1. Objet",
+        "body": "Les présentes conditions régissent l'utilisation du site et l'achat des produits KratosLabs. En passant une commande, vous déclarez les avoir lues et intégralement acceptées. KratosLabs peut mettre à jour les conditions à tout moment : la version en vigueur au moment de la commande s'applique."
+      },
+      {
+        "id": "ordini",
+        "title": "2. Commandes et prix",
+        "body": "Les prix sont indiqués en euros. Une commande est réputée conclue au moment où vous recevez la confirmation par e-mail avec la référence correspondante. Après son envoi, la commande ne peut être modifiée ni annulée par le client. Nous nous réservons le droit de ne pas accepter ou d'annuler une commande en cas d'erreur de prix manifeste, d'indisponibilité du produit ou de soupçon d'utilisation frauduleuse : dans ce cas, les montants éventuellement déjà versés pour la partie non exécutée sont remboursés selon le même mode de paiement."
+      },
+      {
+        "id": "pagamenti",
+        "title": "3. Paiements",
+        "body": "Nous acceptons le virement bancaire (SEPA) et les cryptomonnaies (Bitcoin et USDT sur le réseau TRON/TRC-20). Le paiement par carte et PayPal n'est pas disponible pour le moment. Les adresses crypto sont uniquement de réception et nous ne conservons pas de données de paiement sensibles. La commande est confirmée et prise en charge après réception du paiement ; pour les détails opérationnels, consultez le Guide des paiements ou écrivez à {email}."
+      },
+      {
+        "id": "spedizione",
+        "title": "4. Expédition",
+        "body": "Les tarifs d'expédition suivent un modèle par zones (Union européenne, reste de l'Europe, États-Unis) et sont indiqués lors du paiement en fonction du pays de destination. Les délais, l'emballage neutre et les conditions sont décrits sur la page Expéditions et retours, qui fait partie intégrante des présentes conditions."
+      },
+      {
+        "id": "resi",
+        "title": "5. Retours, rétractation et remboursements",
+        "body": "Pour des raisons de sécurité et d'intégrité du produit, les articles scellés ne peuvent pas être retournés une fois expédiés. Conformément à l'art. 59 du Code de la consommation italien, le droit de rétractation ne s'applique pas à la fourniture de biens scellés qui ne peuvent être retournés pour des raisons de protection de la santé ou d'hygiène, s'ils ont été ouverts après la livraison. Sous réserve des obligations légales impératives, une fois le paiement effectué, aucun remboursement n'est prévu. En cas de problème de livraison, veuillez vous référer à la procédure de réexpédition décrite sur la page Expéditions et retours."
+      },
+      {
+        "id": "garanzia",
+        "title": "6. Garantie et produits endommagés",
+        "body": "Le cas échéant, la garantie légale de conformité prévue par la réglementation de protection des consommateurs s'applique. Si vous recevez un produit endommagé ou différent de celui commandé, contactez-nous dans les 48 heures suivant la livraison en joignant des photos : nous évaluerons le remplacement de l'article selon les indications de la page Expéditions et retours."
+      },
+      {
+        "id": "uso",
+        "title": "7. Utilisation des produits et responsabilité",
+        "body": "Les produits sont fournis exclusivement à des fins de recherche et d'évaluation analytique. Les informations présentes sur le site ont une nature descriptive et ne constituent ni un conseil médical ni une incitation à l'usage. L'acheteur est seul responsable du respect des lois et règlements en vigueur dans son propre pays en matière d'achat, d'importation et de détention. Dans les limites autorisées par la loi, KratosLabs n'est pas responsable des dommages résultant d'une utilisation inappropriée des produits."
+      },
+      {
+        "id": "proprieta",
+        "title": "8. Propriété intellectuelle",
+        "body": "Les contenus du site (textes, graphismes, logo, images et mise en page) sont la propriété de KratosLabs ou de leurs titulaires respectifs et ne peuvent être reproduits sans autorisation."
+      },
+      {
+        "id": "legge",
+        "title": "9. Loi applicable et for compétent",
+        "body": "Les présentes conditions sont régies par la loi italienne. Pour les litiges avec les consommateurs, le tribunal du lieu de résidence ou de domicile du consommateur est compétent, s'il est situé en Italie. Demeure réservée la possibilité de recourir à la plateforme européenne de règlement en ligne des litiges (ODR)."
+      },
+      {
+        "id": "contatti",
+        "title": "10. Contact",
+        "body": "Pour toute question concernant ces conditions, écrivez à {email} ou contactez-nous via Telegram."
+      }
+    ]
+  },
+  "pt": {
+    "metaTitle": "Termos de serviço",
+    "metaDescription": "Condições gerais de venda e de utilização do site KratosLabs.",
+    "title": "Termos de serviço",
+    "updated": "Agosto de 2026",
+    "intro": "Condições gerais de venda e de utilização do site KratosLabs. Convidamos você a lê-las antes de efetuar um pedido.",
+    "labels": {
+      "documents": "Documentos",
+      "onThisPage": "Nesta página",
+      "updated": "Última atualização"
+    },
+    "sections": [
+      {
+        "id": "oggetto",
+        "title": "1. Objeto",
+        "body": "Estes termos regulam a utilização do site e a compra dos produtos KratosLabs. Ao efetuar um pedido, você declara tê-los lido e aceitado integralmente. A KratosLabs pode atualizar os termos a qualquer momento: aplica-se a versão em vigor no momento do pedido."
+      },
+      {
+        "id": "ordini",
+        "title": "2. Pedidos e preços",
+        "body": "Os preços são indicados em euros. Um pedido considera-se concluído no momento em que você recebe a confirmação por e-mail com a respetiva referência. Após o envio, o pedido não pode ser modificado nem cancelado pelo cliente. Reservamo-nos o direito de não aceitar ou de cancelar um pedido em caso de erro de preço manifesto, indisponibilidade do produto ou suspeita de uso fraudulento: nesse caso, eventuais montantes já pagos pela parte não executada são reembolsados através do mesmo método de pagamento."
+      },
+      {
+        "id": "pagamenti",
+        "title": "3. Pagamentos",
+        "body": "Aceitamos transferência bancária (SEPA) e criptomoedas (Bitcoin e USDT na rede TRON/TRC-20). O pagamento com cartão e PayPal não está disponível de momento. Os endereços crypto são apenas de receção e não conservamos dados de pagamento sensíveis. O pedido é confirmado e processado após a receção do pagamento; para os detalhes operacionais, consulte o Guia de pagamentos ou escreva para {email}."
+      },
+      {
+        "id": "spedizione",
+        "title": "4. Envio",
+        "body": "As tarifas de envio seguem um modelo por zonas (União Europeia, resto da Europa, Estados Unidos) e são indicadas na finalização da compra consoante o país de destino. Os prazos, a embalagem neutra e as condições estão descritos na página Envios e devoluções, que é parte integrante destes termos."
+      },
+      {
+        "id": "resi",
+        "title": "5. Devoluções, direito de retratação e reembolsos",
+        "body": "Por motivos de segurança e integridade do produto, os artigos selados não podem ser devolvidos depois de enviados. Nos termos do art. 59 do Código do Consumo italiano, o direito de retratação não se aplica ao fornecimento de bens selados que não sejam suscetíveis de devolução por motivos de proteção da saúde ou de higiene, caso sejam abertos após a entrega. Salvo as obrigações legais imperativas, uma vez efetuado o pagamento não estão previstos reembolsos. Em caso de problemas de entrega, consulte o procedimento de reenvio descrito na página Envios e devoluções."
+      },
+      {
+        "id": "garanzia",
+        "title": "6. Garantia e produtos danificados",
+        "body": "Quando aplicável, aplica-se a garantia legal de conformidade prevista na legislação de proteção do consumidor. Se receber um produto danificado ou diferente do encomendado, contacte-nos no prazo de 48 horas após a entrega, anexando as fotografias: avaliaremos a substituição do artigo conforme indicado na página Envios e devoluções."
+      },
+      {
+        "id": "uso",
+        "title": "7. Utilização dos produtos e responsabilidade",
+        "body": "Os produtos são fornecidos exclusivamente para fins de investigação e avaliação analítica. As informações presentes no site têm natureza descritiva e não constituem aconselhamento médico nem incentivo ao uso. O comprador é o único responsável pelo cumprimento das leis e regulamentos em vigor no seu próprio país em matéria de compra, importação e detenção. Nos limites permitidos por lei, a KratosLabs não responde por danos decorrentes de uma utilização indevida dos produtos."
+      },
+      {
+        "id": "proprieta",
+        "title": "8. Propriedade intelectual",
+        "body": "Os conteúdos do site (textos, grafismos, logótipo, imagens e layout) são propriedade da KratosLabs ou dos respetivos titulares e não podem ser reproduzidos sem autorização."
+      },
+      {
+        "id": "legge",
+        "title": "9. Lei aplicável e foro competente",
+        "body": "Os presentes termos são regidos pela lei italiana. Para os litígios com os consumidores, é competente o foro do lugar de residência ou domicílio do consumidor, se situado em Itália. Mantém-se a possibilidade de recorrer à plataforma europeia de resolução de litígios em linha (ODR)."
+      },
+      {
+        "id": "contatti",
+        "title": "10. Contactos",
+        "body": "Para qualquer questão sobre estes termos, escreva para {email} ou contacte-nos através do Telegram."
+      }
+    ]
+  }
+}
