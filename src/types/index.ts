@@ -34,6 +34,12 @@ export interface ProductSpecs {
   manufacturer?: string;
 }
 
+/** Domanda frequente su un prodotto (mostrata come accordion nella scheda). */
+export interface ProductFaq {
+  q: string;
+  a: string;
+}
+
 export interface LabReport {
   lab: string;
   batch: string;
@@ -60,6 +66,8 @@ export interface Product {
   labReport?: LabReport;
   /** Scheda descrittiva estesa (HTML sanificato: h2/h3/p/ul/li/strong…). */
   detailsHtml?: string;
+  /** Domande frequenti, mostrate come elenco a fisarmonica nella scheda. */
+  faqs?: ProductFaq[];
   stock: number;
   featured: boolean;
 }
