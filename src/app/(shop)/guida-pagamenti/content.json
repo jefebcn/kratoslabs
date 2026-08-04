@@ -1,0 +1,232 @@
+{
+  "it": {
+    "metaTitle": "Guida ai pagamenti",
+    "metaDescription": "Come acquistare e pagare in sicurezza su KratosLabs: bonifico, Bitcoin e USDT.",
+    "title": "Guida ai pagamenti",
+    "intro": "Pagare il tuo ordine è semplice e sicuro. Questa guida ti accompagna in ogni metodo di pagamento disponibile e in cosa aspettarti.",
+    "methodsHeading": "Metodi disponibili",
+    "methods": [
+      {
+        "key": "bank",
+        "name": "Bonifico bancario (SEPA)",
+        "steps": "Dopo l'ordine ricevi via email tutte le coordinate. Il bonifico va effettuato in EUR tramite SEPA. Usa sempre la causale indicata (riferimento KL-…) e controlla le ultime coordinate ricevute.",
+        "confirm": "Conferma entro 24–48 ore dalla ricezione del pagamento."
+      },
+      {
+        "key": "btc",
+        "name": "Bitcoin (BTC)",
+        "steps": "Al checkout compaiono l'indirizzo BTC, il QR e l'importo esatto da inviare. Invia dalla rete Bitcoin.",
+        "confirm": "Conferma di solito entro 1–2 giorni (in base alle conferme di rete)."
+      },
+      {
+        "key": "usdt",
+        "name": "USDT (rete TRON / TRC-20)",
+        "steps": "Invia USDT all'indirizzo indicato usando la rete corretta: TRON (TRC-20). Inviare da un'altra rete comporta la perdita dei fondi.",
+        "confirm": "Conferma solitamente in pochi minuti."
+      }
+    ],
+    "cardsNote": "Carta e PayPal non sono al momento disponibili: verranno attivati a breve.",
+    "issuesHeading": "Problemi comuni",
+    "issues": [
+      { "label": "Bonifico:", "text": "coordinate sbagliate o causale (riferimento) mancante." },
+      { "label": "Bitcoin:", "text": "importo inferiore a quello richiesto." },
+      { "label": "USDT:", "text": "rete sbagliata o importo insufficiente." }
+    ],
+    "pendingBefore": "Se il tuo ordine risulta ancora non pagato, attendi fino a 2–3 giorni lavorativi. Se ci mette di più,",
+    "pendingLink": "contatta l'assistenza",
+    "pendingAfter": ".",
+    "refundsTitle": "Rimborsi ed errori",
+    "refundsBefore": "Al momento non offriamo rimborsi. Per problemi legati alla consegna fai riferimento alla",
+    "refundsLink": "politica di spedizione",
+    "refundsAfter": ".",
+    "securityTitle": "Sicurezza",
+    "securityBody": "Tutti i pagamenti sono gestiti in modo sicuro. Non conserviamo dati di pagamento sensibili; gli indirizzi crypto sono di sola ricezione. La tua privacy è rispettata.",
+    "questionsBefore": "Hai domande?",
+    "questionsLink": "Contatta il nostro supporto",
+    "questionsAfter": "— siamo qui per aiutarti."
+  },
+  "en": {
+    "metaTitle": "Payment guide",
+    "metaDescription": "How to buy and pay securely on KratosLabs: bank transfer, Bitcoin and USDT.",
+    "title": "Payment guide",
+    "intro": "Paying for your order is simple and secure. This guide walks you through every available payment method and what to expect.",
+    "methodsHeading": "Available methods",
+    "methods": [
+      {
+        "key": "bank",
+        "name": "Bank transfer (SEPA)",
+        "steps": "After placing your order you receive all the details by email. The transfer must be made in EUR via SEPA. Always use the reference provided (reference KL-…) and check the latest details you received.",
+        "confirm": "Confirmed within 24–48 hours of receiving the payment."
+      },
+      {
+        "key": "btc",
+        "name": "Bitcoin (BTC)",
+        "steps": "At checkout the BTC address, the QR code and the exact amount to send are shown. Send from the Bitcoin network.",
+        "confirm": "Usually confirmed within 1–2 days (depending on network confirmations)."
+      },
+      {
+        "key": "usdt",
+        "name": "USDT (TRON / TRC-20 network)",
+        "steps": "Send USDT to the address shown using the correct network: TRON (TRC-20). Sending from another network results in the loss of your funds.",
+        "confirm": "Usually confirmed within a few minutes."
+      }
+    ],
+    "cardsNote": "Card and PayPal are not available at the moment: they will be enabled soon.",
+    "issuesHeading": "Common issues",
+    "issues": [
+      { "label": "Bank transfer:", "text": "wrong details or missing reference." },
+      { "label": "Bitcoin:", "text": "amount lower than the one requested." },
+      { "label": "USDT:", "text": "wrong network or insufficient amount." }
+    ],
+    "pendingBefore": "If your order still shows as unpaid, please wait up to 2–3 business days. If it takes longer,",
+    "pendingLink": "contact support",
+    "pendingAfter": ".",
+    "refundsTitle": "Refunds and errors",
+    "refundsBefore": "We do not offer refunds at this time. For delivery-related issues, please refer to the",
+    "refundsLink": "shipping policy",
+    "refundsAfter": ".",
+    "securityTitle": "Security",
+    "securityBody": "All payments are handled securely. We do not store sensitive payment data; crypto addresses are receive-only. Your privacy is respected.",
+    "questionsBefore": "Have questions?",
+    "questionsLink": "Contact our support",
+    "questionsAfter": "— we're here to help."
+  },
+  "de": {
+    "metaTitle": "Zahlungsleitfaden",
+    "metaDescription": "Wie Sie auf KratosLabs sicher einkaufen und bezahlen: Überweisung, Bitcoin und USDT.",
+    "title": "Zahlungsleitfaden",
+    "intro": "Die Bezahlung Ihrer Bestellung ist einfach und sicher. Dieser Leitfaden führt Sie durch jede verfügbare Zahlungsmethode und erklärt, was Sie erwartet.",
+    "methodsHeading": "Verfügbare Methoden",
+    "methods": [
+      {
+        "key": "bank",
+        "name": "Banküberweisung (SEPA)",
+        "steps": "Nach der Bestellung erhalten Sie alle Angaben per E-Mail. Die Überweisung muss in EUR per SEPA erfolgen. Verwenden Sie immer den angegebenen Verwendungszweck (Referenz KL-…) und prüfen Sie die zuletzt erhaltenen Angaben.",
+        "confirm": "Bestätigung innerhalb von 24–48 Stunden nach Zahlungseingang."
+      },
+      {
+        "key": "btc",
+        "name": "Bitcoin (BTC)",
+        "steps": "Beim Checkout werden die BTC-Adresse, der QR-Code und der genaue zu sendende Betrag angezeigt. Senden Sie über das Bitcoin-Netzwerk.",
+        "confirm": "Bestätigung in der Regel innerhalb von 1–2 Tagen (abhängig von den Netzwerkbestätigungen)."
+      },
+      {
+        "key": "usdt",
+        "name": "USDT (TRON- / TRC-20-Netzwerk)",
+        "steps": "Senden Sie USDT an die angegebene Adresse über das richtige Netzwerk: TRON (TRC-20). Ein Senden über ein anderes Netzwerk führt zum Verlust der Gelder.",
+        "confirm": "Bestätigung in der Regel innerhalb weniger Minuten."
+      }
+    ],
+    "cardsNote": "Karte und PayPal sind derzeit nicht verfügbar: Sie werden in Kürze aktiviert.",
+    "issuesHeading": "Häufige Probleme",
+    "issues": [
+      { "label": "Überweisung:", "text": "falsche Angaben oder fehlender Verwendungszweck (Referenz)." },
+      { "label": "Bitcoin:", "text": "Betrag niedriger als der geforderte." },
+      { "label": "USDT:", "text": "falsches Netzwerk oder unzureichender Betrag." }
+    ],
+    "pendingBefore": "Wenn Ihre Bestellung weiterhin als unbezahlt angezeigt wird, warten Sie bitte bis zu 2–3 Werktage. Wenn es länger dauert,",
+    "pendingLink": "kontaktieren Sie den Support",
+    "pendingAfter": ".",
+    "refundsTitle": "Rückerstattungen und Fehler",
+    "refundsBefore": "Derzeit bieten wir keine Rückerstattungen an. Bei Problemen im Zusammenhang mit der Lieferung beachten Sie bitte die",
+    "refundsLink": "Versandrichtlinie",
+    "refundsAfter": ".",
+    "securityTitle": "Sicherheit",
+    "securityBody": "Alle Zahlungen werden sicher abgewickelt. Wir speichern keine sensiblen Zahlungsdaten; Krypto-Adressen dienen nur dem Empfang. Ihre Privatsphäre wird respektiert.",
+    "questionsBefore": "Haben Sie Fragen?",
+    "questionsLink": "Kontaktieren Sie unseren Support",
+    "questionsAfter": "— wir sind für Sie da."
+  },
+  "fr": {
+    "metaTitle": "Guide des paiements",
+    "metaDescription": "Comment acheter et payer en toute sécurité sur KratosLabs : virement, Bitcoin et USDT.",
+    "title": "Guide des paiements",
+    "intro": "Payer votre commande est simple et sécurisé. Ce guide vous accompagne à travers chaque méthode de paiement disponible et ce à quoi vous attendre.",
+    "methodsHeading": "Méthodes disponibles",
+    "methods": [
+      {
+        "key": "bank",
+        "name": "Virement bancaire (SEPA)",
+        "steps": "Après la commande, vous recevez toutes les coordonnées par e-mail. Le virement doit être effectué en EUR via SEPA. Utilisez toujours le motif indiqué (référence KL-…) et vérifiez les dernières coordonnées reçues.",
+        "confirm": "Confirmation sous 24–48 heures après réception du paiement."
+      },
+      {
+        "key": "btc",
+        "name": "Bitcoin (BTC)",
+        "steps": "Au moment du paiement, l'adresse BTC, le QR code et le montant exact à envoyer s'affichent. Envoyez depuis le réseau Bitcoin.",
+        "confirm": "Confirmation généralement sous 1–2 jours (selon les confirmations du réseau)."
+      },
+      {
+        "key": "usdt",
+        "name": "USDT (réseau TRON / TRC-20)",
+        "steps": "Envoyez des USDT à l'adresse indiquée en utilisant le bon réseau : TRON (TRC-20). Envoyer depuis un autre réseau entraîne la perte des fonds.",
+        "confirm": "Confirmation généralement en quelques minutes."
+      }
+    ],
+    "cardsNote": "La carte et PayPal ne sont pas disponibles pour le moment : ils seront activés prochainement.",
+    "issuesHeading": "Problèmes courants",
+    "issues": [
+      { "label": "Virement :", "text": "coordonnées erronées ou motif (référence) manquant." },
+      { "label": "Bitcoin:", "text": "montant inférieur à celui demandé." },
+      { "label": "USDT:", "text": "mauvais réseau ou montant insuffisant." }
+    ],
+    "pendingBefore": "Si votre commande apparaît toujours comme non payée, patientez jusqu'à 2–3 jours ouvrés. Si cela prend plus de temps,",
+    "pendingLink": "contactez l'assistance",
+    "pendingAfter": ".",
+    "refundsTitle": "Remboursements et erreurs",
+    "refundsBefore": "Nous n'offrons pas de remboursements pour le moment. Pour les problèmes liés à la livraison, reportez-vous à la",
+    "refundsLink": "politique d'expédition",
+    "refundsAfter": ".",
+    "securityTitle": "Sécurité",
+    "securityBody": "Tous les paiements sont traités de manière sécurisée. Nous ne conservons pas de données de paiement sensibles ; les adresses crypto sont uniquement en réception. Votre vie privée est respectée.",
+    "questionsBefore": "Vous avez des questions ?",
+    "questionsLink": "Contactez notre support",
+    "questionsAfter": "— nous sommes là pour vous aider."
+  },
+  "pt": {
+    "metaTitle": "Guia de pagamentos",
+    "metaDescription": "Como comprar e pagar com segurança na KratosLabs: transferência, Bitcoin e USDT.",
+    "title": "Guia de pagamentos",
+    "intro": "Pagar o seu pedido é simples e seguro. Este guia acompanha-o em cada método de pagamento disponível e no que esperar.",
+    "methodsHeading": "Métodos disponíveis",
+    "methods": [
+      {
+        "key": "bank",
+        "name": "Transferência bancária (SEPA)",
+        "steps": "Após o pedido, recebe por e-mail todos os dados. A transferência deve ser efetuada em EUR através de SEPA. Use sempre a referência indicada (referência KL-…) e verifique os últimos dados recebidos.",
+        "confirm": "Confirmação em 24–48 horas após a receção do pagamento."
+      },
+      {
+        "key": "btc",
+        "name": "Bitcoin (BTC)",
+        "steps": "No checkout aparecem o endereço BTC, o QR e o valor exato a enviar. Envie a partir da rede Bitcoin.",
+        "confirm": "Confirmação normalmente em 1–2 dias (consoante as confirmações da rede)."
+      },
+      {
+        "key": "usdt",
+        "name": "USDT (rede TRON / TRC-20)",
+        "steps": "Envie USDT para o endereço indicado usando a rede correta: TRON (TRC-20). Enviar a partir de outra rede resulta na perda dos fundos.",
+        "confirm": "Confirmação normalmente em poucos minutos."
+      }
+    ],
+    "cardsNote": "Cartão e PayPal não estão disponíveis de momento: serão ativados em breve.",
+    "issuesHeading": "Problemas comuns",
+    "issues": [
+      { "label": "Transferência:", "text": "dados incorretos ou referência em falta." },
+      { "label": "Bitcoin:", "text": "valor inferior ao solicitado." },
+      { "label": "USDT:", "text": "rede errada ou valor insuficiente." }
+    ],
+    "pendingBefore": "Se o seu pedido continuar como não pago, aguarde até 2–3 dias úteis. Se demorar mais,",
+    "pendingLink": "contacte a assistência",
+    "pendingAfter": ".",
+    "refundsTitle": "Reembolsos e erros",
+    "refundsBefore": "De momento não oferecemos reembolsos. Para problemas relacionados com a entrega, consulte a",
+    "refundsLink": "política de envio",
+    "refundsAfter": ".",
+    "securityTitle": "Segurança",
+    "securityBody": "Todos os pagamentos são geridos de forma segura. Não guardamos dados de pagamento sensíveis; os endereços de cripto são apenas de receção. A sua privacidade é respeitada.",
+    "questionsBefore": "Tem dúvidas?",
+    "questionsLink": "Contacte o nosso suporte",
+    "questionsAfter": "— estamos aqui para ajudar."
+  }
+}

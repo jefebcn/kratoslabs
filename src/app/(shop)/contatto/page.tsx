@@ -1,25 +1,43 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { Send, Mail } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import type { LocaleCode } from "@/types";
+import contentByLocale from "./content.json";
 
-export const metadata: Metadata = {
-  title: "Contatto",
-  description: `Contatta ${SITE.name}: Telegram ed email per ordini e assistenza.`,
-};
+interface ContactContent {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  telegramTitle: string;
+  telegramSub: string;
+  emailTitle: string;
+}
 
-export default function ContattoPage() {
+const CONTENT = contentByLocale as Record<LocaleCode, ContactContent | null>;
+
+function pick(locale: LocaleCode): ContactContent {
+  return CONTENT[locale] ?? (CONTENT.it as ContactContent);
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const c = pick((await getLocale()) as LocaleCode);
+  return { title: c.metaTitle, description: c.metaDescription };
+}
+
+export default async function ContattoPage() {
+  const c = pick((await getLocale()) as LocaleCode);
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-        Assistenza
+        {c.eyebrow}
       </p>
       <h1 className="font-display mt-2 text-3xl font-bold uppercase tracking-tight sm:text-4xl">
-        Contatto
+        {c.title}
       </h1>
-      <p className="mt-4 text-muted">
-        Il modo più veloce per raggiungerci è Telegram: rispondiamo a domande su
-        prodotti, ordini e spedizioni.
-      </p>
+      <p className="mt-4 text-muted">{c.intro}</p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <a
@@ -32,8 +50,8 @@ export default function ContattoPage() {
             <Send className="size-5" aria-hidden />
           </span>
           <span className="flex flex-col">
-            <span className="text-sm font-semibold">Telegram</span>
-            <span className="text-sm text-muted">Chat diretta e supporto</span>
+            <span className="text-sm font-semibold">{c.telegramTitle}</span>
+            <span className="text-sm text-muted">{c.telegramSub}</span>
           </span>
         </a>
 
@@ -45,16 +63,11 @@ export default function ContattoPage() {
             <Mail className="size-5" aria-hidden />
           </span>
           <span className="flex flex-col">
-            <span className="text-sm font-semibold">Email</span>
+            <span className="text-sm font-semibold">{c.emailTitle}</span>
             <span className="text-sm text-muted">{SITE.email}</span>
           </span>
         </a>
       </div>
-
-      <p className="mt-8 text-sm italic text-muted">
-        (Testo segnaposto: aggiorna qui i recapiti reali e gli orari di
-        assistenza.)
-      </p>
     </div>
   );
 }

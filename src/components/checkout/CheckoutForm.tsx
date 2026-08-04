@@ -14,6 +14,11 @@ import { createOrder, type CheckoutResult } from "@/features/checkout";
 import { useCart } from "@/features/cart";
 import { priceLine } from "@/features/products/pricing";
 import { PAYMENT_METHODS } from "@/lib/constants";
+import {
+  SHIPPING_COUNTRIES,
+  shippingCentsForCountry,
+  zoneForCountry,
+} from "@/lib/shipping";
 import { cn, formatPrice } from "@/lib/utils";
 import {
   maxRedeemablePoints,
@@ -97,6 +102,8 @@ export function CheckoutForm({
   const clear = useCart((s) => s.clear);
   const empty = lines.length === 0;
   const [redeem, setRedeem] = useState(0);
+  // Paese di destinazione (default Italia): determina la zona di spedizione.
+  const [country, setCountry] = useState("IT");
 
   // Totale netto (sconti quantità inclusi): stesso valore mostrato nel riepilogo.
   const netTotalCents = lines.reduce(
@@ -108,17 +115,22 @@ export function CheckoutForm({
   const redeemable = maxRedeemablePoints(points, netTotalCents);
   const appliedPoints = Math.max(0, Math.min(Math.floor(redeem) || 0, redeemable));
   const discountCents = discountCentsFor(appliedPoints);
-  const payableCents = Math.max(0, netTotalCents - discountCents);
+  const merchandiseCents = Math.max(0, netTotalCents - discountCents);
+
+  // Spedizione dalla zona del paese scelto; totale finale mostrato al cliente.
+  const shippingCents = empty ? 0 : shippingCentsForCountry(country);
+  const shippingZone = zoneForCountry(country);
+  const payableCents = merchandiseCents + shippingCents;
 
   // Congela il totale al momento della conferma, prima di svuotare il carrello.
   const [orderTotalCents, setOrderTotalCents] = useState<number | null>(null);
 
   useEffect(() => {
     if (state?.ok && orderTotalCents === null) {
-      setOrderTotalCents(netTotalCents);
+      setOrderTotalCents(payableCents);
       clear();
     }
-  }, [state?.ok, orderTotalCents, netTotalCents, clear]);
+  }, [state?.ok, orderTotalCents, payableCents, clear]);
 
   if (state?.ok && state.reference) {
     const paidCents = state.totalCents ?? orderTotalCents ?? undefined;
@@ -224,19 +236,11 @@ export function CheckoutForm({
 
               {appliedPoints > 0 && (
                 <dl className="mt-3 space-y-1 border-t border-accent/20 pt-3 text-sm">
-                  <div className="flex justify-between text-muted">
-                    <dt>{t("rewards.subtotal")}</dt>
-                    <dd className="num">{formatPrice(netTotalCents)}</dd>
-                  </div>
                   <div className="flex justify-between text-accent">
                     <dt>
                       {t("rewards.discount")} ({appliedPoints} pt)
                     </dt>
                     <dd className="num">−{formatPrice(discountCents)}</dd>
-                  </div>
-                  <div className="flex justify-between font-semibold">
-                    <dt>{t("rewards.toPay")}</dt>
-                    <dd className="num">{formatPrice(payableCents)}</dd>
                   </div>
                 </dl>
               )}
@@ -296,13 +300,26 @@ export function CheckoutForm({
           autoComplete="postal-code"
           error={err("postalCode")}
         />
-        <Field
-          label={t("country")}
-          name="country"
-          autoComplete="country-name"
-          error={err("country")}
-          className="sm:col-span-2"
-        />
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
+          <Label htmlFor="country">{t("country")}</Label>
+          <select
+            id="country"
+            name="country"
+            required
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            className="h-10 rounded-base border border-border bg-surface px-3 text-sm outline-none focus:border-accent"
+          >
+            {SHIPPING_COUNTRIES.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+          {err("country") && (
+            <p className="text-xs text-danger">{err("country")}</p>
+          )}
+        </div>
       </fieldset>
 
       <fieldset>
@@ -346,6 +363,32 @@ export function CheckoutForm({
           placeholder={t("notesPlaceholder")}
         />
       </div>
+
+      {!empty && (
+        <dl className="space-y-1.5 rounded-base border border-border bg-surface p-4 text-sm">
+          <div className="flex justify-between text-muted">
+            <dt>{t("rewards.subtotal")}</dt>
+            <dd className="num">{formatPrice(merchandiseCents)}</dd>
+          </div>
+          {discountCents > 0 && (
+            <div className="flex justify-between text-accent">
+              <dt>{t("rewards.discount")}</dt>
+              <dd className="num">−{formatPrice(discountCents)}</dd>
+            </div>
+          )}
+          <div className="flex justify-between text-muted">
+            <dt>
+              {t("shipping")}{" "}
+              <span className="text-xs">({t(`zones.${shippingZone}`)})</span>
+            </dt>
+            <dd className="num">{formatPrice(shippingCents)}</dd>
+          </div>
+          <div className="flex justify-between border-t border-border pt-1.5 text-base font-semibold">
+            <dt>{t("total")}</dt>
+            <dd className="num text-accent">{formatPrice(payableCents)}</dd>
+          </div>
+        </dl>
+      )}
 
       <Button type="submit" size="lg" loading={pending} disabled={empty}>
         {empty ? t("cartEmpty") : t("confirmOrder")}

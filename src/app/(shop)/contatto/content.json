@@ -1,0 +1,52 @@
+{
+  "it": {
+    "metaTitle": "Contatto",
+    "metaDescription": "Contatta KratosLabs: Telegram ed email per ordini e assistenza.",
+    "eyebrow": "Assistenza",
+    "title": "Contatto",
+    "intro": "Il modo più veloce per raggiungerci è Telegram: rispondiamo a domande su prodotti, ordini e spedizioni.",
+    "telegramTitle": "Telegram",
+    "telegramSub": "Chat diretta e supporto",
+    "emailTitle": "Email"
+  },
+  "en": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contact KratosLabs: Telegram and email for orders and support.",
+    "eyebrow": "Support",
+    "title": "Contact",
+    "intro": "The fastest way to reach us is Telegram: we answer questions about products, orders and shipping.",
+    "telegramTitle": "Telegram",
+    "telegramSub": "Direct chat and support",
+    "emailTitle": "Email"
+  },
+  "de": {
+    "metaTitle": "Kontakt",
+    "metaDescription": "Kontaktiere KratosLabs: Telegram und E-Mail für Bestellungen und Support.",
+    "eyebrow": "Support",
+    "title": "Kontakt",
+    "intro": "Am schnellsten erreichst du uns über Telegram: Wir beantworten Fragen zu Produkten, Bestellungen und Versand.",
+    "telegramTitle": "Telegram",
+    "telegramSub": "Direkter Chat und Support",
+    "emailTitle": "Email"
+  },
+  "fr": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contactez KratosLabs : Telegram et e-mail pour les commandes et l'assistance.",
+    "eyebrow": "Assistance",
+    "title": "Contact",
+    "intro": "Le moyen le plus rapide de nous joindre est Telegram : nous répondons aux questions sur les produits, les commandes et les expéditions.",
+    "telegramTitle": "Telegram",
+    "telegramSub": "Chat direct et assistance",
+    "emailTitle": "Email"
+  },
+  "pt": {
+    "metaTitle": "Contato",
+    "metaDescription": "Contate a KratosLabs: Telegram e e-mail para pedidos e suporte.",
+    "eyebrow": "Suporte",
+    "title": "Contato",
+    "intro": "A forma mais rápida de falar connosco é o Telegram: respondemos a perguntas sobre produtos, pedidos e envios.",
+    "telegramTitle": "Telegram",
+    "telegramSub": "Chat direto e suporte",
+    "emailTitle": "Email"
+  }
+}

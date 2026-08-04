@@ -1,0 +1,52 @@
+{
+  "it": {
+    "metaTitle": "Chi siamo",
+    "metaDescription": "Chi siamo: la missione e i valori di KratosLabs.",
+    "title": "Chi siamo",
+    "paragraphs": [
+      "KratosLabs nasce con un obiettivo semplice: offrire prodotti con dosaggi dichiarati e qualità verificabile, senza promesse che non possiamo dimostrare.",
+      "Lavoriamo con distributori ufficiali e selezioniamo ogni referenza in base a purezza e affidabilità. Ci teniamo alla trasparenza: quello che leggi in etichetta è quello che trovi nel prodotto.",
+      "Il nostro team è raggiungibile ogni giorno tramite Telegram per consigli, tracciamento degli ordini e assistenza post-vendita."
+    ]
+  },
+  "en": {
+    "metaTitle": "About us",
+    "metaDescription": "About us: the mission and values of KratosLabs.",
+    "title": "About us",
+    "paragraphs": [
+      "KratosLabs was founded with a simple goal: to offer products with declared dosages and verifiable quality, without promises we cannot prove.",
+      "We work with official distributors and select every product based on purity and reliability. We care about transparency: what you read on the label is what you find in the product.",
+      "Our team is available every day via Telegram for advice, order tracking and after-sales support."
+    ]
+  },
+  "de": {
+    "metaTitle": "Über uns",
+    "metaDescription": "Über uns: die Mission und die Werte von KratosLabs.",
+    "title": "Über uns",
+    "paragraphs": [
+      "KratosLabs wurde mit einem einfachen Ziel gegründet: Produkte mit deklarierten Dosierungen und überprüfbarer Qualität anzubieten, ohne Versprechen, die wir nicht belegen können.",
+      "Wir arbeiten mit offiziellen Vertriebspartnern zusammen und wählen jedes Produkt nach Reinheit und Zuverlässigkeit aus. Transparenz liegt uns am Herzen: Was auf dem Etikett steht, ist auch im Produkt enthalten.",
+      "Unser Team ist täglich über Telegram erreichbar – für Beratung, Sendungsverfolgung und Kundendienst nach dem Kauf."
+    ]
+  },
+  "fr": {
+    "metaTitle": "À propos",
+    "metaDescription": "À propos : la mission et les valeurs de KratosLabs.",
+    "title": "À propos",
+    "paragraphs": [
+      "KratosLabs est né d'un objectif simple : proposer des produits avec des dosages déclarés et une qualité vérifiable, sans promesses que nous ne pouvons pas prouver.",
+      "Nous travaillons avec des distributeurs officiels et sélectionnons chaque référence en fonction de sa pureté et de sa fiabilité. La transparence nous tient à cœur : ce que vous lisez sur l'étiquette est ce que vous trouvez dans le produit.",
+      "Notre équipe est joignable tous les jours via Telegram pour des conseils, le suivi des commandes et l'assistance après-vente."
+    ]
+  },
+  "pt": {
+    "metaTitle": "Sobre nós",
+    "metaDescription": "Sobre nós: a missão e os valores da KratosLabs.",
+    "title": "Sobre nós",
+    "paragraphs": [
+      "A KratosLabs nasceu com um objetivo simples: oferecer produtos com dosagens declaradas e qualidade verificável, sem promessas que não possamos comprovar.",
+      "Trabalhamos com distribuidores oficiais e selecionamos cada produto com base na pureza e na confiabilidade. Prezamos pela transparência: o que você lê no rótulo é o que encontra no produto.",
+      "A nossa equipa está disponível todos os dias através do Telegram para aconselhamento, rastreamento de encomendas e apoio pós-venda."
+    ]
+  }
+}

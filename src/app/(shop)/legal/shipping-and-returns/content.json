@@ -1,0 +1,322 @@
+{
+  "it": {
+    "metaTitle": "Spedizioni e resi",
+    "metaDescription": "Tariffe per zona, tempi, imballo neutro e politica di reso degli ordini KratosLabs.",
+    "title": "Spedizioni, resi e ri-spedizione",
+    "updated": "Agosto 2026",
+    "intro": "Tariffe di spedizione per zona, tempi di consegna, imballo anonimo, resi, rimborsi e procedura di ri-spedizione.",
+    "labels": {
+      "documents": "Documenti",
+      "onThisPage": "In questa pagina",
+      "updated": "Ultimo aggiornamento"
+    },
+    "sections": [
+      {
+        "id": "politica",
+        "title": "1. Politica di consegna",
+        "body": "Facciamo il possibile per mantenere le tariffe di spedizione ragionevoli e per consegnare i tuoi articoli nel modo più efficiente e sicuro. Controlla con attenzione il tuo ordine prima del checkout: una volta inviato, non può essere modificato o annullato."
+      },
+      {
+        "id": "tariffe",
+        "title": "2. Tariffe e tempi di spedizione",
+        "body": "Applichiamo tariffe fisse in base alla zona di destinazione: Unione Europea 22 €, resto d'Europa 28 €, Stati Uniti 30 €. Non è prevista una soglia di spedizione gratuita. Gli ordini vengono generalmente spediti entro 3 giorni lavorativi dopo la conferma del pagamento; i tempi di consegna indicativi sono 12–16 giorni lavorativi per l'Unione Europea, 14–21 giorni per il resto d'Europa e 17–28 giorni per gli Stati Uniti. Tariffe e tempi possono variare in base a destinazione e periodo."
+      },
+      {
+        "id": "imballo",
+        "title": "3. Imballo anonimo",
+        "body": "Spediamo in confezione neutra: scatola anonima, senza logo e senza indicazione del contenuto sull'esterno, per tutelare la tua privacy alla consegna. Il contenuto e la documentazione restano regolari e completi."
+      },
+      {
+        "id": "tracciamento",
+        "title": "4. Tracciamento",
+        "body": "Ogni ordine viene spedito con tracciamento. Ricevi il codice via email non appena l'ordine viene affidato al corriere, con il link per seguire la spedizione dalla tua area account."
+      },
+      {
+        "id": "ritardi",
+        "title": "5. Ritardi e segnalazioni",
+        "body": "Se il tracciamento non si aggiorna o il pacco risulta in ritardo, contatta l'assistenza. Le richieste inoltrate oltre 45 giorni dalla data di spedizione potrebbero non rientrare nella ri-spedizione o nella verifica."
+      },
+      {
+        "id": "resi",
+        "title": "6. Resi",
+        "body": "Per motivi di sicurezza e integrità del prodotto, gli articoli venduti non sono restituibili una volta spediti."
+      },
+      {
+        "id": "rimborsi",
+        "title": "7. Rimborsi",
+        "body": "Una volta effettuato il pagamento con uno qualsiasi dei metodi disponibili, non sono previsti rimborsi. Per problemi legati alla consegna fai riferimento alla sezione Ri-spedizione."
+      },
+      {
+        "id": "sostituzioni",
+        "title": "8. Prodotti danneggiati o errati",
+        "body": "Se ricevi un prodotto danneggiato o diverso da quello ordinato, contattaci entro 48 ore dalla consegna allegando le foto: valutiamo la sostituzione dell'articolo."
+      },
+      {
+        "id": "ri-spedizione",
+        "title": "9. Ri-spedizione",
+        "body": "In caso di problemi di consegna (es. pacco fermato in dogana), per richiedere una ri-spedizione fornisci: una foto ad almeno 120 dpi della busta/lettera della dogana con il nome del destinatario, una foto ad almeno 120 dpi dell'eventuale avviso di sequestro con il nome del destinatario e un nuovo indirizzo di spedizione. La ri-spedizione è prevista una sola volta per ordine."
+      },
+      {
+        "id": "note",
+        "title": "10. Nota importante",
+        "body": "Pur impegnandoci a rispettare i tempi stimati, ritardi occasionali possono verificarsi per fattori fuori dal nostro controllo (dogana, corrieri, volumi elevati). Per qualsiasi problema con il pacco, contatta l'assistenza."
+      }
+    ]
+  },
+  "en": {
+    "metaTitle": "Shipping and returns",
+    "metaDescription": "Rates by zone, timeframes, neutral packaging and the returns policy for KratosLabs orders.",
+    "title": "Shipping, returns and reshipment",
+    "updated": "August 2026",
+    "intro": "Shipping rates by zone, delivery times, discreet packaging, returns, refunds and the reshipment procedure.",
+    "labels": {
+      "documents": "Documents",
+      "onThisPage": "On this page",
+      "updated": "Last updated"
+    },
+    "sections": [
+      {
+        "id": "politica",
+        "title": "1. Delivery policy",
+        "body": "We do our best to keep shipping rates reasonable and to deliver your items in the most efficient and secure way. Please review your order carefully before checkout: once submitted, it cannot be changed or cancelled."
+      },
+      {
+        "id": "tariffe",
+        "title": "2. Shipping rates and times",
+        "body": "We apply flat rates based on the destination zone: European Union 22 €, rest of Europe 28 €, United States 30 €. There is no free shipping threshold. Orders are generally shipped within 3 business days after payment confirmation; indicative delivery times are 12–16 business days for the European Union, 14–21 days for the rest of Europe and 17–28 days for the United States. Rates and times may vary depending on destination and period."
+      },
+      {
+        "id": "imballo",
+        "title": "3. Discreet packaging",
+        "body": "We ship in neutral packaging: a plain box, with no logo and no indication of the contents on the outside, to protect your privacy on delivery. The contents and documentation remain proper and complete."
+      },
+      {
+        "id": "tracciamento",
+        "title": "4. Tracking",
+        "body": "Every order is shipped with tracking. You receive the code by email as soon as the order is handed over to the courier, together with the link to follow the shipment from your account area."
+      },
+      {
+        "id": "ritardi",
+        "title": "5. Delays and reports",
+        "body": "If the tracking does not update or the parcel appears delayed, please contact support. Requests submitted more than 45 days after the shipping date may not qualify for reshipment or verification."
+      },
+      {
+        "id": "resi",
+        "title": "6. Returns",
+        "body": "For reasons of safety and product integrity, items sold cannot be returned once they have been shipped."
+      },
+      {
+        "id": "rimborsi",
+        "title": "7. Refunds",
+        "body": "Once payment has been made with any of the available methods, no refunds are provided. For issues related to delivery, please refer to the Reshipment section."
+      },
+      {
+        "id": "sostituzioni",
+        "title": "8. Damaged or incorrect products",
+        "body": "If you receive a damaged product or one different from what you ordered, contact us within 48 hours of delivery attaching photos: we will assess replacing the item."
+      },
+      {
+        "id": "ri-spedizione",
+        "title": "9. Reshipment",
+        "body": "In the event of delivery problems (e.g. a parcel held at customs), to request a reshipment please provide: a photo of at least 120 dpi of the customs envelope/letter showing the recipient's name, a photo of at least 120 dpi of any seizure notice showing the recipient's name, and a new shipping address. Reshipment is available only once per order."
+      },
+      {
+        "id": "note",
+        "title": "10. Important note",
+        "body": "While we strive to meet the estimated times, occasional delays may occur due to factors beyond our control (customs, couriers, high volumes). For any problem with your parcel, please contact support."
+      }
+    ]
+  },
+  "de": {
+    "metaTitle": "Versand und Rückgabe",
+    "metaDescription": "Tarife nach Zone, Laufzeiten, neutrale Verpackung und Rückgaberichtlinie für KratosLabs-Bestellungen.",
+    "title": "Versand, Rückgabe und Neuversand",
+    "updated": "August 2026",
+    "intro": "Versandtarife nach Zone, Lieferzeiten, neutrale Verpackung, Rückgaben, Erstattungen und das Neuversand-Verfahren.",
+    "labels": {
+      "documents": "Dokumente",
+      "onThisPage": "Auf dieser Seite",
+      "updated": "Zuletzt aktualisiert"
+    },
+    "sections": [
+      {
+        "id": "politica",
+        "title": "1. Lieferrichtlinie",
+        "body": "Wir tun unser Möglichstes, um die Versandtarife angemessen zu halten und deine Artikel auf die effizienteste und sicherste Weise zuzustellen. Bitte überprüfe deine Bestellung vor dem Checkout sorgfältig: Sobald sie abgeschickt ist, kann sie nicht mehr geändert oder storniert werden."
+      },
+      {
+        "id": "tariffe",
+        "title": "2. Versandtarife und -zeiten",
+        "body": "Wir wenden Pauschaltarife je nach Zielzone an: Europäische Union 22 €, übriges Europa 28 €, Vereinigte Staaten 30 €. Es gibt keine Schwelle für kostenlosen Versand. Bestellungen werden in der Regel innerhalb von 3 Werktagen nach Zahlungsbestätigung versendet; die ungefähren Lieferzeiten betragen 12–16 Werktage für die Europäische Union, 14–21 Tage für das übrige Europa und 17–28 Tage für die Vereinigten Staaten. Tarife und Zeiten können je nach Zielort und Zeitraum variieren."
+      },
+      {
+        "id": "imballo",
+        "title": "3. Neutrale Verpackung",
+        "body": "Wir versenden in neutraler Verpackung: ein anonymer Karton, ohne Logo und ohne Hinweis auf den Inhalt an der Außenseite, um deine Privatsphäre bei der Zustellung zu schützen. Inhalt und Unterlagen bleiben ordnungsgemäß und vollständig."
+      },
+      {
+        "id": "tracciamento",
+        "title": "4. Sendungsverfolgung",
+        "body": "Jede Bestellung wird mit Sendungsverfolgung versendet. Du erhältst den Code per E-Mail, sobald die Bestellung dem Kurier übergeben wird, zusammen mit dem Link, um die Sendung in deinem Kontobereich zu verfolgen."
+      },
+      {
+        "id": "ritardi",
+        "title": "5. Verzögerungen und Meldungen",
+        "body": "Wenn sich die Sendungsverfolgung nicht aktualisiert oder das Paket verspätet erscheint, kontaktiere bitte den Support. Anfragen, die mehr als 45 Tage nach dem Versanddatum eingereicht werden, fallen möglicherweise nicht unter den Neuversand oder die Prüfung."
+      },
+      {
+        "id": "resi",
+        "title": "6. Rückgaben",
+        "body": "Aus Gründen der Sicherheit und Produktintegrität können verkaufte Artikel nach dem Versand nicht zurückgegeben werden."
+      },
+      {
+        "id": "rimborsi",
+        "title": "7. Erstattungen",
+        "body": "Sobald die Zahlung mit einer der verfügbaren Methoden erfolgt ist, werden keine Erstattungen gewährt. Bei Problemen im Zusammenhang mit der Zustellung beziehe dich bitte auf den Abschnitt Neuversand."
+      },
+      {
+        "id": "sostituzioni",
+        "title": "8. Beschädigte oder falsche Produkte",
+        "body": "Wenn du ein beschädigtes oder ein von deiner Bestellung abweichendes Produkt erhältst, kontaktiere uns innerhalb von 48 Stunden nach der Zustellung und füge Fotos bei: Wir prüfen den Ersatz des Artikels."
+      },
+      {
+        "id": "ri-spedizione",
+        "title": "9. Neuversand",
+        "body": "Im Falle von Zustellproblemen (z. B. ein beim Zoll zurückgehaltenes Paket) gib für die Anforderung eines Neuversands bitte an: ein Foto mit mindestens 120 dpi des Zollumschlags/-briefs mit dem Namen des Empfängers, ein Foto mit mindestens 120 dpi eines etwaigen Beschlagnahmebescheids mit dem Namen des Empfängers und eine neue Lieferadresse. Der Neuversand ist nur einmal pro Bestellung vorgesehen."
+      },
+      {
+        "id": "note",
+        "title": "10. Wichtiger Hinweis",
+        "body": "Obwohl wir uns bemühen, die geschätzten Zeiten einzuhalten, können gelegentliche Verzögerungen durch Faktoren außerhalb unserer Kontrolle auftreten (Zoll, Kuriere, hohe Volumina). Bei jeglichem Problem mit deinem Paket kontaktiere bitte den Support."
+      }
+    ]
+  },
+  "fr": {
+    "metaTitle": "Expédition et retours",
+    "metaDescription": "Tarifs par zone, délais, emballage neutre et politique de retour des commandes KratosLabs.",
+    "title": "Expédition, retours et réexpédition",
+    "updated": "Août 2026",
+    "intro": "Tarifs d'expédition par zone, délais de livraison, emballage discret, retours, remboursements et procédure de réexpédition.",
+    "labels": {
+      "documents": "Documents",
+      "onThisPage": "Sur cette page",
+      "updated": "Dernière mise à jour"
+    },
+    "sections": [
+      {
+        "id": "politica",
+        "title": "1. Politique de livraison",
+        "body": "Nous faisons de notre mieux pour maintenir des tarifs d'expédition raisonnables et pour livrer vos articles de la manière la plus efficace et la plus sûre. Vérifiez attentivement votre commande avant le paiement : une fois envoyée, elle ne peut être modifiée ni annulée."
+      },
+      {
+        "id": "tariffe",
+        "title": "2. Tarifs et délais d'expédition",
+        "body": "Nous appliquons des tarifs fixes selon la zone de destination : Union européenne 22 €, reste de l'Europe 28 €, États-Unis 30 €. Aucun seuil de livraison gratuite n'est prévu. Les commandes sont généralement expédiées sous 3 jours ouvrables après la confirmation du paiement ; les délais de livraison indicatifs sont de 12–16 jours ouvrables pour l'Union européenne, 14–21 jours pour le reste de l'Europe et 17–28 jours pour les États-Unis. Les tarifs et les délais peuvent varier selon la destination et la période."
+      },
+      {
+        "id": "imballo",
+        "title": "3. Emballage discret",
+        "body": "Nous expédions dans un emballage neutre : une boîte anonyme, sans logo et sans indication du contenu à l'extérieur, afin de protéger votre vie privée à la livraison. Le contenu et la documentation restent conformes et complets."
+      },
+      {
+        "id": "tracciamento",
+        "title": "4. Suivi",
+        "body": "Chaque commande est expédiée avec suivi. Vous recevez le code par e-mail dès que la commande est confiée au transporteur, avec le lien pour suivre l'expédition depuis votre espace compte."
+      },
+      {
+        "id": "ritardi",
+        "title": "5. Retards et signalements",
+        "body": "Si le suivi ne se met pas à jour ou si le colis semble en retard, contactez l'assistance. Les demandes transmises plus de 45 jours après la date d'expédition peuvent ne pas être éligibles à la réexpédition ou à la vérification."
+      },
+      {
+        "id": "resi",
+        "title": "6. Retours",
+        "body": "Pour des raisons de sécurité et d'intégrité du produit, les articles vendus ne sont pas retournables une fois expédiés."
+      },
+      {
+        "id": "rimborsi",
+        "title": "7. Remboursements",
+        "body": "Une fois le paiement effectué avec l'un des moyens disponibles, aucun remboursement n'est prévu. Pour les problèmes liés à la livraison, reportez-vous à la section Réexpédition."
+      },
+      {
+        "id": "sostituzioni",
+        "title": "8. Produits endommagés ou erronés",
+        "body": "Si vous recevez un produit endommagé ou différent de celui commandé, contactez-nous dans les 48 heures suivant la livraison en joignant les photos : nous évaluons le remplacement de l'article."
+      },
+      {
+        "id": "ri-spedizione",
+        "title": "9. Réexpédition",
+        "body": "En cas de problème de livraison (par ex. un colis retenu en douane), pour demander une réexpédition fournissez : une photo d'au moins 120 dpi de l'enveloppe/du courrier de la douane portant le nom du destinataire, une photo d'au moins 120 dpi de l'éventuel avis de saisie portant le nom du destinataire et une nouvelle adresse d'expédition. La réexpédition est prévue une seule fois par commande."
+      },
+      {
+        "id": "note",
+        "title": "10. Note importante",
+        "body": "Bien que nous nous efforcions de respecter les délais estimés, des retards occasionnels peuvent survenir en raison de facteurs indépendants de notre volonté (douane, transporteurs, volumes élevés). Pour tout problème avec votre colis, contactez l'assistance."
+      }
+    ]
+  },
+  "pt": {
+    "metaTitle": "Envio e devoluções",
+    "metaDescription": "Tarifas por zona, prazos, embalagem neutra e política de devolução dos pedidos KratosLabs.",
+    "title": "Envio, devoluções e reenvio",
+    "updated": "Agosto de 2026",
+    "intro": "Tarifas de envio por zona, prazos de entrega, embalagem discreta, devoluções, reembolsos e procedimento de reenvio.",
+    "labels": {
+      "documents": "Documentos",
+      "onThisPage": "Nesta página",
+      "updated": "Última atualização"
+    },
+    "sections": [
+      {
+        "id": "politica",
+        "title": "1. Política de entrega",
+        "body": "Fazemos o possível para manter as tarifas de envio razoáveis e para entregar os teus artigos da forma mais eficiente e segura. Verifica o teu pedido com atenção antes do checkout: uma vez enviado, não pode ser alterado nem cancelado."
+      },
+      {
+        "id": "tariffe",
+        "title": "2. Tarifas e prazos de envio",
+        "body": "Aplicamos tarifas fixas consoante a zona de destino: União Europeia 22 €, resto da Europa 28 €, Estados Unidos 30 €. Não está prevista qualquer limite para envio gratuito. Os pedidos são geralmente enviados no prazo de 3 dias úteis após a confirmação do pagamento; os prazos de entrega indicativos são de 12–16 dias úteis para a União Europeia, 14–21 dias para o resto da Europa e 17–28 dias para os Estados Unidos. As tarifas e os prazos podem variar consoante o destino e o período."
+      },
+      {
+        "id": "imballo",
+        "title": "3. Embalagem discreta",
+        "body": "Enviamos em embalagem neutra: uma caixa anónima, sem logótipo e sem indicação do conteúdo no exterior, para proteger a tua privacidade na entrega. O conteúdo e a documentação permanecem regulares e completos."
+      },
+      {
+        "id": "tracciamento",
+        "title": "4. Rastreamento",
+        "body": "Cada pedido é enviado com rastreamento. Recebes o código por e-mail assim que o pedido é entregue à transportadora, com o link para acompanhar o envio a partir da tua área de conta."
+      },
+      {
+        "id": "ritardi",
+        "title": "5. Atrasos e comunicações",
+        "body": "Se o rastreamento não se atualizar ou a encomenda parecer atrasada, contacta o apoio ao cliente. Os pedidos apresentados mais de 45 dias após a data de envio podem não ser abrangidos pelo reenvio ou pela verificação."
+      },
+      {
+        "id": "resi",
+        "title": "6. Devoluções",
+        "body": "Por motivos de segurança e integridade do produto, os artigos vendidos não são devolvíveis depois de enviados."
+      },
+      {
+        "id": "rimborsi",
+        "title": "7. Reembolsos",
+        "body": "Uma vez efetuado o pagamento com qualquer um dos métodos disponíveis, não estão previstos reembolsos. Para problemas relacionados com a entrega, consulta a secção Reenvio."
+      },
+      {
+        "id": "sostituzioni",
+        "title": "8. Produtos danificados ou errados",
+        "body": "Se receberes um produto danificado ou diferente do que encomendaste, contacta-nos no prazo de 48 horas após a entrega anexando as fotografias: avaliamos a substituição do artigo."
+      },
+      {
+        "id": "ri-spedizione",
+        "title": "9. Reenvio",
+        "body": "Em caso de problemas de entrega (por ex. encomenda retida na alfândega), para solicitar um reenvio fornece: uma fotografia com pelo menos 120 dpi do envelope/carta da alfândega com o nome do destinatário, uma fotografia com pelo menos 120 dpi do eventual aviso de apreensão com o nome do destinatário e um novo endereço de envio. O reenvio está previsto uma única vez por pedido."
+      },
+      {
+        "id": "note",
+        "title": "10. Nota importante",
+        "body": "Embora nos esforcemos por cumprir os prazos estimados, podem ocorrer atrasos ocasionais devido a fatores fora do nosso controlo (alfândega, transportadoras, volumes elevados). Para qualquer problema com a tua encomenda, contacta o apoio ao cliente."
+      }
+    ]
+  }
+}

@@ -75,7 +75,12 @@
     "exploreCatalog": "Browse the catalog",
     "goToCheckout": "Go to checkout",
     "title": "Cart",
-    "continueShopping": "Continue shopping"
+    "continueShopping": "Continue shopping",
+    "subtotal": "Subtotal",
+    "quantityDiscount": "Quantity discount",
+    "shipping": "Shipping",
+    "shippingAtCheckout": "Calculated at checkout",
+    "total": "Total"
   },
   "payments": {
     "accept": "We accept",
@@ -220,7 +225,15 @@
       "useMax": "Use max",
       "note70": "You can cover up to 70% of the order (shipping excluded)."
     },
-    "unavailable": "Unavailable"
+    "unavailable": "Unavailable",
+    "shipping": "Shipping",
+    "total": "Total",
+    "zones": {
+      "eu": "EU",
+      "europe": "Rest of Europe",
+      "usa": "United States",
+      "world": "Rest of world"
+    }
   },
   "toggle": {
     "language": "Language",

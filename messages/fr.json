@@ -75,7 +75,12 @@
     "exploreCatalog": "Explorer le catalogue",
     "goToCheckout": "Aller au paiement",
     "title": "Panier",
-    "continueShopping": "Continuer les achats"
+    "continueShopping": "Continuer les achats",
+    "subtotal": "Sous-total",
+    "quantityDiscount": "Remise quantité",
+    "shipping": "Livraison",
+    "shippingAtCheckout": "Calculée au paiement",
+    "total": "Total"
   },
   "payments": {
     "accept": "Nous acceptons",
@@ -220,7 +225,15 @@
       "useMax": "Utiliser le maximum",
       "note70": "Vous pouvez couvrir jusqu’à 70% de la commande (hors livraison)."
     },
-    "unavailable": "Indisponible"
+    "unavailable": "Indisponible",
+    "shipping": "Livraison",
+    "total": "Total",
+    "zones": {
+      "eu": "UE",
+      "europe": "Reste de l'Europe",
+      "usa": "États-Unis",
+      "world": "Reste du monde"
+    }
   },
   "toggle": {
     "language": "Langue",
