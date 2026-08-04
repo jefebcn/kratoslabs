@@ -1,0 +1,72 @@
+{
+  "it": {
+    "metaTitle": "All'ingrosso",
+    "metaDescription": "Ordini all'ingrosso e dropshipping con KratosLabs.",
+    "eyebrow": "Business",
+    "title": "All'ingrosso",
+    "intro1Before": "Offriamo condizioni dedicate per ",
+    "intro1Strong1": "ordini all'ingrosso",
+    "intro1Middle": " e ",
+    "intro1Strong2": "dropshipping",
+    "intro1After": ". Più aumenta il volume, più il prezzo per unità scende.",
+    "intro2": "Per il listino all'ingrosso e per attivare una collaborazione, scrivici su Telegram: valutiamo insieme quantità, logistica e modalità di pagamento.",
+    "cta": "Richiedi il listino all'ingrosso",
+    "placeholder": "(Testo segnaposto: aggiorna con le tue condizioni reali per l'ingrosso.)"
+  },
+  "en": {
+    "metaTitle": "Wholesale",
+    "metaDescription": "Wholesale orders and dropshipping with KratosLabs.",
+    "eyebrow": "Business",
+    "title": "Wholesale",
+    "intro1Before": "We offer dedicated terms for ",
+    "intro1Strong1": "wholesale orders",
+    "intro1Middle": " and ",
+    "intro1Strong2": "dropshipping",
+    "intro1After": ". The higher the volume, the lower the price per unit.",
+    "intro2": "For the wholesale price list and to start a partnership, message us on Telegram: we'll assess quantities, logistics and payment methods together.",
+    "cta": "Request the wholesale price list",
+    "placeholder": "(Placeholder text: update with your real wholesale terms.)"
+  },
+  "de": {
+    "metaTitle": "Großhandel",
+    "metaDescription": "Großhandelsbestellungen und Dropshipping mit KratosLabs.",
+    "eyebrow": "Business",
+    "title": "Großhandel",
+    "intro1Before": "Wir bieten dedizierte Konditionen für ",
+    "intro1Strong1": "Großhandelsbestellungen",
+    "intro1Middle": " und ",
+    "intro1Strong2": "Dropshipping",
+    "intro1After": ". Je höher das Volumen, desto niedriger der Preis pro Einheit.",
+    "intro2": "Für die Großhandelspreisliste und den Start einer Zusammenarbeit schreiben Sie uns auf Telegram: Wir bewerten gemeinsam Mengen, Logistik und Zahlungsmodalitäten.",
+    "cta": "Großhandelspreisliste anfordern",
+    "placeholder": "(Platzhaltertext: Aktualisieren Sie ihn mit Ihren tatsächlichen Großhandelskonditionen.)"
+  },
+  "fr": {
+    "metaTitle": "En gros",
+    "metaDescription": "Commandes en gros et dropshipping avec KratosLabs.",
+    "eyebrow": "Business",
+    "title": "En gros",
+    "intro1Before": "Nous proposons des conditions dédiées pour les ",
+    "intro1Strong1": "commandes en gros",
+    "intro1Middle": " et le ",
+    "intro1Strong2": "dropshipping",
+    "intro1After": ". Plus le volume augmente, plus le prix unitaire baisse.",
+    "intro2": "Pour la liste de prix en gros et pour lancer une collaboration, écrivez-nous sur Telegram : nous évaluons ensemble les quantités, la logistique et les modalités de paiement.",
+    "cta": "Demander la liste de prix en gros",
+    "placeholder": "(Texte provisoire : mettez-le à jour avec vos conditions réelles pour la vente en gros.)"
+  },
+  "pt": {
+    "metaTitle": "Por atacado",
+    "metaDescription": "Pedidos por atacado e dropshipping com KratosLabs.",
+    "eyebrow": "Business",
+    "title": "Por atacado",
+    "intro1Before": "Oferecemos condições dedicadas para ",
+    "intro1Strong1": "pedidos por atacado",
+    "intro1Middle": " e ",
+    "intro1Strong2": "dropshipping",
+    "intro1After": ". Quanto maior o volume, menor o preço por unidade.",
+    "intro2": "Para a lista de preços por atacado e para iniciar uma parceria, escreva-nos no Telegram: avaliamos juntos quantidades, logística e formas de pagamento.",
+    "cta": "Solicitar a lista de preços por atacado",
+    "placeholder": "(Texto provisório: atualize com as suas condições reais para o atacado.)"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "it": {
+    "metaTitle": "Recensioni",
+    "metaDescription": "Recensioni verificate dei clienti KratosLabs.",
+    "eyebrow": "Recensioni",
+    "title": "La parola ai clienti",
+    "description": "Valutazioni raccolte dopo l'acquisto, tutte da ordini verificati sul sito.",
+    "empty": "Non ci sono ancora recensioni pubblicate. Le recensioni verificate dei clienti compariranno qui dopo i primi acquisti."
+  },
+  "en": {
+    "metaTitle": "Reviews",
+    "metaDescription": "Verified reviews from KratosLabs customers.",
+    "eyebrow": "Reviews",
+    "title": "In our customers' words",
+    "description": "Ratings collected after purchase, all from verified orders on the site.",
+    "empty": "There are no published reviews yet. Verified customer reviews will appear here after the first purchases."
+  },
+  "de": {
+    "metaTitle": "Bewertungen",
+    "metaDescription": "Verifizierte Bewertungen von KratosLabs-Kunden.",
+    "eyebrow": "Bewertungen",
+    "title": "Das sagen unsere Kunden",
+    "description": "Bewertungen, die nach dem Kauf gesammelt wurden, alle aus verifizierten Bestellungen auf der Website.",
+    "empty": "Es sind noch keine Bewertungen veröffentlicht. Verifizierte Kundenbewertungen erscheinen hier nach den ersten Käufen."
+  },
+  "fr": {
+    "metaTitle": "Avis",
+    "metaDescription": "Avis vérifiés des clients KratosLabs.",
+    "eyebrow": "Avis",
+    "title": "La parole aux clients",
+    "description": "Évaluations recueillies après l'achat, toutes issues de commandes vérifiées sur le site.",
+    "empty": "Aucun avis n'a encore été publié. Les avis vérifiés des clients apparaîtront ici après les premiers achats."
+  },
+  "pt": {
+    "metaTitle": "Avaliações",
+    "metaDescription": "Avaliações verificadas dos clientes da KratosLabs.",
+    "eyebrow": "Avaliações",
+    "title": "A palavra aos clientes",
+    "description": "Avaliações recolhidas após a compra, todas de encomendas verificadas no site.",
+    "empty": "Ainda não há avaliações publicadas. As avaliações verificadas dos clientes aparecerão aqui após as primeiras compras."
+  }
+}

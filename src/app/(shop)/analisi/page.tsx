@@ -1,34 +1,52 @@
 import type { Metadata } from "next";
-import { FileCheck2, FlaskConical, PackageCheck, ScrollText } from "lucide-react";
+import { getLocale } from "next-intl/server";
+import {
+  FileCheck2,
+  FlaskConical,
+  PackageCheck,
+  ScrollText,
+  type LucideIcon,
+} from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { listProducts } from "@/features/products";
 import { formatDate } from "@/lib/utils";
+import type { LocaleCode } from "@/types";
+import contentByLocale from "./content.json";
 
-export const metadata: Metadata = {
-  title: "Analisi di laboratorio",
-  description:
-    "Come testiamo ogni lotto e dove trovare i referti con il numero di batch.",
-};
+interface AnalisiContent {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  steps: { title: string; body: string }[];
+  recentTitle: string;
+  tableHeaders: {
+    product: string;
+    lab: string;
+    batch: string;
+    date: string;
+    report: string;
+  };
+}
 
-const STEPS = [
-  {
-    icon: PackageCheck,
-    title: "Prelievo",
-    body: "Da ogni lotto di produzione preleviamo campioni casuali prima della messa in vendita.",
-  },
-  {
-    icon: FlaskConical,
-    title: "Analisi indipendente",
-    body: "Un laboratorio di terza parte misura il contenuto reale e cerca i contaminanti.",
-  },
-  {
-    icon: ScrollText,
-    title: "Referto pubblico",
-    body: "Pubblichiamo il certificato con il numero di lotto, così puoi verificarlo.",
-  },
-];
+const CONTENT = contentByLocale as Record<LocaleCode, AnalisiContent | null>;
+
+function pick(locale: LocaleCode): AnalisiContent {
+  return CONTENT[locale] ?? (CONTENT.it as AnalisiContent);
+}
+
+const STEP_ICONS: LucideIcon[] = [PackageCheck, FlaskConical, ScrollText];
+
+export async function generateMetadata(): Promise<Metadata> {
+  const c = pick((await getLocale()) as LocaleCode);
+  return { title: c.metaTitle, description: c.metaDescription };
+}
 
 export default async function AnalisiPage() {
+  const locale = (await getLocale()) as LocaleCode;
+  const c = pick(locale);
+
   const batches = (await listProducts())
     .filter((p) => p.labReport)
     .map((p) => ({ product: p.title, report: p.labReport! }));
@@ -36,35 +54,40 @@ export default async function AnalisiPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
       <SectionHeading
-        eyebrow="Quality control"
-        title="Ogni lotto, analizzato"
-        description="La dose dichiarata in etichetta deve corrispondere a quella nel barattolo. Lo verifichiamo e lo documentiamo."
+        eyebrow={c.eyebrow}
+        title={c.title}
+        description={c.description}
       />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        {STEPS.map((s) => (
-          <div key={s.title} className="rounded-base border border-border p-5">
-            <span className="grid size-10 place-items-center rounded-base border border-border text-accent">
-              <s.icon className="size-5" aria-hidden />
-            </span>
-            <p className="mt-3 text-sm font-medium">{s.title}</p>
-            <p className="mt-1 text-sm text-muted">{s.body}</p>
-          </div>
-        ))}
+        {c.steps.map((s, i) => {
+          const Icon = STEP_ICONS[i]!;
+          return (
+            <div key={s.title} className="rounded-base border border-border p-5">
+              <span className="grid size-10 place-items-center rounded-base border border-border text-accent">
+                <Icon className="size-5" aria-hidden />
+              </span>
+              <p className="mt-3 text-sm font-medium">{s.title}</p>
+              <p className="mt-1 text-sm text-muted">{s.body}</p>
+            </div>
+          );
+        })}
       </div>
 
       <h2 className="mt-12 text-lg font-semibold uppercase tracking-tight">
-        Referti recenti
+        {c.recentTitle}
       </h2>
       <div className="mt-4 overflow-x-auto rounded-base border border-border">
         <table className="w-full min-w-[560px] text-sm">
           <thead>
             <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted">
-              <th className="px-4 py-3 font-medium">Prodotto</th>
-              <th className="px-4 py-3 font-medium">Laboratorio</th>
-              <th className="px-4 py-3 font-medium">Lotto</th>
-              <th className="px-4 py-3 font-medium">Data</th>
-              <th className="px-4 py-3 text-right font-medium">Referto</th>
+              <th className="px-4 py-3 font-medium">{c.tableHeaders.product}</th>
+              <th className="px-4 py-3 font-medium">{c.tableHeaders.lab}</th>
+              <th className="px-4 py-3 font-medium">{c.tableHeaders.batch}</th>
+              <th className="px-4 py-3 font-medium">{c.tableHeaders.date}</th>
+              <th className="px-4 py-3 text-right font-medium">
+                {c.tableHeaders.report}
+              </th>
             </tr>
           </thead>
           <tbody>

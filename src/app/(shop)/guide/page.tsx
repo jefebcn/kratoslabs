@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/section-heading";
 import {
   Card,
@@ -7,46 +8,47 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import type { LocaleCode } from "@/types";
+import contentByLocale from "./content.json";
 
-export const metadata: Metadata = {
-  title: "Guide",
-  description: "Contenuti pratici su integrazione, dosaggi ed etichette.",
-};
+interface GuideCard {
+  tag: string;
+  title: string;
+  excerpt: string;
+}
 
-// Contenuto mock, da sostituire con articoli da CMS.
-const GUIDES = [
-  {
-    tag: "Proteine",
-    title: "Proteine: quante e quando",
-    excerpt: "Fabbisogno reale, timing e differenze tra isolato e concentrato.",
-  },
-  {
-    tag: "Creatina",
-    title: "Creatina, istruzioni per l'uso",
-    excerpt: "Dosaggio, fase di carico sì o no, cosa dice la letteratura.",
-  },
-  {
-    tag: "Etichette",
-    title: "Come leggere un'etichetta",
-    excerpt: "Riconoscere un proprietary blend e i dosaggi sottosoglia.",
-  },
-  {
-    tag: "Elettroliti",
-    title: "Idratazione ed elettroliti",
-    excerpt: "Quando servono davvero e in quali rapporti.",
-  },
-];
+interface GuideContent {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  guides: GuideCard[];
+}
 
-export default function GuidePage() {
+const CONTENT = contentByLocale as Record<LocaleCode, GuideContent | null>;
+
+function pick(locale: LocaleCode): GuideContent {
+  return CONTENT[locale] ?? (CONTENT.it as GuideContent);
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const c = pick((await getLocale()) as LocaleCode);
+  return { title: c.metaTitle, description: c.metaDescription };
+}
+
+export default async function GuidePage() {
+  const locale = (await getLocale()) as LocaleCode;
+  const c = pick(locale);
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
       <SectionHeading
-        eyebrow="Guide"
-        title="Capire prima di comprare"
-        description="Contenuti pratici, senza promesse. Aggiornati quando cambia l'evidenza."
+        eyebrow={c.eyebrow}
+        title={c.title}
+        description={c.description}
       />
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {GUIDES.map((g) => (
+        {c.guides.map((g) => (
           <Link key={g.title} href="/guide" className="block">
             <Card className="h-full transition-colors hover:border-accent/50">
               <CardHeader>
