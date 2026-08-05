@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowRight, Bitcoin, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -44,6 +44,14 @@ const SLIDES: HeroSlide[] = [
 
 export default async function HomePage() {
   const t = await getTranslations("home");
+  const locale = await getLocale();
+  // Banner testuali localizzati: it = nome base, altre lingue = suffisso -xx.
+  const suffix = locale === "it" ? "" : `-${locale}`;
+  const slides = SLIDES.map((s) =>
+    s.banner?.startsWith("/images/banner-")
+      ? { ...s, banner: s.banner.replace(/\.png$/, `${suffix}.png`) }
+      : s,
+  );
   const bestseller = await listFeaturedProducts();
   const all = await listProducts();
   const categories = await listCategories();
@@ -61,7 +69,7 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Carosello promozionale */}
-      <HeroCarousel slides={SLIDES} />
+      <HeroCarousel slides={slides} />
 
       {/* Prodotti subito sotto il carosello: nuovi prodotti + bestseller */}
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14">
