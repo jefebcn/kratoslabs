@@ -18,3 +18,12 @@ export async function getAdminCaller(): Promise<User | null> {
 export async function isCallerAdmin(): Promise<boolean> {
   return (await getAdminCaller()) !== null;
 }
+
+/**
+ * Blocca la Server Action se il chiamante non è un admin autenticato.
+ * Difesa in profondità: il middleware protegge già le rotte /admin, ma le
+ * Server Action sono endpoint POST e vanno verificate anche internamente.
+ */
+export async function assertAdmin(): Promise<void> {
+  if (!(await isCallerAdmin())) throw new Error("Non autorizzato.");
+}

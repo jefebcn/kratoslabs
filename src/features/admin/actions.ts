@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { assertAdmin } from "@/lib/auth/require-admin";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
 import { enrichDeus, describeI18n } from "@/lib/deus-descriptions";
 import { faqsForProduct, faqsI18nForProduct } from "@/lib/deus-faqs";
@@ -40,6 +41,7 @@ export async function saveProduct(
     };
   }
 
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
 
@@ -118,6 +120,7 @@ export async function saveProduct(
 /** Elimina un prodotto (form action con id nascosto). */
 export async function deleteProduct(formData: FormData): Promise<void> {
   const id = String(formData.get("id") || "");
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin || !id) return;
   await admin.from("products").delete().eq("id", id);
@@ -136,6 +139,7 @@ async function storeImage(
   slug: string,
   url: string,
 ): Promise<ImageImportResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, slug, message: NO_ADMIN };
   try {
@@ -217,6 +221,7 @@ export async function uploadProductImage(
   if (!(file instanceof File) || file.size === 0) {
     return { ok: false, slug, message: "Nessun file selezionato." };
   }
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, slug, message: NO_ADMIN };
   try {
@@ -334,6 +339,7 @@ export async function deleteProductImage(
   slug: string,
   url: string,
 ): Promise<ImageOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   try {
@@ -374,6 +380,7 @@ export async function deleteProductImage(
 export async function deleteProductImages(
   targets: { slug: string; url: string }[],
 ): Promise<ImageOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   if (!targets.length) return { ok: false, message: "Niente da eliminare." };
@@ -424,6 +431,7 @@ export async function reorderProductImages(
   slug: string,
   urls: string[],
 ): Promise<ImageOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   try {
@@ -462,6 +470,7 @@ export async function moveProductImage(
   toSlug: string,
   url: string,
 ): Promise<ImageOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   if (fromSlug === toSlug)
@@ -514,6 +523,7 @@ export async function importCatalog(
   _prev: ActionResult | null,
   _formData: FormData,
 ): Promise<ActionResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
 

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { assertAdmin } from "@/lib/auth/require-admin";
 
 export interface GalleryOpResult {
   ok: boolean;
@@ -25,6 +26,7 @@ function storagePath(url: string): string | null {
 export async function addGalleryImages(
   formData: FormData,
 ): Promise<GalleryOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
 
@@ -93,6 +95,7 @@ export async function deleteGalleryImage(
   id: string,
   url: string,
 ): Promise<GalleryOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   try {
@@ -133,6 +136,7 @@ export async function updateGalleryReview(
   id: string,
   data: GalleryReviewInput,
 ): Promise<GalleryOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   try {
@@ -162,6 +166,7 @@ export async function updateGalleryReview(
 
 /** Riordina la galleria secondo l'ordine di `ids`. */
 export async function reorderGallery(ids: string[]): Promise<GalleryOpResult> {
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
   try {

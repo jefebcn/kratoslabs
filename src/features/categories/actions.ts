@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { assertAdmin } from "@/lib/auth/require-admin";
 
 export interface CategoryResult {
   ok: boolean;
@@ -37,6 +38,7 @@ export async function saveCategory(
       message: parsed.error.issues[0]?.message ?? "Dati non validi.",
     };
   }
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
 
@@ -65,6 +67,7 @@ export async function renameCategory(
   if (!slug) return { ok: false, message: "Categoria non valida." };
   if (!name) return { ok: false, message: "Il nome non può essere vuoto." };
 
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin) return { ok: false, message: NO_ADMIN };
 
@@ -82,6 +85,7 @@ export async function renameCategory(
 export async function toggleCategory(formData: FormData): Promise<void> {
   const slug = String(formData.get("slug") || "");
   const active = String(formData.get("active") || "") === "true";
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin || !slug) return;
   await admin.from("categories").update({ active: !active }).eq("slug", slug);
@@ -91,6 +95,7 @@ export async function toggleCategory(formData: FormData): Promise<void> {
 /** Elimina una categoria (i prodotti collegati restano, senza categoria). */
 export async function deleteCategory(formData: FormData): Promise<void> {
   const slug = String(formData.get("slug") || "");
+  await assertAdmin();
   const admin = createAdminClient();
   if (!admin || !slug) return;
   await admin.from("categories").delete().eq("slug", slug);
