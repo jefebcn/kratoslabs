@@ -52,20 +52,20 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         </p>
       )}
 
-      <div className="flex flex-col gap-2.5 sm:flex-row">
+      <div className="flex gap-2 sm:gap-3">
         <AddToCartButton
           product={product}
           quantity={qty}
           size="lg"
-          className="h-14 flex-1 text-base font-semibold sm:h-12"
-          iconClassName="size-5"
+          className="h-14 min-w-0 flex-1 whitespace-normal px-2 text-sm font-semibold leading-tight sm:h-12 sm:whitespace-nowrap sm:px-6 sm:text-base"
+          iconClassName="size-5 shrink-0"
         />
         <QuickCheckoutButton
           product={product}
           quantity={qty}
           size="lg"
-          className="h-14 flex-1 text-base font-semibold sm:h-12"
-          iconClassName="size-5"
+          className="h-14 min-w-0 flex-1 whitespace-normal px-2 text-sm font-semibold leading-tight sm:h-12 sm:whitespace-nowrap sm:px-6 sm:text-base"
+          iconClassName="size-5 shrink-0"
         />
       </div>
 
