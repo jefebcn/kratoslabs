@@ -49,14 +49,16 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="flex items-stretch gap-2">
           <AddToCartButton
             product={product}
-            className="h-11 flex-1 font-semibold"
+            className="h-11 min-w-0 flex-1 font-semibold"
             iconClassName="size-[18px]"
           />
+          {/* Quick-buy nascosto sui card stretti (2 colonne mobile) dove
+              sborderebbe; ricompare da sm in su. Sul PDP resta sempre. */}
           <QuickCheckoutButton
             product={product}
             iconOnly
             iconClassName="size-[18px]"
-            className="h-11 w-11 shrink-0 border-accent/30 bg-accent-soft text-accent hover:border-accent hover:bg-accent-soft"
+            className="hidden h-11 w-11 shrink-0 border-accent/30 bg-accent-soft text-accent hover:border-accent hover:bg-accent-soft sm:inline-flex"
           />
         </div>
       </div>
