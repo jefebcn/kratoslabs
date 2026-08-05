@@ -46,9 +46,18 @@ export function ProductCard({ product }: { product: Product }) {
 
         <PriceBlock product={product} size="md" className="mt-auto" />
 
-        <div className="flex items-center gap-2">
-          <AddToCartButton product={product} className="flex-1" />
-          <QuickCheckoutButton product={product} iconOnly />
+        <div className="flex items-stretch gap-2">
+          <AddToCartButton
+            product={product}
+            className="h-11 flex-1 font-semibold"
+            iconClassName="size-[18px]"
+          />
+          <QuickCheckoutButton
+            product={product}
+            iconOnly
+            iconClassName="size-[18px]"
+            className="h-11 w-11 shrink-0 border-accent/30 bg-accent-soft text-accent hover:border-accent hover:bg-accent-soft"
+          />
         </div>
       </div>
     </Card>
