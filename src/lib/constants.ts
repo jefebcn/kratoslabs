@@ -27,6 +27,7 @@ export const SITE = {
 export const ANNOUNCEMENTS = [
   "Analisi di terza parte su ogni lotto",
   "Spedizione tracciata in 2–4 settimane",
+  "Spedizione gratuita sopra i 180 €",
   "Reso entro 30 giorni",
 ] as const;
 
