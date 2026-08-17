@@ -80,7 +80,11 @@
     "quantityDiscount": "Remise quantité",
     "shipping": "Livraison",
     "shippingAtCheckout": "Calculée au paiement",
-    "total": "Total"
+    "total": "Total",
+    "freeShipping": "Gratuite",
+    "freeShippingProgress": "Ajoutez {remaining} pour la livraison gratuite",
+    "belowMinimum": "Il vous manque {remaining} pour la commande minimum de {min}.",
+    "minOrderButton": "Commande minimum {min}"
   },
   "payments": {
     "accept": "Nous acceptons",
@@ -99,7 +103,7 @@
       },
       "shipping": {
         "title": "Livraison suivie",
-        "desc": "Coursier suivi en 24/48h, emballage neutre et recyclable sur demande."
+        "desc": "Transporteur suivi, livraison en 2–4 semaines ; emballage neutre et recyclable sur demande."
       },
       "packaging": {
         "title": "Emballage anonyme",
@@ -118,7 +122,7 @@
       },
       "shipping": {
         "title": "Expédition & livraison",
-        "body": "Expédié sous 3 jours ouvrés après paiement. Emballage <b>anonyme</b>, sans étiquettes d'identification et avec <b>suivi</b> sur chaque commande. Livraison en 5–28 jours.",
+        "body": "Expédition à <b>tarif unique</b> (15 €), <b>gratuite au-delà de 180 €</b>. Emballage <b>anonyme</b>, sans étiquette d'identification, avec <b>suivi</b> sur chaque commande. Livraison en <b>2–4 semaines</b>.",
         "cta": "Expédition & retours"
       },
       "payments": {
@@ -185,7 +189,14 @@
       "loginToReview": "Connectez-vous pour laisser un avis.",
       "login": "Se connecter"
     },
-    "faqTitle": "Questions fréquentes"
+    "faqTitle": "Questions fréquentes",
+    "bundle": {
+      "title": "Fréquemment achetés ensemble",
+      "subtitle": "Des produits que les clients associent souvent. Vérifiez toujours l'adéquation et la conformité : ce n'est pas un conseil d'utilisation.",
+      "addAll": "Ajouter le pack au panier",
+      "total": "Total du pack :",
+      "thisItem": "Celui-ci"
+    }
   },
   "auth": {
     "loginTitle": "Se connecter",
@@ -275,7 +286,11 @@
       "europe": "Reste de l'Europe",
       "usa": "États-Unis",
       "world": "Reste du monde"
-    }
+    },
+    "shippingFree": "Gratuite",
+    "freeShippingProgress": "Ajoutez {remaining} pour la livraison gratuite.",
+    "belowMinimum": "La commande minimum est de {min}. Ajoutez encore {remaining} pour continuer.",
+    "minOrderButton": "Commande minimum {min}"
   },
   "toggle": {
     "language": "Langue",
@@ -286,7 +301,7 @@
   "topbar": {
     "announcements": [
       "Analyses tierces sur chaque lot",
-      "Livraison suivie en 24/48h",
+      "Expédition suivie en 2–4 semaines",
       "Retours sous 30 jours"
     ]
   },

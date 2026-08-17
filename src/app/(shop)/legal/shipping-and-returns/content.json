@@ -1,10 +1,10 @@
 {
   "it": {
     "metaTitle": "Spedizioni e resi",
-    "metaDescription": "Tariffe per zona, tempi, imballo neutro e politica di reso degli ordini KratosLabs.",
+    "metaDescription": "Tariffa unica di 15 €, spedizione gratuita sopra i 180 €, tempi, imballo neutro e politica di reso degli ordini KratosLabs.",
     "title": "Spedizioni, resi e ri-spedizione",
     "updated": "Agosto 2026",
-    "intro": "Tariffe di spedizione per zona, tempi di consegna, imballo anonimo, resi, rimborsi e procedura di ri-spedizione.",
+    "intro": "Tariffa di spedizione fissa, spedizione gratuita sopra i 180 €, ordine minimo, tempi di consegna, imballo anonimo, resi, rimborsi e procedura di ri-spedizione.",
     "labels": {
       "documents": "Documenti",
       "onThisPage": "In questa pagina",
@@ -19,7 +19,7 @@
       {
         "id": "tariffe",
         "title": "2. Tariffe e tempi di spedizione",
-        "body": "Applichiamo tariffe fisse in base alla zona di destinazione: Unione Europea 22 €, resto d'Europa 28 €, Stati Uniti 30 €. Non è prevista una soglia di spedizione gratuita. Gli ordini vengono generalmente spediti entro 3 giorni lavorativi dopo la conferma del pagamento; i tempi di consegna indicativi sono 12–16 giorni lavorativi per l'Unione Europea, 14–21 giorni per il resto d'Europa e 17–28 giorni per gli Stati Uniti. Tariffe e tempi possono variare in base a destinazione e periodo."
+        "body": "Applichiamo una tariffa di spedizione fissa di 15 € per ordine. La spedizione è gratuita per gli ordini superiori a 180 €. L'ordine minimo è di 75 €. Gli ordini vengono spediti dopo la conferma del pagamento e la consegna avviene indicativamente in 2–4 settimane. I tempi possono variare in base a destinazione e periodo."
       },
       {
         "id": "imballo",
@@ -65,10 +65,10 @@
   },
   "en": {
     "metaTitle": "Shipping and returns",
-    "metaDescription": "Rates by zone, timeframes, neutral packaging and the returns policy for KratosLabs orders.",
+    "metaDescription": "Flat €15 rate, free shipping over €180, timeframes, neutral packaging and the returns policy for KratosLabs orders.",
     "title": "Shipping, returns and reshipment",
     "updated": "August 2026",
-    "intro": "Shipping rates by zone, delivery times, discreet packaging, returns, refunds and the reshipment procedure.",
+    "intro": "Flat shipping rate, free shipping over €180, minimum order, delivery times, discreet packaging, returns, refunds and the reshipment procedure.",
     "labels": {
       "documents": "Documents",
       "onThisPage": "On this page",
@@ -83,7 +83,7 @@
       {
         "id": "tariffe",
         "title": "2. Shipping rates and times",
-        "body": "We apply flat rates based on the destination zone: European Union 22 €, rest of Europe 28 €, United States 30 €. There is no free shipping threshold. Orders are generally shipped within 3 business days after payment confirmation; indicative delivery times are 12–16 business days for the European Union, 14–21 days for the rest of Europe and 17–28 days for the United States. Rates and times may vary depending on destination and period."
+        "body": "We apply a flat shipping rate of €15 per order. Shipping is free on orders over €180. The minimum order is €75. Orders are shipped after payment confirmation and delivery takes approximately 2–4 weeks. Times may vary depending on destination and period."
       },
       {
         "id": "imballo",
@@ -129,10 +129,10 @@
   },
   "de": {
     "metaTitle": "Versand und Rückgabe",
-    "metaDescription": "Tarife nach Zone, Laufzeiten, neutrale Verpackung und Rückgaberichtlinie für KratosLabs-Bestellungen.",
+    "metaDescription": "Pauschaltarif 15 €, kostenloser Versand ab 180 €, Laufzeiten, neutrale Verpackung und Rückgaberichtlinie für KratosLabs-Bestellungen.",
     "title": "Versand, Rückgabe und Neuversand",
     "updated": "August 2026",
-    "intro": "Versandtarife nach Zone, Lieferzeiten, neutrale Verpackung, Rückgaben, Erstattungen und das Neuversand-Verfahren.",
+    "intro": "Pauschaler Versandtarif, kostenloser Versand ab 180 €, Mindestbestellwert, Lieferzeiten, neutrale Verpackung, Rückgaben, Erstattungen und das Neuversand-Verfahren.",
     "labels": {
       "documents": "Dokumente",
       "onThisPage": "Auf dieser Seite",
@@ -147,7 +147,7 @@
       {
         "id": "tariffe",
         "title": "2. Versandtarife und -zeiten",
-        "body": "Wir wenden Pauschaltarife je nach Zielzone an: Europäische Union 22 €, übriges Europa 28 €, Vereinigte Staaten 30 €. Es gibt keine Schwelle für kostenlosen Versand. Bestellungen werden in der Regel innerhalb von 3 Werktagen nach Zahlungsbestätigung versendet; die ungefähren Lieferzeiten betragen 12–16 Werktage für die Europäische Union, 14–21 Tage für das übrige Europa und 17–28 Tage für die Vereinigten Staaten. Tarife und Zeiten können je nach Zielort und Zeitraum variieren."
+        "body": "Wir berechnen eine pauschale Versandgebühr von 15 € pro Bestellung. Ab einem Bestellwert von 180 € ist der Versand kostenlos. Der Mindestbestellwert beträgt 75 €. Bestellungen werden nach Zahlungsbestätigung versendet und die Lieferung erfolgt in der Regel innerhalb von 2–4 Wochen. Die Zeiten können je nach Zielort und Zeitraum variieren."
       },
       {
         "id": "imballo",
@@ -193,10 +193,10 @@
   },
   "fr": {
     "metaTitle": "Expédition et retours",
-    "metaDescription": "Tarifs par zone, délais, emballage neutre et politique de retour des commandes KratosLabs.",
+    "metaDescription": "Tarif unique de 15 €, livraison gratuite au-delà de 180 €, délais, emballage neutre et politique de retour des commandes KratosLabs.",
     "title": "Expédition, retours et réexpédition",
     "updated": "Août 2026",
-    "intro": "Tarifs d'expédition par zone, délais de livraison, emballage discret, retours, remboursements et procédure de réexpédition.",
+    "intro": "Tarif d'expédition unique, livraison gratuite au-delà de 180 €, commande minimum, délais de livraison, emballage discret, retours, remboursements et procédure de réexpédition.",
     "labels": {
       "documents": "Documents",
       "onThisPage": "Sur cette page",
@@ -211,7 +211,7 @@
       {
         "id": "tariffe",
         "title": "2. Tarifs et délais d'expédition",
-        "body": "Nous appliquons des tarifs fixes selon la zone de destination : Union européenne 22 €, reste de l'Europe 28 €, États-Unis 30 €. Aucun seuil de livraison gratuite n'est prévu. Les commandes sont généralement expédiées sous 3 jours ouvrables après la confirmation du paiement ; les délais de livraison indicatifs sont de 12–16 jours ouvrables pour l'Union européenne, 14–21 jours pour le reste de l'Europe et 17–28 jours pour les États-Unis. Les tarifs et les délais peuvent varier selon la destination et la période."
+        "body": "Nous appliquons un tarif d'expédition fixe de 15 € par commande. La livraison est gratuite pour les commandes supérieures à 180 €. La commande minimum est de 75 €. Les commandes sont expédiées après la confirmation du paiement et la livraison prend environ 2 à 4 semaines. Les délais peuvent varier selon la destination et la période."
       },
       {
         "id": "imballo",
@@ -257,10 +257,10 @@
   },
   "pt": {
     "metaTitle": "Envio e devoluções",
-    "metaDescription": "Tarifas por zona, prazos, embalagem neutra e política de devolução dos pedidos KratosLabs.",
+    "metaDescription": "Tarifa única de 15 €, envio gratuito acima de 180 €, prazos, embalagem neutra e política de devolução dos pedidos KratosLabs.",
     "title": "Envio, devoluções e reenvio",
     "updated": "Agosto de 2026",
-    "intro": "Tarifas de envio por zona, prazos de entrega, embalagem discreta, devoluções, reembolsos e procedimento de reenvio.",
+    "intro": "Tarifa de envio fixa, envio gratuito acima de 180 €, pedido mínimo, prazos de entrega, embalagem discreta, devoluções, reembolsos e procedimento de reenvio.",
     "labels": {
       "documents": "Documentos",
       "onThisPage": "Nesta página",
@@ -275,7 +275,7 @@
       {
         "id": "tariffe",
         "title": "2. Tarifas e prazos de envio",
-        "body": "Aplicamos tarifas fixas consoante a zona de destino: União Europeia 22 €, resto da Europa 28 €, Estados Unidos 30 €. Não está prevista qualquer limite para envio gratuito. Os pedidos são geralmente enviados no prazo de 3 dias úteis após a confirmação do pagamento; os prazos de entrega indicativos são de 12–16 dias úteis para a União Europeia, 14–21 dias para o resto da Europa e 17–28 dias para os Estados Unidos. As tarifas e os prazos podem variar consoante o destino e o período."
+        "body": "Aplicamos uma tarifa de envio fixa de 15 € por pedido. O envio é gratuito para pedidos superiores a 180 €. O pedido mínimo é de 75 €. Os pedidos são enviados após a confirmação do pagamento e a entrega demora aproximadamente 2 a 4 semanas. Os prazos podem variar consoante o destino e o período."
       },
       {
         "id": "imballo",

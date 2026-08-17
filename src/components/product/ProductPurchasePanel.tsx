@@ -5,10 +5,9 @@ import { Money } from "@/components/ui/money";
 import { PriceBlock } from "@/components/product/PriceBlock";
 import { StockBadge } from "@/components/product/StockBadge";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
-import { BulkPricingTable } from "@/components/product/BulkPricingTable";
 import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { QuickCheckoutButton } from "@/components/cart/QuickCheckoutButton";
-import { bulkDiscountFor, nextBulkTier, priceLine } from "@/features/products";
+import { priceLine } from "@/features/products";
 import type { Product } from "@/types";
 
 export function ProductPurchasePanel({ product }: { product: Product }) {
@@ -17,8 +16,6 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
   const maxQty = soldOut ? 1 : Math.min(product.stock, 99);
 
   const priced = priceLine(product.priceCents, qty);
-  const discount = bulkDiscountFor(qty);
-  const next = nextBulkTier(qty);
 
   return (
     <div className="flex flex-col gap-5">
@@ -32,25 +29,8 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         <p className="text-sm text-muted">
           Totale{" "}
           <Money cents={priced.netCents} className="font-semibold text-text" />
-          {discount > 0 && (
-            <span className="num ml-1.5 text-accent">
-              −{Math.round(discount * 100)}%
-            </span>
-          )}
         </p>
       </div>
-
-      {next && !soldOut && (
-        <p className="text-xs text-muted">
-          Aggiungi ancora{" "}
-          <span className="num text-text">{next.minQuantity - qty}</span>{" "}
-          {next.minQuantity - qty === 1 ? "pezzo" : "pezzi"} per lo sconto del{" "}
-          <span className="num text-accent">
-            {Math.round(next.discount * 100)}%
-          </span>
-          .
-        </p>
-      )}
 
       <div className="flex gap-2 sm:gap-3">
         <AddToCartButton
@@ -68,8 +48,6 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
           iconClassName="size-5 shrink-0"
         />
       </div>
-
-      <BulkPricingTable activeQuantity={qty} />
     </div>
   );
 }

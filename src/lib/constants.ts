@@ -26,7 +26,7 @@ export const SITE = {
 /** Barra annuncio. Tre claim, tutti verificabili. */
 export const ANNOUNCEMENTS = [
   "Analisi di terza parte su ogni lotto",
-  "Spedizione tracciata in 24/48h",
+  "Spedizione tracciata in 2–4 settimane",
   "Reso entro 30 giorni",
 ] as const;
 
@@ -73,14 +73,14 @@ export const CATEGORIES: Category[] = [
   },
 ];
 
-/** Sconto quantità, applicato sulla singola riga di carrello. */
-export const BULK_TIERS: BulkTier[] = [
-  { minQuantity: 3, discount: 0.05 },
-  { minQuantity: 5, discount: 0.1 },
-  { minQuantity: 10, discount: 0.15 },
-];
+/**
+ * Sconti quantità disattivati: nessuno sconto sulle quantità maggiori di 1.
+ * `priceLine`/`bulkDiscountFor` restano funzionanti ma senza soglie applicano
+ * sempre sconto 0. Per riattivarli, ripopolare questo elenco.
+ */
+export const BULK_TIERS: BulkTier[] = [];
 
-// Le tariffe di spedizione seguono un modello a zone: vedi `src/lib/shipping.ts`.
+// Spedizione a tariffa unica (gratuita sopra soglia): vedi `src/lib/shipping.ts`.
 
 export const NAV_LINKS: readonly NavLink[] = [
   { href: "/guide", label: "Guide" },
@@ -147,7 +147,7 @@ export const TRUST_BADGES: TrustBadge[] = [
     icon: "Truck",
     title: "Spedizione tracciata",
     description:
-      "Corriere tracciato in 24/48h, imballo neutro e riciclabile su richiesta.",
+      "Corriere tracciato, consegna in 2–4 settimane; imballo neutro e riciclabile su richiesta.",
   },
   {
     icon: "ShieldCheck",

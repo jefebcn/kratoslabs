@@ -10,7 +10,12 @@ import { maxRedeemablePoints, discountCentsFor } from "@/lib/rewards";
 import { listProducts } from "@/features/products";
 import { priceLine } from "@/features/products/pricing";
 import { PAYMENT_METHODS } from "@/lib/constants";
-import { shippingCentsForCountry } from "@/lib/shipping";
+import {
+  shippingCentsFor,
+  meetsMinimumOrder,
+  MIN_ORDER_CENTS,
+} from "@/lib/shipping";
+import { formatPrice } from "@/lib/utils";
 import type { CartLine } from "@/types";
 
 const DISABLED_METHODS = new Set(
@@ -111,14 +116,23 @@ export async function createOrder(
     };
   }
 
+  // Ordine minimo (merce): validato lato server (mai fidarsi del client).
+  if (!meetsMinimumOrder(subtotalCents)) {
+    return {
+      ok: false,
+      message: `L'ordine minimo è ${formatPrice(MIN_ORDER_CENTS)}. Aggiungi altri prodotti per procedere.`,
+    };
+  }
+
   const requestedPoints = Math.max(
     0,
     Math.floor(Number(formData.get("redeemPoints") ?? 0)) || 0,
   );
   const reference = `KL-${Date.now().toString().slice(-6)}`;
 
-  // Spedizione: ricalcolata lato server dalla zona del paese (mai dal client).
-  const shippingCents = shippingCentsForCountry(d.country);
+  // Spedizione: tariffa unica, gratuita oltre la soglia. Calcolata sul
+  // subtotale merce (mai dal client).
+  const shippingCents = shippingCentsFor(subtotalCents);
 
   // Sconto punti: validato lato server (mai fidarsi del client).
   let pointsRedeemed = 0;

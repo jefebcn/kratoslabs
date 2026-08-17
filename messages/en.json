@@ -80,7 +80,11 @@
     "quantityDiscount": "Quantity discount",
     "shipping": "Shipping",
     "shippingAtCheckout": "Calculated at checkout",
-    "total": "Total"
+    "total": "Total",
+    "freeShipping": "Free",
+    "freeShippingProgress": "Add {remaining} for free shipping",
+    "belowMinimum": "You're {remaining} away from the {min} minimum order.",
+    "minOrderButton": "Minimum order {min}"
   },
   "payments": {
     "accept": "We accept",
@@ -99,7 +103,7 @@
       },
       "shipping": {
         "title": "Tracked shipping",
-        "desc": "Tracked courier in 24/48h, neutral and recyclable packaging on request."
+        "desc": "Tracked courier, delivery in 2–4 weeks; neutral, recyclable packaging on request."
       },
       "packaging": {
         "title": "Discreet packaging",
@@ -118,7 +122,7 @@
       },
       "shipping": {
         "title": "Shipping & delivery",
-        "body": "Shipped within 3 business days of payment. <b>Discreet</b> packaging, with no identifying labels and <b>tracking</b> on every order. Delivery in 5–28 days.",
+        "body": "<b>Flat-rate</b> shipping (€15), <b>free over €180</b>. <b>Anonymous</b> packaging, with no identifying labels and <b>tracking</b> on every order. Delivery in <b>2–4 weeks</b>.",
         "cta": "Shipping & returns"
       },
       "payments": {
@@ -185,7 +189,14 @@
       "loginToReview": "Log in to leave a review.",
       "login": "Log in"
     },
-    "faqTitle": "Frequently asked questions"
+    "faqTitle": "Frequently asked questions",
+    "bundle": {
+      "title": "Frequently bought together",
+      "subtitle": "Products customers often pair together. Always check suitability and compliance: this is not usage advice.",
+      "addAll": "Add the bundle to cart",
+      "total": "Bundle total:",
+      "thisItem": "This one"
+    }
   },
   "auth": {
     "loginTitle": "Log in",
@@ -275,7 +286,11 @@
       "europe": "Rest of Europe",
       "usa": "United States",
       "world": "Rest of world"
-    }
+    },
+    "shippingFree": "Free",
+    "freeShippingProgress": "Add {remaining} for free shipping.",
+    "belowMinimum": "The minimum order is {min}. Add {remaining} more to continue.",
+    "minOrderButton": "Minimum order {min}"
   },
   "toggle": {
     "language": "Language",
@@ -286,7 +301,7 @@
   "topbar": {
     "announcements": [
       "Third-party testing on every batch",
-      "Tracked shipping in 24/48h",
+      "Tracked shipping in 2–4 weeks",
       "Returns within 30 days"
     ]
   },

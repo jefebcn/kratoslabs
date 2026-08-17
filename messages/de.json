@@ -80,7 +80,11 @@
     "quantityDiscount": "Mengenrabatt",
     "shipping": "Versand",
     "shippingAtCheckout": "Wird an der Kasse berechnet",
-    "total": "Gesamt"
+    "total": "Gesamt",
+    "freeShipping": "Kostenlos",
+    "freeShippingProgress": "Füge {remaining} für kostenlosen Versand hinzu",
+    "belowMinimum": "Dir fehlen noch {remaining} zum Mindestbestellwert von {min}.",
+    "minOrderButton": "Mindestbestellung {min}"
   },
   "payments": {
     "accept": "Wir akzeptieren",
@@ -99,7 +103,7 @@
       },
       "shipping": {
         "title": "Versand mit Sendungsverfolgung",
-        "desc": "Sendungsverfolgter Kurier in 24/48h, neutrale und recycelbare Verpackung auf Wunsch."
+        "desc": "Verfolgter Kurier, Lieferung in 2–4 Wochen; neutrale, auf Wunsch recycelbare Verpackung."
       },
       "packaging": {
         "title": "Neutrale Verpackung",
@@ -118,7 +122,7 @@
       },
       "shipping": {
         "title": "Versand & Lieferung",
-        "body": "Versand innerhalb von 3 Werktagen nach Zahlung. <b>Anonyme</b> Verpackung ohne identifizierende Etiketten und mit <b>Sendungsverfolgung</b> bei jeder Bestellung. Lieferung in 5–28 Tagen.",
+        "body": "Versand zum <b>Pauschaltarif</b> (15 €), <b>kostenlos ab 180 €</b>. <b>Anonyme</b> Verpackung, ohne identifizierende Etiketten, mit <b>Sendungsverfolgung</b> bei jeder Bestellung. Lieferung in <b>2–4 Wochen</b>.",
         "cta": "Versand & Rückgabe"
       },
       "payments": {
@@ -185,7 +189,14 @@
       "loginToReview": "Melde dich an, um eine Bewertung abzugeben.",
       "login": "Anmelden"
     },
-    "faqTitle": "Häufige Fragen"
+    "faqTitle": "Häufige Fragen",
+    "bundle": {
+      "title": "Häufig zusammen gekauft",
+      "subtitle": "Produkte, die Kunden oft kombinieren. Prüfe stets Eignung und Konformität: Dies ist keine Anwendungsempfehlung.",
+      "addAll": "Paket in den Warenkorb",
+      "total": "Paketpreis:",
+      "thisItem": "Dieser"
+    }
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -275,7 +286,11 @@
       "europe": "Übriges Europa",
       "usa": "USA",
       "world": "Übrige Welt"
-    }
+    },
+    "shippingFree": "Kostenlos",
+    "freeShippingProgress": "Füge {remaining} für kostenlosen Versand hinzu.",
+    "belowMinimum": "Der Mindestbestellwert beträgt {min}. Füge noch {remaining} hinzu, um fortzufahren.",
+    "minOrderButton": "Mindestbestellung {min}"
   },
   "toggle": {
     "language": "Sprache",
@@ -286,7 +301,7 @@
   "topbar": {
     "announcements": [
       "Drittanbieter-Analyse für jede Charge",
-      "Verfolgter Versand in 24/48 Std.",
+      "Verfolgter Versand in 2–4 Wochen",
       "Rückgabe innerhalb von 30 Tagen"
     ]
   },
