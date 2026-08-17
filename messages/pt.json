@@ -80,7 +80,11 @@
     "quantityDiscount": "Desconto quantidade",
     "shipping": "Envio",
     "shippingAtCheckout": "Calculado no checkout",
-    "total": "Total"
+    "total": "Total",
+    "freeShipping": "Grátis",
+    "freeShippingProgress": "Adiciona {remaining} para envio grátis",
+    "belowMinimum": "Faltam {remaining} para o pedido mínimo de {min}.",
+    "minOrderButton": "Pedido mínimo {min}"
   },
   "payments": {
     "accept": "Aceitamos",
@@ -99,7 +103,7 @@
       },
       "shipping": {
         "title": "Envio rastreado",
-        "desc": "Correio rastreado em 24/48h, embalagem neutra e reciclável a pedido."
+        "desc": "Transportadora rastreada, entrega em 2–4 semanas; embalagem neutra e reciclável a pedido."
       },
       "packaging": {
         "title": "Embalagem anónima",
@@ -118,7 +122,7 @@
       },
       "shipping": {
         "title": "Envio & entrega",
-        "body": "Enviado em até 3 dias úteis após o pagamento. Embalagem <b>anónima</b>, sem etiquetas de identificação e com <b>rastreamento</b> em cada encomenda. Entrega em 5–28 dias.",
+        "body": "Envio a <b>tarifa única</b> (15 €), <b>grátis acima de 180 €</b>. Embalagem <b>anónima</b>, sem etiquetas identificativas, com <b>rastreamento</b> em cada pedido. Entrega em <b>2–4 semanas</b>.",
         "cta": "Envios & devoluções"
       },
       "payments": {
@@ -185,7 +189,14 @@
       "loginToReview": "Inicia sessão para deixar uma avaliação.",
       "login": "Entrar"
     },
-    "faqTitle": "Perguntas frequentes"
+    "faqTitle": "Perguntas frequentes",
+    "bundle": {
+      "title": "Frequentemente comprados juntos",
+      "subtitle": "Produtos que os clientes costumam combinar. Verifica sempre a adequação e a conformidade: não é um conselho de utilização.",
+      "addAll": "Adicionar o pacote ao carrinho",
+      "total": "Total do pacote:",
+      "thisItem": "Este"
+    }
   },
   "auth": {
     "loginTitle": "Entrar",
@@ -275,7 +286,11 @@
       "europe": "Resto da Europa",
       "usa": "Estados Unidos",
       "world": "Resto do mundo"
-    }
+    },
+    "shippingFree": "Grátis",
+    "freeShippingProgress": "Adiciona {remaining} para envio grátis.",
+    "belowMinimum": "O pedido mínimo é {min}. Adiciona mais {remaining} para continuar.",
+    "minOrderButton": "Pedido mínimo {min}"
   },
   "toggle": {
     "language": "Idioma",
@@ -286,7 +301,8 @@
   "topbar": {
     "announcements": [
       "Análise de terceiros em cada lote",
-      "Envio rastreado em 24/48h",
+      "Envio rastreado em 2–4 semanas",
+      "Envio grátis acima de 180 €",
       "Devoluções em 30 dias"
     ]
   },

@@ -4,6 +4,11 @@ import { useTranslations } from "next-intl";
 import { Money } from "@/components/ui/money";
 import { Separator } from "@/components/ui/separator";
 import { useCartSummary } from "@/features/cart";
+import {
+  shippingCentsFor,
+  remainingForFreeShipping,
+} from "@/lib/shipping";
+import { formatPrice } from "@/lib/utils";
 
 function Row({
   label,
@@ -27,8 +32,12 @@ export function CartSummary() {
   const { subtotalGrossCents, subtotalNetCents, discountCents } =
     useCartSummary();
 
-  // La spedizione dipende dal paese di destinazione: si calcola al checkout
-  // (modello a zone, nessuna soglia gratuita). Il totale qui è la sola merce.
+  // Spedizione a tariffa unica, gratuita sopra la soglia; calcolata sulla merce.
+  const shippingCents = shippingCentsFor(subtotalNetCents);
+  const freeShipping = shippingCents === 0;
+  const missingForFree = remainingForFreeShipping(subtotalNetCents);
+  const totalCents = subtotalNetCents + shippingCents;
+
   return (
     <div className="flex flex-col gap-2">
       <Row label={t("subtotal")} muted>
@@ -44,13 +53,25 @@ export function CartSummary() {
       )}
 
       <Row label={t("shipping")} muted>
-        <span className="text-xs text-muted">{t("shippingAtCheckout")}</span>
+        {freeShipping ? (
+          <span className="font-medium text-emerald-600">
+            {t("freeShipping")}
+          </span>
+        ) : (
+          <Money cents={shippingCents} />
+        )}
       </Row>
+
+      {!freeShipping && missingForFree > 0 && (
+        <p className="text-xs text-muted">
+          {t("freeShippingProgress", { remaining: formatPrice(missingForFree) })}
+        </p>
+      )}
 
       <Separator className="my-1" />
 
       <Row label={t("total")}>
-        <Money cents={subtotalNetCents} className="text-base text-accent" />
+        <Money cents={totalCents} className="text-base text-accent" />
       </Row>
     </div>
   );

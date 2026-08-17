@@ -80,7 +80,11 @@
     "quantityDiscount": "Sconto quantità",
     "shipping": "Spedizione",
     "shippingAtCheckout": "Calcolata al checkout",
-    "total": "Totale"
+    "total": "Totale",
+    "freeShipping": "Gratuita",
+    "freeShippingProgress": "Aggiungi {remaining} per la spedizione gratuita",
+    "belowMinimum": "Ti mancano {remaining} per l'ordine minimo di {min}.",
+    "minOrderButton": "Ordine minimo {min}"
   },
   "payments": {
     "accept": "Accettiamo",
@@ -99,7 +103,7 @@
       },
       "shipping": {
         "title": "Spedizione tracciata",
-        "desc": "Corriere tracciato in 24/48h, imballo neutro e riciclabile su richiesta."
+        "desc": "Corriere tracciato, consegna in 2–4 settimane; imballo neutro e riciclabile su richiesta."
       },
       "packaging": {
         "title": "Imballo anonimo",
@@ -118,7 +122,7 @@
       },
       "shipping": {
         "title": "Spedizione e consegna",
-        "body": "Spedizione entro 3 giorni lavorativi dal pagamento. Imballo <b>anonimo</b>, senza etichette identificative, con <b>tracciamento</b> su ogni ordine. Consegna in 5–28 giorni.",
+        "body": "Spedizione a <b>tariffa unica</b> (15 €), <b>gratuita sopra i 180 €</b>. Imballo <b>anonimo</b>, senza etichette identificative, con <b>tracciamento</b> su ogni ordine. Consegna in <b>2–4 settimane</b>.",
         "cta": "Spedizioni e resi"
       },
       "payments": {
@@ -185,7 +189,14 @@
       "loginToReview": "Accedi per lasciare una recensione.",
       "login": "Accedi"
     },
-    "faqTitle": "Domande frequenti"
+    "faqTitle": "Domande frequenti",
+    "bundle": {
+      "title": "Spesso acquistati insieme",
+      "subtitle": "Prodotti che i clienti abbinano spesso. Verifica sempre idoneità e conformità: non è un consiglio d'uso.",
+      "addAll": "Aggiungi il pacchetto al carrello",
+      "total": "Totale pacchetto:",
+      "thisItem": "Questo"
+    }
   },
   "auth": {
     "loginTitle": "Accedi",
@@ -275,7 +286,11 @@
       "europe": "Resto d'Europa",
       "usa": "Stati Uniti",
       "world": "Extra-Europa"
-    }
+    },
+    "shippingFree": "Gratuita",
+    "freeShippingProgress": "Aggiungi {remaining} per la spedizione gratuita.",
+    "belowMinimum": "L'ordine minimo è {min}. Aggiungi ancora {remaining} di prodotti per procedere.",
+    "minOrderButton": "Ordine minimo {min}"
   },
   "toggle": {
     "language": "Lingua",
@@ -286,7 +301,8 @@
   "topbar": {
     "announcements": [
       "Analisi di terza parte su ogni lotto",
-      "Spedizione tracciata in 24/48h",
+      "Spedizione tracciata in 2–4 settimane",
+      "Spedizione gratuita sopra i 180 €",
       "Reso entro 30 giorni"
     ]
   },

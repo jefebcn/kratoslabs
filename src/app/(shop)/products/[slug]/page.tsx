@@ -17,10 +17,12 @@ import { ProductFaq } from "@/components/product/ProductFaq";
 import { LabReportCard } from "@/components/product/LabReportCard";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
 import { ProductGrid } from "@/components/product/ProductGrid";
+import { BundleSuggestions } from "@/components/product/BundleSuggestions";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
 import { RatingOverview } from "@/components/reviews/RatingOverview";
 import { Stars } from "@/components/reviews/Stars";
-import { findProduct, listByCategory } from "@/features/products";
+import { findProduct, listProducts } from "@/features/products";
+import { buildBundle } from "@/lib/bundles";
 import { ratingSummary, reviewsForProduct } from "@/features/reviews";
 import { ReviewForm } from "@/components/reviews/ReviewForm";
 import { listCategories } from "@/features/categories";
@@ -55,9 +57,11 @@ export default async function ProductDetailPage({
   const t = await getTranslations("product");
   const categories = await listCategories();
   const category = categories.find((c) => c.slug === product.category);
-  const related = (await listByCategory(product.category)).filter(
-    (p) => p.id !== product.id,
+  const catalog = await listProducts();
+  const related = catalog.filter(
+    (p) => p.category === product.category && p.id !== product.id,
   );
+  const bundle = buildBundle(product, catalog);
   const reviews = await reviewsForProduct(slug);
   const rating = ratingSummary(reviews);
   const user = await getCurrentUser();
@@ -164,6 +168,10 @@ export default async function ProductDetailPage({
 
       {product.faqs && product.faqs.length > 0 && (
         <ProductFaq title={t("faqTitle")} faqs={product.faqs} />
+      )}
+
+      {bundle.length > 0 && (
+        <BundleSuggestions anchor={product} items={bundle} />
       )}
 
       <section id="recensioni" className="mt-16 scroll-mt-24">

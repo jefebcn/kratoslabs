@@ -13,7 +13,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { CartLineItem } from "@/components/cart/CartLineItem";
 import { CartSummary } from "@/components/cart/CartSummary";
-import { useCart, useCartCount } from "@/features/cart";
+import { useCart, useCartCount, useCartSummary } from "@/features/cart";
+import {
+  MIN_ORDER_CENTS,
+  meetsMinimumOrder,
+  remainingForMinimumOrder,
+} from "@/lib/shipping";
+import { formatPrice } from "@/lib/utils";
 
 export function CartDrawer() {
   const t = useTranslations("cart");
@@ -22,6 +28,9 @@ export function CartDrawer() {
   const close = useCart((s) => s.close);
   const lines = useCart((s) => s.lines);
   const count = useCartCount();
+  const { subtotalNetCents } = useCartSummary();
+  const belowMinimum = !meetsMinimumOrder(subtotalNetCents);
+  const missingForMin = remainingForMinimumOrder(subtotalNetCents);
 
   return (
     <Sheet open={isOpen} onOpenChange={(next) => (next ? open() : close())}>
@@ -51,10 +60,24 @@ export function CartDrawer() {
 
             <SheetFooter className="flex flex-col gap-4">
               <CartSummary />
+              {belowMinimum && (
+                <p className="rounded-base border border-accent/40 bg-accent-soft/40 px-3 py-2 text-xs">
+                  {t("belowMinimum", {
+                    min: formatPrice(MIN_ORDER_CENTS),
+                    remaining: formatPrice(missingForMin),
+                  })}
+                </p>
+              )}
               <div className="flex flex-col gap-2">
-                <Button asChild size="lg" onClick={close}>
-                  <Link href="/checkout">{t("goToCheckout")}</Link>
-                </Button>
+                {belowMinimum ? (
+                  <Button size="lg" disabled>
+                    {t("minOrderButton", { min: formatPrice(MIN_ORDER_CENTS) })}
+                  </Button>
+                ) : (
+                  <Button asChild size="lg" onClick={close}>
+                    <Link href="/checkout">{t("goToCheckout")}</Link>
+                  </Button>
+                )}
                 <Button variant="ghost" onClick={close}>
                   {t("continueShopping")}
                 </Button>

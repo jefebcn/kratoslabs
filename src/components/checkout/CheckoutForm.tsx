@@ -16,8 +16,11 @@ import { priceLine } from "@/features/products/pricing";
 import { PAYMENT_METHODS } from "@/lib/constants";
 import {
   SHIPPING_COUNTRIES,
-  shippingCentsForCountry,
-  zoneForCountry,
+  shippingCentsFor,
+  MIN_ORDER_CENTS,
+  FREE_SHIPPING_THRESHOLD_CENTS,
+  remainingForFreeShipping,
+  remainingForMinimumOrder,
 } from "@/lib/shipping";
 import { cn, formatPrice } from "@/lib/utils";
 import {
@@ -117,10 +120,16 @@ export function CheckoutForm({
   const discountCents = discountCentsFor(appliedPoints);
   const merchandiseCents = Math.max(0, netTotalCents - discountCents);
 
-  // Spedizione dalla zona del paese scelto; totale finale mostrato al cliente.
-  const shippingCents = empty ? 0 : shippingCentsForCountry(country);
-  const shippingZone = zoneForCountry(country);
+  // Spedizione a tariffa unica (gratuita sopra la soglia), calcolata sul
+  // subtotale merce. Totale finale mostrato al cliente.
+  const shippingCents = empty ? 0 : shippingCentsFor(netTotalCents);
+  const freeShipping = shippingCents === 0;
+  const missingForFree = remainingForFreeShipping(netTotalCents);
   const payableCents = merchandiseCents + shippingCents;
+
+  // Ordine minimo (merce): blocca il checkout finché non è raggiunto.
+  const belowMinimum = !empty && netTotalCents < MIN_ORDER_CENTS;
+  const missingForMin = remainingForMinimumOrder(netTotalCents);
 
   // Congela il totale al momento della conferma, prima di svuotare il carrello.
   const [orderTotalCents, setOrderTotalCents] = useState<number | null>(null);
@@ -377,12 +386,25 @@ export function CheckoutForm({
             </div>
           )}
           <div className="flex justify-between text-muted">
-            <dt>
-              {t("shipping")}{" "}
-              <span className="text-xs">({t(`zones.${shippingZone}`)})</span>
-            </dt>
-            <dd className="num">{formatPrice(shippingCents)}</dd>
+            <dt>{t("shipping")}</dt>
+            <dd className="num">
+              {freeShipping ? (
+                <span className="font-medium text-emerald-600">
+                  {t("shippingFree")}
+                </span>
+              ) : (
+                formatPrice(shippingCents)
+              )}
+            </dd>
           </div>
+          {!freeShipping && missingForFree > 0 && (
+            <p className="text-xs text-muted">
+              {t("freeShippingProgress", {
+                remaining: formatPrice(missingForFree),
+                threshold: formatPrice(FREE_SHIPPING_THRESHOLD_CENTS),
+              })}
+            </p>
+          )}
           <div className="flex justify-between border-t border-border pt-1.5 text-base font-semibold">
             <dt>{t("total")}</dt>
             <dd className="num text-accent">{formatPrice(payableCents)}</dd>
@@ -390,8 +412,26 @@ export function CheckoutForm({
         </dl>
       )}
 
-      <Button type="submit" size="lg" loading={pending} disabled={empty}>
-        {empty ? t("cartEmpty") : t("confirmOrder")}
+      {belowMinimum && (
+        <div className="rounded-base border border-accent/40 bg-accent-soft/40 px-4 py-3 text-sm">
+          {t("belowMinimum", {
+            min: formatPrice(MIN_ORDER_CENTS),
+            remaining: formatPrice(missingForMin),
+          })}
+        </div>
+      )}
+
+      <Button
+        type="submit"
+        size="lg"
+        loading={pending}
+        disabled={empty || belowMinimum}
+      >
+        {empty
+          ? t("cartEmpty")
+          : belowMinimum
+            ? t("minOrderButton", { min: formatPrice(MIN_ORDER_CENTS) })
+            : t("confirmOrder")}
       </Button>
       <p className="text-xs text-muted">{t("cryptoHint")}</p>
     </form>
