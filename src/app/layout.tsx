@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Oswald } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
 
@@ -54,6 +55,9 @@ export default async function RootLayout({
     <html lang={locale} className={`${inter.variable} ${oswald.variable}`}>
       <body className="min-h-dvh antialiased">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        {/* Analisi visite (paesi/pagine): cookieless, GDPR-friendly.
+            Va attivato anche dal dashboard Vercel del progetto. */}
+        <Analytics />
       </body>
     </html>
   );
