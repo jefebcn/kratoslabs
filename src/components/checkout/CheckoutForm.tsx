@@ -19,6 +19,7 @@ import {
   shippingCentsFor,
   MIN_ORDER_CENTS,
   FREE_SHIPPING_THRESHOLD_CENTS,
+  meetsMinimumOrder,
   remainingForFreeShipping,
   remainingForMinimumOrder,
 } from "@/lib/shipping";
@@ -127,8 +128,8 @@ export function CheckoutForm({
   const missingForFree = remainingForFreeShipping(netTotalCents);
   const payableCents = merchandiseCents + shippingCents;
 
-  // Ordine minimo (merce): blocca il checkout finché non è raggiunto.
-  const belowMinimum = !empty && netTotalCents < MIN_ORDER_CENTS;
+  // Ordine minimo (merce + spedizione): blocca il checkout finché non è raggiunto.
+  const belowMinimum = !empty && !meetsMinimumOrder(netTotalCents);
   const missingForMin = remainingForMinimumOrder(netTotalCents);
 
   // Congela il totale al momento della conferma, prima di svuotare il carrello.
