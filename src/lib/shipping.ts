@@ -24,9 +24,17 @@ export function shippingCentsFor(subtotalCents: number): number {
   return subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ? 0 : FLAT_SHIPPING_CENTS;
 }
 
-/** true se il subtotale merce raggiunge l'importo minimo d'ordine. */
+/**
+ * Base per l'ordine minimo: merce + spedizione. L'importo minimo d'ordine
+ * (75 €) si considera raggiunto sul totale comprensivo di spedizione.
+ */
+export function minimumBasisCents(subtotalCents: number): number {
+  return subtotalCents + shippingCentsFor(subtotalCents);
+}
+
+/** true se l'ordine (merce + spedizione) raggiunge l'importo minimo. */
 export function meetsMinimumOrder(subtotalCents: number): boolean {
-  return subtotalCents >= MIN_ORDER_CENTS;
+  return minimumBasisCents(subtotalCents) >= MIN_ORDER_CENTS;
 }
 
 /** Quanto manca (in centesimi) alla spedizione gratuita; 0 se già raggiunta. */
@@ -34,9 +42,12 @@ export function remainingForFreeShipping(subtotalCents: number): number {
   return Math.max(0, FREE_SHIPPING_THRESHOLD_CENTS - subtotalCents);
 }
 
-/** Quanto manca (in centesimi) all'ordine minimo; 0 se già raggiunto. */
+/**
+ * Quanto manca (in centesimi) all'ordine minimo; 0 se già raggiunto.
+ * Calcolato sul totale comprensivo di spedizione (merce + spedizione).
+ */
 export function remainingForMinimumOrder(subtotalCents: number): number {
-  return Math.max(0, MIN_ORDER_CENTS - subtotalCents);
+  return Math.max(0, MIN_ORDER_CENTS - minimumBasisCents(subtotalCents));
 }
 
 export interface ShippingCountry {
