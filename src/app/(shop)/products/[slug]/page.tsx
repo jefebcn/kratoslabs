@@ -18,6 +18,7 @@ import { LabReportCard } from "@/components/product/LabReportCard";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { BundleSuggestions } from "@/components/product/BundleSuggestions";
+import { CategoryHero } from "@/components/product/CategoryHero";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
 import { RatingOverview } from "@/components/reviews/RatingOverview";
 import { Stars } from "@/components/reviews/Stars";
@@ -112,6 +113,14 @@ export default async function ProductDetailPage({
         <ChevronRight className="size-3" aria-hidden />
         <span className="text-text">{product.title}</span>
       </nav>
+
+      <div className="mt-4">
+        <CategoryHero
+          slug={product.category}
+          fallbackName={category?.name ?? product.category}
+          fallbackTagline={category?.description}
+        />
+      </div>
 
       <div className="mt-6 grid gap-10 lg:grid-cols-2">
         <ProductGallery images={product.images} />

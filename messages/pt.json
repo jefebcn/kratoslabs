@@ -351,5 +351,40 @@
     "servingsPerContainer": "Porções por embalagem",
     "perServing": "{active} por porção",
     "totalActive": "{active} no total"
+  },
+  "productCategory": {
+    "eyebrow": "Categoria",
+    "iniettabili": {
+      "name": "Injetáveis",
+      "tagline": "Soluções estéreis em ampolas para uso intramuscular."
+    },
+    "orali": {
+      "name": "Orais",
+      "tagline": "Comprimidos em blister para uso oral."
+    },
+    "post-cycle": {
+      "name": "Post Cycle (PCT)",
+      "tagline": "SERM, inibidores da aromatase e apoio hormonal."
+    },
+    "brucia-grassi": {
+      "name": "Queima-gorduras",
+      "tagline": "Termogénicos, hormonas tiroideias e agonistas do GLP-1."
+    },
+    "sex-support": {
+      "name": "Sex Support",
+      "tagline": "Apoio à função sexual."
+    },
+    "hgh-peptidi": {
+      "name": "HGH & Péptidos",
+      "tagline": "Hormona do crescimento e péptidos."
+    },
+    "sarms": {
+      "name": "SARMs",
+      "tagline": "Moduladores seletivos dos recetores androgénicos."
+    },
+    "salute": {
+      "name": "Saúde",
+      "tagline": "Apoio cardiovascular, colesterol e acessórios."
+    }
   }
 }
