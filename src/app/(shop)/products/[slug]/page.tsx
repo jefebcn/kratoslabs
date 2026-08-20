@@ -119,6 +119,14 @@ export default async function ProductDetailPage({
           slug={product.category}
           fallbackName={category?.name ?? product.category}
           fallbackTagline={category?.description}
+          image={
+            product.images[0]
+              ? {
+                  url: product.images[0].url,
+                  alt: product.images[0].alt ?? product.title,
+                }
+              : undefined
+          }
         />
       </div>
 
