@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { ChevronRight, Gift } from "lucide-react";
 import { pointsEarnedFor, priceInPoints } from "@/lib/rewards";
 import {
@@ -23,6 +23,7 @@ import { RatingOverview } from "@/components/reviews/RatingOverview";
 import { Stars } from "@/components/reviews/Stars";
 import { findProduct, listProducts } from "@/features/products";
 import { buildBundle } from "@/lib/bundles";
+import { detailsHtml as buildDetailsHtml } from "@/lib/deus-details";
 import { ratingSummary, reviewsForProduct } from "@/features/reviews";
 import { ReviewForm } from "@/components/reviews/ReviewForm";
 import { listCategories } from "@/features/categories";
@@ -62,6 +63,24 @@ export default async function ProductDetailPage({
     (p) => p.category === product.category && p.id !== product.id,
   );
   const bundle = buildBundle(product, catalog);
+
+  // Scheda estesa: se importata (deuspower) ha la precedenza; altrimenti la
+  // generiamo dal principio attivo, nella lingua corrente. Solo per Deus Medical.
+  const locale = await getLocale();
+  const generatedDetails =
+    !product.detailsHtml && /deus/i.test(product.brand)
+      ? buildDetailsHtml(
+          {
+            title: product.title,
+            category: product.category,
+            activeName: product.specs.activeName,
+            packaging: product.specs.packaging,
+          },
+          locale,
+        )
+      : null;
+  const detailsToShow = product.detailsHtml ?? generatedDetails;
+
   const reviews = await reviewsForProduct(slug);
   const rating = ratingSummary(reviews);
   const user = await getCurrentUser();
@@ -149,8 +168,8 @@ export default async function ProductDetailPage({
             <TabsTrigger value="lab">{t("tabLab")}</TabsTrigger>
           </TabsList>
           <TabsContent value="descrizione">
-            {product.detailsHtml ? (
-              <ProductDetails html={product.detailsHtml} />
+            {detailsToShow ? (
+              <ProductDetails html={detailsToShow} />
             ) : (
               <p className="max-w-prose text-pretty text-muted">
                 {product.description}
