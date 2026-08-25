@@ -81,7 +81,10 @@ export async function Footer() {
   const t = await getTranslations("footer");
   const tNav = await getTranslations("nav");
   const year = new Date().getFullYear();
-  const handle = "@" + SITE.telegramUrl.replace(/^https?:\/\/t\.me\//, "");
+  // Da un link pubblico (t.me/nome) ricava la handle "@nome"; per un link
+  // d'invito (t.me/+hash) non c'è una handle pubblica, quindi non la mostriamo.
+  const tgPath = SITE.telegramUrl.replace(/^https?:\/\/t\.me\//, "");
+  const handle = tgPath.startsWith("+") ? null : "@" + tgPath;
 
   const infoLinks = [
     { href: "/rewards", label: tNav("rewards") },
@@ -133,7 +136,9 @@ export async function Footer() {
                 <span className="text-sm font-medium text-white">
                   {t("telegramCta")}
                 </span>
-                <span className="text-xs text-white/60">{handle}</span>
+                {handle && (
+                  <span className="text-xs text-white/60">{handle}</span>
+                )}
               </span>
             </a>
             <p className="mt-4 text-xs uppercase tracking-wide text-white/50">
