@@ -50,14 +50,17 @@ function SocialLinks({ label }: { label: string }) {
 
 function Column({
   title,
+  emoji,
   links,
 }: {
   title: string;
+  emoji?: string;
   links: readonly { href: string; label: string }[];
 }) {
   return (
     <div>
-      <h3 className="text-xs font-semibold uppercase tracking-wide text-white">
+      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-white">
+        {emoji && <span aria-hidden>{emoji}</span>}
         {title}
       </h3>
       <ul className="mt-4 flex flex-col gap-2.5">
@@ -65,9 +68,15 @@ function Column({
           <li key={l.href}>
             <Link
               href={l.href}
-              className="text-sm text-white/70 transition-colors hover:text-accent"
+              className="group flex items-center gap-2.5 text-sm text-white/70 transition-colors hover:text-accent"
             >
-              {l.label}
+              <span
+                aria-hidden
+                className="size-1.5 shrink-0 rounded-full bg-white/25 transition-colors group-hover:bg-accent"
+              />
+              <span className="transition-transform group-hover:translate-x-0.5">
+                {l.label}
+              </span>
             </Link>
           </li>
         ))}
@@ -102,11 +111,29 @@ export async function Footer() {
 
   return (
     <footer className="mt-16 border-t-2 border-accent bg-[#15181d] text-white/70">
+      {/* Striscia valori: badge rapidi con emoji */}
+      <div className="border-b border-white/10 bg-white/[0.02]">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-7 gap-y-2 px-4 py-3.5 text-xs font-medium text-white/70 sm:px-6">
+          <span className="inline-flex items-center gap-1.5">
+            <span aria-hidden>🔬</span> {t("badgeTested")}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span aria-hidden>🚚</span> {t("badgeShipping")}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span aria-hidden>🔒</span> {t("badgeSecure")}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span aria-hidden>🐺</span> {t("badgeCommunity")}
+          </span>
+        </div>
+      </div>
+
       {/* Newsletter */}
       <div className="border-b border-white/10">
         <div className="mx-auto flex max-w-2xl flex-col items-center px-4 py-8 text-center sm:px-6">
-          <h2 className="text-sm font-bold uppercase tracking-wide text-white">
-            {t("newsletterTitle")}
+          <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-white">
+            <span aria-hidden>✉️</span> {t("newsletterTitle")}
           </h2>
           <p className="mt-1 text-sm text-white/70">
             {t("newsletterSubtitle", { site: SITE.name })}
@@ -122,8 +149,16 @@ export async function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Contatto */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-white">
-              {t("contact")}
+            {/* Brand + tagline */}
+            <p className="font-display text-xl font-extrabold uppercase leading-none tracking-tight text-white">
+              Kratos<span className="text-accent">Labs</span>
+            </p>
+            <p className="mt-2 flex items-start gap-1.5 text-xs leading-relaxed text-white/55">
+              <span aria-hidden>🐺</span> {t("tagline")}
+            </p>
+
+            <h3 className="mt-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-white">
+              <span aria-hidden>📩</span> {t("contact")}
             </h3>
             <a
               href={SITE.telegramUrl}
@@ -155,13 +190,14 @@ export async function Footer() {
 
           <Column
             title={t("catalog")}
+            emoji="🛡️"
             links={categories.map((c) => ({
               href: `/products?category=${c.slug}`,
               label: c.name,
             }))}
           />
-          <Column title={t("info")} links={infoLinks} />
-          <Column title={t("legal")} links={legalLinks} />
+          <Column title={t("info")} emoji="📖" links={infoLinks} />
+          <Column title={t("legal")} emoji="⚖️" links={legalLinks} />
         </div>
       </div>
 

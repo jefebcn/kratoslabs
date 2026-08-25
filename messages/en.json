@@ -157,7 +157,12 @@
     "shipping": "Shipping & returns",
     "disclaimer": "© {year} {site}. All products are supplied strictly for research and evaluation purposes and are not presented as medical treatments or health solutions.",
     "fastShipping": "Fast shipping",
-    "follow": "Follow us"
+    "follow": "Follow us",
+    "tagline": "Discipline, transparency, verifiable quality.",
+    "badgeTested": "Third-party tested",
+    "badgeShipping": "Tracked shipping",
+    "badgeSecure": "Secure checkout",
+    "badgeCommunity": "Telegram community"
   },
   "newsletter": {
     "placeholder": "Your email",
