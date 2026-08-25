@@ -157,7 +157,12 @@
     "shipping": "Spedizioni e resi",
     "disclaimer": "© {year} {site}. Tutti i prodotti sono forniti esclusivamente a scopo di ricerca e valutazione e non sono presentati come trattamenti medici o soluzioni per la salute.",
     "fastShipping": "Spedizione veloce",
-    "follow": "Seguici"
+    "follow": "Seguici",
+    "tagline": "Disciplina, trasparenza, qualità verificabile.",
+    "badgeTested": "Analisi di terza parte",
+    "badgeShipping": "Spedizione tracciata",
+    "badgeSecure": "Checkout sicuro",
+    "badgeCommunity": "Community Telegram"
   },
   "newsletter": {
     "placeholder": "La tua email",

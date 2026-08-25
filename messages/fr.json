@@ -157,7 +157,12 @@
     "shipping": "Livraison et retours",
     "disclaimer": "© {year} {site}. Tous les produits sont fournis exclusivement à des fins de recherche et d'évaluation et ne sont pas présentés comme des traitements médicaux ou des solutions de santé.",
     "fastShipping": "Livraison rapide",
-    "follow": "Suivez-nous"
+    "follow": "Suivez-nous",
+    "tagline": "Discipline, transparence, qualité vérifiable.",
+    "badgeTested": "Analyses tierces",
+    "badgeShipping": "Expédition suivie",
+    "badgeSecure": "Paiement sécurisé",
+    "badgeCommunity": "Communauté Telegram"
   },
   "newsletter": {
     "placeholder": "Votre e-mail",

@@ -157,7 +157,12 @@
     "shipping": "Envios e devoluções",
     "disclaimer": "© {year} {site}. Todos os produtos são fornecidos exclusivamente para fins de investigação e avaliação e não são apresentados como tratamentos médicos ou soluções de saúde.",
     "fastShipping": "Envio rápido",
-    "follow": "Siga-nos"
+    "follow": "Siga-nos",
+    "tagline": "Disciplina, transparência, qualidade verificável.",
+    "badgeTested": "Análise de terceiros",
+    "badgeShipping": "Envio rastreado",
+    "badgeSecure": "Checkout seguro",
+    "badgeCommunity": "Comunidade Telegram"
   },
   "newsletter": {
     "placeholder": "O teu e-mail",
