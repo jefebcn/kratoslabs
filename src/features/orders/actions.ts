@@ -5,7 +5,7 @@ import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAdminCaller } from "@/lib/auth/require-admin";
 import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
-import { orderConfirmedEmail } from "@/lib/email/templates";
+import { orderConfirmedEmail, orderShippedEmail } from "@/lib/email/templates";
 import { addEntry, hasEntry, grantOnceBonus } from "@/features/rewards";
 import { pointsEarnedFor, BONUS_FIRST_ORDER } from "@/lib/rewards";
 
@@ -41,7 +41,7 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
     .from("orders")
     .update(patch)
     .eq("id", parsed.data.orderId)
-    .select("reference, user_id, points_redeemed")
+    .select("reference, user_id, points_redeemed, customer_email, tracking_id")
     .maybeSingle();
 
   // Se l'ordine viene annullato, restituisci al cliente i punti eventualmente
@@ -53,6 +53,16 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
       await addEntry(admin, String(ord.user_id), redeemed, "refund", ref);
     }
   }
+
+  // Email di spedizione con tracking quando l'ordine passa a "spedito".
+  if (parsed.data.status === "shipped" && isEmailConfigured && ord?.customer_email) {
+    const { subject, html, text } = orderShippedEmail({
+      reference: String(ord.reference ?? ""),
+      trackingId: (ord.tracking_id as string | null) ?? null,
+    });
+    await sendEmail({ to: String(ord.customer_email), subject, html, text });
+  }
+
   refresh();
 }
 
@@ -87,8 +97,8 @@ export async function confirmPayment(formData: FormData): Promise<void> {
       await grantOnceBonus(String(data.user_id), "bonus_first_order", BONUS_FIRST_ORDER);
     }
     if (isEmailConfigured) {
-      const { subject, html } = orderConfirmedEmail({ reference: ref });
-      await sendEmail({ to: String(data.customer_email), subject, html });
+      const { subject, html, text } = orderConfirmedEmail({ reference: ref });
+      await sendEmail({ to: String(data.customer_email), subject, html, text });
     }
   }
   refresh();

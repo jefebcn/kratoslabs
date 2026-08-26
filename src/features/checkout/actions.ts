@@ -193,11 +193,11 @@ export async function createOrder(
   // Pre-conferma via email (no-op se Resend non è configurato).
   let emailSent = false;
   if (isEmailConfigured) {
-    const { subject, html } = orderPreConfirmationEmail({
+    const { subject, html, text } = orderPreConfirmationEmail({
       reference,
       paymentMethod: d.paymentMethod,
     });
-    emailSent = await sendEmail({ to: d.email, subject, html });
+    emailSent = await sendEmail({ to: d.email, subject, html, text });
   }
 
   return {
