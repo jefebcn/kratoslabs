@@ -6,6 +6,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getAdminCaller } from "@/lib/auth/require-admin";
 import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
 import { orderConfirmedEmail, orderShippedEmail } from "@/lib/email/templates";
+import { registerTracking } from "@/lib/tracking";
 import { addEntry, hasEntry, grantOnceBonus } from "@/features/rewards";
 import { pointsEarnedFor, BONUS_FIRST_ORDER } from "@/lib/rewards";
 
@@ -54,13 +55,18 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
     }
   }
 
-  // Email di spedizione con tracking quando l'ordine passa a "spedito".
-  if (parsed.data.status === "shipped" && isEmailConfigured && ord?.customer_email) {
-    const { subject, html, text } = orderShippedEmail({
-      reference: String(ord.reference ?? ""),
-      trackingId: (ord.tracking_id as string | null) ?? null,
-    });
-    await sendEmail({ to: String(ord.customer_email), subject, html, text });
+  // Quando l'ordine passa a "spedito": registra il codice su 17TRACK (best-effort)
+  // e invia l'email di spedizione con tracking.
+  if (parsed.data.status === "shipped" && ord) {
+    const trackingId = (ord.tracking_id as string | null) ?? null;
+    if (trackingId) await registerTracking(trackingId);
+    if (isEmailConfigured && ord.customer_email) {
+      const { subject, html, text } = orderShippedEmail({
+        reference: String(ord.reference ?? ""),
+        trackingId,
+      });
+      await sendEmail({ to: String(ord.customer_email), subject, html, text });
+    }
   }
 
   refresh();

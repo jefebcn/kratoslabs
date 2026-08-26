@@ -45,7 +45,10 @@
         "paid": "Paid",
         "refunded": "Refunded",
         "failed": "Failed"
-      }
+      },
+      "liveRefresh": "Refresh status",
+      "liveChecking": "Checking…",
+      "liveNoInfo": "No updates yet"
     },
     "rewards": {
       "title": "Reward points",

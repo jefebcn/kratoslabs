@@ -45,7 +45,10 @@
         "paid": "Bezahlt",
         "refunded": "Erstattet",
         "failed": "Fehlgeschlagen"
-      }
+      },
+      "liveRefresh": "Status aktualisieren",
+      "liveChecking": "Prüfe…",
+      "liveNoInfo": "Noch keine Updates"
     },
     "rewards": {
       "title": "Treuepunkte",

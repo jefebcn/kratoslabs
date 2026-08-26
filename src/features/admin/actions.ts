@@ -3,7 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { assertAdmin } from "@/lib/auth/require-admin";
+import { assertAdmin, isCallerAdmin } from "@/lib/auth/require-admin";
+import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
+import { getCurrentUser } from "@/lib/supabase/server";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
 import { enrichDeus, describeI18n } from "@/lib/deus-descriptions";
 import { faqsForProduct, faqsI18nForProduct } from "@/lib/deus-faqs";
@@ -586,4 +588,50 @@ export async function importCatalog(
     ok: true,
     message: `Catalogo importato: ${catRows.length} categorie e ${rows.length} prodotti.`,
   };
+}
+
+export interface TestEmailResult {
+  ok: boolean;
+  message: string;
+}
+
+/**
+ * Invia un'email di test all'indirizzo dell'admin loggato per verificare che
+ * Resend (chiave + dominio) sia configurato e funzionante.
+ */
+export async function sendTestEmail(
+  _prev: TestEmailResult | null,
+  _formData: FormData,
+): Promise<TestEmailResult> {
+  if (!(await isCallerAdmin())) {
+    return { ok: false, message: "Non autorizzato." };
+  }
+  if (!isEmailConfigured) {
+    return {
+      ok: false,
+      message:
+        "Resend non configurato: imposta RESEND_API_KEY e RESEND_FROM su Vercel e ridistribuisci.",
+    };
+  }
+  const user = await getCurrentUser();
+  const to = user?.email;
+  if (!to) {
+    return { ok: false, message: "Nessun indirizzo email admin trovato." };
+  }
+  const ok = await sendEmail({
+    to,
+    subject: "Email di test — KratosLabs",
+    html: "<p>Se leggi questa email, <strong>Resend</strong> è configurato correttamente. 🐺</p>",
+    text: "Se leggi questa email, Resend è configurato correttamente.",
+  });
+  return ok
+    ? {
+        ok: true,
+        message: `Email di test inviata a ${to}. Controlla la casella (anche spam).`,
+      }
+    : {
+        ok: false,
+        message:
+          "Invio non riuscito. Controlla i log di Resend e che RESEND_FROM usi il dominio verificato.",
+      };
 }
