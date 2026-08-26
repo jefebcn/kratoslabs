@@ -10,6 +10,11 @@ import {
   emailFrom,
 } from "@/lib/email/resend";
 import { getCurrentUser } from "@/lib/supabase/server";
+import {
+  isTrackingApiConfigured,
+  registerTracking,
+  getTrackingInfo,
+} from "@/lib/tracking";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
 import { enrichDeus, describeI18n } from "@/lib/deus-descriptions";
 import { faqsForProduct, faqsI18nForProduct } from "@/lib/deus-faqs";
@@ -638,5 +643,57 @@ export async function sendTestEmail(
   return {
     ok: false,
     message: `Invio non riuscito${httpPart}. Mittente: ${emailFrom}. Errore Resend: ${result.error ?? "sconosciuto"}`,
+  };
+}
+
+export interface Track17Result {
+  ok: boolean;
+  message: string;
+}
+
+/**
+ * Diagnostica 17TRACK: registra e interroga un codice di prova per verificare
+ * che la API key sia valida e l'integrazione funzioni. Non richiede un ordine.
+ */
+export async function test17Track(
+  _prev: Track17Result | null,
+  formData: FormData,
+): Promise<Track17Result> {
+  if (!(await isCallerAdmin())) {
+    return { ok: false, message: "Non autorizzato." };
+  }
+  if (!isTrackingApiConfigured) {
+    return {
+      ok: false,
+      message:
+        "17TRACK non configurato: imposta SEVENTEENTRACK_API_KEY su Vercel e ridistribuisci.",
+    };
+  }
+  const num = String(formData.get("number") ?? "").trim();
+  if (!num) {
+    return { ok: false, message: "Inserisci un codice di tracciamento di prova." };
+  }
+
+  const registered = await registerTracking(num);
+  if (!registered) {
+    return {
+      ok: false,
+      message:
+        "Chiamata 17TRACK non riuscita: chiave non valida, quota esaurita o API non raggiungibile.",
+    };
+  }
+
+  const info = await getTrackingInfo(num);
+  if (info) {
+    const parts = [info.status, info.description, info.location].filter(Boolean);
+    return {
+      ok: true,
+      message: `API 17TRACK OK. Stato: ${parts.join(" · ")}`,
+    };
+  }
+  return {
+    ok: true,
+    message:
+      "API 17TRACK OK (chiave valida). Nessuno stato ancora per questo codice: numero nuovo/di test o non ancora acquisito dal corriere.",
   };
 }

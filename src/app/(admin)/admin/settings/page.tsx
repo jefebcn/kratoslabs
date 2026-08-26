@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SettingsForm } from "@/components/admin/SettingsForm";
 import { TestEmailButton } from "@/components/admin/TestEmailButton";
+import { Test17TrackButton } from "@/components/admin/Test17TrackButton";
 import { getSiteSettings } from "@/features/settings";
 import { hasServiceRole } from "@/lib/supabase/admin";
 
@@ -29,6 +30,7 @@ export default async function AdminSettingsPage() {
       <SettingsForm settings={settings} />
 
       <TestEmailButton />
+      <Test17TrackButton />
     </div>
   );
 }
