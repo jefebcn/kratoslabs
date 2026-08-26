@@ -9,9 +9,17 @@
  */
 import { SITE } from "@/lib/constants";
 
+/**
+ * Pulisce un indirizzo/mittente: rimuove spazi e punteggiatura finale (es. un
+ * punto lasciato per errore in RESEND_FROM), che renderebbe il campo non valido.
+ */
+function cleanAddress(v: string): string {
+  return v.trim().replace(/[\s.,;]+$/, "").trim();
+}
+
 const RESEND_API_KEY = (process.env.RESEND_API_KEY ?? "").trim();
-const RESEND_FROM = (process.env.RESEND_FROM ?? "").trim();
-const RESEND_REPLY_TO = (process.env.RESEND_REPLY_TO ?? SITE.email).trim();
+const RESEND_FROM = cleanAddress(process.env.RESEND_FROM ?? "");
+const RESEND_REPLY_TO = cleanAddress(process.env.RESEND_REPLY_TO ?? SITE.email);
 
 export const isEmailConfigured = Boolean(RESEND_API_KEY && RESEND_FROM);
 
