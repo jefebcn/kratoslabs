@@ -45,7 +45,10 @@
         "paid": "Pagato",
         "refunded": "Rimborsato",
         "failed": "Fallito"
-      }
+      },
+      "liveRefresh": "Aggiorna stato",
+      "liveChecking": "Controllo…",
+      "liveNoInfo": "Nessun aggiornamento disponibile"
     },
     "rewards": {
       "title": "Punti fedeltà",

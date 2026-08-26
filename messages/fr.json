@@ -45,7 +45,10 @@
         "paid": "Payé",
         "refunded": "Remboursé",
         "failed": "Échoué"
-      }
+      },
+      "liveRefresh": "Actualiser le statut",
+      "liveChecking": "Vérification…",
+      "liveNoInfo": "Aucune mise à jour"
     },
     "rewards": {
       "title": "Points de fidélité",

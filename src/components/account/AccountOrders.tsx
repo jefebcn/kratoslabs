@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { ExternalLink, Package, Truck } from "lucide-react";
 import { formatPrice, cn } from "@/lib/utils";
-import { trackingUrl } from "@/lib/tracking";
+import { trackingUrl, isTrackingApiConfigured } from "@/lib/tracking";
+import { LiveTrackingStatus } from "@/components/account/LiveTrackingStatus";
 import type { AdminOrder } from "@/features/orders";
 import type { OrderStatus } from "@/types";
 
@@ -86,28 +87,40 @@ export async function AccountOrders({ orders }: { orders: AdminOrder[] }) {
             {(o.trackingId ||
               o.status === "pending" ||
               o.status === "processing") && (
-              <div className="mt-3 flex items-center gap-2 rounded-base bg-surface-2 px-3 py-2 text-xs">
+              <div className="mt-3 rounded-base bg-surface-2 px-3 py-2 text-xs">
                 {o.trackingId ? (
                   <>
-                    <Truck className="size-4 text-accent" aria-hidden />
-                    <span className="font-medium text-text">
-                      {t("tracking")}:
-                    </span>
-                    <a
-                      href={trackingUrl(o.trackingId)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-accent hover:underline"
-                    >
-                      {o.trackingId}
-                      <ExternalLink className="size-3" aria-hidden />
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <Truck className="size-4 text-accent" aria-hidden />
+                      <span className="font-medium text-text">
+                        {t("tracking")}:
+                      </span>
+                      <a
+                        href={trackingUrl(o.trackingId)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-mono text-accent hover:underline"
+                      >
+                        {o.trackingId}
+                        <ExternalLink className="size-3" aria-hidden />
+                      </a>
+                    </div>
+                    {isTrackingApiConfigured && (
+                      <LiveTrackingStatus
+                        trackingId={o.trackingId}
+                        labels={{
+                          refresh: t("liveRefresh"),
+                          checking: t("liveChecking"),
+                          noInfo: t("liveNoInfo"),
+                        }}
+                      />
+                    )}
                   </>
                 ) : (
-                  <>
+                  <div className="flex items-center gap-2">
                     <Package className="size-4 text-muted" aria-hidden />
                     <span className="text-muted">{t("trackingWaiting")}</span>
-                  </>
+                  </div>
                 )}
               </div>
             )}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SettingsForm } from "@/components/admin/SettingsForm";
+import { TestEmailButton } from "@/components/admin/TestEmailButton";
 import { getSiteSettings } from "@/features/settings";
 import { hasServiceRole } from "@/lib/supabase/admin";
 
@@ -26,6 +27,8 @@ export default async function AdminSettingsPage() {
       )}
 
       <SettingsForm settings={settings} />
+
+      <TestEmailButton />
     </div>
   );
 }
