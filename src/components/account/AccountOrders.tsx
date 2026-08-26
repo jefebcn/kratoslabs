@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { Package, Truck } from "lucide-react";
+import { ExternalLink, Package, Truck } from "lucide-react";
 import { formatPrice, cn } from "@/lib/utils";
+import { trackingUrl } from "@/lib/tracking";
 import type { AdminOrder } from "@/features/orders";
 import type { OrderStatus } from "@/types";
 
@@ -92,7 +93,15 @@ export async function AccountOrders({ orders }: { orders: AdminOrder[] }) {
                     <span className="font-medium text-text">
                       {t("tracking")}:
                     </span>
-                    <span className="font-mono">{o.trackingId}</span>
+                    <a
+                      href={trackingUrl(o.trackingId)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-accent hover:underline"
+                    >
+                      {o.trackingId}
+                      <ExternalLink className="size-3" aria-hidden />
+                    </a>
                   </>
                 ) : (
                   <>

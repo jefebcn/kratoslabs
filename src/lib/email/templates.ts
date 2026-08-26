@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/constants";
+import { trackingUrl } from "@/lib/tracking";
 
 export interface EmailContent {
   subject: string;
@@ -174,14 +175,14 @@ export function orderShippedEmail({
       ${trackRow}
     </table>
     <p style="margin:0 0 4px">Consegna indicativa in <strong>2–4 settimane</strong>. Imballo neutro e anonimo, con tracciamento.</p>
-    ${button(`${SITE_URL}/account`, "Vedi i tuoi ordini")}
+    ${hasTracking ? button(trackingUrl(String(trackingId)), "Traccia spedizione") : button(`${SITE_URL}/account`, "Vedi i tuoi ordini")}
     <p style="margin:0;color:${MUTED};font-size:13px">Se il tracciamento non si aggiorna o hai domande, rispondi a questa email o scrivici su Telegram.</p>
     `,
     `Ordine ${reference} spedito${hasTracking ? ` — tracking ${trackingId}` : ""}`,
   );
   const text = `Il tuo ordine è in viaggio.
 
-Riferimento ordine: ${reference}${hasTracking ? `\nCodice di tracciamento: ${trackingId}` : ""}
+Riferimento ordine: ${reference}${hasTracking ? `\nCodice di tracciamento: ${trackingId}\nTraccia: ${trackingUrl(String(trackingId))}` : ""}
 
 Consegna indicativa in 2–4 settimane. Imballo neutro e anonimo, con tracciamento.
 I tuoi ordini: ${SITE_URL}/account
