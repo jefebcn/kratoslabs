@@ -4,7 +4,11 @@ import { revalidatePath } from "next/cache";
 import { productFormSchema } from "./schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { assertAdmin, isCallerAdmin } from "@/lib/auth/require-admin";
-import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
+import {
+  isEmailConfigured,
+  sendEmailResult,
+  emailFrom,
+} from "@/lib/email/resend";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { DEUS_CATEGORIES, DEUS_PRODUCTS } from "@/lib/deus-catalog";
 import { enrichDeus, describeI18n } from "@/lib/deus-descriptions";
@@ -618,20 +622,21 @@ export async function sendTestEmail(
   if (!to) {
     return { ok: false, message: "Nessun indirizzo email admin trovato." };
   }
-  const ok = await sendEmail({
+  const result = await sendEmailResult({
     to,
     subject: "Email di test — KratosLabs",
     html: "<p>Se leggi questa email, <strong>Resend</strong> è configurato correttamente. 🐺</p>",
     text: "Se leggi questa email, Resend è configurato correttamente.",
   });
-  return ok
-    ? {
-        ok: true,
-        message: `Email di test inviata a ${to}. Controlla la casella (anche spam).`,
-      }
-    : {
-        ok: false,
-        message:
-          "Invio non riuscito. Controlla i log di Resend e che RESEND_FROM usi il dominio verificato.",
-      };
+  if (result.ok) {
+    return {
+      ok: true,
+      message: `Email di test inviata a ${to} (mittente: ${emailFrom}). Controlla la casella, anche lo spam.`,
+    };
+  }
+  const httpPart = result.status ? ` (HTTP ${result.status})` : "";
+  return {
+    ok: false,
+    message: `Invio non riuscito${httpPart}. Mittente: ${emailFrom}. Errore Resend: ${result.error ?? "sconosciuto"}`,
+  };
 }

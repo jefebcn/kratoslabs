@@ -15,13 +15,18 @@ const RESEND_REPLY_TO = (process.env.RESEND_REPLY_TO ?? SITE.email).trim();
 
 export const isEmailConfigured = Boolean(RESEND_API_KEY && RESEND_FROM);
 
-export async function sendEmail({
-  to,
-  subject,
-  html,
-  text,
-  replyTo,
-}: {
+/** Mittente configurato (senza segreti): utile solo per la diagnostica admin. */
+export const emailFrom = RESEND_FROM;
+
+export interface SendResult {
+  ok: boolean;
+  /** Codice HTTP restituito da Resend, se disponibile. */
+  status?: number;
+  /** Messaggio d'errore leggibile (dal corpo della risposta Resend). */
+  error?: string;
+}
+
+interface SendArgs {
   to: string;
   subject: string;
   html: string;
@@ -29,8 +34,25 @@ export async function sendEmail({
   text?: string;
   /** Sovrascrive il reply-to di default. */
   replyTo?: string;
-}): Promise<boolean> {
-  if (!isEmailConfigured) return false;
+}
+
+/**
+ * Invia l'email e restituisce l'esito dettagliato, incluso il messaggio
+ * d'errore reale di Resend (es. dominio non verificato, from non valido).
+ */
+export async function sendEmailResult({
+  to,
+  subject,
+  html,
+  text,
+  replyTo,
+}: SendArgs): Promise<SendResult> {
+  if (!isEmailConfigured) {
+    return {
+      ok: false,
+      error: "Email non configurata (RESEND_API_KEY / RESEND_FROM mancanti).",
+    };
+  }
   try {
     const payload: Record<string, unknown> = {
       from: RESEND_FROM,
@@ -50,8 +72,27 @@ export async function sendEmail({
       },
       body: JSON.stringify(payload),
     });
-    return res.ok;
-  } catch {
-    return false;
+    if (res.ok) return { ok: true, status: res.status };
+
+    // Estrae il messaggio d'errore reale dal corpo della risposta.
+    let message = "";
+    try {
+      const body = (await res.json()) as { message?: string; error?: string };
+      message = body.message || body.error || "";
+    } catch {
+      try {
+        message = await res.text();
+      } catch {
+        message = "";
+      }
+    }
+    return { ok: false, status: res.status, error: message || `HTTP ${res.status}` };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Errore di rete" };
   }
+}
+
+/** Invio "fire and forget": true se accettato da Resend. */
+export async function sendEmail(args: SendArgs): Promise<boolean> {
+  return (await sendEmailResult(args)).ok;
 }
