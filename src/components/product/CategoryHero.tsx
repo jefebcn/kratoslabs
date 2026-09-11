@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { categoryName, categoryTagline } from "@/lib/category-i18n";
 import {
   Atom,
   Dna,
@@ -27,8 +28,9 @@ const ICONS: Record<string, LucideIcon> = {
 
 /**
  * Banner hero della categoria, mostrato in cima alla scheda prodotto. Nome e
- * sottotitolo sono localizzati (namespace `productCategory`), con fallback ai
- * valori del catalogo. Banda scura brandizzata, coerente in tema chiaro/scuro.
+ * sottotitolo rispettano l'eventuale rinomina dell'admin; se la categoria è
+ * ancora quella di default vengono localizzati (namespace `productCategory`).
+ * Banda scura brandizzata, coerente in tema chiaro/scuro.
  */
 export async function CategoryHero({
   slug,
@@ -42,10 +44,8 @@ export async function CategoryHero({
   image?: { url: string; alt: string };
 }) {
   const t = await getTranslations("productCategory");
-  const name = t.has(`${slug}.name`) ? t(`${slug}.name`) : fallbackName;
-  const tagline = t.has(`${slug}.tagline`)
-    ? t(`${slug}.tagline`)
-    : (fallbackTagline ?? "");
+  const name = categoryName(t, slug, fallbackName);
+  const tagline = categoryTagline(t, slug, fallbackTagline ?? "");
   const eyebrow = t.has("eyebrow") ? t("eyebrow") : "Categoria";
   const Icon = ICONS[slug] ?? Package;
 

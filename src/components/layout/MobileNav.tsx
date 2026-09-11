@@ -26,6 +26,7 @@ import { CurrencyToggle } from "@/components/layout/CurrencyToggle";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import type { Category } from "@/types";
 import { categoryIcon } from "@/lib/category-icons";
+import { categoryName } from "@/lib/category-i18n";
 
 /** Pagine nel drawer: href, icona e chiave di traduzione (namespace nav). */
 const PAGES: { href: string; icon: LucideIcon; key: string }[] = [
@@ -43,6 +44,7 @@ export function MobileNav({ categories }: { categories: Category[] }) {
   const tNav = useTranslations("nav");
   const tMenu = useTranslations("menu");
   const tAcc = useTranslations("account");
+  const tCat = useTranslations("productCategory");
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -80,7 +82,7 @@ export function MobileNav({ categories }: { categories: Category[] }) {
                   className="flex items-center gap-3 py-2 text-sm transition-colors hover:text-accent"
                 >
                   <Icon className="size-4 shrink-0 text-muted" aria-hidden />
-                  {c.name}
+                  {categoryName(tCat, c.slug, c.name)}
                 </Link>
               );
             })}

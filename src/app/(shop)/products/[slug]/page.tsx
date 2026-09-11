@@ -28,6 +28,7 @@ import { detailsHtml as buildDetailsHtml } from "@/lib/deus-details";
 import { ratingSummary, reviewsForProduct } from "@/features/reviews";
 import { ReviewForm } from "@/components/reviews/ReviewForm";
 import { listCategories } from "@/features/categories";
+import { categoryName } from "@/lib/category-i18n";
 import { getCurrentUser } from "@/lib/supabase/server";
 
 export async function generateMetadata({
@@ -57,8 +58,12 @@ export default async function ProductDetailPage({
   if (!product) notFound();
 
   const t = await getTranslations("product");
+  const tCat = await getTranslations("productCategory");
   const categories = await listCategories();
   const category = categories.find((c) => c.slug === product.category);
+  const categoryLabel = category
+    ? categoryName(tCat, category.slug, category.name)
+    : undefined;
   const catalog = await listProducts();
   const related = catalog.filter(
     (p) => p.category === product.category && p.id !== product.id,
@@ -106,7 +111,7 @@ export default async function ProductDetailPage({
               href={`/products?category=${category.slug}`}
               className="hover:text-text"
             >
-              {category.name}
+              {categoryLabel}
             </Link>
           </>
         )}

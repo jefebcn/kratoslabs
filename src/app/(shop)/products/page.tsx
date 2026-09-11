@@ -1,10 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { listProducts, searchProducts } from "@/features/products";
 import { listCategories } from "@/features/categories";
+import { categoryName } from "@/lib/category-i18n";
 import { cn } from "@/lib/utils";
 import type { CategorySlug, LocaleCode } from "@/types";
 import contentByLocale from "./content.json";
@@ -64,7 +65,10 @@ export default async function ProductsPage({
   const c = pick(locale);
 
   const { category, q } = await searchParams;
-  const categories = await listCategories();
+  const [categories, tCat] = await Promise.all([
+    listCategories(),
+    getTranslations("productCategory"),
+  ]);
   const slugs = categories.map((c) => c.slug);
   const activeCategory =
     category && slugs.includes(category as CategorySlug)
@@ -76,8 +80,11 @@ export default async function ProductsPage({
     ? base.filter((p) => p.category === activeCategory)
     : base;
 
-  const activeName = activeCategory
-    ? categories.find((c) => c.slug === activeCategory)?.name
+  const activeCat = activeCategory
+    ? categories.find((c) => c.slug === activeCategory)
+    : undefined;
+  const activeName = activeCat
+    ? categoryName(tCat, activeCat.slug, activeCat.name)
     : undefined;
 
   const title =
@@ -103,7 +110,7 @@ export default async function ProductsPage({
             href={`/products?category=${c.slug}`}
             active={activeCategory === c.slug}
           >
-            {c.name}
+            {categoryName(tCat, c.slug, c.name)}
           </FilterPill>
         ))}
       </div>
