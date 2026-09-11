@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import type { Category } from "@/types";
 import { categoryIcon } from "@/lib/category-icons";
+import { categoryName } from "@/lib/category-i18n";
 
 interface NavItem {
   href: string;
@@ -20,11 +21,12 @@ interface NavItem {
 /** Barra categorie desktop (nascosta su mobile: lì c'è il drawer). */
 export function CategoryNav({ categories }: { categories: Category[] }) {
   const t = useTranslations("nav");
+  const tc = useTranslations("productCategory");
   const items: NavItem[] = [
     { href: "/", label: t("home"), icon: Home },
     ...categories.map((c) => ({
       href: `/products?category=${c.slug}`,
-      label: c.name,
+      label: categoryName(tc, c.slug, c.name),
       icon: categoryIcon(c.slug),
     })),
     { href: "/products", label: t("allProducts"), icon: LayoutGrid },

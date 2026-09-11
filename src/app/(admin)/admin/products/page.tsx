@@ -5,12 +5,16 @@ import { Button } from "@/components/ui/button";
 import { ProductsTable } from "@/components/admin/ProductsTable";
 import { ImportCatalogButton } from "@/components/admin/ImportCatalogButton";
 import { listProducts } from "@/features/products";
+import { listCategories } from "@/features/categories";
 import { hasServiceRole } from "@/lib/supabase/admin";
 
 export const metadata: Metadata = { title: "Prodotti" };
 
 export default async function AdminProductsPage() {
-  const products = await listProducts();
+  const [products, categories] = await Promise.all([
+    listProducts(),
+    listCategories(),
+  ]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -39,7 +43,7 @@ export default async function AdminProductsPage() {
         </p>
       )}
 
-      <ProductsTable products={products} />
+      <ProductsTable products={products} categories={categories} />
     </div>
   );
 }

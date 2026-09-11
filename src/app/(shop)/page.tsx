@@ -13,6 +13,7 @@ import { ReviewsSection } from "@/components/reviews/ReviewsSection";
 import { listFeaturedProducts, listProducts } from "@/features/products";
 import { SITE, TRUST_BADGES } from "@/lib/constants";
 import { listCategories } from "@/features/categories";
+import { categoryName } from "@/lib/category-i18n";
 import { listGalleryImages } from "@/features/gallery/queries";
 
 // Ordine allineato a TRUST_BADGES: mappa ogni badge alla sua chiave i18n.
@@ -44,6 +45,7 @@ const SLIDES: HeroSlide[] = [
 
 export default async function HomePage() {
   const t = await getTranslations("home");
+  const tCat = await getTranslations("productCategory");
   const locale = await getLocale();
   // Banner testuali localizzati: it = nome base, altre lingue = suffisso -xx.
   const suffix = locale === "it" ? "" : `-${locale}`;
@@ -84,7 +86,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-7xl px-4 pt-10 sm:px-6">
             {/* Barra rossa larga quanto la griglia prodotti sotto. */}
             <p className="bg-accent px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.2em] text-white">
-              {category.name}
+              {categoryName(tCat, category.slug, category.name)}
             </p>
           </div>
           <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -94,7 +96,7 @@ export default async function HomePage() {
                 href={`/products?category=${category.slug}`}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-accent transition-colors hover:underline"
               >
-                {t("viewAll", { category: category.name })}
+                {t("viewAll", { category: categoryName(tCat, category.slug, category.name) })}
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
             </div>

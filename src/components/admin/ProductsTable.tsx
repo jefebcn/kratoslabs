@@ -4,13 +4,23 @@ import { Pencil, Trash2 } from "lucide-react";
 import { CATEGORIES } from "@/lib/constants";
 import { formatPrice } from "@/lib/utils";
 import { deleteProduct } from "@/features/admin";
-import type { Product } from "@/types";
+import type { Category, Product } from "@/types";
 
-function categoryName(slug: string) {
-  return CATEGORIES.find((c) => c.slug === slug)?.name ?? slug;
-}
+export function ProductsTable({
+  products,
+  categories = CATEGORIES,
+}: {
+  products: Product[];
+  categories?: Category[];
+}) {
+  // Nome categoria dal DB (riflette le rinomine dell'admin), con fallback al
+  // catalogo di default e infine allo slug.
+  const nameBySlug = new Map(categories.map((c) => [c.slug, c.name]));
+  const categoryName = (slug: string) =>
+    nameBySlug.get(slug) ??
+    CATEGORIES.find((c) => c.slug === slug)?.name ??
+    slug;
 
-export function ProductsTable({ products }: { products: Product[] }) {
   return (
     <div className="overflow-x-auto rounded-base border border-border">
       <table className="w-full min-w-[720px] text-sm">
