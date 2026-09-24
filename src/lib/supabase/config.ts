@@ -55,16 +55,21 @@ export const isSupabaseConfigured =
 
 /**
  * Un utente è admin se:
- *  - ha il ruolo "admin" nei metadati Supabase (app_metadata/user_metadata.role), oppure
+ *  - ha il ruolo "admin" in `app_metadata.role` (scritto solo dal service role,
+ *    vedi `setUserRole` in src/features/users/actions.ts), oppure
  *  - la sua email è nell'allowlist ADMIN_EMAILS (env solo-server, separata da virgole).
  * Usare SOLO lato server/middleware (ADMIN_EMAILS non è esposto al client).
+ *
+ * IMPORTANTE: non leggere mai `user_metadata` per decidere i permessi.
+ * `user_metadata` (= `raw_user_meta_data`) è scrivibile dall'utente stesso con
+ * la sola chiave pubblica — `supabase.auth.updateUser({ data: { ... } })` — quindi
+ * un fallback su quel campo permetterebbe a chiunque si registri di promuoversi
+ * ad admin dalla console del browser. Solo `app_metadata` è immutabile dal client.
  */
 export function isAdminUser(user: User | null | undefined): boolean {
   if (!user) return false;
 
-  const role =
-    (user.app_metadata?.role as string | undefined) ??
-    (user.user_metadata?.role as string | undefined);
+  const role = user.app_metadata?.role as string | undefined;
   if (role === "admin") return true;
 
   const allow = (process.env.ADMIN_EMAILS ?? "")
