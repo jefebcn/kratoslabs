@@ -42,10 +42,9 @@ export async function listUsers(): Promise<AdminUser[]> {
         email: u.email ?? "—",
         createdAt: u.created_at,
         lastSignInAt: u.last_sign_in_at ?? null,
-        role:
-          ((u.app_metadata?.role as string | undefined) ??
-            (u.user_metadata?.role as string | undefined)) ||
-          null,
+        // Solo `app_metadata`: `user_metadata` è scrivibile dall'utente stesso,
+        // quindi mostrarlo qui farebbe apparire "admin" chi si è auto-promosso.
+        role: (u.app_metadata?.role as string | undefined) || null,
         isAdmin: isAdminUser(u),
         banned: isBanned(u),
         emailConfirmed: Boolean(u.email_confirmed_at),
