@@ -45,13 +45,19 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
     .select("reference, user_id, points_redeemed, customer_email, tracking_id")
     .maybeSingle();
 
-  // Se l'ordine viene annullato, restituisci al cliente i punti eventualmente
-  // usati (una sola volta).
-  if (parsed.data.status === "cancelled" && ord?.user_id) {
-    const ref = String(ord.reference ?? "");
-    const redeemed = Number(ord.points_redeemed ?? 0);
-    if (redeemed > 0 && !(await hasEntry(admin, ref, "refund"))) {
-      await addEntry(admin, String(ord.user_id), redeemed, "refund", ref);
+  // Se l'ordine viene annullato, rimetti la merce a magazzino (il checkout la
+  // scala alla creazione) e restituisci al cliente i punti eventualmente usati.
+  // Entrambe le operazioni sono idempotenti: annullare due volte non gonfia lo
+  // stock né accredita i punti due volte.
+  if (parsed.data.status === "cancelled" && ord) {
+    await admin.rpc("restore_order_stock", { p_order_id: parsed.data.orderId });
+
+    if (ord.user_id) {
+      const ref = String(ord.reference ?? "");
+      const redeemed = Number(ord.points_redeemed ?? 0);
+      if (redeemed > 0 && !(await hasEntry(admin, ref, "refund"))) {
+        await addEntry(admin, String(ord.user_id), redeemed, "refund", ref);
+      }
     }
   }
 
