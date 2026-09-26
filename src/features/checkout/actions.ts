@@ -5,7 +5,7 @@ import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
 import { orderPreConfirmationEmail } from "@/lib/email/templates";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getCurrentUser } from "@/lib/supabase/server";
-import { balanceFor, addEntry } from "@/features/rewards";
+import { balanceFor } from "@/features/rewards";
 import { maxRedeemablePoints, discountCentsFor } from "@/lib/rewards";
 import { listProducts } from "@/features/products";
 import { priceLine } from "@/features/products/pricing";
@@ -59,10 +59,45 @@ function parseLines(raw: string): CartLine[] {
 }
 
 /**
- * Server Action del checkout. Valida i dati, persiste l'ordine su Supabase
- * (service role, così il server controlla totali e stato) e invia la
- * pre-conferma via email. Se la persistenza o l'email non sono configurate, il
- * flusso resta funzionante: il cliente riceve comunque il riferimento.
+ * Riferimento ordine univoco e non indovinabile.
+ *
+ * La versione precedente (`KL-` + ultime 6 cifre di Date.now()) si ripeteva
+ * ogni 10^6 ms ≈ 16 minuti e 40 secondi: su una colonna `unique` la collisione
+ * faceva fallire l'inserimento, ed essendo di soli 10^6 valori la reference era
+ * anche enumerabile. Qui usiamo 10 caratteri esadecimali casuali (~1,1e12
+ * combinazioni), generati con il CSPRNG della piattaforma.
+ */
+function newOrderReference(): string {
+  const hex = globalThis.crypto.randomUUID().replace(/-/g, "");
+  return `KL-${hex.slice(0, 10).toUpperCase()}`;
+}
+
+/**
+ * Traduce l'errore sollevato da `create_order` in un messaggio per il cliente.
+ * Gli identificatori (`insufficient_stock:<slug>`, `insufficient_points`) sono
+ * definiti in supabase/migrations/0019_create_order_tx.sql.
+ */
+function orderErrorMessage(raw: string, lines: CartLine[]): string {
+  const stock = /insufficient_stock:(\S+)/.exec(raw);
+  if (stock) {
+    const slug = stock[1];
+    const title = lines.find((l) => l.slug === slug)?.title ?? slug;
+    return `Scorte insufficienti per "${title}". Riduci la quantità o rimuovilo dal carrello.`;
+  }
+  if (raw.includes("insufficient_points")) {
+    return "Il tuo saldo punti è cambiato nel frattempo. Ricarica la pagina e riprova.";
+  }
+  return "Non è stato possibile registrare l'ordine. Riprova tra poco; se il problema persiste scrivici.";
+}
+
+/**
+ * Server Action del checkout. Valida i dati, ricalcola i totali dai prezzi reali
+ * del catalogo e persiste l'ordine su Supabase tramite la funzione transazionale
+ * `create_order` (stock + ordine + punti in un'unica transazione).
+ *
+ * Se la persistenza fallisce l'ordine NON viene confermato: restituire `ok: true`
+ * senza una riga a database significherebbe mandare al cliente un riferimento —
+ * e un invito a pagare — per un ordine che non esiste.
  */
 export async function createOrder(
   _prev: CheckoutResult | null,
@@ -128,7 +163,7 @@ export async function createOrder(
     0,
     Math.floor(Number(formData.get("redeemPoints") ?? 0)) || 0,
   );
-  const reference = `KL-${Date.now().toString().slice(-6)}`;
+  const reference = newOrderReference();
 
   // Spedizione: tariffa unica, gratuita oltre la soglia. Calcolata sul
   // subtotale merce (mai dal client).
@@ -139,54 +174,62 @@ export async function createOrder(
   let discountCents = 0;
   let totalCents = subtotalCents + shippingCents;
 
-  // Persistenza su Supabase (best-effort: non blocca il checkout se assente).
   const admin = createAdminClient();
-  if (admin) {
-    try {
-      const user = await getCurrentUser();
 
-      if (user && requestedPoints > 0) {
-        const balance = await balanceFor(admin, user.id);
-        pointsRedeemed = maxRedeemablePoints(
-          Math.min(balance, requestedPoints),
-          subtotalCents,
-        );
-        discountCents = discountCentsFor(pointsRedeemed);
-        totalCents = Math.max(0, subtotalCents - discountCents) + shippingCents;
-      }
+  if (!admin) {
+    // Senza service role non possiamo scrivere l'ordine. In produzione è una
+    // misconfigurazione: fermarsi è l'unico comportamento onesto, perché
+    // confermare un ordine che non viene salvato porta il cliente a pagare per
+    // nulla. In sviluppo si prosegue, così il flusso resta provabile a vuoto.
+    if (process.env.NODE_ENV === "production") {
+      return {
+        ok: false,
+        message:
+          "Il servizio ordini non è disponibile in questo momento. Riprova più tardi o scrivici.",
+      };
+    }
+  } else {
+    const user = await getCurrentUser();
 
-      await admin.from("orders").insert({
-        reference,
-        user_id: user?.id ?? null,
-        customer_email: d.email,
-        status: "pending",
-        total_cents: totalCents,
-        discount_cents: discountCents,
-        points_redeemed: pointsRedeemed,
-        lines,
-        shipping: {
-          firstName: d.firstName,
-          lastName: d.lastName,
-          address: d.address,
-          city: d.city,
-          postalCode: d.postalCode,
-          country: d.country,
-          costCents: shippingCents,
-          notes: d.notes ?? "",
-        },
-        payment_method: d.paymentMethod,
-        payment_status: "unpaid",
-      });
+    // Sconto punti: proposto qui sui dati correnti, ma il saldo viene
+    // riverificato dentro la transazione (vedi create_order), così due checkout
+    // in parallelo non possono spendere lo stesso credito.
+    if (user && requestedPoints > 0) {
+      const balance = await balanceFor(admin, user.id);
+      pointsRedeemed = maxRedeemablePoints(
+        Math.min(balance, requestedPoints),
+        subtotalCents,
+      );
+      discountCents = discountCentsFor(pointsRedeemed);
+      totalCents = Math.max(0, subtotalCents - discountCents) + shippingCents;
+    }
 
-      // Scala i punti usati (il guadagno arriva alla conferma del pagamento).
-      if (user && pointsRedeemed > 0) {
-        await addEntry(admin, user.id, -pointsRedeemed, "redeem", reference);
-      }
-    } catch {
-      // Persistenza non riuscita: si prosegue comunque con la pre-conferma.
-      pointsRedeemed = 0;
-      discountCents = 0;
-      totalCents = subtotalCents + shippingCents;
+    // Stock, ordine e ledger punti in un'unica transazione: se un passo
+    // fallisce non resta nulla a metà.
+    const { error } = await admin.rpc("create_order", {
+      p_reference: reference,
+      p_user_id: user?.id ?? null,
+      p_customer_email: d.email,
+      p_lines: lines,
+      p_shipping: {
+        firstName: d.firstName,
+        lastName: d.lastName,
+        address: d.address,
+        city: d.city,
+        postalCode: d.postalCode,
+        country: d.country,
+        costCents: shippingCents,
+        notes: d.notes ?? "",
+      },
+      p_payment_method: d.paymentMethod,
+      p_total_cents: totalCents,
+      p_discount_cents: discountCents,
+      p_points_redeemed: pointsRedeemed,
+    });
+
+    if (error) {
+      // Nessuna email, nessun riferimento: l'ordine non esiste.
+      return { ok: false, message: orderErrorMessage(error.message, lines) };
     }
   }
 
