@@ -19,13 +19,23 @@ import { listGalleryImages } from "@/features/gallery/queries";
 // Ordine allineato a TRUST_BADGES: mappa ogni badge alla sua chiave i18n.
 const BADGE_KEYS = ["analysis", "shipping", "packaging", "payments"] as const;
 
+/**
+ * Slide del carosello, in ordine di utilità per chi arriva da fuori (social,
+ * ricerca) e non conosce il sito.
+ *
+ * La prima slide è quella che porta al catalogo: è la sola che risponde alla
+ * domanda "cosa vendete?". Telegram resta in coda perché la sua CTA porta
+ * FUORI dal sito: metterla per prima significa perdere il visitatore prima
+ * ancora che abbia visto un prodotto. Stesso ragionamento per la recensione,
+ * che ha senso solo per chi ha già acquistato.
+ */
 const SLIDES: HeroSlide[] = [
   {
-    eyebrow: "Community",
-    title: "Unisciti alla community Telegram",
+    eyebrow: "Kratos Labs",
+    title: "Kratos Athletes",
     subtitle: "",
-    cta: { label: "Unisciti", href: SITE.telegramUrl },
-    banner: "/images/banner-telegram.png",
+    cta: { label: "Esplora il catalogo", href: "/products" },
+    banner: "/images/carousel-hero.jpg",
   },
   {
     eyebrow: "Community",
@@ -35,11 +45,11 @@ const SLIDES: HeroSlide[] = [
     banner: "/images/banner-recensioni.png",
   },
   {
-    eyebrow: "Kratos Labs",
-    title: "Kratos Athletes",
+    eyebrow: "Community",
+    title: "Unisciti alla community Telegram",
     subtitle: "",
-    cta: { label: "Esplora il catalogo", href: "/products" },
-    banner: "/images/carousel-hero.jpg",
+    cta: { label: "Unisciti", href: SITE.telegramUrl },
+    banner: "/images/banner-telegram.png",
   },
 ];
 

@@ -6,10 +6,15 @@ import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { AccountMenu } from "@/components/layout/AccountMenu";
 
 /**
- * Barra utility in cima.
- *  - Mobile: solo account (sinistra) e lingua (destra), per non affollare.
- *    Le voci informative e la valuta vivono nel menu hamburger.
- *  - Desktop: voci informative a sinistra; valuta, lingua e account a destra.
+ * Barra utility in cima. Visibile solo da `sm` in su.
+ *
+ * Su mobile è nascosta: occupava 40px della prima schermata per offrire
+ * "accedi" e la lingua a un visitatore che spesso arriva da un social e non
+ * ha ancora visto un prodotto. Entrambe le voci — più registrazione, valuta e
+ * link informativi — sono già nel menu hamburger, quindi non si perde nulla e
+ * si guadagna spazio dove serve.
+ *
+ * Da `sm` in su: voci informative a sinistra; valuta, lingua e account a destra.
  */
 export function AccountBar() {
   const t = useTranslations("nav");
@@ -19,7 +24,7 @@ export function AccountBar() {
     { href: "/all-ingrosso", label: t("wholesale"), icon: Store },
   ];
   return (
-    <div className="bg-[#2a2e35] text-white">
+    <div className="hidden bg-[#2a2e35] text-white sm:block">
       <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6">
         {/* Sinistra */}
         <div className="flex items-center">
@@ -35,10 +40,6 @@ export function AccountBar() {
               </Link>
             ))}
           </nav>
-          {/* Su mobile l'account sta a sinistra (stile competitor). */}
-          <div className="sm:hidden">
-            <AccountMenu />
-          </div>
         </div>
 
         {/* Destra */}
