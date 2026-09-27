@@ -22,21 +22,26 @@ export function ProductTabs({
   bestseller: Product[];
 }) {
   const t = useTranslations("home");
+  // I bestseller vengono per primi e sono la scheda aperta di default: per chi
+  // arriva da fuori e non conosce il catalogo, "i più venduti" orienta più di
+  // "i più recenti". Se non ci sono bestseller (flag `featured` non impostato)
+  // si ricade sui nuovi prodotti, per non aprire su una griglia vuota.
+  const hasBestseller = bestseller.length > 0;
   return (
-    <Tabs defaultValue="all">
+    <Tabs defaultValue={hasBestseller ? "bestseller" : "all"}>
       <TabsList className="grid w-full grid-cols-2 gap-2 border-0">
-        <TabsTrigger value="all" className={triggerClass}>
-          {t("newProducts")}
-        </TabsTrigger>
         <TabsTrigger value="bestseller" className={triggerClass}>
           {t("bestsellers")}
         </TabsTrigger>
+        <TabsTrigger value="all" className={triggerClass}>
+          {t("newProducts")}
+        </TabsTrigger>
       </TabsList>
-      <TabsContent value="all">
-        <ProductGrid products={all} />
-      </TabsContent>
       <TabsContent value="bestseller">
         <ProductGrid products={bestseller} />
+      </TabsContent>
+      <TabsContent value="all">
+        <ProductGrid products={all} />
       </TabsContent>
     </Tabs>
   );

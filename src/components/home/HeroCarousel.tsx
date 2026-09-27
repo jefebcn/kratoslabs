@@ -18,8 +18,17 @@ import { cn } from "@/lib/utils";
 // da Server a Client Component.
 const ICONS: Record<string, LucideIcon> = { Star, FlaskConical };
 
-// Altezza FISSA e uguale per ogni slide: niente salti di layout quando ruota.
-const SLIDE_H = "h-[230px] sm:h-[330px] lg:h-[440px]";
+/**
+ * Altezza della slide, uguale per tutte: niente salti di layout quando ruota.
+ *
+ * Sotto `lg` la cornice segue il rapporto reale dei banner (2560x900): con
+ * un'altezza fissa l'immagine, mostrata per intero con `object-contain`, ne
+ * riempiva solo una parte e il resto restava sfondo sfocato — su un telefono
+ * erano ~90px di banda grigia su 230, cioè il 40% del carosello sprecato
+ * proprio dove lo spazio è più prezioso. Da `lg` in su resta l'altezza fissa
+ * già calibrata per il desktop.
+ */
+const SLIDE_H = "aspect-[2560/900] lg:aspect-auto lg:h-[440px]";
 
 export interface HeroSlide {
   eyebrow: string;
@@ -163,7 +172,12 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
           >
             <ChevronRight className="size-5" aria-hidden />
           </button>
-          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+          {/* Indicatori SOTTO l'immagine, non sovrapposti.
+              Ora che la cornice segue il rapporto del banner non esiste più la
+              banda vuota su cui cadevano prima: sovrapporli coprirebbe il testo
+              del banner (sulla slide "Kratos Athletes" finivano esattamente
+              sopra la parola KRATOS). Meglio una riga dedicata di ~22px. */}
+          <div className="flex items-center justify-center gap-2 py-2">
             {slides.map((s, i) => (
               <button
                 key={s.title}
