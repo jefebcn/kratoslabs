@@ -54,6 +54,16 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   // Cambia per forzare un nuovo challenge dopo un errore (token monouso).
   const [captchaKey, setCaptchaKey] = useState(0);
+  // Codice d'errore del widget, se non è riuscito a produrre un token.
+  // `setCaptchaError` è stabile, quindi passarlo al widget non ne provoca il
+  // rimontaggio a ogni render.
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
+
+  function retryCaptcha() {
+    setCaptchaError(null);
+    setCaptchaToken(null);
+    setCaptchaKey((k) => k + 1);
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -76,7 +86,11 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     // registrazione: senza token l'endpoint auth rifiuta la richiesta.
     if (turnstileEnabled && !captchaToken) {
       setLoading(false);
-      setError(t("captchaRequired"));
+      // Se il widget è in errore, "completa la verifica qui sotto" rimanderebbe
+      // l'utente a un riquadro che non può completare: il messaggio d'errore è
+      // già mostrato sotto il campo password, quindi qui non ne aggiungiamo un
+      // secondo.
+      setError(captchaError ? null : t("captchaRequired"));
       return;
     }
 
@@ -171,7 +185,32 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
         autoComplete={isLogin ? "current-password" : "new-password"}
       />
 
-      <TurnstileWidget key={captchaKey} onToken={setCaptchaToken} />
+      <TurnstileWidget
+        key={captchaKey}
+        onToken={setCaptchaToken}
+        onError={setCaptchaError}
+      />
+
+      {captchaError && (
+        <div
+          role="alert"
+          className="flex flex-col gap-2 rounded-base border border-danger/30 bg-accent-soft px-3 py-2.5 text-sm text-danger"
+        >
+          <p>
+            {t("captchaUnavailable")}{" "}
+            <span className="font-mono text-xs opacity-70">
+              ({t("captchaCode")} {captchaError})
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={retryCaptcha}
+            className="self-start text-xs font-semibold uppercase tracking-wide underline underline-offset-2 hover:no-underline"
+          >
+            {t("captchaRetry")}
+          </button>
+        </div>
+      )}
 
       {error && (
         <p className="rounded-base border border-danger/30 bg-accent-soft px-3 py-2 text-sm text-danger">
