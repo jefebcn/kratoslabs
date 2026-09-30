@@ -19,7 +19,8 @@ interface TurnstileApi {
       sitekey: string;
       callback: (token: string) => void;
       "expired-callback"?: () => void;
-      "error-callback"?: () => void;
+      /** Riceve il codice d'errore client-side di Turnstile. */
+      "error-callback"?: (code?: string | number) => void;
     },
   ) => string;
   remove: (id: string) => void;
@@ -37,8 +38,17 @@ const SCRIPT_SRC =
 
 export function TurnstileWidget({
   onToken,
+  onError,
 }: {
   onToken: (token: string | null) => void;
+  /**
+   * Chiamato quando il widget non riesce a produrre un token: con il codice
+   * d'errore di Cloudflare (es. "110200" = dominio non autorizzato nel pannello
+   * Turnstile) oppure "script" se `api.js` non si carica (rete, ad-blocker).
+   * Senza questo callback l'errore restava invisibile: l'utente vedeva uno
+   * spazio vuoto e il form gli chiedeva di completare una verifica inesistente.
+   */
+  onError?: (code: string) => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
@@ -54,7 +64,13 @@ export function TurnstileWidget({
         sitekey: SITE_KEY,
         callback: (token) => onToken(token),
         "expired-callback": () => onToken(null),
-        "error-callback": () => onToken(null),
+        "error-callback": (code) => {
+          onToken(null);
+          // Il codice finisce anche in console, così è leggibile dagli strumenti
+          // di sviluppo senza dover riprodurre il problema.
+          console.warn(`[Turnstile] errore ${code}`);
+          onError?.(String(code ?? "unknown"));
+        },
       });
     };
 
@@ -73,6 +89,13 @@ export function TurnstileWidget({
         document.head.appendChild(script);
       }
       script.addEventListener("load", render);
+      // Script bloccato (ad-blocker, rete, firewall): senza questo il widget
+      // restava uno spazio vuoto senza alcuna spiegazione.
+      script.addEventListener("error", () => {
+        if (cancelled) return;
+        onToken(null);
+        onError?.("script");
+      });
     }
 
     return () => {
@@ -86,7 +109,7 @@ export function TurnstileWidget({
         widgetIdRef.current = null;
       }
     };
-  }, [onToken]);
+  }, [onToken, onError]);
 
   if (!SITE_KEY) return null;
   return <div ref={containerRef} className="min-h-[65px]" />;

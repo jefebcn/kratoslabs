@@ -172,6 +172,17 @@
   }
 }
 
+/* Contenitori che scorrono al tocco (es. la striscia categorie su mobile):
+   la barra di scorrimento visibile ruberebbe altezza e sporcherebbe il
+   layout, mentre lo scorrimento resta possibile con dito, trackpad e
+   tastiera. */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari e Chrome */
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

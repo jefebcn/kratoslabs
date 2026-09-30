@@ -3,6 +3,7 @@ import { Topbar } from "@/components/layout/Topbar";
 import { AccountBar } from "@/components/layout/AccountBar";
 import { Header } from "@/components/layout/Header";
 import { CategoryNav } from "@/components/layout/CategoryNav";
+import { CategoryStripMobile } from "@/components/layout/CategoryStripMobile";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { getSiteSettings } from "@/features/settings";
@@ -35,6 +36,8 @@ export default async function ShopLayout({
       <Topbar announcements={announcements} />
       <AccountBar />
       <Header categories={categories} />
+      {/* Categorie: pillole scorrevoli su mobile, barra completa da lg. */}
+      <CategoryStripMobile categories={categories} />
       <CategoryNav categories={categories} />
       <main className="flex-1">{children}</main>
       <Footer />
