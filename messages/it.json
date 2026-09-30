@@ -230,6 +230,8 @@
     "title": "Checkout",
     "contactShipping": "Contatti e spedizione",
     "email": "Email",
+    "phone": "Telefono",
+    "phonePlaceholder": "+39 333 123 4567",
     "firstName": "Nome",
     "lastName": "Cognome",
     "address": "Indirizzo",

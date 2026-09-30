@@ -1,6 +1,10 @@
+import { Fragment } from "react";
 import { OrderControls } from "@/components/admin/OrderControls";
+import { SupplierSheetRow } from "@/components/admin/SupplierSheetRow";
 import { formatDate, formatPrice, cn } from "@/lib/utils";
+import { supplierRows, toTsv } from "@/lib/supplier-sheet";
 import type { AdminOrder, PaymentStatus } from "@/features/orders/queries";
+import type { Product } from "@/types";
 
 const PAYMENT_LABEL: Record<string, string> = {
   bank: "Bonifico",
@@ -19,7 +23,14 @@ const PAYMENT_STATUS_META: Record<
   failed: { label: "Fallito", tone: "border-danger/50 text-danger" },
 };
 
-export function OrdersTable({ orders }: { orders: AdminOrder[] }) {
+export function OrdersTable({
+  orders,
+  catalog = [],
+}: {
+  orders: AdminOrder[];
+  /** Catalogo prodotti, per ricavare i nomi nel formato del fornitore. */
+  catalog?: Product[];
+}) {
   if (orders.length === 0) {
     return (
       <p className="rounded-base border border-border bg-surface px-4 py-10 text-center text-sm text-muted">
@@ -45,48 +56,58 @@ export function OrdersTable({ orders }: { orders: AdminOrder[] }) {
         <tbody>
           {orders.map((o) => {
             const pay = PAYMENT_STATUS_META[o.paymentStatus];
+            const sheet = supplierRows(o, catalog);
             return (
-              <tr
-                key={o.id}
-                className="border-b border-border align-top last:border-0"
-              >
-                <td className="num px-4 py-4 font-medium">{o.reference}</td>
-                <td className="px-4 py-4 text-muted">{o.customerEmail}</td>
-                <td className="px-4 py-4">
-                  <div className="flex flex-col gap-1">
-                    {o.paymentMethod && (
-                      <span className="text-xs text-muted">
-                        {PAYMENT_LABEL[o.paymentMethod] ?? o.paymentMethod}
-                      </span>
-                    )}
-                    <span
-                      className={cn(
-                        "w-fit rounded-base border px-1.5 py-0.5 text-xs",
-                        pay.tone,
+              <Fragment key={o.id}>
+                <tr className="align-top">
+                  <td className="num px-4 py-4 font-medium">{o.reference}</td>
+                  <td className="px-4 py-4 text-muted">{o.customerEmail}</td>
+                  <td className="px-4 py-4">
+                    <div className="flex flex-col gap-1">
+                      {o.paymentMethod && (
+                        <span className="text-xs text-muted">
+                          {PAYMENT_LABEL[o.paymentMethod] ?? o.paymentMethod}
+                        </span>
                       )}
-                    >
-                      {pay.label}
-                    </span>
-                  </div>
-                </td>
-                <td className="num px-4 py-4 text-right">
-                  {o.lines.reduce((n, l) => n + l.quantity, 0)}
-                </td>
-                <td className="num px-4 py-4 text-right">
-                  {formatPrice(o.totalCents)}
-                </td>
-                <td className="num px-4 py-4 text-right text-muted">
-                  {o.createdAt ? formatDate(o.createdAt) : "—"}
-                </td>
-                <td className="px-4 py-4">
-                  <OrderControls
-                    orderId={o.id}
-                    status={o.status}
-                    trackingId={o.trackingId}
-                    paymentStatus={o.paymentStatus}
-                  />
-                </td>
-              </tr>
+                      <span
+                        className={cn(
+                          "w-fit rounded-base border px-1.5 py-0.5 text-xs",
+                          pay.tone,
+                        )}
+                      >
+                        {pay.label}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="num px-4 py-4 text-right">
+                    {o.lines.reduce((n, l) => n + l.quantity, 0)}
+                  </td>
+                  <td className="num px-4 py-4 text-right">
+                    {formatPrice(o.totalCents)}
+                  </td>
+                  <td className="num px-4 py-4 text-right text-muted">
+                    {o.createdAt ? formatDate(o.createdAt) : "—"}
+                  </td>
+                  <td className="px-4 py-4">
+                    <OrderControls
+                      orderId={o.id}
+                      status={o.status}
+                      trackingId={o.trackingId}
+                      paymentStatus={o.paymentStatus}
+                    />
+                  </td>
+                </tr>
+                {/* Riga per il foglio del fornitore, a tutta larghezza. */}
+                <tr className="border-b border-border last:border-0">
+                  <td colSpan={7} className="px-4 pb-4">
+                    <SupplierSheetRow
+                      rows={sheet.rows}
+                      tsv={toTsv(sheet.rows)}
+                      warnings={sheet.warnings}
+                    />
+                  </td>
+                </tr>
+              </Fragment>
             );
           })}
         </tbody>

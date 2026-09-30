@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { OrdersTable } from "@/components/admin/OrdersTable";
 import { listOrders } from "@/features/orders";
+import { listProducts } from "@/features/products";
 import { hasServiceRole } from "@/lib/supabase/admin";
 import { isEmailConfigured } from "@/lib/email/resend";
 
 export const metadata: Metadata = { title: "Ordini" };
 
 export default async function AdminOrdersPage() {
-  const orders = await listOrders();
+  const [orders, catalog] = await Promise.all([listOrders(), listProducts()]);
   const unpaid = orders.filter((o) => o.paymentStatus === "unpaid").length;
 
   return (
@@ -34,7 +35,7 @@ export default async function AdminOrdersPage() {
         </p>
       )}
 
-      <OrdersTable orders={orders} />
+      <OrdersTable orders={orders} catalog={catalog} />
     </div>
   );
 }

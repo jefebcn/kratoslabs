@@ -230,6 +230,8 @@
     "title": "Kasse",
     "contactShipping": "Kontakt & Versand",
     "email": "E-Mail",
+    "phone": "Telefon",
+    "phonePlaceholder": "+49 151 23456789",
     "firstName": "Vorname",
     "lastName": "Nachname",
     "address": "Adresse",

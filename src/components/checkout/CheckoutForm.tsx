@@ -66,6 +66,8 @@ function Field({
   autoComplete,
   error,
   className,
+  placeholder,
+  inputMode,
 }: {
   label: string;
   name: string;
@@ -73,6 +75,8 @@ function Field({
   autoComplete?: string;
   error?: string;
   className?: string;
+  placeholder?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
 }) {
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
@@ -82,6 +86,8 @@ function Field({
         name={name}
         type={type}
         autoComplete={autoComplete}
+        placeholder={placeholder}
+        inputMode={inputMode}
         required
       />
       {error && <p className="text-xs text-danger">{error}</p>}
@@ -277,7 +283,15 @@ export function CheckoutForm({
           type="email"
           autoComplete="email"
           error={err("email")}
-          className="sm:col-span-2"
+        />
+        <Field
+          label={t("phone")}
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          placeholder={t("phonePlaceholder")}
+          error={err("phone")}
         />
         <Field
           label={t("firstName")}

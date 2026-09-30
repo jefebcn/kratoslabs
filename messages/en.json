@@ -230,6 +230,8 @@
     "title": "Checkout",
     "contactShipping": "Contact & shipping",
     "email": "Email",
+    "phone": "Phone",
+    "phonePlaceholder": "+44 7700 900123",
     "firstName": "First name",
     "lastName": "Last name",
     "address": "Address",

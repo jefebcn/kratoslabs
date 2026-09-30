@@ -230,6 +230,8 @@
     "title": "Paiement",
     "contactShipping": "Contact et livraison",
     "email": "E-mail",
+    "phone": "Téléphone",
+    "phonePlaceholder": "+33 6 12 34 56 78",
     "firstName": "Prénom",
     "lastName": "Nom",
     "address": "Adresse",
