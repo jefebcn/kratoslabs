@@ -167,6 +167,7 @@ export async function createOrder(
         shipping: {
           firstName: d.firstName,
           lastName: d.lastName,
+          phone: d.phone,
           address: d.address,
           city: d.city,
           postalCode: d.postalCode,

@@ -230,6 +230,8 @@
     "title": "Checkout",
     "contactShipping": "Contacto e envio",
     "email": "E-mail",
+    "phone": "Telefone",
+    "phonePlaceholder": "+351 912 345 678",
     "firstName": "Nome",
     "lastName": "Apelido",
     "address": "Morada",
