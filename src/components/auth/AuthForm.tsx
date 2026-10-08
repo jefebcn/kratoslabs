@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { notifySignup } from "@/features/auth/actions";
+import { safeNext } from "@/lib/safe-next";
 import {
   TurnstileWidget,
   turnstileEnabled,
@@ -46,7 +47,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   const tAcc = useTranslations("account");
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") || "/";
+  const next = safeNext(searchParams.get("next"));
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
