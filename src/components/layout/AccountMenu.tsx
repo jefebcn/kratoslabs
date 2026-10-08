@@ -1,48 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { LogIn, UserPlus, LogOut, User as UserIcon } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { useSessionEmail } from "@/hooks/use-session-email";
 
 /**
  * Stato account nell'header. Legge la sessione lato client (i cookie Supabase
  * sono condivisi col server), così le pagine restano statiche.
  */
 export function AccountMenu() {
-  const router = useRouter();
   const t = useTranslations("account");
-  const [email, setEmail] = useState<string | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    if (!isSupabaseConfigured) {
-      setReady(true);
-      return;
-    }
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setEmail(data.user?.email ?? null);
-      setReady(true);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      setEmail(session?.user?.email ?? null);
-    });
-    return () => sub.subscription.unsubscribe();
-  }, []);
-
-  async function handleLogout() {
-    if (isSupabaseConfigured) {
-      const supabase = createClient();
-      await supabase.auth.signOut();
-    }
-    setEmail(null);
-    router.push("/");
-    router.refresh();
-  }
+  const { email, ready, logout: handleLogout } = useSessionEmail();
 
   // Prima dell'idratazione mostriamo i link di default (evita sfarfallio).
   if (ready && email) {

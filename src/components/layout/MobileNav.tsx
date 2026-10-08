@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import {
   BookOpen,
   Info,
+  LogOut,
+  User as UserIcon,
   Mail,
   Menu,
   ScrollText,
@@ -24,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { SearchForm } from "@/components/layout/SearchBar";
 import { CurrencyToggle } from "@/components/layout/CurrencyToggle";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
+import { useSessionEmail } from "@/hooks/use-session-email";
 import type { Category } from "@/types";
 import { categoryIcon } from "@/lib/category-icons";
 import { categoryName } from "@/lib/category-i18n";
@@ -45,6 +48,9 @@ export function MobileNav({ categories }: { categories: Category[] }) {
   const tMenu = useTranslations("menu");
   const tAcc = useTranslations("account");
   const tCat = useTranslations("productCategory");
+  // Da collegati il menu mostra account ed "Esci" al posto di accedi/registrati:
+  // su mobile (e nell'app salvata in home) è l'unico punto con questi link.
+  const { email, ready, logout } = useSessionEmail();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -105,14 +111,36 @@ export function MobileNav({ categories }: { categories: Category[] }) {
             ))}
           </nav>
 
-          <div className="flex flex-col gap-2 border-t border-border pt-4">
-            <Button asChild onClick={close}>
-              <Link href="/login">{tAcc("login")}</Link>
-            </Button>
-            <Button asChild variant="outline" onClick={close}>
-              <Link href="/register">{tAcc("register")}</Link>
-            </Button>
-          </div>
+          {ready && email ? (
+            <div className="flex flex-col gap-2 border-t border-border pt-4">
+              <p className="flex items-center gap-2 truncate text-xs text-muted">
+                <UserIcon className="size-3.5 shrink-0 text-accent" aria-hidden />
+                <span className="truncate">{email}</span>
+              </p>
+              <Button asChild onClick={close}>
+                <Link href="/account">{tAcc("title")}</Link>
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  close();
+                  void logout();
+                }}
+              >
+                <LogOut className="size-4" aria-hidden />
+                {tAcc("logout")}
+              </Button>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2 border-t border-border pt-4">
+              <Button asChild onClick={close}>
+                <Link href="/login">{tAcc("login")}</Link>
+              </Button>
+              <Button asChild variant="outline" onClick={close}>
+                <Link href="/register">{tAcc("register")}</Link>
+              </Button>
+            </div>
+          )}
         </div>
 
         <div className="mt-auto flex items-center gap-2 border-t border-border p-5">
