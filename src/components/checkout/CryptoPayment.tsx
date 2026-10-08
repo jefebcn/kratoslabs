@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Bitcoin, Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SpamNotice } from "@/components/checkout/SpamNotice";
 import { CopyRow } from "@/components/checkout/CopyRow";
 import { formatPrice } from "@/lib/utils";
 import { bitcoinUri, type CryptoAsset } from "@/lib/payments/crypto";
@@ -109,6 +110,7 @@ export function CryptoPayment({
           {t("cryptoFlow")}
         </p>
       </div>
+      {emailSent && <SpamNotice className="mt-3" />}
 
       <div className="mt-6">
         <Button asChild variant="outline">

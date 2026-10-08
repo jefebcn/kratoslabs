@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CryptoPayment } from "@/components/checkout/CryptoPayment";
 import { BankTransfer } from "@/components/checkout/BankTransfer";
+import { SpamNotice } from "@/components/checkout/SpamNotice";
 import { createOrder, type CheckoutResult } from "@/features/checkout";
 import { useCart } from "@/features/cart";
 import { priceLine } from "@/features/products/pricing";
@@ -182,6 +183,7 @@ export function CheckoutForm({
           {state.emailSent ? " " + t("emailPreconfirm") : ""}{" "}
           {t("confirmedAfterPayment")}
         </p>
+        {state.emailSent && <SpamNotice className="mx-auto mt-4 max-w-md" />}
         <Button asChild className="mt-6" variant="outline">
           <Link href="/products">{tCart("continueShopping")}</Link>
         </Button>
@@ -448,6 +450,7 @@ export function CheckoutForm({
             ? t("minOrderButton", { min: formatPrice(MIN_ORDER_CENTS) })
             : t("confirmOrder")}
       </Button>
+      <p className="text-xs text-muted">{t("emailNotice")}</p>
       <p className="text-xs text-muted">{t("cryptoHint")}</p>
     </form>
   );

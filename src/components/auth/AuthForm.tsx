@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { notifySignup } from "@/features/auth/actions";
 import {
   TurnstileWidget,
   turnstileEnabled,
@@ -138,6 +139,10 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
       setCaptchaKey((k) => k + 1);
       return;
     }
+
+    // Avvisa gli admin del nuovo iscritto. Non si attende la risposta né si
+    // mostra un eventuale errore: la registrazione è già riuscita.
+    if (data.user?.id) void notifySignup(data.user.id).catch(() => {});
 
     // Se la conferma email è disattivata su Supabase, la sessione è già attiva.
     if (data.session) {

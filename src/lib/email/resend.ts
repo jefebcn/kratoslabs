@@ -35,7 +35,8 @@ export interface SendResult {
 }
 
 interface SendArgs {
-  to: string;
+  /** Uno o più destinatari (Resend ne accetta fino a 50 per invio). */
+  to: string | string[];
   subject: string;
   html: string;
   /** Versione testo semplice: migliora la recapitabilità (anti-spam). */
