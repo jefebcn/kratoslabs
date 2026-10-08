@@ -94,6 +94,7 @@ export function OrdersTable({
                       status={o.status}
                       trackingId={o.trackingId}
                       paymentStatus={o.paymentStatus}
+                      paymentMethod={o.paymentMethod}
                     />
                   </td>
                 </tr>

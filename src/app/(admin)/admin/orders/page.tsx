@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OrdersTable } from "@/components/admin/OrdersTable";
+import { ResendBankDetails } from "@/components/admin/ResendBankDetails";
 import { listOrders } from "@/features/orders";
 import { listProducts } from "@/features/products";
 import { hasServiceRole } from "@/lib/supabase/admin";
@@ -10,6 +11,12 @@ export const metadata: Metadata = { title: "Ordini" };
 export default async function AdminOrdersPage() {
   const [orders, catalog] = await Promise.all([listOrders(), listProducts()]);
   const unpaid = orders.filter((o) => o.paymentStatus === "unpaid").length;
+  const bankPending = orders.filter(
+    (o) =>
+      o.paymentMethod === "bank" &&
+      o.paymentStatus === "unpaid" &&
+      o.status === "pending",
+  ).length;
 
   return (
     <div className="flex flex-col gap-6">
@@ -33,6 +40,10 @@ export default async function AdminOrdersPage() {
           (<code>RESEND_API_KEY</code> + <code>RESEND_FROM</code>). Lo stato
           dell&apos;ordine si aggiorna comunque.
         </p>
+      )}
+
+      {hasServiceRole && isEmailConfigured && bankPending > 0 && (
+        <ResendBankDetails count={bankPending} />
       )}
 
       <OrdersTable orders={orders} catalog={catalog} />
