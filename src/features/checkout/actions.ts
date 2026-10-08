@@ -1,8 +1,13 @@
 "use server";
 
+import { after } from "next/server";
 import { checkoutSchema } from "./schema";
 import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
-import { orderPreConfirmationEmail } from "@/lib/email/templates";
+import { notifyAdmins } from "@/lib/email/admin-notify";
+import {
+  adminNewOrderEmail,
+  orderPreConfirmationEmail,
+} from "@/lib/email/templates";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { balanceFor, addEntry } from "@/features/rewards";
@@ -138,6 +143,7 @@ export async function createOrder(
   let pointsRedeemed = 0;
   let discountCents = 0;
   let totalCents = subtotalCents + shippingCents;
+  let saved = false;
 
   // Persistenza su Supabase (best-effort: non blocca il checkout se assente).
   const admin = createAdminClient();
@@ -155,7 +161,7 @@ export async function createOrder(
         totalCents = Math.max(0, subtotalCents - discountCents) + shippingCents;
       }
 
-      await admin.from("orders").insert({
+      const { error: insertError } = await admin.from("orders").insert({
         reference,
         user_id: user?.id ?? null,
         customer_email: d.email,
@@ -178,16 +184,26 @@ export async function createOrder(
         payment_method: d.paymentMethod,
         payment_status: "unpaid",
       });
+      // Senza riga salvata non si scalano punti: si passa al ramo d'errore.
+      if (insertError) throw new Error(insertError.message);
+      saved = true;
 
       // Scala i punti usati (il guadagno arriva alla conferma del pagamento).
       if (user && pointsRedeemed > 0) {
         await addEntry(admin, user.id, -pointsRedeemed, "redeem", reference);
       }
-    } catch {
+    } catch (e) {
       // Persistenza non riuscita: si prosegue comunque con la pre-conferma.
-      pointsRedeemed = 0;
-      discountCents = 0;
-      totalCents = subtotalCents + shippingCents;
+      console.error(
+        `[checkout] ordine ${reference}: ${saved ? "punti non scalati" : "non salvato"}:`,
+        e instanceof Error ? e.message : e,
+      );
+      // Se la riga è già salvata, il totale scontato resta quello registrato.
+      if (!saved) {
+        pointsRedeemed = 0;
+        discountCents = 0;
+        totalCents = subtotalCents + shippingCents;
+      }
     }
   }
 
@@ -200,6 +216,33 @@ export async function createOrder(
     });
     emailSent = await sendEmail({ to: d.email, subject, html, text });
   }
+
+  // Notifica agli admin, inviata DOPO la risposta al cliente (non rallenta il
+  // checkout). Contiene tutti i dati: se il salvataggio su Supabase fosse
+  // fallito, l'ordine non va comunque perso. Rispondendo, si scrive al cliente.
+  const adminEmail = adminNewOrderEmail({
+    reference,
+    paymentMethod: d.paymentMethod,
+    totalCents,
+    shippingCents,
+    discountCents,
+    pointsRedeemed,
+    lines,
+    customer: {
+      email: d.email,
+      firstName: d.firstName,
+      lastName: d.lastName,
+      phone: d.phone,
+      address: d.address,
+      city: d.city,
+      postalCode: d.postalCode,
+      country: d.country,
+      notes: d.notes ?? "",
+    },
+    saved,
+    customerEmailSent: emailSent,
+  });
+  after(() => notifyAdmins(adminEmail, d.email).then(() => undefined));
 
   return {
     ok: true,
