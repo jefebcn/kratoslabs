@@ -5,6 +5,7 @@ import { BadgeCheck, Check } from "lucide-react";
 import { Select } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { StatusBadge } from "@/components/admin/StatusBadge";
+import { ResendBankDetails } from "@/components/admin/ResendBankDetails";
 import { updateOrderStatus, confirmPayment } from "@/features/orders/actions";
 import { ORDER_STATUS_META } from "@/lib/constants";
 import type { OrderStatus } from "@/types";
@@ -15,11 +16,13 @@ export function OrderControls({
   status,
   trackingId,
   paymentStatus,
+  paymentMethod,
 }: {
   orderId: string;
   status: OrderStatus;
   trackingId?: string;
   paymentStatus: PaymentStatus;
+  paymentMethod?: string | null;
 }) {
   const [st, setSt] = useState<OrderStatus>(status);
 
@@ -81,6 +84,10 @@ export function OrderControls({
           </button>
         </form>
       )}
+
+      {paymentMethod === "bank" &&
+        paymentStatus === "unpaid" &&
+        st === "pending" && <ResendBankDetails orderId={orderId} compact />}
     </div>
   );
 }

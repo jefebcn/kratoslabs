@@ -6,4 +6,9 @@ export {
   type PaymentStatus,
   type OrderStats,
 } from "./queries";
-export { updateOrderStatus, confirmPayment } from "./actions";
+export {
+  updateOrderStatus,
+  confirmPayment,
+  resendBankDetails,
+  type ResendBankResult,
+} from "./actions";

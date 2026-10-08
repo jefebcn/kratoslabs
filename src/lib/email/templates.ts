@@ -108,9 +108,12 @@ export function orderPreConfirmationEmail({
   paymentMethod,
   totalCents,
   bank,
+  reminder = false,
 }: {
   reference: string;
   paymentMethod?: string;
+  /** true = reinvio dei dati di pagamento per un ordine già ricevuto. */
+  reminder?: boolean;
   /** Importo da pagare (dopo sconto punti e con spedizione). */
   totalCents?: number;
   /** Coordinate bancarie: incluse se il metodo è bonifico e sono complete. */
@@ -139,7 +142,12 @@ export function orderPreConfirmationEmail({
   const payIntro =
     "Esegui il bonifico con questi dati, indicando come causale il riferimento dell'ordine:";
 
-  const subject = `Abbiamo ricevuto il tuo ordine ${reference}`;
+  const subject = reminder
+    ? `Dati per il pagamento dell'ordine ${reference}`
+    : `Abbiamo ricevuto il tuo ordine ${reference}`;
+  const intro = reminder
+    ? "Ti rimandiamo i dati per completare il pagamento del tuo ordine."
+    : "Grazie, abbiamo registrato il tuo ordine.";
   const summaryRows: [string, string][] = [
     ["Riferimento ordine", reference],
     ["Metodo di pagamento", method],
@@ -156,16 +164,18 @@ export function orderPreConfirmationEmail({
 
   const html = wrap(
     `
-    <p style="margin:0 0 14px;font-size:17px;font-weight:700">Grazie, abbiamo registrato il tuo ordine.</p>
+    <p style="margin:0 0 14px;font-size:17px;font-weight:700">${intro}</p>
     ${tableHtml(summaryRows)}
     <p style="margin:0 0 14px">Questa è una <strong>pre-conferma</strong>: l'ordine non è ancora confermato. ${timing}</p>
     ${hasPayment ? `<p style="margin:0 0 8px;font-weight:700">${esc(payIntro)}</p>${tableHtml(payRows, true)}` : ""}
     <p style="margin:0 0 14px;color:${MUTED};font-size:13px">Indica il riferimento <strong>${esc(reference)}</strong> nel pagamento, così possiamo abbinarlo al tuo ordine.</p>
     <p style="margin:0;color:${MUTED};font-size:13px">${CONTACTS_HINT}</p>
     `,
-    `Ordine ${reference} ricevuto — pre-conferma`,
+    reminder
+      ? `Ordine ${reference} — dati per il pagamento`
+      : `Ordine ${reference} ricevuto — pre-conferma`,
   );
-  const text = `Grazie, abbiamo registrato il tuo ordine.
+  const text = `${intro}
 
 ${summaryRows.map(([k, v]) => `${k}: ${v}`).join("\n")}
 
