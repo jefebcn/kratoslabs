@@ -2,6 +2,7 @@ import { SITE } from "@/lib/constants";
 import { trackingUrl } from "@/lib/tracking";
 import { countryName } from "@/lib/supplier-sheet";
 import { formatPrice } from "@/lib/utils";
+import { formatIban, isBankComplete, type BankConfig } from "@/lib/payments/bank";
 import type { CartLine } from "@/types";
 
 export interface EmailContent {
@@ -105,27 +106,60 @@ const footerText = `\n\n—\n${SITE.name} — ${SITE.tagline}\nAssistenza: ${SIT
 export function orderPreConfirmationEmail({
   reference,
   paymentMethod,
+  totalCents,
+  bank,
 }: {
   reference: string;
   paymentMethod?: string;
+  /** Importo da pagare (dopo sconto punti e con spedizione). */
+  totalCents?: number;
+  /** Coordinate bancarie: incluse se il metodo è bonifico e sono complete. */
+  bank?: BankConfig;
 }): EmailContent {
   const isBank = paymentMethod === "bank";
   const method = isBank ? "bonifico bancario" : "criptovaluta";
   const timing = isBank
     ? "Alla ricezione del bonifico (di norma entro 24–48 ore) confermeremo l'ordine con una seconda email."
     : "Appena verifichiamo il pagamento confermeremo l'ordine con una seconda email.";
+  const amount =
+    typeof totalCents === "number" && totalCents > 0 ? formatPrice(totalCents) : "";
+
+  // Coordinate bancarie: stessi valori mostrati nella pagina dopo l'ordine.
+  // Gli indirizzi crypto restano solo sul sito: un indirizzo Bitcoin nel testo
+  // è un segnale tipico delle email di estorsione e fa salire il punteggio
+  // spam (SpamAssassin: PDS_BTC_ID).
+  const payRows: [string, string][] = [];
+  if (isBank && bank && isBankComplete(bank)) {
+    payRows.push(["Intestatario", bank.holder], ["IBAN", formatIban(bank.iban)]);
+    if (bank.bic) payRows.push(["BIC / SWIFT", bank.bic]);
+    if (bank.bank) payRows.push(["Banca", bank.bank]);
+    payRows.push(["Causale", reference]);
+  }
+  const hasPayment = payRows.length > 0;
+  const payIntro =
+    "Esegui il bonifico con questi dati, indicando come causale il riferimento dell'ordine:";
 
   const subject = `Abbiamo ricevuto il tuo ordine ${reference}`;
+  const summaryRows: [string, string][] = [
+    ["Riferimento ordine", reference],
+    ["Metodo di pagamento", method],
+    ...(amount ? [["Importo da pagare", amount] as [string, string]] : []),
+  ];
+  const tableHtml = (rows: [string, string][], mono = false) =>
+    `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 16px;border:1px solid ${LINE};border-radius:8px">${rows
+      .map(([k, v], i) => {
+        const border = i < rows.length - 1 ? `border-bottom:1px solid ${LINE};` : "";
+        return `<tr><td style="padding:12px 14px;${border}font-size:14px;color:${MUTED};white-space:nowrap;vertical-align:top">${esc(k)}</td>
+          <td style="padding:12px 14px;${border}font-size:14px;font-weight:700;text-align:right;word-break:break-all${mono ? ";font-family:Consolas,Menlo,monospace" : ""}">${esc(v)}</td></tr>`;
+      })
+      .join("")}</table>`;
+
   const html = wrap(
     `
     <p style="margin:0 0 14px;font-size:17px;font-weight:700">Grazie, abbiamo registrato il tuo ordine.</p>
-    <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 16px;border:1px solid ${LINE};border-radius:8px">
-      <tr><td style="padding:12px 14px;border-bottom:1px solid ${LINE};font-size:14px;color:${MUTED}">Riferimento ordine</td>
-          <td style="padding:12px 14px;border-bottom:1px solid ${LINE};font-size:14px;font-weight:700;text-align:right">${esc(reference)}</td></tr>
-      <tr><td style="padding:12px 14px;font-size:14px;color:${MUTED}">Metodo di pagamento</td>
-          <td style="padding:12px 14px;font-size:14px;font-weight:700;text-align:right">${esc(method)}</td></tr>
-    </table>
+    ${tableHtml(summaryRows)}
     <p style="margin:0 0 14px">Questa è una <strong>pre-conferma</strong>: l'ordine non è ancora confermato. ${timing}</p>
+    ${hasPayment ? `<p style="margin:0 0 8px;font-weight:700">${esc(payIntro)}</p>${tableHtml(payRows, true)}` : ""}
     <p style="margin:0 0 14px;color:${MUTED};font-size:13px">Indica il riferimento <strong>${esc(reference)}</strong> nel pagamento, così possiamo abbinarlo al tuo ordine.</p>
     <p style="margin:0;color:${MUTED};font-size:13px">${CONTACTS_HINT}</p>
     `,
@@ -133,11 +167,10 @@ export function orderPreConfirmationEmail({
   );
   const text = `Grazie, abbiamo registrato il tuo ordine.
 
-Riferimento ordine: ${reference}
-Metodo di pagamento: ${method}
+${summaryRows.map(([k, v]) => `${k}: ${v}`).join("\n")}
 
 Questa è una pre-conferma: l'ordine non è ancora confermato. ${timing}
-
+${hasPayment ? `\n${payIntro}\n${payRows.map(([k, v]) => `${k}: ${v}`).join("\n")}\n` : ""}
 Indica il riferimento ${reference} nel pagamento, così possiamo abbinarlo al tuo ordine.
 
 ${CONTACTS_HINT}${footerText}`;

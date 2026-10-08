@@ -15,6 +15,7 @@ import { maxRedeemablePoints, discountCentsFor } from "@/lib/rewards";
 import { listProducts } from "@/features/products";
 import { priceLine } from "@/features/products/pricing";
 import { PAYMENT_METHODS } from "@/lib/constants";
+import { getSiteSettings } from "@/features/settings";
 import {
   shippingCentsFor,
   meetsMinimumOrder,
@@ -210,9 +211,13 @@ export async function createOrder(
   // Pre-conferma via email (no-op se Resend non è configurato).
   let emailSent = false;
   if (isEmailConfigured) {
+    // Per il bonifico: stesse coordinate mostrate nella pagina dopo l'ordine.
+    const settings = await getSiteSettings();
     const { subject, html, text } = orderPreConfirmationEmail({
       reference,
       paymentMethod: d.paymentMethod,
+      totalCents,
+      bank: settings.bank,
     });
     emailSent = await sendEmail({ to: d.email, subject, html, text });
   }
