@@ -1,25 +1,15 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/auth/AuthForm";
-import { getCurrentUser } from "@/lib/supabase/server";
-import { safeNext } from "@/lib/safe-next";
 
 export const metadata: Metadata = {
   title: "Accedi",
   robots: { index: false },
 };
 
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ next?: string }>;
-}) {
-  // Già collegato: niente form, si va dritti a destinazione (o all'account).
-  if (await getCurrentUser()) {
-    const { next } = await searchParams;
-    redirect(safeNext(next, "/account"));
-  }
+// Chi è già collegato viene reindirizzato dal middleware (a ?next= o
+// all'account): la pagina resta statica e si apre all'istante dal menu.
+export default function LoginPage() {
   return (
     <Suspense fallback={null}>
       <AuthForm mode="login" />
