@@ -6,11 +6,12 @@ import {
   isSupabaseConfigured,
   isAdminUser,
 } from "./config";
+import { safeNext } from "@/lib/safe-next";
 
 /**
  * Aggiorna la sessione Supabase a ogni richiesta e applica le regole d'accesso:
  *  - /admin richiede utente autenticato E admin;
- *  - /login e /register, se già loggato, rimandano alla home.
+ *  - /login e /register, se già loggato, rimandano a ?next= o all'account.
  * Se Supabase non è configurato, lascia passare tutto (utile in locale).
  */
 export async function updateSession(request: NextRequest) {
@@ -53,10 +54,10 @@ async function runSession(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
 
-  const redirectTo = (pathname: string, next?: string) => {
+  const redirectTo = (pathname: string, next?: string, search = "") => {
     const url = request.nextUrl.clone();
     url.pathname = pathname;
-    url.search = "";
+    url.search = search;
     if (next) url.searchParams.set("next", next);
     const redirect = NextResponse.redirect(url);
     // Preserva i cookie di sessione eventualmente aggiornati.
@@ -69,8 +70,17 @@ async function runSession(request: NextRequest) {
     if (!isAdminUser(user)) return redirectTo("/");
   }
 
+  // Già collegato: si va a destinazione o all'account. Non alla home: chi
+  // tocca "Accedi" dalla home (es. dal menu mobile, aperto prima che la
+  // sessione fosse letta) resterebbe dov'è e penserebbe che il tasto non vada.
   if (user && (path === "/login" || path === "/register")) {
-    return redirectTo("/");
+    const next = safeNext(request.nextUrl.searchParams.get("next"), "/account");
+    let url = new URL(next, request.nextUrl.origin);
+    // ?next=/login rimanderebbe qui all'infinito.
+    if (url.pathname === "/login" || url.pathname === "/register") {
+      url = new URL("/account", request.nextUrl.origin);
+    }
+    return redirectTo(url.pathname, undefined, url.search);
   }
 
   return response;
