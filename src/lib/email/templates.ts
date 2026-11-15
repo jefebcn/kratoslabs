@@ -4,6 +4,11 @@ import { countryName } from "@/lib/supplier-sheet";
 import { formatPrice } from "@/lib/utils";
 import { formatIban, isBankComplete, type BankConfig } from "@/lib/payments/bank";
 import type { CartLine } from "@/types";
+import {
+  emailStrings,
+  type EmailStrings,
+  type PreConfirmationVariant,
+} from "@/lib/email/i18n";
 
 export interface EmailContent {
   subject: string;
@@ -24,6 +29,19 @@ function esc(s: string): string {
     .replace(/>/g, "&gt;");
 }
 
+/** Testo con `**evidenza**` → HTML escapato, evidenza in grassetto. */
+function rich(s: string, color?: string): string {
+  return esc(s).replace(
+    /\*\*(.+?)\*\*/g,
+    color ? `<span style="color:${color}">$1</span>` : "<strong>$1</strong>",
+  );
+}
+
+/** Stesso testo per la versione solo testo: senza asterischi. */
+function plain(s: string): string {
+  return s.replace(/\*\*(.+?)\*\*/g, "$1");
+}
+
 /**
  * Involucro email professionale, table-based per compatibilità con tutti i
  * client (Outlook incluso), stili inline, barra rossa del brand, preheader
@@ -32,10 +50,14 @@ function esc(s: string): string {
 function wrap(
   bodyHtml: string,
   preheader: string,
-  footnote = `Email transazionale relativa al tuo ordine su ${esc(SITE.name)}.`,
+  {
+    footnote,
+    strings = emailStrings("it"),
+  }: { footnote?: string; strings?: EmailStrings } = {},
 ): string {
+  const lang = strings.intl.slice(0, 2);
   return `<!doctype html>
-<html lang="it">
+<html lang="${lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -65,16 +87,16 @@ function wrap(
       <!-- Footer -->
       <tr>
         <td style="padding:18px 24px;border-top:1px solid ${LINE};font-family:Arial,Helvetica,sans-serif">
-          <p style="margin:0 0 6px;font-size:12px;color:${MUTED}">${esc(SITE.name)} — ${esc(SITE.tagline)}</p>
+          <p style="margin:0 0 6px;font-size:12px;color:${MUTED}">${esc(SITE.name)} — ${esc(strings.tagline)}</p>
           <p style="margin:0;font-size:12px;color:${MUTED}">
-            Assistenza: <a href="mailto:${SITE.email}" style="color:${ACCENT};text-decoration:none">${SITE.email}</a>
+            ${esc(strings.support)}: <a href="mailto:${SITE.email}" style="color:${ACCENT};text-decoration:none">${SITE.email}</a>
             &nbsp;·&nbsp; <a href="${SITE.telegramUrl}" style="color:${ACCENT};text-decoration:none">Telegram</a>
           </p>
         </td>
       </tr>
     </table>
     <p style="max-width:560px;margin:14px auto 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#9aa0a9;text-align:center">
-      ${footnote}
+      ${footnote ?? esc(strings.footnote(SITE.name))}
     </p>
   </td></tr>
 </table>
@@ -91,51 +113,26 @@ function button(href: string, label: string): string {
   </tr></table>`;
 }
 
-/**
- * Invito ad aggiungere il mittente ai contatti: è il segnale che più aiuta le
- * email successive (conferma, tracking) ad arrivare in Posta in arrivo.
- */
-const CONTACTS_HINT =
-  "Per ricevere senza intoppi la conferma e il codice di tracciamento, aggiungi questo indirizzo ai tuoi contatti.";
+/** Firma della versione solo testo. */
+function footerText(t: EmailStrings): string {
+  return `\n\n—\n${SITE.name} — ${t.tagline}\n${t.support}: ${SITE.email} · Telegram: ${SITE.telegramUrl}`;
+}
 
-const footerText = `\n\n—\n${SITE.name} — ${SITE.tagline}\nAssistenza: ${SITE.email} · Telegram: ${SITE.telegramUrl}`;
+/** Tabella etichetta/valore delle email ai clienti. */
+function infoTable(rows: [string, string][], mono = false): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 16px;border:1px solid ${LINE};border-radius:8px">${rows
+    .map(([k, v], i) => {
+      const border = i < rows.length - 1 ? `border-bottom:1px solid ${LINE};` : "";
+      return `<tr><td style="padding:12px 14px;${border}font-size:14px;color:${MUTED};white-space:nowrap;vertical-align:top">${esc(k)}</td>
+          <td style="padding:12px 14px;${border}font-size:14px;font-weight:700;text-align:right;word-break:break-all${mono ? ";font-family:Consolas,Menlo,monospace" : ""}">${esc(v)}</td></tr>`;
+    })
+    .join("")}</table>`;
+}
 
 /* -------------------------------------------------------------------------- */
 /*  1. Pre-conferma ordine (e reinvio / promemoria dei dati di pagamento)     */
 /* -------------------------------------------------------------------------- */
-export type PreConfirmationVariant = "new" | "resend" | "reminder" | "final";
-
-const PRE_CONFIRMATION_COPY: Record<
-  PreConfirmationVariant,
-  {
-    subject: (ref: string) => string;
-    intro: string;
-    preheader: (ref: string) => string;
-  }
-> = {
-  new: {
-    subject: (ref) => `Abbiamo ricevuto il tuo ordine ${ref}`,
-    intro: "Grazie, abbiamo registrato il tuo ordine.",
-    preheader: (ref) => `Ordine ${ref} ricevuto — pre-conferma`,
-  },
-  resend: {
-    subject: (ref) => `Dati per il pagamento dell'ordine ${ref}`,
-    intro: "Ti rimandiamo i dati per completare il pagamento del tuo ordine.",
-    preheader: (ref) => `Ordine ${ref} — dati per il pagamento`,
-  },
-  reminder: {
-    subject: (ref) => `Promemoria: completa il tuo ordine ${ref}`,
-    intro:
-      "Il tuo ordine è in attesa del pagamento: completa l'acquisto inviando il bonifico con i dati qui sotto.",
-    preheader: (ref) => `Ordine ${ref} in attesa del bonifico`,
-  },
-  final: {
-    subject: (ref) => `Ultimo promemoria per il tuo ordine ${ref}`,
-    intro:
-      "Non abbiamo ancora ricevuto il bonifico per il tuo ordine. Completa il pagamento con i dati qui sotto per non perdere l'ordine.",
-    preheader: (ref) => `Ordine ${ref}: ultimo promemoria di pagamento`,
-  },
-};
+export type { PreConfirmationVariant };
 
 export function orderPreConfirmationEmail({
   reference,
@@ -143,6 +140,7 @@ export function orderPreConfirmationEmail({
   totalCents,
   bank,
   variant = "new",
+  locale,
 }: {
   reference: string;
   paymentMethod?: string;
@@ -155,14 +153,17 @@ export function orderPreConfirmationEmail({
   totalCents?: number;
   /** Coordinate bancarie: incluse se il metodo è bonifico e sono complete. */
   bank?: BankConfig;
+  /** Lingua del cliente (salvata sull'ordine); italiano se assente. */
+  locale?: string | null;
 }): EmailContent {
+  const t = emailStrings(locale);
   const isBank = paymentMethod === "bank";
-  const method = isBank ? "bonifico bancario" : "criptovaluta";
-  const timing = isBank
-    ? "Alla ricezione del bonifico (di norma entro 24–48 ore) confermeremo l'ordine con una seconda email."
-    : "Appena verifichiamo il pagamento confermeremo l'ordine con una seconda email.";
+  const method = isBank ? t.methodBank : t.methodCrypto;
+  const timing = isBank ? t.timingBank : t.timingCrypto;
   const amount =
-    typeof totalCents === "number" && totalCents > 0 ? formatPrice(totalCents) : "";
+    typeof totalCents === "number" && totalCents > 0
+      ? formatPrice(totalCents, t.intl)
+      : "";
 
   // Coordinate bancarie: stessi valori mostrati nella pagina dopo l'ordine.
   // Gli indirizzi crypto restano solo sul sito: un indirizzo Bitcoin nel testo
@@ -170,63 +171,47 @@ export function orderPreConfirmationEmail({
   // spam (SpamAssassin: PDS_BTC_ID).
   const payRows: [string, string][] = [];
   if (isBank && bank && isBankComplete(bank)) {
-    payRows.push(["Intestatario", bank.holder], ["IBAN", formatIban(bank.iban)]);
+    payRows.push([t.holder, bank.holder], ["IBAN", formatIban(bank.iban)]);
     if (bank.bic) payRows.push(["BIC / SWIFT", bank.bic]);
-    if (bank.bank) payRows.push(["Banca", bank.bank]);
-    payRows.push(["Causale", reference]);
+    if (bank.bank) payRows.push([t.bank, bank.bank]);
+    payRows.push([t.causal, reference]);
   }
   const hasPayment = payRows.length > 0;
-  const payIntro =
-    "Esegui il bonifico con questi dati, indicando come causale il riferimento dell'ordine:";
 
-  const copy = PRE_CONFIRMATION_COPY[variant];
+  const copy = t.variants[variant];
   const subject = copy.subject(reference);
-  const intro = copy.intro;
   // Nei promemoria il cliente potrebbe aver già pagato: lo diciamo subito.
   const status =
     variant === "reminder" || variant === "final"
-      ? {
-          html: `Se hai <strong>già fatto il bonifico</strong>, ignora questa email: confermeremo l'ordine appena il pagamento sarà accreditato (di norma 24–48 ore).`,
-          text: "Se hai già fatto il bonifico, ignora questa email: confermeremo l'ordine appena il pagamento sarà accreditato (di norma 24–48 ore).",
-        }
-      : {
-          html: `Questa è una <strong>pre-conferma</strong>: l'ordine non è ancora confermato. ${timing}`,
-          text: `Questa è una pre-conferma: l'ordine non è ancora confermato. ${timing}`,
-        };
+      ? t.alreadyPaid
+      : `${t.preStatus} ${timing}`;
   const summaryRows: [string, string][] = [
-    ["Riferimento ordine", reference],
-    ["Metodo di pagamento", method],
-    ...(amount ? [["Importo da pagare", amount] as [string, string]] : []),
+    [t.reference, reference],
+    [t.paymentMethod, method],
+    ...(amount ? [[t.amountDue, amount] as [string, string]] : []),
   ];
-  const tableHtml = (rows: [string, string][], mono = false) =>
-    `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 16px;border:1px solid ${LINE};border-radius:8px">${rows
-      .map(([k, v], i) => {
-        const border = i < rows.length - 1 ? `border-bottom:1px solid ${LINE};` : "";
-        return `<tr><td style="padding:12px 14px;${border}font-size:14px;color:${MUTED};white-space:nowrap;vertical-align:top">${esc(k)}</td>
-          <td style="padding:12px 14px;${border}font-size:14px;font-weight:700;text-align:right;word-break:break-all${mono ? ";font-family:Consolas,Menlo,monospace" : ""}">${esc(v)}</td></tr>`;
-      })
-      .join("")}</table>`;
 
   const html = wrap(
     `
-    <p style="margin:0 0 14px;font-size:17px;font-weight:700">${intro}</p>
-    ${tableHtml(summaryRows)}
-    <p style="margin:0 0 14px">${status.html}</p>
-    ${hasPayment ? `<p style="margin:0 0 8px;font-weight:700">${esc(payIntro)}</p>${tableHtml(payRows, true)}` : ""}
-    <p style="margin:0 0 14px;color:${MUTED};font-size:13px">Indica il riferimento <strong>${esc(reference)}</strong> nel pagamento, così possiamo abbinarlo al tuo ordine.</p>
-    <p style="margin:0;color:${MUTED};font-size:13px">${CONTACTS_HINT}</p>
+    <p style="margin:0 0 14px;font-size:17px;font-weight:700">${esc(copy.intro)}</p>
+    ${infoTable(summaryRows)}
+    <p style="margin:0 0 14px">${rich(status)}</p>
+    ${hasPayment ? `<p style="margin:0 0 8px;font-weight:700">${esc(t.payIntro)}</p>${infoTable(payRows, true)}` : ""}
+    <p style="margin:0 0 14px;color:${MUTED};font-size:13px">${rich(t.referenceHint(reference))}</p>
+    <p style="margin:0;color:${MUTED};font-size:13px">${esc(t.contactsHint)}</p>
     `,
     copy.preheader(reference),
+    { strings: t },
   );
-  const text = `${intro}
+  const text = `${copy.intro}
 
 ${summaryRows.map(([k, v]) => `${k}: ${v}`).join("\n")}
 
-${status.text}
-${hasPayment ? `\n${payIntro}\n${payRows.map(([k, v]) => `${k}: ${v}`).join("\n")}\n` : ""}
-Indica il riferimento ${reference} nel pagamento, così possiamo abbinarlo al tuo ordine.
+${plain(status)}
+${hasPayment ? `\n${t.payIntro}\n${payRows.map(([k, v]) => `${k}: ${v}`).join("\n")}\n` : ""}
+${plain(t.referenceHint(reference))}
 
-${CONTACTS_HINT}${footerText}`;
+${t.contactsHint}${footerText(t)}`;
   return { subject, html, text };
 }
 
@@ -235,25 +220,26 @@ ${CONTACTS_HINT}${footerText}`;
 /* -------------------------------------------------------------------------- */
 export function orderConfirmedEmail({
   reference,
+  locale,
 }: {
   reference: string;
+  locale?: string | null;
 }): EmailContent {
-  const subject = `Ordine ${reference} confermato`;
+  const t = emailStrings(locale);
+  const c = t.confirmed;
   const html = wrap(
     `
-    <p style="margin:0 0 14px;font-size:17px;font-weight:700">Pagamento ricevuto — ordine <span style="color:${ACCENT}">confermato</span>.</p>
-    <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 16px;border:1px solid ${LINE};border-radius:8px">
-      <tr><td style="padding:12px 14px;font-size:14px;color:${MUTED}">Riferimento ordine</td>
-          <td style="padding:12px 14px;font-size:14px;font-weight:700;text-align:right">${esc(reference)}</td></tr>
-    </table>
-    <p style="margin:0;color:${MUTED};font-size:13px">Ti avviseremo con il codice di tracciamento appena la spedizione sarà in viaggio.</p>
+    <p style="margin:0 0 14px;font-size:17px;font-weight:700">${rich(c.headline, ACCENT)}</p>
+    ${infoTable([[t.reference, reference]])}
+    <p style="margin:0;color:${MUTED};font-size:13px">${esc(c.trackingSoon)}</p>
     `,
-    `Ordine ${reference} confermato`,
+    c.preheader(reference),
+    { strings: t },
   );
-  const text = `Pagamento ricevuto: il tuo ordine ${reference} è confermato.
+  const text = `${c.textLine(reference)}
 
-Ti avviseremo con il codice di tracciamento appena la spedizione sarà in viaggio.${footerText}`;
-  return { subject, html, text };
+${c.trackingSoon}${footerText(t)}`;
+  return { subject: c.subject(reference), html, text };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -262,39 +248,37 @@ Ti avviseremo con il codice di tracciamento appena la spedizione sarà in viaggi
 export function orderShippedEmail({
   reference,
   trackingId,
+  locale,
 }: {
   reference: string;
   trackingId?: string | null;
+  locale?: string | null;
 }): EmailContent {
-  const hasTracking = Boolean(trackingId && trackingId.trim());
-  const subject = `Ordine ${reference} spedito`;
-  const trackRow = hasTracking
-    ? `<tr><td style="padding:12px 14px;font-size:14px;color:${MUTED}">Codice di tracciamento</td>
-          <td style="padding:12px 14px;font-size:14px;font-weight:700;text-align:right">${esc(String(trackingId))}</td></tr>`
-    : "";
+  const t = emailStrings(locale);
+  const s = t.shipped;
+  const tracking = trackingId?.trim() ? trackingId.trim() : null;
+  const rows: [string, string][] = [[t.reference, reference]];
+  if (tracking) rows.push([s.trackingCode, tracking]);
   const html = wrap(
     `
-    <p style="margin:0 0 14px;font-size:17px;font-weight:700">Il tuo ordine è <span style="color:${ACCENT}">in viaggio</span>. 🐺</p>
-    <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 16px;border:1px solid ${LINE};border-radius:8px">
-      <tr><td style="padding:12px 14px;${hasTracking ? `border-bottom:1px solid ${LINE};` : ""}font-size:14px;color:${MUTED}">Riferimento ordine</td>
-          <td style="padding:12px 14px;${hasTracking ? `border-bottom:1px solid ${LINE};` : ""}font-size:14px;font-weight:700;text-align:right">${esc(reference)}</td></tr>
-      ${trackRow}
-    </table>
-    <p style="margin:0 0 4px">Consegna indicativa in <strong>2–4 settimane</strong>. Imballo neutro e anonimo, con tracciamento.</p>
-    ${hasTracking ? button(trackingUrl(String(trackingId)), "Traccia spedizione") : button(`${SITE_URL}/account`, "Vedi i tuoi ordini")}
-    <p style="margin:0;color:${MUTED};font-size:13px">Se il tracciamento non si aggiorna o hai domande, rispondi a questa email o scrivici su Telegram.</p>
+    <p style="margin:0 0 14px;font-size:17px;font-weight:700">${rich(s.headline, ACCENT)}</p>
+    ${infoTable(rows)}
+    <p style="margin:0 0 4px">${rich(s.delivery)}</p>
+    ${tracking ? button(trackingUrl(tracking), s.trackButton) : button(`${SITE_URL}/account`, s.ordersButton)}
+    <p style="margin:0;color:${MUTED};font-size:13px">${esc(s.help)}</p>
     `,
-    `Ordine ${reference} spedito${hasTracking ? ` — tracking ${trackingId}` : ""}`,
+    `${s.preheader(reference)}${tracking ? ` — tracking ${tracking}` : ""}`,
+    { strings: t },
   );
-  const text = `Il tuo ordine è in viaggio.
+  const text = `${s.textHeadline}
 
-Riferimento ordine: ${reference}${hasTracking ? `\nCodice di tracciamento: ${trackingId}\nTraccia: ${trackingUrl(String(trackingId))}` : ""}
+${t.reference}: ${reference}${tracking ? `\n${s.trackingCode}: ${tracking}\n${s.track}: ${trackingUrl(tracking)}` : ""}
 
-Consegna indicativa in 2–4 settimane. Imballo neutro e anonimo, con tracciamento.
-I tuoi ordini: ${SITE_URL}/account
+${plain(s.delivery)}
+${s.yourOrders}: ${SITE_URL}/account
 
-Se il tracciamento non si aggiorna o hai domande, rispondi a questa email o scrivici su Telegram.${footerText}`;
-  return { subject, html, text };
+${s.help}${footerText(t)}`;
+  return { subject: s.subject(reference), html, text };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -407,7 +391,7 @@ export function adminNewOrderEmail(o: AdminOrderInfo): EmailContent {
     <p style="margin:0;color:${MUTED};font-size:13px">Rispondendo a questa email scrivi direttamente al cliente.</p>
     `,
     `${o.reference} · ${total} · ${method} · ${name}`,
-    ADMIN_FOOTNOTE,
+    { footnote: ADMIN_FOOTNOTE },
   );
 
   const text = `Nuovo ordine ${o.reference}
@@ -460,7 +444,7 @@ export function adminNewSignupEmail({
     ${button(`${SITE_URL}/admin/users`, "Apri gli utenti")}
     `,
     `${name ? `${name} · ` : ""}${email} si è registrato`,
-    ADMIN_FOOTNOTE,
+    { footnote: ADMIN_FOOTNOTE },
   );
   const text = `Nuovo account registrato
 ${name ? `\nNome: ${name}` : ""}

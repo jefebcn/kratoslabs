@@ -1,17 +1,15 @@
 import { getRequestConfig } from "next-intl/server";
-import { cookies } from "next/headers";
-import { DEFAULT_LOCALE, LOCALES, LOCALE_COOKIE } from "@/lib/constants";
-import type { LocaleCode } from "@/types";
-
-const SUPPORTED = LOCALES.map((l) => l.code) as LocaleCode[];
+import { cookies, headers } from "next/headers";
+import { LOCALE_COOKIE } from "@/lib/constants";
+import { siteLocale } from "@/lib/locale";
 
 export default getRequestConfig(async () => {
-  const cookieStore = await cookies();
-  const requested = cookieStore.get(LOCALE_COOKIE)?.value as
-    | LocaleCode
-    | undefined;
-  const locale =
-    requested && SUPPORTED.includes(requested) ? requested : DEFAULT_LOCALE;
+  const [cookieStore, headerList] = await Promise.all([cookies(), headers()]);
+  // Lingua scelta a mano, altrimenti quella del browser (vedi lib/locale).
+  const locale = siteLocale(
+    cookieStore.get(LOCALE_COOKIE)?.value,
+    headerList.get("accept-language"),
+  );
 
   return {
     locale,

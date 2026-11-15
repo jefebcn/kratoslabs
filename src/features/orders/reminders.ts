@@ -105,6 +105,7 @@ export async function runPaymentReminders(
       totalCents: Number(row.total_cents ?? 0),
       bank,
       variant,
+      locale: typeof shipping.locale === "string" ? shipping.locale : null,
     });
     // Resend accetta poche richieste al secondo: si va uno alla volta.
     if (sent.length + failed.length > 0) await wait(600);

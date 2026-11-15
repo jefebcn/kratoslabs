@@ -26,6 +26,12 @@ const statusSchema = z.object({
   trackingId: z.string().optional(),
 });
 
+/** Lingua delle email salvata sull'ordine al checkout (italiano se assente). */
+function orderLocale(shipping: unknown): string | null {
+  const v = (shipping as Record<string, unknown> | null)?.locale;
+  return typeof v === "string" ? v : null;
+}
+
 function refresh() {
   revalidatePath("/admin/orders");
   revalidatePath("/admin");
@@ -52,7 +58,9 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
     .from("orders")
     .update(patch)
     .eq("id", parsed.data.orderId)
-    .select("reference, user_id, points_redeemed, customer_email, tracking_id")
+    .select(
+      "reference, user_id, points_redeemed, customer_email, tracking_id, shipping",
+    )
     .maybeSingle();
 
   // Se l'ordine viene annullato, restituisci al cliente i punti eventualmente
@@ -74,6 +82,7 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
       const { subject, html, text } = orderShippedEmail({
         reference: String(ord.reference ?? ""),
         trackingId,
+        locale: orderLocale(ord.shipping),
       });
       await sendEmail({ to: String(ord.customer_email), subject, html, text });
     }
@@ -98,7 +107,7 @@ export async function confirmPayment(formData: FormData): Promise<void> {
     .from("orders")
     .update({ payment_status: "paid", status: "processing" })
     .eq("id", orderId)
-    .select("reference, customer_email, status, user_id, total_cents")
+    .select("reference, customer_email, status, user_id, total_cents, shipping")
     .maybeSingle();
 
   if (!error && data) {
@@ -113,7 +122,10 @@ export async function confirmPayment(formData: FormData): Promise<void> {
       await grantOnceBonus(String(data.user_id), "bonus_first_order", BONUS_FIRST_ORDER);
     }
     if (isEmailConfigured) {
-      const { subject, html, text } = orderConfirmedEmail({ reference: ref });
+      const { subject, html, text } = orderConfirmedEmail({
+        reference: ref,
+        locale: orderLocale(data.shipping),
+      });
       await sendEmail({ to: String(data.customer_email), subject, html, text });
     }
   }
@@ -196,6 +208,7 @@ export async function resendBankDetails(
       totalCents: Number(row.total_cents ?? 0),
       bank,
       variant: "resend",
+      locale: orderLocale(shipping),
     });
     // Resend accetta poche richieste al secondo: si va uno alla volta.
     if (sent + failed.length > 0) await wait(600);
