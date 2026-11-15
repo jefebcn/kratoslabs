@@ -1,6 +1,7 @@
 "use server";
 
 import { after } from "next/server";
+import { cookies, headers } from "next/headers";
 import { checkoutSchema } from "./schema";
 import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
 import { notifyAdmins } from "@/lib/email/admin-notify";
@@ -14,7 +15,8 @@ import { balanceFor, addEntry } from "@/features/rewards";
 import { maxRedeemablePoints, discountCentsFor } from "@/lib/rewards";
 import { listProducts } from "@/features/products";
 import { priceLine } from "@/features/products/pricing";
-import { PAYMENT_METHODS } from "@/lib/constants";
+import { LOCALE_COOKIE, PAYMENT_METHODS } from "@/lib/constants";
+import { emailLocale } from "@/lib/locale";
 import { getSiteSettings } from "@/features/settings";
 import {
   shippingCentsFor,
@@ -136,6 +138,15 @@ export async function createOrder(
   );
   const reference = `KL-${Date.now().toString().slice(-6)}`;
 
+  // Lingua delle email al cliente (pre-conferma, conferma, spedizione,
+  // promemoria): salvata sull'ordine, così anche le email successive la usano.
+  const [cookieStore, headerList] = await Promise.all([cookies(), headers()]);
+  const locale = emailLocale({
+    cookieLocale: cookieStore.get(LOCALE_COOKIE)?.value,
+    acceptLanguage: headerList.get("accept-language"),
+    country: d.country,
+  });
+
   // Spedizione: tariffa unica, gratuita oltre la soglia. Calcolata sul
   // subtotale merce (mai dal client).
   const shippingCents = shippingCentsFor(subtotalCents);
@@ -181,6 +192,7 @@ export async function createOrder(
           country: d.country,
           costCents: shippingCents,
           notes: d.notes ?? "",
+          locale,
         },
         payment_method: d.paymentMethod,
         payment_status: "unpaid",
@@ -218,6 +230,7 @@ export async function createOrder(
       paymentMethod: d.paymentMethod,
       totalCents,
       bank: settings.bank,
+      locale,
     });
     emailSent = await sendEmail({ to: d.email, subject, html, text });
   }
