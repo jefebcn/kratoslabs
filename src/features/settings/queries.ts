@@ -16,6 +16,7 @@ function merge(
     bank: { ...base.bank, ...(over.bank ?? {}) },
     crypto: { ...base.crypto, ...(over.crypto ?? {}) },
     shipping: { ...base.shipping, ...(over.shipping ?? {}) },
+    reminders: { ...base.reminders, ...(over.reminders ?? {}) },
     storeEmail:
       typeof over.storeEmail === "string" ? over.storeEmail : base.storeEmail,
   };

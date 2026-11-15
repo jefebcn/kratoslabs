@@ -101,19 +101,56 @@ const CONTACTS_HINT =
 const footerText = `\n\n—\n${SITE.name} — ${SITE.tagline}\nAssistenza: ${SITE.email} · Telegram: ${SITE.telegramUrl}`;
 
 /* -------------------------------------------------------------------------- */
-/*  1. Pre-conferma ordine                                                    */
+/*  1. Pre-conferma ordine (e reinvio / promemoria dei dati di pagamento)     */
 /* -------------------------------------------------------------------------- */
+export type PreConfirmationVariant = "new" | "resend" | "reminder" | "final";
+
+const PRE_CONFIRMATION_COPY: Record<
+  PreConfirmationVariant,
+  {
+    subject: (ref: string) => string;
+    intro: string;
+    preheader: (ref: string) => string;
+  }
+> = {
+  new: {
+    subject: (ref) => `Abbiamo ricevuto il tuo ordine ${ref}`,
+    intro: "Grazie, abbiamo registrato il tuo ordine.",
+    preheader: (ref) => `Ordine ${ref} ricevuto — pre-conferma`,
+  },
+  resend: {
+    subject: (ref) => `Dati per il pagamento dell'ordine ${ref}`,
+    intro: "Ti rimandiamo i dati per completare il pagamento del tuo ordine.",
+    preheader: (ref) => `Ordine ${ref} — dati per il pagamento`,
+  },
+  reminder: {
+    subject: (ref) => `Promemoria: completa il tuo ordine ${ref}`,
+    intro:
+      "Il tuo ordine è in attesa del pagamento: completa l'acquisto inviando il bonifico con i dati qui sotto.",
+    preheader: (ref) => `Ordine ${ref} in attesa del bonifico`,
+  },
+  final: {
+    subject: (ref) => `Ultimo promemoria per il tuo ordine ${ref}`,
+    intro:
+      "Non abbiamo ancora ricevuto il bonifico per il tuo ordine. Completa il pagamento con i dati qui sotto per non perdere l'ordine.",
+    preheader: (ref) => `Ordine ${ref}: ultimo promemoria di pagamento`,
+  },
+};
+
 export function orderPreConfirmationEmail({
   reference,
   paymentMethod,
   totalCents,
   bank,
-  reminder = false,
+  variant = "new",
 }: {
   reference: string;
   paymentMethod?: string;
-  /** true = reinvio dei dati di pagamento per un ordine già ricevuto. */
-  reminder?: boolean;
+  /**
+   * "new" = pre-conferma al checkout; "resend" = dati rimandati a mano
+   * dall'admin; "reminder" / "final" = promemoria automatici di pagamento.
+   */
+  variant?: PreConfirmationVariant;
   /** Importo da pagare (dopo sconto punti e con spedizione). */
   totalCents?: number;
   /** Coordinate bancarie: incluse se il metodo è bonifico e sono complete. */
@@ -142,12 +179,20 @@ export function orderPreConfirmationEmail({
   const payIntro =
     "Esegui il bonifico con questi dati, indicando come causale il riferimento dell'ordine:";
 
-  const subject = reminder
-    ? `Dati per il pagamento dell'ordine ${reference}`
-    : `Abbiamo ricevuto il tuo ordine ${reference}`;
-  const intro = reminder
-    ? "Ti rimandiamo i dati per completare il pagamento del tuo ordine."
-    : "Grazie, abbiamo registrato il tuo ordine.";
+  const copy = PRE_CONFIRMATION_COPY[variant];
+  const subject = copy.subject(reference);
+  const intro = copy.intro;
+  // Nei promemoria il cliente potrebbe aver già pagato: lo diciamo subito.
+  const status =
+    variant === "reminder" || variant === "final"
+      ? {
+          html: `Se hai <strong>già fatto il bonifico</strong>, ignora questa email: confermeremo l'ordine appena il pagamento sarà accreditato (di norma 24–48 ore).`,
+          text: "Se hai già fatto il bonifico, ignora questa email: confermeremo l'ordine appena il pagamento sarà accreditato (di norma 24–48 ore).",
+        }
+      : {
+          html: `Questa è una <strong>pre-conferma</strong>: l'ordine non è ancora confermato. ${timing}`,
+          text: `Questa è una pre-conferma: l'ordine non è ancora confermato. ${timing}`,
+        };
   const summaryRows: [string, string][] = [
     ["Riferimento ordine", reference],
     ["Metodo di pagamento", method],
@@ -166,20 +211,18 @@ export function orderPreConfirmationEmail({
     `
     <p style="margin:0 0 14px;font-size:17px;font-weight:700">${intro}</p>
     ${tableHtml(summaryRows)}
-    <p style="margin:0 0 14px">Questa è una <strong>pre-conferma</strong>: l'ordine non è ancora confermato. ${timing}</p>
+    <p style="margin:0 0 14px">${status.html}</p>
     ${hasPayment ? `<p style="margin:0 0 8px;font-weight:700">${esc(payIntro)}</p>${tableHtml(payRows, true)}` : ""}
     <p style="margin:0 0 14px;color:${MUTED};font-size:13px">Indica il riferimento <strong>${esc(reference)}</strong> nel pagamento, così possiamo abbinarlo al tuo ordine.</p>
     <p style="margin:0;color:${MUTED};font-size:13px">${CONTACTS_HINT}</p>
     `,
-    reminder
-      ? `Ordine ${reference} — dati per il pagamento`
-      : `Ordine ${reference} ricevuto — pre-conferma`,
+    copy.preheader(reference),
   );
   const text = `${intro}
 
 ${summaryRows.map(([k, v]) => `${k}: ${v}`).join("\n")}
 
-Questa è una pre-conferma: l'ordine non è ancora confermato. ${timing}
+${status.text}
 ${hasPayment ? `\n${payIntro}\n${payRows.map(([k, v]) => `${k}: ${v}`).join("\n")}\n` : ""}
 Indica il riferimento ${reference} nel pagamento, così possiamo abbinarlo al tuo ordine.
 

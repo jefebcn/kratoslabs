@@ -118,6 +118,47 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
         </Field>
       </Card>
 
+      <Card
+        title="Promemoria pagamento (bonifico)"
+        description="Email automatiche ai clienti che hanno ordinato con bonifico e non hanno ancora pagato: due promemoria al massimo, con IBAN, importo e causale. Il controllo parte una volta al giorno."
+      >
+        <label className="flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            name="reminderEnabled"
+            defaultChecked={settings.reminders.enabled}
+            className="size-4 [accent-color:#dc2626]"
+          />
+          Invia i promemoria automatici
+        </label>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field
+            label="1° promemoria dopo (giorni)"
+            hint="Giorni dall'ordine. Es. 1 = il giorno dopo."
+          >
+            <Input
+              name="reminderFirstDays"
+              type="number"
+              min={1}
+              max={30}
+              defaultValue={settings.reminders.firstAfterDays}
+            />
+          </Field>
+          <Field
+            label="2° e ultimo promemoria dopo (giorni)"
+            hint="Sempre almeno un giorno dopo il primo."
+          >
+            <Input
+              name="reminderSecondDays"
+              type="number"
+              min={2}
+              max={30}
+              defaultValue={settings.reminders.secondAfterDays}
+            />
+          </Field>
+        </div>
+      </Card>
+
       <Card title="Spedizione">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field

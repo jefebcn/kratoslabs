@@ -28,5 +28,10 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     freeThresholdCents: null,
     note: "",
   },
+  reminders: {
+    enabled: true,
+    firstAfterDays: 1,
+    secondAfterDays: 3,
+  },
   storeEmail: clean(process.env.NEXT_PUBLIC_STORE_EMAIL),
 };
