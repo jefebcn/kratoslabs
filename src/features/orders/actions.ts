@@ -12,6 +12,10 @@ import {
 } from "@/lib/email/templates";
 import { getSiteSettings } from "@/features/settings";
 import { isBankComplete } from "@/lib/payments/bank";
+import {
+  runPaymentReminders,
+  type ReminderRunResult,
+} from "@/features/orders/reminders";
 import { registerTracking } from "@/lib/tracking";
 import { addEntry, hasEntry, grantOnceBonus } from "@/features/rewards";
 import { pointsEarnedFor, BONUS_FIRST_ORDER } from "@/lib/rewards";
@@ -191,7 +195,7 @@ export async function resendBankDetails(
       paymentMethod: "bank",
       totalCents: Number(row.total_cents ?? 0),
       bank,
-      reminder: true,
+      variant: "resend",
     });
     // Resend accetta poche richieste al secondo: si va uno alla volta.
     if (sent + failed.length > 0) await wait(600);
@@ -210,4 +214,14 @@ export async function resendBankDetails(
 
   refresh();
   return { ok: failed.length === 0, sent, failed, skipped };
+}
+
+/** Esegue subito il controllo dei promemoria di pagamento (dal pannello admin). */
+export async function runRemindersNow(): Promise<ReminderRunResult> {
+  if (!(await getAdminCaller())) {
+    return { ok: false, sent: [], failed: [], waiting: 0, message: "Non autorizzato." };
+  }
+  const result = await runPaymentReminders();
+  refresh();
+  return result;
 }

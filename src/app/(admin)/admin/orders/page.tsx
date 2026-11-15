@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { OrdersTable } from "@/components/admin/OrdersTable";
 import { ResendBankDetails } from "@/components/admin/ResendBankDetails";
+import { PaymentReminders } from "@/components/admin/PaymentReminders";
+import { getSiteSettings } from "@/features/settings";
 import { listOrders } from "@/features/orders";
 import { listProducts } from "@/features/products";
 import { hasServiceRole } from "@/lib/supabase/admin";
@@ -9,7 +11,11 @@ import { isEmailConfigured } from "@/lib/email/resend";
 export const metadata: Metadata = { title: "Ordini" };
 
 export default async function AdminOrdersPage() {
-  const [orders, catalog] = await Promise.all([listOrders(), listProducts()]);
+  const [orders, catalog, settings] = await Promise.all([
+    listOrders(),
+    listProducts(),
+    getSiteSettings(),
+  ]);
   const unpaid = orders.filter((o) => o.paymentStatus === "unpaid").length;
   const bankPending = orders.filter(
     (o) =>
@@ -40,6 +46,10 @@ export default async function AdminOrdersPage() {
           (<code>RESEND_API_KEY</code> + <code>RESEND_FROM</code>). Lo stato
           dell&apos;ordine si aggiorna comunque.
         </p>
+      )}
+
+      {hasServiceRole && isEmailConfigured && (
+        <PaymentReminders settings={settings.reminders} />
       )}
 
       {hasServiceRole && isEmailConfigured && bankPending > 0 && (

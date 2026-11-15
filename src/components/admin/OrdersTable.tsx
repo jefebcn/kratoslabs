@@ -23,6 +23,12 @@ const PAYMENT_STATUS_META: Record<
   failed: { label: "Fallito", tone: "border-danger/50 text-danger" },
 };
 
+/** Promemoria automatici di pagamento già inviati per l'ordine. */
+function reminderCount(o: AdminOrder): number {
+  const r = o.shipping.paymentReminders;
+  return Array.isArray(r) ? r.length : 0;
+}
+
 export function OrdersTable({
   orders,
   catalog = [],
@@ -77,6 +83,11 @@ export function OrdersTable({
                       >
                         {pay.label}
                       </span>
+                      {reminderCount(o) > 0 && (
+                        <span className="text-xs text-muted">
+                          Promemoria: {reminderCount(o)}/2
+                        </span>
+                      )}
                     </div>
                   </td>
                   <td className="num px-4 py-4 text-right">

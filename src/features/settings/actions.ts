@@ -21,6 +21,12 @@ function eurosToCents(raw: string): number | null {
   return Number.isFinite(n) && n >= 0 ? Math.round(n * 100) : null;
 }
 
+/** Giorni interi tra 1 e 30; valore non valido -> fallback. */
+function days(raw: string, fallback: number): number {
+  const n = Number.parseInt(raw, 10);
+  return Number.isFinite(n) ? Math.min(30, Math.max(1, n)) : fallback;
+}
+
 export async function saveSettings(
   _prev: SettingsResult | null,
   formData: FormData,
@@ -38,6 +44,13 @@ export async function saveSettings(
     .map((s) => s.trim())
     .filter(Boolean);
 
+  const firstAfterDays = days(str("reminderFirstDays"), 1);
+  // Il secondo promemoria parte sempre almeno un giorno dopo il primo.
+  const secondAfterDays = Math.max(
+    firstAfterDays + 1,
+    days(str("reminderSecondDays"), 3),
+  );
+
   const value: SiteSettings = {
     announcements,
     bank: {
@@ -53,6 +66,11 @@ export async function saveSettings(
     shipping: {
       freeThresholdCents: eurosToCents(str("freeThresholdEuro")),
       note: str("shippingNote"),
+    },
+    reminders: {
+      enabled: formData.get("reminderEnabled") === "on",
+      firstAfterDays,
+      secondAfterDays,
     },
     storeEmail: str("storeEmail"),
   };
